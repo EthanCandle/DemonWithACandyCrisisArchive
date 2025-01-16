@@ -5,38 +5,45 @@ using UnityEngine;
 public class PlayerDeath : MonoBehaviour
 {
     public float timeUntilRespawn = 5.0f;
-
+    public bool isDead = false;
 
     public GameObject deathParticles;
     public Sound deathSFX;
     public PlayerController playerController;
     public Vector3 playerRespawnPoint; // should be brought by playerCheckPoint
-
-    public GameObject playerCamera, playerFakeCamera;
+    public Quaternion playerRotationPoint;
+    public GameObject playerCamera, playerFakeCamera, checkPointCurrent;
 
     // Start is called before the first frame update
     void Start()
     {
         playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         playerRespawnPoint = playerController.gameObject.transform.position;
+        playerRotationPoint = playerController.gameObject.transform.rotation;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        //  print($"RespawnPoint:{playerRespawnPoint} Player is now: {playerController.gameObject.transform.position}");
+        print($"RespawnPoint:{playerRespawnPoint} Player is now: {playerController.gameObject.transform.position}");
+
     }
 
-    public void SetPlayerRespawnPoint(Vector3 positionToSetTo)
+    public void SetPlayerRespawnPoint(Vector3 positionToSetTo, GameObject checkPointObj)
     {
         
         playerRespawnPoint = positionToSetTo;
+        checkPointCurrent = checkPointObj;
     }
 
     // should be called by player health
     public void PlayerShouldDeath()
     {
         // play sound effect, player animation, freeze movement/input
+        isDead = true;
+        playerController.SetDead(true);
+
         playerController.LosePlayerControl();
         StartCoroutine(RespawnDelay());
         SetFakeCamera();
@@ -51,9 +58,24 @@ public class PlayerDeath : MonoBehaviour
     public void Respawn()
     {
         // put player back, particle again on respawn, regive movement/input
+        //StartCoroutine(GivePlayerControl());
+        playerController.SetCharacterController(false); // need it to be false to prevent gravity and other movements being applied and re-teleporting the player back to where they were
+        playerController.gameObject.transform.position = playerRespawnPoint; // teleports player to cp
+        playerController.SetCameraRotation(playerRotationPoint); // sets camera to cp's rotation
+        isDead = false; // removes being dead on this script
+        playerController.SetDead(false); // sets the player's script to not dead
+        playerController.SetCharacterController(true); // re enables the character controller so they can move
+        EndFakeCamera(); // disables the fake camera
         playerController.GainPlayerControl();
-        playerController.gameObject.transform.position = playerRespawnPoint;
-        EndFakeCamera();
+        print($"DEATH RespawnPoint:{playerRespawnPoint} Player is now: {playerController.gameObject.transform.position}");
+    }
+
+    public IEnumerator GivePlayerControl()
+    {
+        yield return new WaitForSeconds(0.5f);
+
+        print($"RespawnPoint:{playerRespawnPoint} Player is now: {playerController.gameObject.transform.position}");
+
     }
 
     public void SetFakeCamera()
@@ -72,8 +94,10 @@ public class PlayerDeath : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Death"))
+        if (other.CompareTag("Death") && !isDead)
         {
+
+            print("Die");
             PlayerShouldDeath();
         }
     }

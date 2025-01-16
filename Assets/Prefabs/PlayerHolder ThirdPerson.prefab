@@ -334,6 +334,8 @@ GameObject:
   - component: {fileID: 8458144827836217339}
   - component: {fileID: 6193994798716019626}
   - component: {fileID: 7377199005418839023}
+  - component: {fileID: 5967912856590061851}
+  - component: {fileID: 5712012131079612471}
   m_Layer: 0
   m_Name: PlayerArmature (1)
   m_TagString: Player
@@ -485,7 +487,7 @@ MonoBehaviour:
   coyoteJumpTime: 0
   coyoteJumpTimeReset: 0.25
   Gravity: -15
-  JumpTimeout: 0.5
+  JumpTimeout: 0.1
   FallTimeout: 0.15
   Grounded: 1
   GroundedOffset: -0.14
@@ -493,6 +495,9 @@ MonoBehaviour:
   GravityOfSloper: -45
   groundedOnceCheck: 0
   isGoingToBeOffGround: 0
+  timeToHoldJumpBufferCurrent: 0
+  timeToHoldJumpBufferMax: 0.1
+  jumpBufferIsOn: 0
   slideFactor: 0.5
   slideThreshold: 0.7
   GroundLayers:
@@ -505,6 +510,7 @@ MonoBehaviour:
   LockCameraPosition: 0
   speedCurrent: 0
   _verticalVelocity: 0
+  _jumpTimeoutDelta: 0
   pos1: 0
   canMove: 1
   canJump: 1
@@ -523,13 +529,19 @@ MonoBehaviour:
     loop: 0
     source: {fileID: 0}
   jumpSFX:
-    name: Jumping
+    name: Jumping Sound
     clip: {fileID: 8300000, guid: 3a8bf52cb1730cf4784500d472018323, type: 3}
     volume: 1
     volumeOriginal: 1
     pitch: 1
     loop: 0
     source: {fileID: 0}
+  isRoofed: 0
+  roofOffsetSphere: 1.58
+  dashSpeed: 30
+  dashDuration: 0.1
+  isDashing: 0
+  isJumping: 0
 --- !u!114 &8458144827836217339
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -677,6 +689,48 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelTransManager: {fileID: 0}
+--- !u!114 &5967912856590061851
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 409234657933732274}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c4bfd50cd3590344af4bfd7143d0c74, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentCP: {fileID: 0}
+  currentCheckPointLocation: {x: 0, y: 0, z: 0}
+  playerDeath: {fileID: 0}
+  waitTimeWhenRespawn: 0
+--- !u!114 &5712012131079612471
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 409234657933732274}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6ef53806944b0344a67984e892805da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeUntilRespawn: 2
+  deathParticles: {fileID: 0}
+  deathSFX:
+    name: 
+    clip: {fileID: 0}
+    volume: 1
+    volumeOriginal: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  playerController: {fileID: 0}
+  playerRespawnPoint: {x: 0, y: 0, z: 0}
+  playerCamera: {fileID: 3217460797952865927}
+  playerFakeCamera: {fileID: 0}
 --- !u!1 &480444090062235381
 GameObject:
   m_ObjectHideFlags: 0
@@ -776,7 +830,7 @@ MonoBehaviour:
     m_Bits: 2147483647
   IgnoreTag: Player
   CameraRadius: 0.15
-  DampingIntoCollision: 0.6
+  DampingIntoCollision: 0.1
   DampingFromCollision: 0.6
 --- !u!1 &586983879865803343
 GameObject:
@@ -1843,7 +1897,7 @@ Transform:
   m_GameObject: {fileID: 3078209233697946738}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.525, z: -8}
+  m_LocalPosition: {x: 0, y: 1.5250001, z: -8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

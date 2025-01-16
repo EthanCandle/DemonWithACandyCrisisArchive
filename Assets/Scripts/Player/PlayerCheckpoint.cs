@@ -32,10 +32,14 @@ public class PlayerCheckpoint : MonoBehaviour
     {
         if (other.CompareTag("CheckPoint"))
         {
-            currentCP = other.gameObject;
-            currentCheckPointLocation = currentCP.transform.GetChild(0).transform.position;//currentCP.transform.position;
-            playerDeath.SetPlayerRespawnPoint(currentCheckPointLocation);
+            SetCheckPoint(other.gameObject);
         }
     }
 
+    public void SetCheckPoint(GameObject otherObj)
+    {
+        currentCP = otherObj;
+        currentCheckPointLocation = currentCP.transform.GetChild(0).transform.position;//currentCP.transform.position;
+        playerDeath.SetPlayerRespawnPoint(currentCheckPointLocation, currentCP);
+    }
 }

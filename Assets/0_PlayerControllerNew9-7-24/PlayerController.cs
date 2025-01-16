@@ -124,10 +124,12 @@ public class PlayerController : MonoBehaviour
     public Sound landedSFX, jumpSFX;
     public bool isRoofed = false;
     public float roofOffsetSphere = 2.0f;
+    public float fallSpeedInitial = -2.0f;
+
 
     public float dashSpeed = 15.0f, dashDuration = 1.0f;
-    public bool isDashing = false;
-    private bool IsCurrentDeviceMouse
+    public bool isDashing = false, isJumping = false, isDead;
+    private bool IsCurrentDeviceMouse 
     {
         get
         {
@@ -239,6 +241,11 @@ public class PlayerController : MonoBehaviour
 
     private void GroundedCheck()
     {
+        // no need to check if we are going to land on ground if we are currently rising
+        if(_verticalVelocity > 0 && !Grounded)
+        {
+            return;
+        }
         // print("Set bool" + Grounded);
         bool lastCheckGrounded = Grounded;
         // set sphere position, with offset
@@ -257,9 +264,24 @@ public class PlayerController : MonoBehaviour
 
         if (Grounded && !lastCheckGrounded)
         {
-            //print($"Ground: {Grounded}, LastGround: {lastCheckGrounded}");
+            print($"Ground: {Grounded}, LastGround: {lastCheckGrounded}");
              FindObjectOfType<AudioManager>().PlaySoundInstantiate(landedSFX);
         }
+        if (!Grounded && lastCheckGrounded)
+        {
+            print($"Ground: {Grounded}, LastGround: {lastCheckGrounded}");
+
+        }
+    }
+
+    public void SetDead(bool shouldDead)
+    {
+        isDead = shouldDead;
+    }
+
+    public void SetCharacterController(bool shouldDead)
+    {
+        _controller.enabled = shouldDead;
     }
     void OnDrawGizmos()
     {
@@ -294,6 +316,13 @@ public class PlayerController : MonoBehaviour
 
     private void CameraRotation()
     {
+        if (isDead)
+        {
+            // sets these 2 to 0 so it resets back to natural position
+            _cinemachineTargetYaw = 0; 
+            _cinemachineTargetPitch = 0;
+            return;
+        }
         // if there is an input and camera position is not fixed
         if (_input.look.sqrMagnitude >= _threshold && !LockCameraPosition)
         {
@@ -308,6 +337,7 @@ public class PlayerController : MonoBehaviour
         _cinemachineTargetYaw = ClampAngle(_cinemachineTargetYaw, float.MinValue, float.MaxValue);
         _cinemachineTargetPitch = ClampAngle(_cinemachineTargetPitch, BottomClamp, TopClamp);
 
+      //  _cinemachineTargetYaw = _cinemachineTargetPitch = 0;
         // Cinemachine will follow this target
         CinemachineCameraTarget.transform.rotation = Quaternion.Euler(_cinemachineTargetPitch + CameraAngleOverride,
             _cinemachineTargetYaw, 0.0f);
@@ -408,7 +438,7 @@ public class PlayerController : MonoBehaviour
         {
             print("In grounded once check guard");
             groundedOnceCheck = false;
-            _verticalVelocity = -2.5f;
+            _verticalVelocity = fallSpeedInitial;
         }
 
         // jump timeout (prevents player from jumping 
@@ -496,7 +526,7 @@ public class PlayerController : MonoBehaviour
                 // stops the falling check at the ttop if you jump 
                 groundedOnceCheck = false;
                 _input.jump = false;
-
+                isJumping = true;
             }
             else
             {
@@ -517,7 +547,7 @@ public class PlayerController : MonoBehaviour
             if (jumpBufferIsOn)
             {
                 FindObjectOfType<AudioManager>().PlaySoundInstantiate(jumpSFX);
-               // print("Coyote Jumping");
+                print("Coyote Jumping");
                 // the square root of H * -2 * G = how much velocity needed to reach desired height
                 _verticalVelocity = Mathf.Sqrt(JumpHeight * -2f * Gravity);
                 //  Debug.Log("Jump Velocity: " + _verticalVelocity);  // Should be ~7.67 m/s
@@ -533,30 +563,15 @@ public class PlayerController : MonoBehaviour
                 // stops the falling check at the ttop if you jump 
                 groundedOnceCheck = false;
                 _input.jump = false;
+                isJumping = true;
             }
-            else if (_input.jumpHold && jumpTimeHold > 0) // holding jump to still jump higher
-            {
-                _verticalVelocity = Mathf.Sqrt(JumpHeight * -2f * Gravity);
-                jumpTimeHold -= 1 * Time.deltaTime;
-                //print("JumpHOldBugger");
-                //print(jumpTimeHold);
-                //  print(Grounded);
-                if (_hasAnimator)
-                {
-
-                    _animator.SetBool(_animIDJump, true);
-                }
-                return;
-            }
-
-
         }
         else
         {
           //  print($"Jumping: {jumpTimeHold}, inputHold: {_input.jumpHold}, jumpHoldTime:{jumpTimeHold}");
-            if (_input.jumpHold && jumpTimeHold > 0) // holding jump to still jump higher
+            if (_input.jumpHold && isJumping && jumpTimeHold > 0) // holding jump to still jump higher
             {
-               // print("in jump hold");
+              //print("else in jump hold");
                 _verticalVelocity = Mathf.Sqrt(JumpHeight * -2f * Gravity);
                 jumpTimeHold -= 1 * Time.deltaTime;
                 //  print("JumpHOldBugger");
@@ -569,7 +584,7 @@ public class PlayerController : MonoBehaviour
             {
                // _input.jumpHold = false;
                 jumpTimeHold = 0;
-
+                isJumping = false;
             }
             // reset the jump timeout timer
             ///
@@ -605,7 +620,7 @@ public class PlayerController : MonoBehaviour
     public void AddGravity()
     {
         // apply gravity over time if under terminal (multiply by delta time twice to linearly speed up over time)
-        if (_verticalVelocity < _terminalVelocity)
+        if (_verticalVelocity < _terminalVelocity && _controller.enabled == true)
         {
             _verticalVelocity += Gravity * Time.deltaTime;
             _controller.Move(new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
@@ -640,7 +655,7 @@ public class PlayerController : MonoBehaviour
         //pos1 = gameObject.transform.position.y;
     }
 
-    // moves the player
+    // moves the player (maybe use for bouncepad)
     public void JumpForce(float multiplier)
     {
         _verticalVelocity = Mathf.Sqrt(JumpHeight * -2f * Gravity * multiplier);
@@ -701,10 +716,10 @@ public class PlayerController : MonoBehaviour
 
     public void DashinSpeedBoost()
     {
-        print("Dashing");
+     //   print("Dashing");
         // normalise input direction
         Vector3 inputDirection = new Vector3(_input.move.x, 0.0f, _input.move.y).normalized;
-        _playerInput.actions["Move"].Disable();
+      //  print(_input.move);
         // note: Vector2's != operator uses approximation so is not floating point error prone, and is cheaper than magnitude
         // if there is a move input rotate player when the player is moving
         if (_input.move != Vector2.zero)
@@ -720,6 +735,7 @@ public class PlayerController : MonoBehaviour
             // if no input i guess (should make player dash forwards from camera
             _targetRotation = _mainCamera.transform.eulerAngles.y;
         }
+       // _playerInput.actions["Move"].Disable();
 
         _verticalVelocity = 0;
 
@@ -737,8 +753,18 @@ public class PlayerController : MonoBehaviour
         isDashing = false;
         canMove = true; 
         _playerInput.actions["Move"].Enable();
-        print("Stop dashing");
+      //  print("Stop dashing");
         // end the dash and regive player movement
+    }
+
+    public void SetCameraRotation(Quaternion rotation)
+    {
+        print("Set cam rotation");
+        // sets the player's camera to a set angle (should be on respawn)
+
+        gameObject.transform.rotation = rotation;
+        CinemachineCameraTarget.transform.rotation = Quaternion.identity;
+        print(CinemachineCameraTarget.transform.rotation);
     }
 
 }
