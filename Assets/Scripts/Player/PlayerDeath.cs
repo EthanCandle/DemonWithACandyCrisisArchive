@@ -26,7 +26,7 @@ public class PlayerDeath : MonoBehaviour
     void Update()
     {
         //  print($"RespawnPoint:{playerRespawnPoint} Player is now: {playerController.gameObject.transform.position}");
-        print($"RespawnPoint:{playerRespawnPoint} Player is now: {playerController.gameObject.transform.position}");
+       // print($"RespawnPoint:{playerRespawnPoint} Player is now: {playerController.gameObject.transform.position}");
 
     }
 
@@ -35,6 +35,7 @@ public class PlayerDeath : MonoBehaviour
         
         playerRespawnPoint = positionToSetTo;
         checkPointCurrent = checkPointObj;
+        playerRotationPoint = checkPointCurrent.transform.rotation;
     }
 
     // should be called by player health
@@ -67,7 +68,7 @@ public class PlayerDeath : MonoBehaviour
         playerController.SetCharacterController(true); // re enables the character controller so they can move
         EndFakeCamera(); // disables the fake camera
         playerController.GainPlayerControl();
-        print($"DEATH RespawnPoint:{playerRespawnPoint} Player is now: {playerController.gameObject.transform.position}");
+        //print($"DEATH RespawnPoint:{playerRespawnPoint} Player is now: {playerController.gameObject.transform.position}");
     }
 
     public IEnumerator GivePlayerControl()

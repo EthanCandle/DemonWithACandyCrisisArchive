@@ -319,7 +319,7 @@ public class PlayerController : MonoBehaviour
         if (isDead)
         {
             // sets these 2 to 0 so it resets back to natural position
-            _cinemachineTargetYaw = 0; 
+            //_cinemachineTargetYaw = 0; 
             _cinemachineTargetPitch = 0;
             return;
         }
@@ -763,8 +763,11 @@ public class PlayerController : MonoBehaviour
         // sets the player's camera to a set angle (should be on respawn)
 
         gameObject.transform.rotation = rotation;
-        CinemachineCameraTarget.transform.rotation = Quaternion.identity;
-        print(CinemachineCameraTarget.transform.rotation);
+        _cinemachineTargetYaw = gameObject.transform.rotation.eulerAngles.y;
+        //CinemachineCameraTarget.transform.localRotation = Quaternion.Euler(0, gameObject.transform.rotation.eulerAngles.y, 0);
+        print(rotation.eulerAngles);        print(gameObject.transform.rotation.eulerAngles);
+        print(CinemachineCameraTarget.transform.rotation.eulerAngles);
+
     }
 
 }
