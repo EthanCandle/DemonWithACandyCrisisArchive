@@ -37,21 +37,15 @@ public class DialogueInteraction : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            print("talk");
-        }
-            // if player presses E,
-            // if player is within range
-            if (Input.GetKeyDown(KeyCode.E) && isPlayerWithinRange)
+
+        // if player presses E,
+        // if player is within range
+        if (Input.GetKeyDown(KeyCode.E) && isPlayerWithinRange)
         {
             print("talk");
             Interact();
         }
-        else if(isPlayerWithinRange)
-        {
-            print(Input.GetKeyDown(KeyCode.E));
-        }
+
 
 
     }

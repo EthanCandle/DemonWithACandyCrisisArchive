@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.XR;
+using UnityEngine.UI;
 using UnityEngine.Windows;
 
 public class PlayerController : MonoBehaviour
@@ -128,8 +129,13 @@ public class PlayerController : MonoBehaviour
 
 
     public float dashSpeed = 15.0f, dashDuration = 1.0f;
-    public bool isDashing = false, isJumping = false, isDead;
-    private bool IsCurrentDeviceMouse 
+    public float dashRechargeCurrent = 0.0f, dashRechargeMax = 100.0f, dashRechargeRate = 25.0f, dashRechargeTime = 1.0f;
+    public bool isDashing = false, isJumping = false, isDead = false;
+    public bool unlockedDash = true, canDash;
+
+    public Slider dashSlider;
+
+    private bool IsCurrentDeviceMouse
     {
         get
         {
@@ -169,7 +175,7 @@ public class PlayerController : MonoBehaviour
         // reset our timeouts on start
         _jumpTimeoutDelta = JumpTimeout;
         // _fallTimeoutDelta = FallTimeout;
-
+        SetRechargeRate();
 
     }
 
@@ -195,7 +201,7 @@ public class PlayerController : MonoBehaviour
     public void SetPlayerControl(bool playerControlState = true)
     {
         hasControl = playerControlState;
-      //  _playerInput.enabled = playerControlState;
+        //  _playerInput.enabled = playerControlState;
     }
     private void FixedUpdate()
     {
@@ -242,7 +248,7 @@ public class PlayerController : MonoBehaviour
     private void GroundedCheck()
     {
         // no need to check if we are going to land on ground if we are currently rising
-        if(_verticalVelocity > 0 && !Grounded)
+        if (_verticalVelocity > 0 && !Grounded)
         {
             return;
         }
@@ -254,18 +260,18 @@ public class PlayerController : MonoBehaviour
         Grounded = Physics.CheckSphere(spherePosition, GroundedRadius, GroundLayers,
             QueryTriggerInteraction.Ignore);
 
-     //   OnDrawGizmos();
+        //   OnDrawGizmos();
         // update animator if using character
         if (_hasAnimator)
         {
             _animator.SetBool(_animIDGrounded, Grounded);
-          //  print("Set bool2" + Grounded);
+            //  print("Set bool2" + Grounded);
         }
 
         if (Grounded && !lastCheckGrounded)
         {
             print($"Ground: {Grounded}, LastGround: {lastCheckGrounded}");
-             FindObjectOfType<AudioManager>().PlaySoundInstantiate(landedSFX);
+            FindObjectOfType<AudioManager>().PlaySoundInstantiate(landedSFX);
         }
         if (!Grounded && lastCheckGrounded)
         {
@@ -305,7 +311,7 @@ public class PlayerController : MonoBehaviour
         {
             timeToHoldJumpBufferCurrent -= 1 * Time.deltaTime;
             jumpBufferIsOn = true;
-            if (timeToHoldJumpBufferCurrent <= 0){
+            if (timeToHoldJumpBufferCurrent <= 0) {
                 jumpBufferIsOn = false;
             }
         }
@@ -337,7 +343,7 @@ public class PlayerController : MonoBehaviour
         _cinemachineTargetYaw = ClampAngle(_cinemachineTargetYaw, float.MinValue, float.MaxValue);
         _cinemachineTargetPitch = ClampAngle(_cinemachineTargetPitch, BottomClamp, TopClamp);
 
-      //  _cinemachineTargetYaw = _cinemachineTargetPitch = 0;
+        //  _cinemachineTargetYaw = _cinemachineTargetPitch = 0;
         // Cinemachine will follow this target
         CinemachineCameraTarget.transform.rotation = Quaternion.Euler(_cinemachineTargetPitch + CameraAngleOverride,
             _cinemachineTargetYaw, 0.0f);
@@ -449,14 +455,17 @@ public class PlayerController : MonoBehaviour
 
         if (Grounded && _jumpTimeoutDelta <= 0.0f)
         {
-          //  print($"On ground right now _input.jump = ({_input.jump} _jumpTimeoutDelta = ({_jumpTimeoutDelta}");
+            //  print($"On ground right now _input.jump = ({_input.jump} _jumpTimeoutDelta = ({_jumpTimeoutDelta}");
             groundedOnceCheck = true;
             if (_input.jumpHold && jumpTimeHold > 0) // edds
             {
                 jumpTimeHold = 0;
             }
-            // reset the fall timeout timer
-            _fallTimeoutDelta = FallTimeout;
+
+            // increase dash meter when on the ground
+            ChargeDashMeter();
+
+
 
             jumpTimeHold = jumpTimeHoldReset; // resets jump holding
 
@@ -510,10 +519,10 @@ public class PlayerController : MonoBehaviour
             if (jumpBufferIsOn)
             {
                 FindObjectOfType<AudioManager>().PlaySoundInstantiate(jumpSFX);
-              //  print($"Jumping: {jumpTimeHold}");
+                //  print($"Jumping: {jumpTimeHold}");
                 // the square root of H * -2 * G = how much velocity needed to reach desired height
                 _verticalVelocity = Mathf.Sqrt(JumpHeight * -2f * Gravity);
-              //  Debug.Log("Jump Velocity: " + _verticalVelocity);  // Should be ~7.67 m/s
+                //  Debug.Log("Jump Velocity: " + _verticalVelocity);  // Should be ~7.67 m/s
                 coyoteJumpTime = 0;
                 //_input.jump = false;
                 // update animator if using character
@@ -565,13 +574,19 @@ public class PlayerController : MonoBehaviour
                 _input.jump = false;
                 isJumping = true;
             }
+
+            if (_hasAnimator)
+            {
+                _animator.SetBool(_animIDFreeFall, true);
+            }
+
         }
         else
         {
-          //  print($"Jumping: {jumpTimeHold}, inputHold: {_input.jumpHold}, jumpHoldTime:{jumpTimeHold}");
+            //  print($"Jumping: {jumpTimeHold}, inputHold: {_input.jumpHold}, jumpHoldTime:{jumpTimeHold}");
             if (_input.jumpHold && isJumping && jumpTimeHold > 0) // holding jump to still jump higher
             {
-              //print("else in jump hold");
+                //print("else in jump hold");
                 _verticalVelocity = Mathf.Sqrt(JumpHeight * -2f * Gravity);
                 jumpTimeHold -= 1 * Time.deltaTime;
                 //  print("JumpHOldBugger");
@@ -582,7 +597,7 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
-               // _input.jumpHold = false;
+                // _input.jumpHold = false;
                 jumpTimeHold = 0;
                 isJumping = false;
             }
@@ -590,22 +605,14 @@ public class PlayerController : MonoBehaviour
             ///
 
             // fall timeout
-            if (_fallTimeoutDelta >= 0.0f)
-            {
-                _fallTimeoutDelta -= Time.deltaTime;
-            }
-            else
-            {
-                // update animator if using character
-                if (_hasAnimator)
-                {
 
-
-                    _animator.SetBool(_animIDFreeFall, true);
-                }
+            // update animator if using character
+            if (_hasAnimator)
+            {
+                _animator.SetBool(_animIDFreeFall, true);
             }
 
-         //   _input.jump = false;
+            //   _input.jump = false;
         }
         // apply gravity over time if under terminal (multiply by delta time twice to linearly speed up over time)
         if (_verticalVelocity < _terminalVelocity)
@@ -694,28 +701,40 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
-        // if hte player isn't presing the itneract button then ignore
+        // if hte player isn't pressing the interact button then ignore
         if (!_input.interact)
         {
-           // print($"{_input.interact} {isDashing}");
+            // print($"{_input.interact} {isDashing}");
             return;
         }
 
-
-        _input.interact = false;
-        // only happens the first time the player presses interact
-        if (!isDashing)
+        if (canDash)
         {
-            StartCoroutine(DashWait());
+            StartDash();
         }
+
+    }
+
+    public void StartDash()
+    {
+        // the initial press of the dash
+        _input.interact = false;
+
+        // only happens the first time the player presses interact
+
+        StartCoroutine(DashWait());
+
+        UsedDashMeter();
 
         isDashing = true;
 
-
+        canDash = false;
     }
 
     public void DashinSpeedBoost()
     {
+        // increases the players speed, prevents input, moves in current held direction
+
      //   print("Dashing");
         // normalise input direction
         Vector3 inputDirection = new Vector3(_input.move.x, 0.0f, _input.move.y).normalized;
@@ -768,6 +787,52 @@ public class PlayerController : MonoBehaviour
         print(rotation.eulerAngles);        print(gameObject.transform.rotation.eulerAngles);
         print(CinemachineCameraTarget.transform.rotation.eulerAngles);
 
+    }
+
+    public void ChargeDashMeter()
+    {
+        // called when on ground
+
+        // entry gate when we are already charged
+        if (dashRechargeCurrent >= dashRechargeMax)
+        {
+            return;
+        }
+
+
+        // increase to new amount
+        dashRechargeCurrent += dashRechargeRate * Time.deltaTime;
+        dashSlider.value = dashRechargeCurrent;
+        // checks it once when dash has fully charge
+        // also checks if the previous one wasn't
+        if (dashRechargeCurrent >= dashRechargeMax)
+        {
+            FullyChargeDashMeter();
+        }
+
+    }
+
+    public void FullyChargeDashMeter()
+    {
+        // called when you want to fully charge the dash meter instantly
+        // or call when the meter naturally fills up
+        canDash = true;
+        dashRechargeCurrent = dashRechargeMax;
+        dashSlider.value = dashRechargeCurrent;
+    }
+
+    public void UsedDashMeter()
+    {
+        dashRechargeCurrent = 0;
+        dashSlider.value = dashRechargeCurrent;
+    }
+
+    public void SetRechargeRate()
+    {
+        // this is based on the dash time and converting it to the recharge rate
+        dashRechargeRate = dashRechargeMax / dashRechargeTime;
+
+        dashSlider.maxValue = dashRechargeMax;
     }
 
 }
