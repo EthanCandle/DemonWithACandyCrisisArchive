@@ -1936,18 +1936,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.020378837, y: 0.010313202, z: 0.01049864}
   m_Center: {x: 1.1469872e-12, y: -0.000038391056, z: 0.005209641}
---- !u!114 &89294728 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4029739511907013188, guid: 5c99790009516cd479140b56fb5e77a1,
-    type: 3}
-  m_PrefabInstance: {fileID: 1169800172}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &89713191
 GameObject:
   m_ObjectHideFlags: 0
@@ -55973,89 +55961,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1199331279}
     m_Modifications:
-    - target: {fileID: 838897009620271955, guid: 5c99790009516cd479140b56fb5e77a1,
-        type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 838897009620271955, guid: 5c99790009516cd479140b56fb5e77a1,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 838897009620271955, guid: 5c99790009516cd479140b56fb5e77a1,
-        type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1137878048822373851, guid: 5c99790009516cd479140b56fb5e77a1,
-        type: 3}
-      propertyPath: m_SizeDelta.x
-      value: -9.319
-      objectReference: {fileID: 0}
-    - target: {fileID: 1137878048822373851, guid: 5c99790009516cd479140b56fb5e77a1,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0.33999634
-      objectReference: {fileID: 0}
-    - target: {fileID: 2455594256029041735, guid: 5c99790009516cd479140b56fb5e77a1,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 4.1908
-      objectReference: {fileID: 0}
-    - target: {fileID: 2455594256029041735, guid: 5c99790009516cd479140b56fb5e77a1,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 4.1908
-      objectReference: {fileID: 0}
-    - target: {fileID: 2455594256029041735, guid: 5c99790009516cd479140b56fb5e77a1,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 4.1908
-      objectReference: {fileID: 0}
-    - target: {fileID: 2455594256029041735, guid: 5c99790009516cd479140b56fb5e77a1,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -615.5725
-      objectReference: {fileID: 0}
-    - target: {fileID: 2455594256029041735, guid: 5c99790009516cd479140b56fb5e77a1,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -491.90842
-      objectReference: {fileID: 0}
     - target: {fileID: 2602230690018411452, guid: 5c99790009516cd479140b56fb5e77a1,
         type: 3}
       propertyPath: m_Name
       value: PlayerHolder ThirdPerson
       objectReference: {fileID: 0}
-    - target: {fileID: 3019666042673523020, guid: 5c99790009516cd479140b56fb5e77a1,
-        type: 3}
-      propertyPath: m_SizeDelta.x
-      value: -0.000030518
-      objectReference: {fileID: 0}
-    - target: {fileID: 3045629522028377874, guid: 5c99790009516cd479140b56fb5e77a1,
-        type: 3}
-      propertyPath: m_Type
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3045629522028377874, guid: 5c99790009516cd479140b56fb5e77a1,
         type: 3}
       propertyPath: m_FillAmount
-      value: 0.989
-      objectReference: {fileID: 0}
-    - target: {fileID: 3045629522028377874, guid: 5c99790009516cd479140b56fb5e77a1,
-        type: 3}
-      propertyPath: m_FillMethod
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3234459524334086016, guid: 5c99790009516cd479140b56fb5e77a1,
-        type: 3}
-      propertyPath: dashSlider
-      value: 
-      objectReference: {fileID: 89294728}
-    - target: {fileID: 4029739511907013188, guid: 5c99790009516cd479140b56fb5e77a1,
-        type: 3}
-      propertyPath: m_Value
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5712012131079612471, guid: 5c99790009516cd479140b56fb5e77a1,
