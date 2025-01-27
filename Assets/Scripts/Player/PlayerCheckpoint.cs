@@ -38,7 +38,7 @@ public class PlayerCheckpoint : MonoBehaviour
 
     public void SetCheckPoint(GameObject otherObj)
     {
-        currentCP = otherObj.transform.GetChild(0).gameObject;
+        currentCP = otherObj.transform.parent.gameObject;
         // gets the child object
         currentCheckPointLocation = currentCP.transform.position;//currentCP.transform.position;
         playerDeath.SetPlayerRespawnPoint(currentCheckPointLocation, currentCP);

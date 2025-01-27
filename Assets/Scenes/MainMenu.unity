@@ -3371,13 +3371,13 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 704589920}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0.25882575, w: 0.965924}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 0.36346054, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1688767050}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -30.001}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: -1.8594971, y: 4.3927307}
@@ -3403,7 +3403,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 68859c9e003fb104988fbd4d878085e1, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ed6b23767c4aa59449f33565651ab889, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -38658,7 +38658,7 @@ RectTransform:
   m_GameObject: {fileID: 1146901116}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.3333333, y: 0.3333333, z: 0.3333333}
+  m_LocalScale: {x: 0.96973324, y: 0.96973324, z: 0.96973324}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 725229989}
@@ -38668,7 +38668,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -105.07879, y: -39.778362}
+  m_AnchoredPosition: {x: -481.2276, y: -39.778362}
   m_SizeDelta: {x: 146.0253, y: 144.0143}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1146901118
@@ -40082,8 +40082,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 42
+  m_fontSizeBase: 42
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -42396,6 +42396,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4338683139242813201, guid: 6c46e4498cb8c8f479f4612549a89cc6,
+        type: 3}
+      propertyPath: currentVolume
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4763647196156443463, guid: 6c46e4498cb8c8f479f4612549a89cc6,
         type: 3}

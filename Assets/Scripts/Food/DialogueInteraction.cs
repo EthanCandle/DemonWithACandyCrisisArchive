@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+// NotStarted = player hasn't talked to them yet, Locked is player is in the locked dialogue, normal is normal, finished is after talking to them normal
 public enum DialogueState {NotStarted, Locked, Normal,Finished  }
 public class DialogueInteraction : MonoBehaviour
 {
@@ -105,14 +106,22 @@ public class DialogueInteraction : MonoBehaviour
     {
         lineOn += 1;
 
+        // if we are on the last line of dialogue
         if (IsOnLastLineOfDialogue())
         {
-            hasFinishedConversation = true;
+
             FinishedTalking();
-            if (shouldKillSelfAtEnd)
+
+            // if the player is in the npcs normal dialogue route
+            if (dialogueState == DialogueState.Normal)
             {
-                isDead = true;
-                Destroy(gameObject, 5f);
+                hasFinishedConversation = true;
+
+                if (shouldKillSelfAtEnd)
+                {
+                    isDead = true;
+                    Destroy(gameObject, 5f);
+                }
             }
             return;
         }

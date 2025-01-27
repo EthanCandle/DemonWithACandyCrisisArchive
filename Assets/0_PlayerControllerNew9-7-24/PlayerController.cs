@@ -133,8 +133,9 @@ public class PlayerController : MonoBehaviour
     public bool isDashing = false, isJumping = false, isDead = false;
     public bool unlockedDash = true, canDash;
 
-    public Slider dashSlider;
-
+    public SliderNew dashSlider;
+    public Animator playerCanvasAnimator;
+    public GameObject dashUI;
     private bool IsCurrentDeviceMouse
     {
         get
@@ -176,6 +177,14 @@ public class PlayerController : MonoBehaviour
         _jumpTimeoutDelta = JumpTimeout;
         // _fallTimeoutDelta = FallTimeout;
         SetRechargeRate();
+
+        if (unlockedDash)
+        {
+            TurnOnDash();
+        }
+
+        // turns on all general canvas that holds all player ui (they can be disabled indiviually)
+        playerCanvasAnimator.SetTrigger("On");
 
     }
 
@@ -802,7 +811,7 @@ public class PlayerController : MonoBehaviour
 
         // increase to new amount
         dashRechargeCurrent += dashRechargeRate * Time.deltaTime;
-        dashSlider.value = dashRechargeCurrent;
+        dashSlider.SetSlider(dashRechargeCurrent);
         // checks it once when dash has fully charge
         // also checks if the previous one wasn't
         if (dashRechargeCurrent >= dashRechargeMax)
@@ -818,13 +827,14 @@ public class PlayerController : MonoBehaviour
         // or call when the meter naturally fills up
         canDash = true;
         dashRechargeCurrent = dashRechargeMax;
-        dashSlider.value = dashRechargeCurrent;
+        dashSlider.SetSlider(dashRechargeCurrent);
     }
 
     public void UsedDashMeter()
     {
         dashRechargeCurrent = 0;
-        dashSlider.value = dashRechargeCurrent;
+        // need to call deplete
+        dashSlider.DepleteSlider();
     }
 
     public void SetRechargeRate()
@@ -834,5 +844,13 @@ public class PlayerController : MonoBehaviour
 
         dashSlider.maxValue = dashRechargeMax;
     }
+
+    public void TurnOnDash()
+    {
+        unlockedDash = true;
+        dashUI.SetActive(true);
+        // need to turn on canvas and stuff
+    }
+
 
 }
