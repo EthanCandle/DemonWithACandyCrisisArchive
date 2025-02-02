@@ -9,13 +9,17 @@ public class LevelTransitionManager : MonoBehaviour
     public GameObject levelTransitionUIHolder; // thing that holds all of the ui othertahn the canvas tiself
     public Animator levelTransAnimator;
     public Sound goingInSFX, goingOutSFX, test;
+
+    public AudioManager audioManager;
     // Start is called before the first frame update
     void Start()
     {
+        audioManager = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
         print("Playing test sound");
         if (!shouldPlayTransition)
         {
             DoNotPlayTransition();
+            audioManager.FadeIn();
             return;
         }
 
@@ -41,7 +45,7 @@ public class LevelTransitionManager : MonoBehaviour
         PauseTime();
         levelTransitionUIHolder.SetActive(true);
         levelTransAnimator.Play("GoingOut");
-
+        audioManager.FadeIn();
     }
 
     public void PlayTransitionIn()
@@ -50,7 +54,8 @@ public class LevelTransitionManager : MonoBehaviour
         PauseTime();
         levelTransitionUIHolder.SetActive(true);
         levelTransAnimator.Play("GoingIn");
-        FindObjectOfType<AudioManager>().PlaySoundInstantiate(goingInSFX);
+        FindObjectOfType<AudioManager>().PlaySoundInstantiate(goingInSFX);  
+        audioManager.FadeOut();
     }
 
     public void StartGame()

@@ -12,7 +12,7 @@ public class Settings : MonoBehaviour
     public bool isMuted = false;
     public GameObject muteObject, unMuteObject;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         audioManager = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
         SetSliderOnStart();
@@ -34,7 +34,7 @@ public class Settings : MonoBehaviour
 
     public void ChangeVolume()
     {
-        print((int)volumeSlider.value);
+       // print((int)volumeSlider.value);
         audioManager.SetVolume((int)volumeSlider.value);
         UnMute(); // just to remove the mute symbol
     }

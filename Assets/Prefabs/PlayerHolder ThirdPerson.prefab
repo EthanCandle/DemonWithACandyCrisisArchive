@@ -352,7 +352,7 @@ Transform:
   m_GameObject: {fileID: 409234657933732274}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.01, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -524,17 +524,19 @@ MonoBehaviour:
     name: Landing
     clip: {fileID: 8300000, guid: 771c359260d19b64da8a9855353cb659, type: 3}
     volume: 1
-    volumeOriginal: 1
+    volumeOriginal: 0.35
     pitch: 1
     loop: 0
+    audioMixerGroup: {fileID: 0}
     source: {fileID: 0}
   jumpSFX:
     name: Jumping Sound
     clip: {fileID: 8300000, guid: 3a8bf52cb1730cf4784500d472018323, type: 3}
     volume: 1
-    volumeOriginal: 1
+    volumeOriginal: 0.35
     pitch: 1
     loop: 0
+    audioMixerGroup: {fileID: 0}
     source: {fileID: 0}
   isRoofed: 0
   roofOffsetSphere: 1.58
@@ -553,6 +555,8 @@ MonoBehaviour:
   dashSlider: {fileID: 362330708517548665}
   playerCanvasAnimator: {fileID: 3666730386343579869}
   dashUI: {fileID: 8373510499625093791}
+  posLow: 0
+  posHigh: 0
 --- !u!114 &8458144827836217339
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -716,6 +720,15 @@ MonoBehaviour:
   currentCheckPointLocation: {x: 0, y: 0, z: 0}
   playerDeath: {fileID: 0}
   waitTimeWhenRespawn: 0
+  soundHittingCheckPoint:
+    name: 
+    clip: {fileID: 0}
+    volume: 1
+    volumeOriginal: 1
+    pitch: 1
+    loop: 0
+    audioMixerGroup: {fileID: 0}
+    source: {fileID: 0}
 --- !u!114 &5712012131079612471
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -738,6 +751,7 @@ MonoBehaviour:
     volumeOriginal: 1
     pitch: 1
     loop: 0
+    audioMixerGroup: {fileID: 0}
     source: {fileID: 0}
   playerController: {fileID: 0}
   playerRespawnPoint: {x: 0, y: 0, z: 0}
@@ -2556,7 +2570,7 @@ Transform:
   m_GameObject: {fileID: 3078209233697946738}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.5250001, z: -8}
+  m_LocalPosition: {x: 0, y: 1.5150001, z: -8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2697,7 +2711,7 @@ Transform:
   m_GameObject: {fileID: 3217460797952865927}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.5250001, z: -8}
+  m_LocalPosition: {x: 0, y: 1.5150001, z: -8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

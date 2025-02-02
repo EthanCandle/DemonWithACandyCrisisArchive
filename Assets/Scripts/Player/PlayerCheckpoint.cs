@@ -10,6 +10,9 @@ public class PlayerCheckpoint : MonoBehaviour
     public PlayerDeath playerDeath;
     public float waitTimeWhenRespawn;
 
+    public Animator checkPointAnimator;
+
+    public Sound soundHittingCheckPoint;
     // Start is called before the first frame update
     void Start()
     {
@@ -32,16 +35,34 @@ public class PlayerCheckpoint : MonoBehaviour
     {
         if (other.CompareTag("CheckPoint"))
         {
+            // bail out if we are already 
+            if(other.gameObject == currentCP)
+            {
+                return;
+            }
             SetCheckPoint(other.gameObject);
         }
     }
 
     public void SetCheckPoint(GameObject otherObj)
     {
+       // a checkpoint is a cube with a hitbox child. The cube parent is where the player should be placed.
+
+        // safeguard for the first time the player touches the checkpoint
+        if(checkPointAnimator != null)
+        {
+            checkPointAnimator.SetBool("IsSet", true);
+        }
+
         currentCP = otherObj.transform.parent.gameObject;
-        // gets the child object
-        currentCheckPointLocation = currentCP.transform.position;//currentCP.transform.position;
+        // need to get the current cps animator and set it to go down
+        checkPointAnimator = currentCP.GetComponentInChildren<Animator>();
+        checkPointAnimator.SetBool("IsSet", true);
+
+        currentCheckPointLocation = currentCP.transform.position;
         playerDeath.SetPlayerRespawnPoint(currentCheckPointLocation, currentCP);
+        FindObjectOfType<AudioManager>().PlaySoundInstantiate(soundHittingCheckPoint);
+        // need to get its animator and play the animation for it to sprout up
         //print($"")
     }
 }

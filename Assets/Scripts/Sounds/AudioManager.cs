@@ -2,7 +2,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.Rendering;
-
+using UnityEngine.SceneManagement;
 public class AudioManager : MonoBehaviour
 {
     public int currentVolume = 100;
@@ -15,6 +15,14 @@ public class AudioManager : MonoBehaviour
     public AudioSource songCurrentlyPlaying;
 
     public int amountOfSoundsSoFar = 0;
+
+    public bool shouldFadeIn = false, shouldFadeOut = false;
+    public float fadeInOutTime = 1.0f;
+    public float fadeInOutSpeed = 0.5f;
+    public float songVolumeMax; // this is the music's current volume before transitioning
+
+    public AudioMixerGroup audioMixerGroupMusic, audioMixerGroupSFX;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -61,10 +69,11 @@ public class AudioManager : MonoBehaviour
             s.source.volume = s.volume;
             s.source.pitch = s.pitch;
             s.source.loop = s.loop;
-
+            s.source.outputAudioMixerGroup = audioMixerGroupMusic;
         }
 
-        AdjustVolume(currentVolume);
+        AdjustVolume(currentVolume); 
+
     }
 
     public Sound FindSound(string name)
@@ -104,7 +113,7 @@ public class AudioManager : MonoBehaviour
         sourceSound.source.volume = currentVolume / 100.0f * sourceSound.volumeOriginal;
         sourceSound.source.pitch = sourceSound.pitch;
         sourceSound.source.loop = sourceSound.loop;
-        
+        sourceSound.source.outputAudioMixerGroup = audioMixerGroupSFX;
         // plays teh sound
         sourceSound.source.Play();
 
@@ -144,7 +153,8 @@ public class AudioManager : MonoBehaviour
 
     private void Start()
     {
-        PlayRandomGamePlayMusic();
+
+       // PlayRandomGamePlayMusic();
         /*
          * Lo-Fi
          * Ambient, Good at 1.3 pitch. soft and child
@@ -154,6 +164,54 @@ public class AudioManager : MonoBehaviour
         */
     }
 
+    private void Update()
+    {
+        if (shouldFadeOut)
+        {
+            songCurrentlyPlaying.volume -= fadeInOutSpeed * Time.unscaledDeltaTime;
+            if (songCurrentlyPlaying.volume <= 0)
+            {
+                shouldFadeOut = false;
+            }
+        }
+
+        if (shouldFadeIn)
+        {
+            songCurrentlyPlaying.volume += fadeInOutSpeed * Time.unscaledDeltaTime;
+            if (songCurrentlyPlaying.volume >= songVolumeMax)
+            {
+
+                shouldFadeIn = false;
+                songCurrentlyPlaying.volume = songVolumeMax;
+            }
+        }
+
+    }
+
+    public void GetTransitionSpeed()
+    {
+        print(songVolumeMax);
+        songVolumeMax = songCurrentlyPlaying.volume;
+        fadeInOutSpeed = songCurrentlyPlaying.volume / fadeInOutTime;
+        print(songVolumeMax);
+    }
+
+    public void FadeOut()
+    {
+        // this should only be called by the transition manager
+        shouldFadeOut = true;
+        GetTransitionSpeed();
+
+    }
+    public void FadeIn()
+    {
+        // this should only be called by the transition manager
+        // sets the fade in to true, gets teh new transition speed based on the volume of the song, mutes teh song so it comes back in teh fade
+        PlayLevelMusic();
+        shouldFadeIn = true;
+        GetTransitionSpeed();
+        songCurrentlyPlaying.volume = 0;
+    }
     // FindObjectOfType<AudioManager>().Play("BombDeport");
 
     public void PlaySFX(string name)
@@ -187,6 +245,21 @@ public class AudioManager : MonoBehaviour
         s.source.Play();
         songCurrentlyPlaying = s.source;
 
+    }
+
+    public void PlayLevelMusic()
+    {
+        Sound s = gamePlayMusic[SceneManager.GetActiveScene().buildIndex];
+
+        if (s == null)
+        {
+            Debug.LogWarning("Sound: " + name + " not found!");
+            return;
+        }
+
+        s.source.Play();
+        songCurrentlyPlaying = s.source;
+        print(songCurrentlyPlaying.volume);
     }
 
     public void StopCurrentSong()
@@ -299,6 +372,7 @@ public class AudioManager : MonoBehaviour
 
     public void AdjustVolume(int volume = 100)
     {
+        print("Adjust volume start");
         // volume range is between 0-100
         foreach (Sound s in sounds)
         {
@@ -315,7 +389,7 @@ public class AudioManager : MonoBehaviour
             s.source.volume = volume / 100.0f * s.volumeOriginal;
 
         }
-
+        print("Adjust volume end");
     }
 
 

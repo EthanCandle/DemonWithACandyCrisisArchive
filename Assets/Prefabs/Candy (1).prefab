@@ -254,9 +254,10 @@ MonoBehaviour:
     name: Collected Candy
     clip: {fileID: 8300000, guid: 55affb5a378ff324687c973e6a94e9ce, type: 3}
     volume: 1
-    volumeOriginal: 1
+    volumeOriginal: 0.35
     pitch: 1
     loop: 0
+    audioMixerGroup: {fileID: 0}
     source: {fileID: 0}
   particleEffect: {fileID: 7466658172720886040, guid: 5329ec35533d76c42a4a1c44ea058be3,
     type: 3}

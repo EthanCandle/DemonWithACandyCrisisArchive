@@ -41682,6 +41682,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2406654612500179825, guid: 9326fd8558077c140b89480e4ef2e527,
+        type: 3}
+      propertyPath: shouldPlayTransition
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3476485397191855952, guid: 9326fd8558077c140b89480e4ef2e527,
         type: 3}
       propertyPath: m_Pivot.x
@@ -42401,6 +42406,11 @@ PrefabInstance:
         type: 3}
       propertyPath: currentVolume
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4338683139242813201, guid: 6c46e4498cb8c8f479f4612549a89cc6,
+        type: 3}
+      propertyPath: fadeInOutTime
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4763647196156443463, guid: 6c46e4498cb8c8f479f4612549a89cc6,
         type: 3}

@@ -122,7 +122,7 @@ public class PlayerController : MonoBehaviour
 
     public bool _hasAnimator;
 
-    public Sound landedSFX, jumpSFX;
+    public Sound landedSFX, jumpSFX, dashSFX;
     public bool isRoofed = false;
     public float roofOffsetSphere = 2.0f;
     public float fallSpeedInitial = -2.0f;
@@ -136,6 +136,8 @@ public class PlayerController : MonoBehaviour
     public SliderNew dashSlider;
     public Animator playerCanvasAnimator;
     public GameObject dashUI;
+
+    public float posLow, posHigh;
     private bool IsCurrentDeviceMouse
     {
         get
@@ -235,7 +237,20 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
+            if (isDashing)
+            {
+                return;
+            }
             AddGravity();
+        }
+        if(transform.position.y < posLow)
+        {
+            posLow = transform.position.y;
+        }
+        if (transform.position.y > posHigh)
+        {
+            posLow = transform.position.y;
+            posHigh = transform.position.y;
         }
 
     }
@@ -396,6 +411,10 @@ public class PlayerController : MonoBehaviour
             inputMagnitude = 1.0f;
         }
 
+        // 0, 2.4
+        // 1. 11.34
+        // 2, 19.94
+        // 3, 28.56
 
         // accelerate or decelerate to target speed
         if (currentHorizontalSpeed < targetSpeed - speedOffset || currentHorizontalSpeed > targetSpeed + speedOffset)
@@ -528,9 +547,7 @@ public class PlayerController : MonoBehaviour
             if (jumpBufferIsOn)
             {
                 FindObjectOfType<AudioManager>().PlaySoundInstantiate(jumpSFX);
-                //  print($"Jumping: {jumpTimeHold}");
-                // the square root of H * -2 * G = how much velocity needed to reach desired height
-                _verticalVelocity = Mathf.Sqrt(JumpHeight * -2f * Gravity);
+                AddJumpForce();
                 //  Debug.Log("Jump Velocity: " + _verticalVelocity);  // Should be ~7.67 m/s
                 coyoteJumpTime = 0;
                 //_input.jump = false;
@@ -566,8 +583,7 @@ public class PlayerController : MonoBehaviour
             {
                 FindObjectOfType<AudioManager>().PlaySoundInstantiate(jumpSFX);
                 print("Coyote Jumping");
-                // the square root of H * -2 * G = how much velocity needed to reach desired height
-                _verticalVelocity = Mathf.Sqrt(JumpHeight * -2f * Gravity);
+                AddJumpForce();
                 //  Debug.Log("Jump Velocity: " + _verticalVelocity);  // Should be ~7.67 m/s
                 coyoteJumpTime = 0;
                 //_input.jump = false;
@@ -596,7 +612,7 @@ public class PlayerController : MonoBehaviour
             if (_input.jumpHold && isJumping && jumpTimeHold > 0) // holding jump to still jump higher
             {
                 //print("else in jump hold");
-                _verticalVelocity = Mathf.Sqrt(JumpHeight * -2f * Gravity);
+                AddJumpForce();
                 jumpTimeHold -= 1 * Time.deltaTime;
                 //  print("JumpHOldBugger");
                 //print(jumpTimeHold);
@@ -672,9 +688,10 @@ public class PlayerController : MonoBehaviour
     }
 
     // moves the player (maybe use for bouncepad)
-    public void JumpForce(float multiplier)
+    public void AddJumpForce(float multiplier = 1)
     {
-        _verticalVelocity = Mathf.Sqrt(JumpHeight * -2f * Gravity * multiplier);
+        // 1 * -2 * -30
+        _verticalVelocity = Mathf.Sqrt(JumpHeight * -2f * Gravity) * Mathf.Sqrt(multiplier);
     }
 
     public void SetSpeedToZero()
@@ -728,13 +745,13 @@ public class PlayerController : MonoBehaviour
     {
         // the initial press of the dash
         _input.interact = false;
-
+        FindObjectOfType<AudioManager>().PlaySoundInstantiate(dashSFX);
         // only happens the first time the player presses interact
 
         StartCoroutine(DashWait());
 
         UsedDashMeter();
-
+        _verticalVelocity = 0;
         isDashing = true;
 
         canDash = false;
@@ -765,7 +782,7 @@ public class PlayerController : MonoBehaviour
         }
        // _playerInput.actions["Move"].Disable();
 
-        _verticalVelocity = 0;
+
 
         Vector3 targetDirection = Quaternion.Euler(0.0f, _targetRotation, 0.0f) * Vector3.forward;
         canMove = false;
@@ -778,11 +795,16 @@ public class PlayerController : MonoBehaviour
     public IEnumerator DashWait()
     {
         yield return new WaitForSeconds(dashDuration);
-        isDashing = false;
-        canMove = true; 
-        _playerInput.actions["Move"].Enable();
+        StopDash();
       //  print("Stop dashing");
         // end the dash and regive player movement
+    }
+
+    public void StopDash()
+    {
+        isDashing = false;
+        canMove = true;
+        _playerInput.actions["Move"].Enable();
     }
 
     public void SetCameraRotation(Quaternion rotation)
@@ -850,6 +872,24 @@ public class PlayerController : MonoBehaviour
         unlockedDash = true;
         dashUI.SetActive(true);
         // need to turn on canvas and stuff
+    }
+
+    // this should bounce the player 3x their jump height
+    public void Bounce()
+    {
+        coyoteJumpTime = 0;
+        //_input.jump = false;
+        // update animator if using character
+        if (_hasAnimator)
+        {
+
+            _animator.SetBool(_animIDJump, true);
+        }
+        _jumpTimeoutDelta = JumpTimeout;
+        // stops the falling check at the ttop if you jump 
+        groundedOnceCheck = false;
+        _input.jump = false;
+        AddJumpForce(6);
     }
 
 

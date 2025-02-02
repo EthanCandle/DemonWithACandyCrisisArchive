@@ -19,6 +19,8 @@ public class Sound
 
     public bool loop;
 
+   public AudioMixerGroup audioMixerGroup;
+
     [HideInInspector]
     public AudioSource source;
 
