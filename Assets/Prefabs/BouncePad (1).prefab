@@ -120,7 +120,8 @@ MonoBehaviour:
     name: Boing
     clip: {fileID: 8300000, guid: a21d30c577d194c4cae4f46331886c14, type: 3}
     volume: 1
-    volumeOriginal: 1
+    volumeOriginal: 0.1
     pitch: 1
     loop: 0
+    audioMixerGroup: {fileID: 0}
     source: {fileID: 0}

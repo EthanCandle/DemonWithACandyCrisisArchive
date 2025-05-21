@@ -234,7 +234,7 @@ MonoBehaviour:
     name: TransitionIn
     clip: {fileID: 8300000, guid: 33f34b5f3a393d246bef346de130b085, type: 3}
     volume: 1
-    volumeOriginal: 0.35
+    volumeOriginal: 0.25
     pitch: 1
     loop: 0
     audioMixerGroup: {fileID: 0}
@@ -243,7 +243,7 @@ MonoBehaviour:
     name: TransitionOut
     clip: {fileID: 8300000, guid: 33f34b5f3a393d246bef346de130b085, type: 3}
     volume: 1
-    volumeOriginal: 0.35
+    volumeOriginal: 0.25
     pitch: 1
     loop: 0
     audioMixerGroup: {fileID: 0}

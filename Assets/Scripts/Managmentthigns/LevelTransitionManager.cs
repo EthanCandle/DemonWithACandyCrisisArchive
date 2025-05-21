@@ -16,10 +16,12 @@ public class LevelTransitionManager : MonoBehaviour
     {
         audioManager = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
         print("Playing test sound");
-        if (!shouldPlayTransition)
+
+        if (audioManager.inMainMenuFirstTime)
         {
             DoNotPlayTransition();
             audioManager.FadeIn();
+            audioManager.inMainMenuFirstTime = false;
             return;
         }
 
@@ -48,7 +50,7 @@ public class LevelTransitionManager : MonoBehaviour
         audioManager.FadeIn();
     }
 
-    public void PlayTransitionIn()
+    public void PlayTransitionIn(int levelNum = 0)
     {
        
         PauseTime();
@@ -56,6 +58,25 @@ public class LevelTransitionManager : MonoBehaviour
         levelTransAnimator.Play("GoingIn");
         FindObjectOfType<AudioManager>().PlaySoundInstantiate(goingInSFX);  
         audioManager.FadeOut();
+
+        float duration = 1;
+
+        foreach (var clip in levelTransAnimator.runtimeAnimatorController.animationClips)
+        {
+            if (clip.name == "GoingIn")
+            {
+                duration = clip.length;
+                break;
+            }
+        }
+        StartCoroutine(WaitToLoadNextScene(duration, levelNum));
+    }
+
+    IEnumerator WaitToLoadNextScene(float timeToWait, int levelToGoTo)
+    {
+
+        yield return new WaitForSecondsRealtime(timeToWait);
+        LoadLevel(levelToGoTo);
     }
 
     public void StartGame()
@@ -65,7 +86,12 @@ public class LevelTransitionManager : MonoBehaviour
 
     public void EndGame()
     {
-        PlayTransitionIn();
+        PlayTransitionIn(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+
+    public void MoveToDifferentLevel(int levelNum)
+    {
+        PlayTransitionIn(levelNum);
     }
 
     public void UnPauseTime()
@@ -76,6 +102,11 @@ public class LevelTransitionManager : MonoBehaviour
     public void PauseTime()
     {
         Time.timeScale = 0;
+    }
+
+    public void LoadLevel(int levelNum)
+    {
+        SceneManager.LoadScene(levelNum);
     }
 
     public void NextLevel()

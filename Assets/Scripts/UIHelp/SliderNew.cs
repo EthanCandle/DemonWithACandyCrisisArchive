@@ -45,6 +45,7 @@ public class SliderNew : MonoBehaviour
     {
         valueCurrent -= amountToChangeBy;
         SetSlider(valueCurrent);
+       // print($"Decrease to: {valueCurrent}");
     }
 
     public void DepleteSlider()
@@ -58,6 +59,14 @@ public class SliderNew : MonoBehaviour
         }
     }
 
+    public void FullyFillSlider()
+    {
+
+        SetSlider(maxValue);
+        shouldDepleteSlider = false;
+       // print($"Max Filled Value to: {valueCurrent}");
+    }
+
     public void SetSlider(float sliderValueNew)
     {
         valueCurrent = sliderValueNew;
@@ -69,6 +78,7 @@ public class SliderNew : MonoBehaviour
         }
         Mathf.Clamp(valueCurrent, minValue, maxValue);
         sliderFillImage.fillAmount = valueCurrent / maxValue;
+     //   print($"Set Value to: {valueCurrent}");
     }
 
     public void SetDepleteSpeed()

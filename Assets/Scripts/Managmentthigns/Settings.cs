@@ -5,14 +5,17 @@ using UnityEngine.UI;
 
 public class Settings : MonoBehaviour
 {
+    public bool isInOptions = false;
     public AudioManager audioManager;
     public int volume;
     public Slider volumeSlider;
 
     public bool isMuted = false;
     public GameObject muteObject, unMuteObject;
+    public Animator optionsAnimator;
+    public CanvasGroup menuToDeactiveOnSummon;
     // Start is called before the first frame update
-    void Awake()
+    void Start()
     {
         audioManager = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
         SetSliderOnStart();
@@ -69,5 +72,43 @@ public class Settings : MonoBehaviour
         unMuteObject.SetActive(true);
 
     }
+
+    public void ToggleOptionsMenu()
+    {
+        if (isInOptions)
+        {
+            DesummonOptionsMenu();
+        }
+        else
+        {
+            SummonOptionsMenu();
+        }
+    }
+
+    // called by buttons, 
+    public void SummonOptionsMenu()
+    {
+        if (!isInOptions)
+        {
+            optionsAnimator.SetTrigger("Move");
+        }
+        // called by options button
+        isInOptions = true;
+        optionsAnimator.SetTrigger("Move");
+        menuToDeactiveOnSummon.interactable = false;
+    }
+
+    public void DesummonOptionsMenu()
+    {
+        if (isInOptions)
+        {
+            optionsAnimator.SetTrigger("Move");
+        }
+        // called by back button
+        isInOptions = false;
+
+        menuToDeactiveOnSummon.interactable = true;
+    }
+
 
 }

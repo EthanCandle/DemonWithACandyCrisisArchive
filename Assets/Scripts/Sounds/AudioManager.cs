@@ -22,13 +22,17 @@ public class AudioManager : MonoBehaviour
     public float songVolumeMax; // this is the music's current volume before transitioning
 
     public AudioMixerGroup audioMixerGroupMusic, audioMixerGroupSFX;
-
+    public  bool inMainMenuFirstTime = true;
     // Start is called before the first frame update
     void Awake()
     {
         // create self if not already in
         if (instance == null)
+        {
+
+        
             instance = this;
+        }
         else
         {
             Destroy(gameObject);
@@ -95,7 +99,7 @@ public class AudioManager : MonoBehaviour
         {
             return;
         }
-        print(sourceSound.name);
+       // print(sourceSound.name);
         // plays a sound by creating an empty object with the sound attached and deletes it when it ends
         amountOfSoundsSoFar++;
 
@@ -171,13 +175,15 @@ public class AudioManager : MonoBehaviour
             songCurrentlyPlaying.volume -= fadeInOutSpeed * Time.unscaledDeltaTime;
             if (songCurrentlyPlaying.volume <= 0)
             {
+                print("Fully faded");
                 shouldFadeOut = false;
+                songCurrentlyPlaying.Stop();
             }
         }
 
         if (shouldFadeIn)
         {
-            songCurrentlyPlaying.volume += fadeInOutSpeed * Time.unscaledDeltaTime;
+            songCurrentlyPlaying.volume += fadeInOutSpeed / 5 * Time.unscaledDeltaTime;
             if (songCurrentlyPlaying.volume >= songVolumeMax)
             {
 

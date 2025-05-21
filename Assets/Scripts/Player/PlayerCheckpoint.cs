@@ -13,10 +13,13 @@ public class PlayerCheckpoint : MonoBehaviour
     public Animator checkPointAnimator;
 
     public Sound soundHittingCheckPoint;
+
+    public CheckPointManager checkPointManager;
     // Start is called before the first frame update
     void Start()
     {
         playerDeath = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerDeath>();
+        checkPointManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<CheckPointManager>();
     }
 
     // Update is called once per frame
@@ -36,7 +39,7 @@ public class PlayerCheckpoint : MonoBehaviour
         if (other.CompareTag("CheckPoint"))
         {
             // bail out if we are already 
-            if(other.gameObject == currentCP)
+            if(other.transform.parent.gameObject == currentCP)
             {
                 return;
             }
@@ -51,7 +54,7 @@ public class PlayerCheckpoint : MonoBehaviour
         // safeguard for the first time the player touches the checkpoint
         if(checkPointAnimator != null)
         {
-            checkPointAnimator.SetBool("IsSet", true);
+            checkPointAnimator.SetBool("IsSet", false);
         }
 
         currentCP = otherObj.transform.parent.gameObject;

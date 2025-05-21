@@ -14,17 +14,19 @@ public class MainMenu : MonoBehaviour
 
     public void PlayGame ()
     {
-        levelTransition.PlayTransitionIn();
+        levelTransition.MoveToDifferentLevel(SceneManager.GetActiveScene().buildIndex +1);
     }
 
     public void ResetLevel()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        levelTransition.MoveToDifferentLevel(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void BackToMainMenu()
     {
-        SceneManager.LoadScene(0);
+        // called by pause menu button
+        levelTransition.MoveToDifferentLevel(0);
+
     }
 
     public void QuitGame ()

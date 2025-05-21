@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Windows;
 public class InputManager : MonoBehaviour
 {
 	[Header("Character Input Values")]
@@ -12,6 +13,7 @@ public class InputManager : MonoBehaviour
 	public bool sprint;
 	public bool interact;
 	public bool goBack;
+	public bool pause;
 	public bool one, two, three, four;
 	public Vector2 mousePosition;
 	[Header("Movement Settings")]
@@ -62,7 +64,6 @@ then call the input in another script with _input.{veryTopVar} == true;
 
 	public void OnF(InputValue value)///
 	{
-
 		interact = value.isPressed;
 	}
 
@@ -97,10 +98,15 @@ then call the input in another script with _input.{veryTopVar} == true;
         //print(value);
         interact = (value.isPressed);
 
-	}
+
+    }
 	public void OnSprint(InputValue value)
 	{
         sprint = (value.isPressed);
+	}
+	public void OnPause(InputValue value)
+	{
+        pause = (value.isPressed);
 	}
 
 
@@ -118,8 +124,30 @@ then call the input in another script with _input.{veryTopVar} == true;
 		SetCursorState(cursorLocked);
 	}
 
-	public void SetCursorState(bool newState)
+	public void SetCursorState(bool isMouseLocked)
 	{
-		Cursor.lockState = newState ? CursorLockMode.Locked : CursorLockMode.None;
-	}
+		print($"set cursor state{isMouseLocked}");
+        //Cursor.lockState = newState ? CursorLockMode.Locked : CursorLockMode.None;
+
+        if (isMouseLocked)
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.None;
+        }
+    }
+
+
+    public void TurnOffMouse()
+    {
+		SetCursorState(true);
+    }
+
+    public void TurnOnMouse()
+    {
+        SetCursorState(false);
+    }
+
 }

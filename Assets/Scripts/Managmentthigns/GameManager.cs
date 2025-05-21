@@ -13,16 +13,16 @@ public class GameManager : MonoBehaviour
     public FoodManager fm;
     public TypingManager tm;
     public PlayerController playerController;
-    
 
+    public InputManager _input;
     //public GameManager gm;  gm = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
 
     // Start is called before the first frame update
     void Start()
     {
         playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
-
-        StartGame();
+        _input = playerController.gameObject.GetComponent<InputManager>();
+    StartGame();
     }
 
     // Update is called once per frame
@@ -83,4 +83,32 @@ public class GameManager : MonoBehaviour
         playerController.GainPlayerControl();
     }
 
+    public void TurnOffMouse()
+    {
+        _input.TurnOffMouse();
+    }
+
+    public void TurnOnMouse()
+    {
+        _input.TurnOnMouse();
+    }
+
+    public void TurnOffTime()
+    {
+        Time.timeScale = 0;
+    }
+
+    public void TurnOnTime()
+    {
+        Time.timeScale = 1;
+    }
+
+    public void TurnOffCamerControl()
+    {
+        playerController.LoseCameraControl();
+    }
+    public void TurnOnCamerControl()
+    {
+        playerController.GainCameraControl();
+    }
 }

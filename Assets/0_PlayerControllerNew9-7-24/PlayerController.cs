@@ -122,7 +122,7 @@ public class PlayerController : MonoBehaviour
 
     public bool _hasAnimator;
 
-    public Sound landedSFX, jumpSFX, dashSFX;
+    public Sound landedSFX, jumpSFX, dashSFX, moveSFX;
     public bool isRoofed = false;
     public float roofOffsetSphere = 2.0f;
     public float fallSpeedInitial = -2.0f;
@@ -138,6 +138,9 @@ public class PlayerController : MonoBehaviour
     public GameObject dashUI;
 
     public float posLow, posHigh;
+
+    public float footStepTimerCurrent, footStepTimerLow, footStepTimerMax;
+
     private bool IsCurrentDeviceMouse
     {
         get
@@ -184,6 +187,10 @@ public class PlayerController : MonoBehaviour
         {
             TurnOnDash();
         }
+        else
+        {
+            TurnOffDash();
+        }
 
         // turns on all general canvas that holds all player ui (they can be disabled indiviually)
         playerCanvasAnimator.SetTrigger("On");
@@ -208,6 +215,17 @@ public class PlayerController : MonoBehaviour
         _animator.SetBool(_animIDJump, false);
         _animator.SetBool(_animIDFreeFall, false);
     }
+
+    public void GainCameraControl()
+    {
+        LockCameraPosition = false;
+    }
+
+    public void LoseCameraControl()
+    {
+        LockCameraPosition = true;
+    }
+    
 
     public void SetPlayerControl(bool playerControlState = true)
     {
@@ -447,6 +465,11 @@ public class PlayerController : MonoBehaviour
 
             // rotate to face input direction relative to camera position
             transform.rotation = Quaternion.Euler(0.0f, rotation, 0.0f);
+
+            if (Grounded)
+            {
+                PlayMovingSFX();
+            }
         }
 
         if (canMove)
@@ -462,7 +485,27 @@ public class PlayerController : MonoBehaviour
             _animator.SetFloat(_animIDSpeed, _animationBlend);
             _animator.SetFloat(_animIDMotionSpeed, inputMagnitude);
         }
+
+
+
     }
+
+    public void PlayMovingSFX()
+    {
+        footStepTimerCurrent -= 1 * Time.deltaTime;
+
+        if (footStepTimerCurrent <= 0)
+        {
+            FindObjectOfType<AudioManager>().PlaySoundInstantiate(moveSFX);
+            SetFootStepTimer();
+        }
+    }
+
+    public void SetFootStepTimer()
+    {
+        footStepTimerCurrent = Random.Range(footStepTimerLow, footStepTimerMax);
+    }
+
 
     private void JumpAndGravity()
     {
@@ -473,6 +516,8 @@ public class PlayerController : MonoBehaviour
             print("In grounded once check guard");
             groundedOnceCheck = false;
             _verticalVelocity = fallSpeedInitial;
+
+            SetFootStepTimer();
         }
 
         // jump timeout (prevents player from jumping 
@@ -676,15 +721,6 @@ public class PlayerController : MonoBehaviour
             _verticalVelocity = -2.0f;
             StopJumpInputs();
         }
-        //if (pos1 == gameObject.transform.position.y && !Grounded)
-        //{
-        //    print("roofed");
-        //    jumpTimeHold = 0;
-        //    coyoteJumpTime = 0;
-        //    _verticalVelocity = -2.0f;
-        //    StopJumpInputs();
-        //}
-        //pos1 = gameObject.transform.position.y;
     }
 
     // moves the player (maybe use for bouncepad)
@@ -727,8 +763,8 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
-        // if hte player isn't pressing the interact button then ignore
-        if (!_input.interact)
+        // if hte player isn't pressing the interact button or hasn't unlocked the dash then ignore
+        if (!_input.interact || !unlockedDash)
         {
             // print($"{_input.interact} {isDashing}");
             return;
@@ -849,7 +885,7 @@ public class PlayerController : MonoBehaviour
         // or call when the meter naturally fills up
         canDash = true;
         dashRechargeCurrent = dashRechargeMax;
-        dashSlider.SetSlider(dashRechargeCurrent);
+        dashSlider.FullyFillSlider();
     }
 
     public void UsedDashMeter()
@@ -874,6 +910,12 @@ public class PlayerController : MonoBehaviour
         // need to turn on canvas and stuff
     }
 
+    public void TurnOffDash()
+    {
+        unlockedDash = false;
+        dashUI.SetActive(false);
+        // need to turn on canvas and stuff
+    }
     // this should bounce the player 3x their jump height
     public void Bounce()
     {
@@ -882,15 +924,25 @@ public class PlayerController : MonoBehaviour
         // update animator if using character
         if (_hasAnimator)
         {
-
             _animator.SetBool(_animIDJump, true);
         }
         _jumpTimeoutDelta = JumpTimeout;
         // stops the falling check at the ttop if you jump 
         groundedOnceCheck = false;
         _input.jump = false;
+
+        // give player dash back
+        FullyChargeDashMeter();
         AddJumpForce(6);
     }
 
+    public void SetPlayerPosition(GameObject placeToPutPlayer)
+    {
+        // moves player to set vector position
+        SetCharacterController(false); // need it to be false to prevent gravity and other movements being applied and re-teleporting the player back to where they were
+        transform.position = placeToPutPlayer.transform.position; // teleports player to cp
+        SetCameraRotation(placeToPutPlayer.transform.rotation); // sets camera to cp's rotation
+        SetCharacterController(true); // re enables the character controller so they can move
 
+    }
 }

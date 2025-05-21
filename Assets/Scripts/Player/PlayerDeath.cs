@@ -60,17 +60,30 @@ public class PlayerDeath : MonoBehaviour
     {
         // put player back, particle again on respawn, regive movement/input
         //StartCoroutine(GivePlayerControl());
-        playerController.SetCharacterController(false); // need it to be false to prevent gravity and other movements being applied and re-teleporting the player back to where they were
-        playerController.gameObject.transform.position = playerRespawnPoint; // teleports player to cp
-        playerController.SetCameraRotation(playerRotationPoint); // sets camera to cp's rotation
+        SetPlayerPosition();
         isDead = false; // removes being dead on this script
         playerController.SetDead(false); // sets the player's script to not dead
-        playerController.SetCharacterController(true); // re enables the character controller so they can move
-        EndFakeCamera(); // disables the fake camera
+    EndFakeCamera(); // disables the fake camera
         playerController.GainPlayerControl();
         //print($"DEATH RespawnPoint:{playerRespawnPoint} Player is now: {playerController.gameObject.transform.position}");
     }
 
+
+    public void SetPlayerPosition()
+    {
+        // puts player at last checkpoint interacted with
+        SetPlayerPosition(playerRespawnPoint);
+    }
+
+    public void SetPlayerPosition(Vector3 placeToPutPlayer)
+    {
+        // moves player to set vector position
+        playerController.SetCharacterController(false); // need it to be false to prevent gravity and other movements being applied and re-teleporting the player back to where they were
+        playerController.gameObject.transform.position = placeToPutPlayer; // teleports player to cp
+        playerController.SetCameraRotation(playerRotationPoint); // sets camera to cp's rotation
+        playerController.SetCharacterController(true); // re enables the character controller so they can move
+
+    }
     public IEnumerator GivePlayerControl()
     {
         yield return new WaitForSeconds(0.5f);
