@@ -629,33 +629,9 @@ MonoBehaviour:
   lettersPerSecond: 45
   finishTypingOutSentence: 0
   dialogueAnimation: {fileID: 8533146649993766371}
-  talkingSFX:
-    name: TypingSound
-    clip: {fileID: 8300000, guid: 1b94a8a63f65cdf458f562aee29ffaac, type: 3}
-    volume: 1
-    volumeOriginal: 0.1
-    pitch: 1
-    loop: 0
-    audioMixerGroup: {fileID: 0}
-    source: {fileID: 0}
-  windowGoingInSFX:
-    name: Dialogue Box In
-    clip: {fileID: 8300000, guid: b71f688c2b1417540bdd8de7783206b4, type: 3}
-    volume: 1
-    volumeOriginal: 1
-    pitch: 1
-    loop: 0
-    audioMixerGroup: {fileID: 0}
-    source: {fileID: 0}
-  windowGoingOutSFX:
-    name: Dialogue Box Out
-    clip: {fileID: 8300000, guid: 0d98e285778706e4ca3dbd519d7a2e54, type: 3}
-    volume: 1
-    volumeOriginal: 1
-    pitch: 1
-    loop: 0
-    audioMixerGroup: {fileID: 0}
-    source: {fileID: 0}
+  talkingSFX: {fileID: 11400000, guid: a799eb3ff4737b640a3dc0f9aa4f9855, type: 2}
+  windowGoingInSFX: {fileID: 11400000, guid: b347ffd3f5ecae4409da7c8a930416e9, type: 2}
+  windowGoingOutSFX: {fileID: 11400000, guid: d332c8ab6a8e72b489bb4184b7e8cee5, type: 2}
 --- !u!114 &7545090175226002083
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -668,6 +644,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2adbd77c020af104dae54c47909486a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  checkPointObjectList: []
+  playerController: {fileID: 0}
 --- !u!114 &6538873962043478002
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -684,24 +662,8 @@ MonoBehaviour:
     type: 3}
   teleportParticleDoor: {fileID: 1136322774040192062, guid: 28a83f4b69797bc4cb13bc1de37d43fb,
     type: 3}
-  teleportGirlSFX:
-    name: 
-    clip: {fileID: 8300000, guid: acc24c1209871c74598cafe605c93069, type: 3}
-    volume: 1
-    volumeOriginal: 0.35
-    pitch: 1
-    loop: 0
-    audioMixerGroup: {fileID: 0}
-    source: {fileID: 0}
-  teleportDoorSFX:
-    name: 
-    clip: {fileID: 8300000, guid: de994bd122ab6f847ae5e1b9ccc692ac, type: 3}
-    volume: 1
-    volumeOriginal: 0.35
-    pitch: 1
-    loop: 0
-    audioMixerGroup: {fileID: 0}
-    source: {fileID: 0}
+  teleportGirlSFX: {fileID: 11400000, guid: f8f344d43459f89408966738aafc7e6e, type: 2}
+  teleportDoorSFX: {fileID: 11400000, guid: 0d9e5d41407fad64a96f288693312da2, type: 2}
 --- !u!1 &5525558893909088749
 GameObject:
   m_ObjectHideFlags: 0

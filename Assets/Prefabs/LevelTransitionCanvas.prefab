@@ -230,33 +230,9 @@ MonoBehaviour:
   shouldPlayTransition: 1
   levelTransitionUIHolder: {fileID: 5554538098577289032}
   levelTransAnimator: {fileID: 3917525393352898586}
-  goingInSFX:
-    name: TransitionIn
-    clip: {fileID: 8300000, guid: 33f34b5f3a393d246bef346de130b085, type: 3}
-    volume: 1
-    volumeOriginal: 0.25
-    pitch: 1
-    loop: 0
-    audioMixerGroup: {fileID: 0}
-    source: {fileID: 0}
-  goingOutSFX:
-    name: TransitionOut
-    clip: {fileID: 8300000, guid: 33f34b5f3a393d246bef346de130b085, type: 3}
-    volume: 1
-    volumeOriginal: 0.25
-    pitch: 1
-    loop: 0
-    audioMixerGroup: {fileID: 0}
-    source: {fileID: 0}
-  test:
-    name: Happy sound
-    clip: {fileID: 8300000, guid: acc24c1209871c74598cafe605c93069, type: 3}
-    volume: 1
-    volumeOriginal: 0.35
-    pitch: 1
-    loop: 0
-    audioMixerGroup: {fileID: 0}
-    source: {fileID: 0}
+  goingInSFX: {fileID: 11400000, guid: 4148b56dca9e08d47a50ebc11837b54c, type: 2}
+  goingOutSFX: {fileID: 11400000, guid: f57408a4cb614474dbe8a76a5e0a5a38, type: 2}
+  test: {fileID: 0}
   audioManager: {fileID: 0}
 --- !u!95 &3917525393352898586
 Animator:

@@ -1,11 +1,10 @@
 ﻿using UnityEngine.Audio;
 using UnityEngine;
 
-[System.Serializable]
-
-public class Sound
+[CreateAssetMenu(fileName = "New Sound", menuName = "Audio/Sound")]
+public class Sound : ScriptableObject
 {
-    public string name;
+    public string nameOfSound;
 
     public AudioClip clip;
 

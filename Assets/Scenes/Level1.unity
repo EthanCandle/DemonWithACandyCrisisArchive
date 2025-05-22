@@ -2641,11 +2641,51 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1593027063}
     m_Modifications:
+    - target: {fileID: 390273058470106818, guid: 5c99790009516cd479140b56fb5e77a1,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.5150001
+      objectReference: {fileID: 0}
+    - target: {fileID: 390273058470106818, guid: 5c99790009516cd479140b56fb5e77a1,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -8
+      objectReference: {fileID: 0}
     - target: {fileID: 2602230690018411452, guid: 5c99790009516cd479140b56fb5e77a1,
         type: 3}
       propertyPath: m_Name
       value: PlayerHolder ThirdPerson
       objectReference: {fileID: 0}
+    - target: {fileID: 3234459524334086016, guid: 5c99790009516cd479140b56fb5e77a1,
+        type: 3}
+      propertyPath: dashSFX
+      value: 
+      objectReference: {fileID: 11400000, guid: 76c5b0fbaa2296b46a7c30a204b0a176,
+        type: 2}
+    - target: {fileID: 3234459524334086016, guid: 5c99790009516cd479140b56fb5e77a1,
+        type: 3}
+      propertyPath: jumpSFX
+      value: 
+      objectReference: {fileID: 11400000, guid: cfed24de83ef85840af8189de6a8cbba,
+        type: 2}
+    - target: {fileID: 3234459524334086016, guid: 5c99790009516cd479140b56fb5e77a1,
+        type: 3}
+      propertyPath: moveSFX
+      value: 
+      objectReference: {fileID: 11400000, guid: a865d6495e2737a48b0fef8d9c6bcac9,
+        type: 2}
+    - target: {fileID: 3234459524334086016, guid: 5c99790009516cd479140b56fb5e77a1,
+        type: 3}
+      propertyPath: landedSFX
+      value: 
+      objectReference: {fileID: 11400000, guid: d7b2babc91839a74f8f373643e6752af,
+        type: 2}
+    - target: {fileID: 5967912856590061851, guid: 5c99790009516cd479140b56fb5e77a1,
+        type: 3}
+      propertyPath: soundHittingCheckPoint
+      value: 
+      objectReference: {fileID: 11400000, guid: 47eea2a011be7c04d970892be38c7e4a,
+        type: 2}
     - target: {fileID: 6108481233487024298, guid: 5c99790009516cd479140b56fb5e77a1,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -6041,26 +6081,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4338683139242813201, guid: 6c46e4498cb8c8f479f4612549a89cc6,
-        type: 3}
-      propertyPath: gamePlayMusic.Array.data[0].loop
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4338683139242813201, guid: 6c46e4498cb8c8f479f4612549a89cc6,
-        type: 3}
-      propertyPath: gamePlayMusic.Array.data[1].volume
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4338683139242813201, guid: 6c46e4498cb8c8f479f4612549a89cc6,
-        type: 3}
-      propertyPath: gamePlayMusic.Array.data[0].volumeOriginal
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4338683139242813201, guid: 6c46e4498cb8c8f479f4612549a89cc6,
-        type: 3}
-      propertyPath: gamePlayMusic.Array.data[1].volumeOriginal
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4763647196156443463, guid: 6c46e4498cb8c8f479f4612549a89cc6,
         type: 3}
       propertyPath: m_Name
@@ -6342,6 +6362,26 @@ PrefabInstance:
         type: 3}
       propertyPath: dialougeToShowNormal.Array.data[3].dialogueText
       value: Collect some of those green lolipops things and then find me again!
+      objectReference: {fileID: 0}
+    - target: {fileID: 5161285370465794090, guid: 908c0ef3aa2249440a20fdd225dabd80,
+        type: 3}
+      propertyPath: dialougeToShowNormal.Array.data[0].AnimationToPlayName
+      value: Idle
+      objectReference: {fileID: 0}
+    - target: {fileID: 5161285370465794090, guid: 908c0ef3aa2249440a20fdd225dabd80,
+        type: 3}
+      propertyPath: dialougeToShowNormal.Array.data[3].AnimationToPlayName
+      value: Close
+      objectReference: {fileID: 0}
+    - target: {fileID: 5161285370465794090, guid: 908c0ef3aa2249440a20fdd225dabd80,
+        type: 3}
+      propertyPath: dialougeToShowNormal.Array.data[0].shouldTransitionToThisAnimation
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5161285370465794090, guid: 908c0ef3aa2249440a20fdd225dabd80,
+        type: 3}
+      propertyPath: dialougeToShowNormal.Array.data[3].shouldTransitionToThisAnimation
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6000501134516398997, guid: 908c0ef3aa2249440a20fdd225dabd80,
         type: 3}
@@ -44891,6 +44931,7 @@ PrefabInstance:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 922999630}
   - {fileID: 331526847}
   - {fileID: 1961967960}
   - {fileID: 2104645683}
@@ -44906,7 +44947,6 @@ SceneRoots:
   - {fileID: 446616254}
   - {fileID: 1360274309}
   - {fileID: 828723294}
-  - {fileID: 922999630}
   - {fileID: 1574772552}
   - {fileID: 1509057885}
   - {fileID: 1657570717}

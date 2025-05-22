@@ -520,42 +520,10 @@ MonoBehaviour:
   _input: {fileID: 6193994798716019626}
   _mainCamera: {fileID: 0}
   _hasAnimator: 0
-  landedSFX:
-    name: Landing
-    clip: {fileID: 8300000, guid: 771c359260d19b64da8a9855353cb659, type: 3}
-    volume: 1
-    volumeOriginal: 0.35
-    pitch: 1
-    loop: 0
-    audioMixerGroup: {fileID: 0}
-    source: {fileID: 0}
-  jumpSFX:
-    name: Jumping Sound
-    clip: {fileID: 8300000, guid: 3a8bf52cb1730cf4784500d472018323, type: 3}
-    volume: 1
-    volumeOriginal: 0.25
-    pitch: 1
-    loop: 0
-    audioMixerGroup: {fileID: 0}
-    source: {fileID: 0}
-  dashSFX:
-    name: Dash Sound
-    clip: {fileID: 8300000, guid: ffb3faa6806fa13449bffe9bc5b31d36, type: 3}
-    volume: 1
-    volumeOriginal: 0.35
-    pitch: 1
-    loop: 0
-    audioMixerGroup: {fileID: 0}
-    source: {fileID: 0}
-  moveSFX:
-    name: 
-    clip: {fileID: 8300000, guid: 4e727b74de91c3d4285c9c3d1f48d460, type: 3}
-    volume: 1
-    volumeOriginal: 0.075
-    pitch: 1
-    loop: 0
-    audioMixerGroup: {fileID: 0}
-    source: {fileID: 0}
+  landedSFX: {fileID: 11400000, guid: d7b2babc91839a74f8f373643e6752af, type: 2}
+  jumpSFX: {fileID: 11400000, guid: cfed24de83ef85840af8189de6a8cbba, type: 2}
+  dashSFX: {fileID: 11400000, guid: 76c5b0fbaa2296b46a7c30a204b0a176, type: 2}
+  moveSFX: {fileID: 11400000, guid: a865d6495e2737a48b0fef8d9c6bcac9, type: 2}
   isRoofed: 0
   roofOffsetSphere: 1.58
   fallSpeedInitial: 0
@@ -743,15 +711,7 @@ MonoBehaviour:
   playerDeath: {fileID: 0}
   waitTimeWhenRespawn: 0
   checkPointAnimator: {fileID: 0}
-  soundHittingCheckPoint:
-    name: CheckPoint Sound
-    clip: {fileID: 8300000, guid: c7ad0d2cc87228c4087a287ef587bc1a, type: 3}
-    volume: 1
-    volumeOriginal: 0.35
-    pitch: 1
-    loop: 0
-    audioMixerGroup: {fileID: 0}
-    source: {fileID: 0}
+  soundHittingCheckPoint: {fileID: 0}
   checkPointManager: {fileID: 0}
 --- !u!114 &5712012131079612471
 MonoBehaviour:
@@ -768,15 +728,7 @@ MonoBehaviour:
   timeUntilRespawn: 2
   isDead: 0
   deathParticles: {fileID: 0}
-  deathSFX:
-    name: 
-    clip: {fileID: 0}
-    volume: 1
-    volumeOriginal: 1
-    pitch: 1
-    loop: 0
-    audioMixerGroup: {fileID: 0}
-    source: {fileID: 0}
+  deathSFX: {fileID: 0}
   playerController: {fileID: 0}
   playerRespawnPoint: {x: 0, y: 0, z: 0}
   playerRotationPoint: {x: 0, y: 0, z: 0, w: 0}
@@ -3213,7 +3165,7 @@ Transform:
   m_GameObject: {fileID: 3217460797952865927}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.5150001, z: -8}
+  m_LocalPosition: {x: 0, y: 2.015, z: -34.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

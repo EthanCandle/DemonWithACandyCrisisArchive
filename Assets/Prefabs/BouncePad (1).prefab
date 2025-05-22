@@ -116,12 +116,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf4ac4c0ff0b9784ea83e4df14f45520, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boingSFX:
-    name: Boing
-    clip: {fileID: 8300000, guid: a21d30c577d194c4cae4f46331886c14, type: 3}
-    volume: 1
-    volumeOriginal: 0.1
-    pitch: 1
-    loop: 0
-    audioMixerGroup: {fileID: 0}
-    source: {fileID: 0}
+  boingSFX: {fileID: 11400000, guid: 6071b4e1c6bb52d4b993b0a29b0e755b, type: 2}

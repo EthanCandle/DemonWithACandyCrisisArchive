@@ -48,46 +48,11 @@ MonoBehaviour:
   isMuted: 0
   mainMenuMusic: []
   gamePlayMusic:
-  - name: MainMenu
-    clip: {fileID: 8300000, guid: 5373d843d61a3d941af0d519ea98e0f1, type: 3}
-    volume: 1
-    volumeOriginal: 1
-    pitch: 1
-    loop: 1
-    audioMixerGroup: {fileID: 0}
-    source: {fileID: 0}
-  - name: 
-    clip: {fileID: 8300000, guid: 82044713303b4f3469d915d66491862e, type: 3}
-    volume: 1
-    volumeOriginal: 1
-    pitch: 1
-    loop: 1
-    audioMixerGroup: {fileID: 0}
-    source: {fileID: 0}
-  - name: 
-    clip: {fileID: 8300000, guid: 263ea76706099d54bb6f302c468409b2, type: 3}
-    volume: 1
-    volumeOriginal: 1
-    pitch: 1
-    loop: 1
-    audioMixerGroup: {fileID: 0}
-    source: {fileID: 0}
-  - name: 
-    clip: {fileID: 8300000, guid: c6e225ee954747442bdbca7e00907dd9, type: 3}
-    volume: 1
-    volumeOriginal: 1
-    pitch: 1
-    loop: 1
-    audioMixerGroup: {fileID: 0}
-    source: {fileID: 0}
-  - name: 
-    clip: {fileID: 8300000, guid: f2c3ae6c606d1704ca2fec608db0fdf1, type: 3}
-    volume: 1
-    volumeOriginal: 1
-    pitch: 1
-    loop: 1
-    audioMixerGroup: {fileID: 0}
-    source: {fileID: 0}
+  - {fileID: 11400000, guid: 0633721ca5a46a641994d6c69d47c977, type: 2}
+  - {fileID: 11400000, guid: 0d923f8763c51614b86c99538fc9736b, type: 2}
+  - {fileID: 11400000, guid: 97ae14c91db948b4fb0c78cb2f7738ed, type: 2}
+  - {fileID: 11400000, guid: 94b0d98a0bc643f4eb34fef42f3f2846, type: 2}
+  - {fileID: 11400000, guid: 647457923c0451846832e711301dc1c1, type: 2}
   sounds: []
   songCurrentlyPlaying: {fileID: 0}
   amountOfSoundsSoFar: 0
@@ -99,3 +64,4 @@ MonoBehaviour:
   audioMixerGroupMusic: {fileID: 24300002, guid: 7f39a7cdf3aee3643ab811cfa12f5cae,
     type: 2}
   audioMixerGroupSFX: {fileID: 24300002, guid: e5c64160d8db3d54181c92225215f2b8, type: 2}
+  inMainMenuFirstTime: 1
