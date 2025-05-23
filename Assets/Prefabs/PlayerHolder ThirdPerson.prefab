@@ -711,7 +711,8 @@ MonoBehaviour:
   playerDeath: {fileID: 0}
   waitTimeWhenRespawn: 0
   checkPointAnimator: {fileID: 0}
-  soundHittingCheckPoint: {fileID: 0}
+  soundHittingCheckPoint: {fileID: 11400000, guid: 47eea2a011be7c04d970892be38c7e4a,
+    type: 2}
   checkPointManager: {fileID: 0}
 --- !u!114 &5712012131079612471
 MonoBehaviour:
@@ -3165,7 +3166,7 @@ Transform:
   m_GameObject: {fileID: 3217460797952865927}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.015, z: -34.5}
+  m_LocalPosition: {x: 0, y: 1.515, z: -8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

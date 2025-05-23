@@ -60,6 +60,7 @@ public class GameManager : MonoBehaviour
         // turn off box girl
         platformerArea.SetActive(true);
         typingArea.SetActive(false);
+        TurnOffMouse();
     }
 
     public void SwitchToTypingGame()

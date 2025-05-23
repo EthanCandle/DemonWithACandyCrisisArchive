@@ -5,6 +5,7 @@ using UnityEngine;
 public class BouncePad : MonoBehaviour
 {
     public Sound boingSFX;
+    public float bounceStength = 6;
     // Start is called before the first frame update
     void Start()
     {
@@ -27,7 +28,7 @@ public class BouncePad : MonoBehaviour
 
     public void BouncePlayer(GameObject objToBounce)
     {
-        objToBounce.gameObject.GetComponent<PlayerController>().Bounce();
+        objToBounce.gameObject.GetComponent<PlayerController>().Bounce(bounceStength);
         FindObjectOfType<AudioManager>().PlaySoundInstantiate(boingSFX);
     }
 }

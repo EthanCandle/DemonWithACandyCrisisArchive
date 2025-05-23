@@ -250,15 +250,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fm: {fileID: 0}
-  soundEffect:
-    name: Collected Candy
-    clip: {fileID: 8300000, guid: 55affb5a378ff324687c973e6a94e9ce, type: 3}
-    volume: 1
-    volumeOriginal: 0.35
-    pitch: 1
-    loop: 0
-    audioMixerGroup: {fileID: 0}
-    source: {fileID: 0}
+  soundEffect: {fileID: 11400000, guid: cbdffcadfedbe3a45b5a9cd93b4dd5a7, type: 2}
   particleEffect: {fileID: 7466658172720886040, guid: 5329ec35533d76c42a4a1c44ea058be3,
     type: 3}
 --- !u!54 &2671932054573709627

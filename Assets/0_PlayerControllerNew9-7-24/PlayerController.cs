@@ -917,7 +917,7 @@ public class PlayerController : MonoBehaviour
         // need to turn on canvas and stuff
     }
     // this should bounce the player 3x their jump height
-    public void Bounce()
+    public void Bounce(float bounceStrength = 6)
     {
         coyoteJumpTime = 0;
         //_input.jump = false;
@@ -933,7 +933,7 @@ public class PlayerController : MonoBehaviour
 
         // give player dash back
         FullyChargeDashMeter();
-        AddJumpForce(6);
+        AddJumpForce(bounceStrength);
     }
 
     public void SetPlayerPosition(GameObject placeToPutPlayer)
