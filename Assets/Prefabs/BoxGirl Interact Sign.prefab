@@ -330,6 +330,8 @@ GameObject:
   - component: {fileID: 5161285370465794090}
   - component: {fileID: 2000985832754677923}
   - component: {fileID: 2486171907765800383}
+  - component: {fileID: 6424200434378399332}
+  - component: {fileID: 2910652318912919432}
   m_Layer: 6
   m_Name: BoxGirl Interact Sign
   m_TagString: Untagged
@@ -573,6 +575,34 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   doorToRemove: {fileID: 0}
   functions: {fileID: 0}
+--- !u!114 &6424200434378399332
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8964126141429560800}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8255fae80d534b84e93f66c46cfed929, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animatorToTrigger: {fileID: 0}
+  nameOfTrigger: 
+  soundToPlay: {fileID: 0}
+--- !u!114 &2910652318912919432
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8964126141429560800}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c234a662932a1f445ab420c30b4b7d90, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectToSet: {fileID: 0}
 --- !u!1001 &7606147926978220922
 PrefabInstance:
   m_ObjectHideFlags: 0

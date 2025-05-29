@@ -59,6 +59,19 @@ public class BoxGirlFunctions : MonoBehaviour
 
     }
 
+    public void TeleportToDissapear(GameObject objectToDisappear)
+    {
+        // actually turn on object, make it appear with a smoke effect
+        SetObjectActive(objectToDisappear, false);
+
+
+        SpawnParticlesBoxGirl(objectToDisappear);
+        // spawn particle there
+        FindObjectOfType<AudioManager>().PlaySoundInstantiate(teleportGirlSFX);
+
+    }
+
+
     public void SetObjectActive(GameObject objectToChange, bool becomeActive)
     {
         StartCoroutine(SpawnDelay(objectToChange, becomeActive));

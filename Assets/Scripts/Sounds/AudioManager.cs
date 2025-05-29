@@ -22,15 +22,13 @@ public class AudioManager : MonoBehaviour
     public float songVolumeMax; // this is the music's current volume before transitioning
 
     public AudioMixerGroup audioMixerGroupMusic, audioMixerGroupSFX;
-    public  bool inMainMenuFirstTime = true;
+
     // Start is called before the first frame update
     void Awake()
     {
         // create self if not already in
         if (instance == null)
         {
-
-        
             instance = this;
         }
         else
@@ -123,6 +121,38 @@ public class AudioManager : MonoBehaviour
 
         // deletes objects after finishing (might mess up if pitch is different, maybe multiply or divide by pitch?)
         Destroy(newGameObject, sourceSound.clip.length / sourceSound.pitch);
+    }
+
+    public void PlaySoundInstantiate(Sound sourceSound, float timeToPlayRatio)
+    {
+        if (sourceSound == null || isMuted)
+        {
+            return;
+        }
+        // print(sourceSound.name);
+        // plays a sound by creating an empty object with the sound attached and deletes it when it ends
+        amountOfSoundsSoFar++;
+
+        // FindObjectOfType<AudioManager>().PlaySoundInstantiate(deathSFX);
+        // use the var:     public Sound deathSFX;
+
+        // creates the object
+        GameObject newGameObject = new GameObject($"Sound Holder ({amountOfSoundsSoFar})", typeof(AudioSource));
+
+        // addes the audiosource and sets it
+        sourceSound.source = newGameObject.GetComponent<AudioSource>();
+
+        sourceSound.source.clip = sourceSound.clip;
+
+        sourceSound.source.volume = currentVolume / 100.0f * sourceSound.volumeOriginal;
+        sourceSound.source.pitch = sourceSound.pitch;
+        sourceSound.source.loop = sourceSound.loop;
+        sourceSound.source.outputAudioMixerGroup = audioMixerGroupSFX;
+        // plays teh sound
+        sourceSound.source.Play();
+
+        // deletes objects after finishing (might mess up if pitch is different, maybe multiply or divide by pitch?)
+        Destroy(newGameObject, sourceSound.clip.length / sourceSound.pitch * timeToPlayRatio);
     }
 
     public void PlaySoundInstantiate(string nameOfSound)

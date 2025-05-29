@@ -27,6 +27,11 @@ public class BGTeleport : MonoBehaviour
 
     }
 
+    public void TeleportToDissapear()
+    {
+        functions.TeleportToDissapear(modelOfSelf);
+
+    }
     public void TurnOffModel()
     {
         // turns off the object that has collision and the script (should be at the end of a teleport

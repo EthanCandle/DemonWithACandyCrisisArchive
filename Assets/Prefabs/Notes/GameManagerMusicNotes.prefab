@@ -1,0 +1,64 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7691258624229340358
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2675256085451745938}
+  - component: {fileID: 6668358915543201033}
+  m_Layer: 0
+  m_Name: GameManagerMusicNotes
+  m_TagString: GameManager
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2675256085451745938
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7691258624229340358}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6668358915543201033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7691258624229340358}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3eca2429af27ba4594155568b60fdd6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  zOffSet: 25
+  zPositionCurrent: 0
+  musicObject: {fileID: 11400000, guid: c0474825cf6b29742a15b5d4c9d6c399, type: 2}
+  noteEighth: {fileID: 2895401435050185179, guid: fbb75e36f80b25a46968071d16aae873,
+    type: 3}
+  noteQuarter: {fileID: 4368110924909900722, guid: 0df270c921c8eca45b78c66ca2f93567,
+    type: 3}
+  noteHalf: {fileID: 4368110924909900722, guid: 14bbb7d85ff5eaa4ebcf569d521b5d96,
+    type: 3}
+  noteWhole: {fileID: 7845311290752350863, guid: cf000ced45124644f91bfb6405f96b1c,
+    type: 3}
+  clipF: {fileID: 11400000, guid: 2147ac360bd103e45aaa76a7546638e3, type: 2}
+  clipE: {fileID: 11400000, guid: 272a10832d718d041a2d9b1381a86817, type: 2}
+  clipD: {fileID: 11400000, guid: abfe8ea477a1cc6418780d824dcfb9dd, type: 2}
+  clipC: {fileID: 11400000, guid: 45dcf59af12edcc4b9358f529b8b6eb5, type: 2}
+  clipB: {fileID: 11400000, guid: 9e41528eb060f734d85f4928b9c6063e, type: 2}
+  clipA: {fileID: 11400000, guid: afc9cce33f69e3f4aa35897cb5b4054d, type: 2}
+  clipG: {fileID: 11400000, guid: ceee694887358d747a1a16735101faad, type: 2}
