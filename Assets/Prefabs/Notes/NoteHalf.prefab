@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5866894525696758191}
   - component: {fileID: 1635857079908147136}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: Shadow (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -137,7 +137,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: d1cacb390a67a8448bb75a2983645f51,
         type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -159,6 +159,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 5521780517467816481}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: d1cacb390a67a8448bb75a2983645f51,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3592158444999927664}
   m_SourcePrefab: {fileID: 100100000, guid: d1cacb390a67a8448bb75a2983645f51, type: 3}
 --- !u!4 &4023250565121288456 stripped
 Transform:
@@ -208,15 +212,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hasPlayed: 0
   noteDuration: 0
-  soundToPlay:
-    name: 
-    clip: {fileID: 0}
-    volume: 1
-    volumeOriginal: 1
-    pitch: 1
-    loop: 0
-    audioMixerGroup: {fileID: 0}
-    source: {fileID: 0}
+  soundToPlay: {fileID: 0}
 --- !u!114 &5521780517467816481
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -229,13 +225,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf4ac4c0ff0b9784ea83e4df14f45520, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bounceForce: 5
-  boingSFX:
-    name: 
-    clip: {fileID: 0}
-    volume: 1
-    volumeOriginal: 1
-    pitch: 1
-    loop: 0
-    audioMixerGroup: {fileID: 0}
-    source: {fileID: 0}
+  boingSFX: {fileID: 0}
+  bounceStength: 2
+--- !u!114 &3592158444999927664
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4368110924909900722}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77ee56ba66359e34cbaab3979a0b9774, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speedSFX: {fileID: 0}
+  speedStrength: 5.2

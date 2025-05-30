@@ -2,20 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BouncePad : MonoBehaviour
+public class BounceTowardsDirection : MonoBehaviour
 {
     public Sound boingSFX;
     public float bounceStength = 6;
+    public GameObject lookDirection;
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     private void OnTriggerEnter(Collider other)
@@ -24,7 +25,7 @@ public class BouncePad : MonoBehaviour
         {
             BouncePlayer(other.gameObject);
         }
-    }   
+    }
     private void OnCollisionEnter(Collision other)
     {
         if (other.gameObject.CompareTag("Player"))
@@ -35,7 +36,7 @@ public class BouncePad : MonoBehaviour
 
     public void BouncePlayer(GameObject objToBounce)
     {
-        objToBounce.gameObject.GetComponent<PlayerController>().Bounce(bounceStength);
+        objToBounce.gameObject.GetComponent<PlayerController>().BounceSet(lookDirection, bounceStength);
         FindObjectOfType<AudioManager>().PlaySoundInstantiate(boingSFX);
     }
 }

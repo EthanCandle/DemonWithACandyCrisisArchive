@@ -130,7 +130,7 @@ public class PlayerController : MonoBehaviour
 
     public float dashSpeed = 15.0f, dashDuration = 1.0f;
     public float dashRechargeCurrent = 0.0f, dashRechargeMax = 100.0f, dashRechargeRate = 25.0f, dashRechargeTime = 1.0f;
-    public bool isDashing = false, isJumping = false, isDead = false;
+    public bool isDashing = false, isJumping = false, isDead = false, isBouncing, hasGravity = true;
     public bool unlockedDash = true, canDash;
 
     public SliderNew dashSlider;
@@ -140,6 +140,13 @@ public class PlayerController : MonoBehaviour
     public float posLow, posHigh;
 
     public float footStepTimerCurrent, footStepTimerLow, footStepTimerMax;
+
+    public GameObject bounceDirectionObj;
+    public float bouncePower;
+
+    public float speedNormalHolder, speedSprintHolder;
+
+    public Coroutine speedCoroutine;
 
     private bool IsCurrentDeviceMouse
     {
@@ -194,7 +201,8 @@ public class PlayerController : MonoBehaviour
 
         // turns on all general canvas that holds all player ui (they can be disabled indiviually)
         playerCanvasAnimator.SetTrigger("On");
-
+        speedNormalHolder = MoveSpeed;
+        speedSprintHolder = SprintSpeed;
     }
 
     public void GainPlayerControl()
@@ -251,6 +259,7 @@ public class PlayerController : MonoBehaviour
 
             BufferJumpFunction();
             DashMechanic();
+
             //print($"y: {transform.position.y}");
         }
         else
@@ -259,6 +268,8 @@ public class PlayerController : MonoBehaviour
             {
                 return;
             }
+
+
             AddGravity();
         }
         if(transform.position.y < posLow)
@@ -685,10 +696,16 @@ public class PlayerController : MonoBehaviour
             //   _input.jump = false;
         }
         // apply gravity over time if under terminal (multiply by delta time twice to linearly speed up over time)
-        if (_verticalVelocity < _terminalVelocity)
-        {
-            _verticalVelocity += Gravity * Time.deltaTime;
 
+        // apply gravity over time if under terminal (multiply by delta time twice to linearly speed up over time)
+        if (_verticalVelocity < _terminalVelocity && _controller.enabled == true)
+        {
+            if (!hasGravity)
+            {
+                return;
+            }
+            _verticalVelocity += Gravity * Time.deltaTime;
+            //_controller.Move(new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
 
         }
         ///AddGravity();
@@ -696,6 +713,10 @@ public class PlayerController : MonoBehaviour
 
     public void AddGravity()
     {
+        if (!hasGravity)
+        {
+            return;
+        }
         // apply gravity over time if under terminal (multiply by delta time twice to linearly speed up over time)
         if (_verticalVelocity < _terminalVelocity && _controller.enabled == true)
         {
@@ -934,6 +955,69 @@ public class PlayerController : MonoBehaviour
         // give player dash back
         FullyChargeDashMeter();
         AddJumpForce(bounceStrength);
+    }
+
+    public void BounceSet(GameObject objectDirection, float force)
+    {
+        // this is called by bouncepad
+        bounceDirectionObj = objectDirection;
+        bouncePower = force;
+        isBouncing = true;
+        //hasGravity = false;
+        // Start the bounce coroutine
+        StartCoroutine(BounceRoutine());
+    }
+
+    // Coroutine that handles movement with power falloff
+    private IEnumerator BounceRoutine()
+    {
+        float duration = 1f; // total time for bounce to taper off
+        float decayRate = 5f; // Higher = faster decay
+        float elapsed = 0f;
+        Vector3 targetDirection = bounceDirectionObj.transform.forward.normalized;
+
+        while (elapsed < duration)
+        {
+            // Lerp the power down to 0 over time
+            float currentPower = bouncePower * Mathf.Exp(-decayRate * elapsed);
+
+            _controller.Move(targetDirection * currentPower * Time.deltaTime);
+
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        isBouncing = false;
+        _verticalVelocity = 0;
+        hasGravity = true;
+    }
+
+    public void SetTempSpeed(float speedMult)
+    {
+        if (speedCoroutine != null)
+        {
+            StopCoroutine(speedCoroutine);
+        }
+
+        MoveSpeed = speedNormalHolder * speedMult / 4;
+        SprintSpeed = speedSprintHolder * speedMult;
+        speedCoroutine = StartCoroutine(ReduceSpeedGradually());
+    }
+
+    public IEnumerator ReduceSpeedGradually()
+    {
+        float speed = 4f;  // Adjust to control intensity
+        print($"{SprintSpeed}, {speedSprintHolder}");
+        while (SprintSpeed > speedSprintHolder)
+        {
+            print(SprintSpeed);
+            SprintSpeed = Mathf.Lerp(SprintSpeed, speedSprintHolder, 1 / speed * Time.deltaTime);
+            yield return null;
+        }
+        print("End");
+        SprintSpeed = speedSprintHolder;
+        MoveSpeed = speedNormalHolder;
+        speedCoroutine = null;
     }
 
     public void SetPlayerPosition(GameObject placeToPutPlayer)

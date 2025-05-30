@@ -17,4 +17,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Level3OpenSlopes.unity
     guid: 8c701a555c7631d4585919130976ba8a
+  - enabled: 1
+    path: Assets/Scenes/Level4WaterStuff.unity
+    guid: 3e170a98fd5fe0740a0bd2956528c4e6
+  - enabled: 1
+    path: Assets/Scenes/LevelzScrap1MusicLevel.unity
+    guid: 53e13a7f286179a439accdc6d6afade6
   m_configObjects: {}

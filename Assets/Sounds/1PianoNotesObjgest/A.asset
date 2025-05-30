@@ -13,13 +13,5 @@ MonoBehaviour:
   m_Name: A
   m_EditorClassIdentifier: 
   valueOfNote: a
-  soundClip:
-    name: 
-    clip: {fileID: 8300000, guid: 634b1547253e7044b9a2cfde48e5e873, type: 3}
-    volume: 1
-    volumeOriginal: 1
-    pitch: 1
-    loop: 0
-    audioMixerGroup: {fileID: 0}
-    source: {fileID: 0}
+  soundClip: {fileID: 11400000, guid: 15da5f7aa72cb6a498c3702bc8120528, type: 2}
   yPosition: 12.5

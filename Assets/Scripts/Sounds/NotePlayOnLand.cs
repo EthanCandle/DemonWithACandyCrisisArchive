@@ -10,6 +10,7 @@ public class NotePlayOnLand : MonoBehaviour
     public Sound soundToPlay;
     public void SetSound(Sound soundToSet)
     {
+        print(soundToSet.name);
         soundToPlay = soundToSet;
     }
 
@@ -29,5 +30,14 @@ public class NotePlayOnLand : MonoBehaviour
             
         }
     }
+    private void OnTriggerEnter(Collider collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
 
+            PlaySound();
+            hasPlayed = true;
+
+        }
+    }
 }

@@ -22,6 +22,7 @@ public class AudioManager : MonoBehaviour
     public float songVolumeMax; // this is the music's current volume before transitioning
 
     public AudioMixerGroup audioMixerGroupMusic, audioMixerGroupSFX;
+    public bool inMainMenuFirstTime = true;
 
     // Start is called before the first frame update
     void Awake()
@@ -115,7 +116,7 @@ public class AudioManager : MonoBehaviour
         sourceSound.source.volume = currentVolume / 100.0f * sourceSound.volumeOriginal;
         sourceSound.source.pitch = sourceSound.pitch;
         sourceSound.source.loop = sourceSound.loop;
-        sourceSound.source.outputAudioMixerGroup = audioMixerGroupSFX;
+        sourceSound.source.outputAudioMixerGroup = sourceSound.audioMixerGroup;
         // plays teh sound
         sourceSound.source.Play();
 
@@ -147,7 +148,7 @@ public class AudioManager : MonoBehaviour
         sourceSound.source.volume = currentVolume / 100.0f * sourceSound.volumeOriginal;
         sourceSound.source.pitch = sourceSound.pitch;
         sourceSound.source.loop = sourceSound.loop;
-        sourceSound.source.outputAudioMixerGroup = audioMixerGroupSFX;
+        sourceSound.source.outputAudioMixerGroup = sourceSound.audioMixerGroup;
         // plays teh sound
         sourceSound.source.Play();
 
