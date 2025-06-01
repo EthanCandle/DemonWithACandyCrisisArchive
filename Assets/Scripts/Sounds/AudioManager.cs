@@ -5,12 +5,14 @@ using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
 public class AudioManager : MonoBehaviour
 {
+    // FindObjectOfType<AudioManager>().PlaySoundInstantiate(deathSFX);
+
     public int currentVolume = 100;
     public bool isMuted;
     public Sound[] mainMenuMusic;
     public Sound[] gamePlayMusic;
     public Sound[] sounds;
-
+    public Sound buttonHoverSFX;
     public static AudioManager instance;
     public AudioSource songCurrentlyPlaying;
 
