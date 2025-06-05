@@ -23,6 +23,7 @@ public class InputManager : MonoBehaviour
 	public bool cursorLocked = true;
 	public bool cursorInputForLook = true;
 
+	public GameObject jumpText, jumpHoldText;
 
 	/*
 The way this works,
@@ -83,14 +84,31 @@ then call the input in another script with _input.{veryTopVar} == true;
 	public void OnJump(InputValue value)
 	{
 		jump = (value.isPressed);
+		if (jump)
+		{
+			jumpText.SetActive(true);
+
+        }
+		else
+		{
+            jumpText.SetActive(false);
+        }
 	}
 	public void OnJumpHold(InputValue value)///
 	{
         //print("JumpHold In OnJumpHold");
         //print(value);
         jumpHold = (value.isPressed);
+        if (jumpHold)
+        {
+            jumpHoldText.SetActive(true);
 
-	}
+        }
+        else
+        {
+            jumpHoldText.SetActive(false);
+        }
+    }
 
 	public void OnInteract(InputValue value)///
 	{

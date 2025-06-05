@@ -6245,6 +6245,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tree Rock (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 3699243547685105229, guid: 209e2efd0015b8a4981ec77c582efb9e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4043540617683105015, guid: 209e2efd0015b8a4981ec77c582efb9e,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -6855,6 +6860,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Tree Rock (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3699243547685105229, guid: 209e2efd0015b8a4981ec77c582efb9e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4043540617683105015, guid: 209e2efd0015b8a4981ec77c582efb9e,
         type: 3}
@@ -27229,6 +27239,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tree Rock (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 3699243547685105229, guid: 209e2efd0015b8a4981ec77c582efb9e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4043540617683105015, guid: 209e2efd0015b8a4981ec77c582efb9e,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -45148,6 +45163,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Tree Rock
+      objectReference: {fileID: 0}
+    - target: {fileID: 3699243547685105229, guid: 209e2efd0015b8a4981ec77c582efb9e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4043540617683105015, guid: 209e2efd0015b8a4981ec77c582efb9e,
         type: 3}

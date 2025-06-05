@@ -28,7 +28,12 @@ public class MainMenu : MonoBehaviour
         levelTransition.MoveToDifferentLevel(0);
 
     }
+    public void PlayLevel(int levelToPlay)
+    {
+        // called by pause menu button
+        levelTransition.MoveToDifferentLevel(levelToPlay);
 
+    }
     public void QuitGame ()
     {
         Debug.Log("QUIT");

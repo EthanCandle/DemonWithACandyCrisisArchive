@@ -29,7 +29,7 @@
                     "id": "8c4abdf8-4099-493a-aa1a-129acec7c3df",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "Press(behavior=2)",
+                    "interactions": "",
                     "initialStateCheck": false
                 },
                 {
@@ -38,7 +38,7 @@
                     "id": "6bc6954b-4216-4848-a7f8-bd86c8287d08",
                     "expectedControlType": "Key",
                     "processors": "",
-                    "interactions": "Hold(duration=0.1,pressPoint=0.1)",
+                    "interactions": "",
                     "initialStateCheck": true
                 },
                 {
@@ -331,7 +331,7 @@
                     "name": "",
                     "id": "58dca807-6135-4258-a50a-c03acf046eb4",
                     "path": "<Keyboard>/space",
-                    "interactions": "Hold(duration=0.01,pressPoint=0.01)",
+                    "interactions": "",
                     "processors": "",
                     "groups": "KeyboardMouse",
                     "action": "JumpHold",

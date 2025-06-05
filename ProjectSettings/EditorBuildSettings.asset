@@ -21,6 +21,12 @@ EditorBuildSettings:
     path: Assets/Scenes/Level4WaterStuff.unity
     guid: 3e170a98fd5fe0740a0bd2956528c4e6
   - enabled: 1
+    path: Assets/Scenes/Level5House.unity
+    guid: bf36cb01a13407d4ea062022f491b6a2
+  - enabled: 1
     path: Assets/Scenes/LevelzScrap1MusicLevel.unity
     guid: 53e13a7f286179a439accdc6d6afade6
+  - enabled: 1
+    path: Assets/Scenes/Level1Backup.unity
+    guid: 430dc98842b6d9f4993af9995310940c
   m_configObjects: {}

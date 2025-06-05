@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.XR;
@@ -148,6 +149,7 @@ public class PlayerController : MonoBehaviour
 
     public Coroutine speedCoroutine;
 
+    public TextMeshProUGUI jumpHoldTimeLeft, coyoteTimeLeft;
     private bool IsCurrentDeviceMouse
     {
         get
@@ -281,7 +283,8 @@ public class PlayerController : MonoBehaviour
             posLow = transform.position.y;
             posHigh = transform.position.y;
         }
-
+        jumpHoldTimeLeft.text = jumpTimeHold.ToString();
+        coyoteTimeLeft.text = coyoteJumpTime.ToString();
     }
 
     private void LateUpdate()
