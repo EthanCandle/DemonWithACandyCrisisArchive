@@ -8,14 +8,14 @@ public class BGDoorRemove : MonoBehaviour
     public GameObject doorToRemove;
 
     public BoxGirlFunctions functions;
-
+    public GameObject particlesToSummon, placeToSummon;
     private void Start()
     {
         functions = GameObject.FindGameObjectWithTag("GameManager").GetComponent<BoxGirlFunctions>();
     }
     public void RemoveDoor()
     {
-        functions.RemoveDoor(doorToRemove);
+        functions.RemoveDoor(doorToRemove, particlesToSummon, placeToSummon);
 
     }
 

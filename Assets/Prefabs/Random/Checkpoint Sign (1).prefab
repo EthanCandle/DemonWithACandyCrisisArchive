@@ -336,7 +336,7 @@ GameObject:
   - component: {fileID: 1281513647091047184}
   - component: {fileID: 3423970212214550362}
   - component: {fileID: 3047859547090067294}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SignCard.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -439,7 +439,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3868677169257348517}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -556,7 +556,7 @@ GameObject:
   - component: {fileID: 4819754769836043173}
   - component: {fileID: 8393164830346015002}
   - component: {fileID: 7277944438738707374}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -693,7 +693,7 @@ GameObject:
   - component: {fileID: 9169343774195374862}
   - component: {fileID: 781689865788629671}
   - component: {fileID: 4980122944585222151}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SignCard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -947,7 +947,7 @@ GameObject:
   - component: {fileID: 4397115410542355998}
   - component: {fileID: 6665337945749100236}
   - component: {fileID: 311576890303906309}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1046,7 +1046,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5967728132014874962}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SignPostTilted
   m_TagString: Untagged
   m_Icon: {fileID: 0}

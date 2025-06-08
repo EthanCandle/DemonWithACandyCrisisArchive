@@ -84,30 +84,31 @@ then call the input in another script with _input.{veryTopVar} == true;
 	public void OnJump(InputValue value)
 	{
 		jump = (value.isPressed);
-		if (jump)
-		{
-			jumpText.SetActive(true);
-
-        }
-		else
-		{
-            jumpText.SetActive(false);
-        }
-	}
+		//if (jump)
+		//{
+		//	jumpText.SetActive(true);
+			
+  //      }
+		//else
+		//{
+  //          jumpText.SetActive(false);
+  //      }
+        print(jump);
+    }
 	public void OnJumpHold(InputValue value)///
 	{
         //print("JumpHold In OnJumpHold");
         //print(value);
         jumpHold = (value.isPressed);
-        if (jumpHold)
-        {
-            jumpHoldText.SetActive(true);
+        //if (jumpHold)
+        //{
+        //    jumpHoldText.SetActive(true);
 
-        }
-        else
-        {
-            jumpHoldText.SetActive(false);
-        }
+        //}
+        //else
+        //{
+        //    jumpHoldText.SetActive(false);
+        //}
     }
 
 	public void OnInteract(InputValue value)///

@@ -20,17 +20,17 @@ public class BoxGirlFunctions : MonoBehaviour
     }
 
 
-    public void RemoveDoor(GameObject objectToRemove)
+    public void RemoveDoor(GameObject objectToRemove, GameObject particlesToSummon, GameObject placeToSummon)
     {
         // this is called during dialouge to remove a door blocking the path, this is to force the player to talk to box girl
         SetDoorFalse(objectToRemove);
-        SpawnParticlesDoor(objectToRemove);
+        SpawnParticlesDoor(placeToSummon, particlesToSummon);
         FindObjectOfType<AudioManager>().PlaySoundInstantiate(teleportDoorSFX);
     }
 
-    public void SpawnParticlesDoor(GameObject objectToSpawnAt)
+    public void SpawnParticlesDoor(GameObject objectToSpawnAt, GameObject particlesToSummon)
     {
-        Instantiate(teleportParticleDoor, objectToSpawnAt.transform.position + new Vector3(0, -12, 0), teleportParticleDoor.transform.rotation);
+        Instantiate(particlesToSummon, objectToSpawnAt.transform.position, teleportParticleDoor.transform.rotation);
     }
 
     public void SetDoorFalse(GameObject objectToChange)

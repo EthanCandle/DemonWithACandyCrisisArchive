@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 564739422041892411}
   - component: {fileID: 5386382505117430545}
   - component: {fileID: 1502072440149542131}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Door (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -117,7 +117,7 @@ GameObject:
   - component: {fileID: 1362502897141157779}
   - component: {fileID: 41461298853484189}
   - component: {fileID: 3459062139571042740}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Hitbox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -223,7 +223,7 @@ GameObject:
   - component: {fileID: 2109860216403700473}
   - component: {fileID: 3862846010810677771}
   - component: {fileID: 2906250632351140636}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -336,9 +336,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d87ba6d0999716949ba37d39ff2fc67e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isPlayerWithinRange: 0
-  isPlayerAbleToOpenDoor: 0
-  canvasHolderOfAll: {fileID: 0}
-  textToShowWhenLocked: {fileID: 0}
-  textToShoWhenLockedInteract: {fileID: 0}
-  textToShowWhenOpen: {fileID: 0}

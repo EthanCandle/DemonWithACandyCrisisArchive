@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Windows;
 
 // NotStarted = player hasn't talked to them yet, Locked is player is in the locked dialogue, normal is normal, finished is after talking to them normal
 public enum DialogueState {NotStarted, Locked, Normal,Finished  }
@@ -28,11 +29,13 @@ public class DialogueInteraction : MonoBehaviour
     public List<DialogueData> dialougeToShowFinished; // the text to tell the player what to do
 
 
-
+    public InputManager _input;
     // Start is called before the first frame update
     void Start()
     {
         dm = GameObject.FindGameObjectWithTag("GameManager").GetComponent<DialogueManager>();
+
+        _input = GameObject.FindGameObjectWithTag("Player").GetComponent<InputManager>();
     }
 
     // Update is called once per frame
@@ -41,8 +44,9 @@ public class DialogueInteraction : MonoBehaviour
 
         // if player presses E,
         // if player is within range
-        if (Input.GetKeyDown(KeyCode.E) && isPlayerWithinRange)
+        if (_input.interact && isPlayerWithinRange)
         {
+            _input.interact = false;
             print("talk");
             Interact();
         }

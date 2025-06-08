@@ -3444,7 +3444,7 @@ Transform:
   m_GameObject: {fileID: 3217460797952865927}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.5250001, z: -8}
+  m_LocalPosition: {x: 0, y: -98.90168, z: -89.547226}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3811,12 +3811,12 @@ GameObject:
   - component: {fileID: 8916763004384780361}
   - component: {fileID: 5306301644728267566}
   m_Layer: 0
-  m_Name: PauseMenu (1)
+  m_Name: Debug
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &8916763004384780361
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3849,7 +3849,7 @@ CanvasGroup:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3426985421721272736}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Alpha: 1
   m_Interactable: 1
   m_BlocksRaycasts: 1
@@ -3961,7 +3961,7 @@ MonoBehaviour:
   m_ScaleMode: 0
   m_Offset: {x: 0, y: 0, z: 25}
   m_Size: {x: 0.8, y: 0.8, z: 50}
-  m_FadeFactor: 0.321
+  m_FadeFactor: 0.72
 --- !u!1 &3608386746407215268
 GameObject:
   m_ObjectHideFlags: 0
@@ -5636,7 +5636,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4087995207124810704
 Transform:
   m_ObjectHideFlags: 0

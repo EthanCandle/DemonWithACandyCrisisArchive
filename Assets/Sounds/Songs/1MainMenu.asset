@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameOfSound: 
   clip: {fileID: 8300000, guid: 5373d843d61a3d941af0d519ea98e0f1, type: 3}
-  volume: 1
+  volume: 0.624
   volumeOriginal: 0.35
   pitch: 1
-  loop: 0
+  loop: 1
   audioMixerGroup: {fileID: 24300002, guid: 7f39a7cdf3aee3643ab811cfa12f5cae, type: 2}
   source: {fileID: 0}
