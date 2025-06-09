@@ -44,7 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6e6ce4a35b6ff94f9212f0f412fba97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentVolume: 50
+  currentVolumeSFX: 50
+  currentVolumeMusic: 50
   isMuted: 0
   mainMenuMusic: []
   gamePlayMusic:

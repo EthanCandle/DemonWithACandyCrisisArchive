@@ -7,7 +7,7 @@ public class AudioManager : MonoBehaviour
 {
     // FindObjectOfType<AudioManager>().PlaySoundInstantiate(deathSFX);
 
-    public int currentVolume = 100;
+    public int currentVolumeSFX = 100, currentVolumeMusic = 100;
     public bool isMuted;
     public Sound[] mainMenuMusic;
     public Sound[] gamePlayMusic;
@@ -24,6 +24,7 @@ public class AudioManager : MonoBehaviour
     public float songVolumeMax; // this is the music's current volume before transitioning
 
     public AudioMixerGroup audioMixerGroupMusic, audioMixerGroupSFX;
+
     public bool inMainMenuFirstTime = true;
 
     // Start is called before the first frame update
@@ -42,42 +43,43 @@ public class AudioManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
 
 
-        foreach (Sound s in sounds)
-        {
-            s.source = gameObject.AddComponent<AudioSource>();
+        //foreach (Sound s in sounds)
+        //{
+        //    s.source = gameObject.AddComponent<AudioSource>();
 
-            s.source.clip = s.clip;
+        //    s.source.clip = s.clip;
 
-            s.source.volume = s.volume;
-            s.source.pitch = s.pitch;
-            s.source.loop = s.loop;
+        //    s.source.volume = s.volume;
+        //    s.source.pitch = s.pitch;
+        //    s.source.loop = s.loop;
 
-        }
+        //}
 
-        foreach (Sound s in mainMenuMusic)
-        {
-            s.source = gameObject.AddComponent<AudioSource>();
+        //foreach (Sound s in mainMenuMusic)
+        //{
+        //    s.source = gameObject.AddComponent<AudioSource>();
 
-            s.source.clip = s.clip;
+        //    s.source.clip = s.clip;
 
-            s.source.volume = s.volume;
-            s.source.pitch = s.pitch;
-            s.source.loop = s.loop;
+        //    s.source.volume = s.volume;
+        //    s.source.pitch = s.pitch;
+        //    s.source.loop = s.loop;
 
-        }
-        foreach (Sound s in gamePlayMusic)
-        {
-            s.source = gameObject.AddComponent<AudioSource>();
+        //}
+        //foreach (Sound s in gamePlayMusic)
+        //{
+        //    s.source = gameObject.AddComponent<AudioSource>();
 
-            s.source.clip = s.clip;
+        //    s.source.clip = s.clip;
 
-            s.source.volume = s.volume;
-            s.source.pitch = s.pitch;
-            s.source.loop = s.loop;
-            s.source.outputAudioMixerGroup = audioMixerGroupMusic;
-        }
+        //    s.source.volume = s.volume;
+        //    s.source.pitch = s.pitch;
+        //    s.source.loop = s.loop;
+        //    s.source.outputAudioMixerGroup = audioMixerGroupMusic;
+        //}
 
-        AdjustVolume(currentVolume); 
+        AdjustVolumeSFX(currentVolumeSFX);
+        AdjustVolumeMusic(currentVolumeMusic);
 
     }
 
@@ -115,7 +117,7 @@ public class AudioManager : MonoBehaviour
 
         sourceSound.source.clip = sourceSound.clip;
 
-        sourceSound.source.volume = currentVolume / 100.0f * sourceSound.volumeOriginal;
+        sourceSound.source.volume =  sourceSound.volumeOriginal; // currentVolume / 100.0f *
         sourceSound.source.pitch = sourceSound.pitch;
         sourceSound.source.loop = sourceSound.loop;
         sourceSound.source.outputAudioMixerGroup = sourceSound.audioMixerGroup;
@@ -147,7 +149,7 @@ public class AudioManager : MonoBehaviour
 
         sourceSound.source.clip = sourceSound.clip;
 
-        sourceSound.source.volume = currentVolume / 100.0f * sourceSound.volumeOriginal;
+        sourceSound.source.volume =  sourceSound.volumeOriginal; // currentVolume / 100.0f *
         sourceSound.source.pitch = sourceSound.pitch;
         sourceSound.source.loop = sourceSound.loop;
         sourceSound.source.outputAudioMixerGroup = sourceSound.audioMixerGroup;
@@ -288,17 +290,39 @@ public class AudioManager : MonoBehaviour
 
     public void PlayLevelMusic()
     {
-        Sound s = gamePlayMusic[SceneManager.GetActiveScene().buildIndex];
+        Sound sourceSound = gamePlayMusic[SceneManager.GetActiveScene().buildIndex];
 
-        if (s == null)
+        if (sourceSound == null)
         {
             Debug.LogWarning("Sound: " + name + " not found!");
             return;
         }
 
-        s.source.Play();
-        songCurrentlyPlaying = s.source;
-        print(songCurrentlyPlaying.volume);
+        // print(sourceSound.name);
+        // plays a sound by creating an empty object with the sound attached and deletes it when it ends
+        amountOfSoundsSoFar++;
+
+        // FindObjectOfType<AudioManager>().PlaySoundInstantiate(deathSFX);
+        // use the var:     public Sound deathSFX;
+
+        // creates the object
+        GameObject newGameObject = new GameObject($"Sound Holder ({amountOfSoundsSoFar})", typeof(AudioSource));
+
+        // addes the audiosource and sets it
+        sourceSound.source = newGameObject.GetComponent<AudioSource>();
+
+        sourceSound.source.clip = sourceSound.clip;
+
+        sourceSound.source.volume = sourceSound.volumeOriginal; //currentVolume / 100.0f * 
+        sourceSound.source.pitch = sourceSound.pitch;
+        sourceSound.source.loop = sourceSound.loop;
+        sourceSound.source.outputAudioMixerGroup = sourceSound.audioMixerGroup;
+        // plays teh sound
+        sourceSound.source.Play();
+
+        songCurrentlyPlaying = sourceSound.source;
+
+
     }
 
     public void StopCurrentSong()
@@ -370,66 +394,104 @@ public class AudioManager : MonoBehaviour
     }
 
     // these called by some sort of game manager
-    public void IncreaseVolume(int amountToChange)
-    {
-        currentVolume += amountToChange;
-        if (currentVolume > 100)
-        {
-            currentVolume = 100;
-        }
-        AdjustVolume(currentVolume);
-    }
+    //public void IncreaseVolume(int amountToChange)
+    //{
+    //    currentVolume += amountToChange;
+    //    if (currentVolume > 100)
+    //    {
+    //        currentVolume = 100;
+    //    }
+    //    AdjustVolume(currentVolume);
+    //}
 
-    public void DecreaseVolume(int amountToChange)
-    {
-        currentVolume -= amountToChange;
-        if (currentVolume < 0)
-        {
-            currentVolume = 0;
-        }
-        AdjustVolume(currentVolume);
-    }
+    //public void DecreaseVolume(int amountToChange)
+    //{
+    //    currentVolume -= amountToChange;
+    //    if (currentVolume < 0)
+    //    {
+    //        currentVolume = 0;
+    //    }
+    //    AdjustVolume(currentVolume);
+    //}
 
-    public void SetVolume(int amountToChange)
+    public void SetVolumeSFX(int amountToChange)
     {
-        currentVolume = amountToChange;
-        AdjustVolume(currentVolume);
+        currentVolumeSFX = amountToChange;
+        AdjustVolumeSFX(currentVolumeSFX);
         isMuted = false;
     }
 
-    public void MuteVolume()
+    public void MuteVolumeSFX()
     {
-        AdjustVolume(0);
+        audioMixerGroupSFX.audioMixer.SetFloat("SFXVolume", -80);
+        //AdjustVolumeSFX(0);
         isMuted = true;
     }
 
-    public void UnMuteVolume()
+    public void UnMuteVolumeSFX()
     {
-        AdjustVolume(currentVolume);
+        AdjustVolumeSFX(currentVolumeSFX);
+        isMuted = false;
+    }    
+    
+    public void AdjustVolumeSFX(float volume)
+    {
+        float dB = Mathf.Lerp(-20, 20f, volume / 100f);
+        audioMixerGroupSFX.audioMixer.SetFloat("SFXVolume", dB);
+    }
+
+
+
+
+    public void SetVolumeMusic(int amountToChange)
+    {
+        currentVolumeMusic = amountToChange;
+        AdjustVolumeMusic(currentVolumeMusic);
         isMuted = false;
     }
 
-    public void AdjustVolume(int volume = 100)
+    public void MuteVolumeMusic()
     {
-        print("Adjust volume start");
-        // volume range is between 0-100
-        foreach (Sound s in sounds)
-        {
-            s.source.volume = volume / 100.0f * s.volumeOriginal;
-        }
-
-        foreach (Sound s in mainMenuMusic)
-        {
-            s.source.volume = volume / 100.0f * s.volumeOriginal;
-
-        }
-        foreach (Sound s in gamePlayMusic)
-        {
-            s.source.volume = volume / 100.0f * s.volumeOriginal;
-
-        }
-        print("Adjust volume end");
+        audioMixerGroupMusic.audioMixer.SetFloat("MusicVolume", -80);
+        //AdjustVolumeMusic(0);
+        isMuted = true;
     }
+
+    public void UnMuteVolumeMusic()
+    {
+        AdjustVolumeMusic(currentVolumeMusic);
+        isMuted = false;
+    }
+
+    public void AdjustVolumeMusic(float volume)
+    {
+        float dB = Mathf.Lerp(-20f, 20f, volume / 100f);
+        audioMixerGroupMusic.audioMixer.SetFloat("MusicVolume", dB);
+       // songCurrentlyPlaying.volume =
+    }
+    //public void AdjustVolume(int volume = 100)
+    //{
+    //    print("Adjust volume start");
+    //    // volume range is between 0-100
+    //    //foreach (Sound s in sounds)
+    //    //{
+    //    //    s.source.volume = volume / 100.0f * s.volumeOriginal;
+    //    //}
+
+    //    //foreach (Sound s in mainMenuMusic)
+    //    //{
+    //    //    s.source.volume = volume / 100.0f * s.volumeOriginal;
+
+    //    //}
+    //    //foreach (Sound s in gamePlayMusic)
+    //    //{
+    //    //    s.source.volume = volume / 100.0f * s.volumeOriginal;
+
+    //    //}
+    //    print("Adjust volume end");
+    //}
+
+
 
 
 }

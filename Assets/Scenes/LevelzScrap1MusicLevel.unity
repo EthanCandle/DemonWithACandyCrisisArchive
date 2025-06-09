@@ -240,6 +240,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: NoteQuarter (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 4368110924909900722, guid: 0df270c921c8eca45b78c66ca2f93567,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3476,7 +3481,7 @@ PrefabInstance:
     - target: {fileID: 7691258624229340358, guid: 07383fa830b4f7741909448546bbecf3,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7691258624229340358, guid: 07383fa830b4f7741909448546bbecf3,
         type: 3}
@@ -4830,6 +4835,7 @@ MonoBehaviour:
     objectAnimator: {fileID: 1337568031}
     AnimationToPlayName: Close
     shouldTransitionToThisAnimation: 1
+  _input: {fileID: 0}
 --- !u!54 &854304998
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -4921,6 +4927,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   doorToRemove: {fileID: 558016956}
   functions: {fileID: 0}
+  particlesToSummon: {fileID: 0}
+  placeToSummon: {fileID: 0}
 --- !u!114 &854305002
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5091,6 +5099,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: NoteAlone
+      objectReference: {fileID: 0}
+    - target: {fileID: 7845311290752350863, guid: cf000ced45124644f91bfb6405f96b1c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -19862,27 +19875,32 @@ PrefabInstance:
     - target: {fileID: 390273058470106818, guid: 5c99790009516cd479140b56fb5e77a1,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 11.525
+      value: 9.884999
       objectReference: {fileID: 0}
     - target: {fileID: 390273058470106818, guid: 5c99790009516cd479140b56fb5e77a1,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -8
+      value: -18.93
       objectReference: {fileID: 0}
     - target: {fileID: 1180820315283058231, guid: 5c99790009516cd479140b56fb5e77a1,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 10
+      value: 8.36
+      objectReference: {fileID: 0}
+    - target: {fileID: 1180820315283058231, guid: 5c99790009516cd479140b56fb5e77a1,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -10.93
       objectReference: {fileID: 0}
     - target: {fileID: 1461520272717249658, guid: 5c99790009516cd479140b56fb5e77a1,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 11.525
+      value: 9.884999
       objectReference: {fileID: 0}
     - target: {fileID: 1461520272717249658, guid: 5c99790009516cd479140b56fb5e77a1,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -8
+      value: -18.93
       objectReference: {fileID: 0}
     - target: {fileID: 2602230690018411452, guid: 5c99790009516cd479140b56fb5e77a1,
         type: 3}
@@ -19893,6 +19911,31 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6108481233487024298, guid: 5c99790009516cd479140b56fb5e77a1,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6108481233487024298, guid: 5c99790009516cd479140b56fb5e77a1,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7270867707235702744, guid: 5c99790009516cd479140b56fb5e77a1,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7270867707235702744, guid: 5c99790009516cd479140b56fb5e77a1,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7270867707235702744, guid: 5c99790009516cd479140b56fb5e77a1,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9173783671317046693, guid: 5c99790009516cd479140b56fb5e77a1,
         type: 3}
@@ -20874,6 +20917,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: NoteQuarter (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 4368110924909900722, guid: 0df270c921c8eca45b78c66ca2f93567,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -20945,7 +20993,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: d9b9179bf82171746b85e4b6d54b0ec7,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -21893,6 +21941,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   doorToRemove: {fileID: 0}
   functions: {fileID: 0}
+  particlesToSummon: {fileID: 0}
+  placeToSummon: {fileID: 0}
 --- !u!114 &1368976505
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21997,6 +22047,7 @@ MonoBehaviour:
     objectAnimator: {fileID: 0}
     AnimationToPlayName: Close
     shouldTransitionToThisAnimation: 1
+  _input: {fileID: 0}
 --- !u!54 &1368976507
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -22162,6 +22213,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: NoteQuarter (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4368110924909900722, guid: 0df270c921c8eca45b78c66ca2f93567,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -24237,6 +24293,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: NoteQuarter (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4368110924909900722, guid: 0df270c921c8eca45b78c66ca2f93567,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -26336,6 +26397,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: NoteQuarter (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 4368110924909900722, guid: 0df270c921c8eca45b78c66ca2f93567,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -28147,7 +28213,7 @@ PrefabInstance:
     - target: {fileID: 4368110924909900722, guid: 0df270c921c8eca45b78c66ca2f93567,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -28242,6 +28308,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: NoteQuarter (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4368110924909900722, guid: 0df270c921c8eca45b78c66ca2f93567,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -8,17 +8,18 @@ public class Settings : MonoBehaviour
     public bool isInOptions = false;
     public AudioManager audioManager;
     public int volume;
-    public Slider volumeSlider;
+    public Slider volumeSliderSFX, volumeSliderMusic;
 
-    public bool isMuted = false;
-    public GameObject muteObject, unMuteObject;
+    public bool isMutedSFX = false, isMutedMusic = false;
+    public GameObject muteObjectSFX, unMuteObjectSFX, muteObjectMusic, unMuteObjectMusic;
     public Animator optionsAnimator;
     public CanvasGroup menuToDeactiveOnSummon;
     // Start is called before the first frame update
     void Start()
     {
         audioManager = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
-        SetSliderOnStart();
+        SetSliderOnStartSFX();
+        SetSliderOnStartMusic();
     }
 
     // Update is called once per frame
@@ -27,49 +28,89 @@ public class Settings : MonoBehaviour
         
     }
 
-    public void SetSliderOnStart()
+    public void SetSliderOnStartSFX()
     {
         // call this whenever this thing is set active (need to see if theres a set active start_
         // makes it  so the slier starts on the correct value when it is made
-        volumeSlider.value = audioManager.currentVolume;
+        volumeSliderSFX.value = audioManager.currentVolumeSFX;
+    }
+    public void SetSliderOnStartMusic()
+    {
+        // call this whenever this thing is set active (need to see if theres a set active start_
+        // makes it  so the slier starts on the correct value when it is made
+        volumeSliderMusic.value = audioManager.currentVolumeMusic;
     }
 
-
-    public void ChangeVolume()
+    public void ChangeVolumeSFX(Slider slider)
     {
        // print((int)volumeSlider.value);
-        audioManager.SetVolume((int)volumeSlider.value);
-        UnMute(); // just to remove the mute symbol
+        audioManager.SetVolumeSFX((int)slider.value);
+        UnMuteSFX(); // just to remove the mute symbol
     }
-
-    public void ChangeMute()
+    public void ChangeVolumeMusic(Slider slider)
     {
-        if (isMuted)
+        // print((int)volumeSlider.value);
+        audioManager.SetVolumeMusic((int)slider.value);
+        UnMuteMusic(); // just to remove the mute symbol
+    }
+    public void ChangeMuteSFX()
+    {
+        if (isMutedSFX)
         {
-            UnMute();
+            UnMuteSFX();
         }
         else
         {
-            Mute();
+            MuteSFX();
+        }        
+    }
+    public void ChangeMuteMusic()
+    {
+
+        if (isMutedMusic)
+        {
+            UnMuteMusic();
+        }
+        else
+        {
+            MuteMusic();
         }
     }
-
-    public void Mute()
+    public void MuteSFX()
     {
-        isMuted = true;
+        isMutedSFX = true;
         // called by button
-        audioManager.MuteVolume();
-        muteObject.SetActive(true);
-        unMuteObject.SetActive(false);
+        audioManager.MuteVolumeSFX();
+        muteObjectSFX.SetActive(true);
+        unMuteObjectSFX.SetActive(false);
     }
 
-    public void UnMute()
+    public void UnMuteSFX()
     {
-        isMuted = false;
+        isMutedSFX = false;
         // called by button
-        audioManager.UnMuteVolume();
-        muteObject.SetActive(false);
-        unMuteObject.SetActive(true);
+        audioManager.UnMuteVolumeSFX();
+        muteObjectSFX.SetActive(false);
+        unMuteObjectSFX.SetActive(true);
+
+    }
+
+    public void MuteMusic()
+    {
+        isMutedMusic = true;
+        // called by button
+        audioManager.MuteVolumeMusic();
+        muteObjectMusic.SetActive(true);
+        unMuteObjectMusic.SetActive(false);
+    }
+
+    public void UnMuteMusic()
+    {
+        isMutedMusic = false;
+        // called by button
+        audioManager.UnMuteVolumeMusic();
+        muteObjectMusic.SetActive(false);
+        unMuteObjectMusic.SetActive(true);
 
     }
 
