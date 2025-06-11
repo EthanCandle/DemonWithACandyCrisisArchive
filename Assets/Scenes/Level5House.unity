@@ -57137,6 +57137,21 @@ PrefabInstance:
       propertyPath: m_SelectedVertices.Array.data[7]
       value: 23
       objectReference: {fileID: 0}
+    - target: {fileID: 3868677169257348517, guid: 915d24198eefa86449b4823cbc778b13,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 10.565006
+      objectReference: {fileID: 0}
+    - target: {fileID: 3868677169257348517, guid: 915d24198eefa86449b4823cbc778b13,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.00001192093
+      objectReference: {fileID: 0}
+    - target: {fileID: 3868677169257348517, guid: 915d24198eefa86449b4823cbc778b13,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 23.680061
+      objectReference: {fileID: 0}
     - target: {fileID: 4210682415043759854, guid: 915d24198eefa86449b4823cbc778b13,
         type: 3}
       propertyPath: m_Mesh
@@ -57152,25 +57167,15 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5967728132014874962, guid: 915d24198eefa86449b4823cbc778b13,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8070628007106338749, guid: 915d24198eefa86449b4823cbc778b13,
         type: 3}
       propertyPath: m_Name
       value: Checkpoint Sign (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 8219931005603448520, guid: 915d24198eefa86449b4823cbc778b13,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0.27778623
-      objectReference: {fileID: 0}
-    - target: {fileID: 8219931005603448520, guid: 915d24198eefa86449b4823cbc778b13,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.00018040337
-      objectReference: {fileID: 0}
-    - target: {fileID: 8219931005603448520, guid: 915d24198eefa86449b4823cbc778b13,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 22.618767
       objectReference: {fileID: 0}
     - target: {fileID: 8219931005603448520, guid: 915d24198eefa86449b4823cbc778b13,
         type: 3}
@@ -68923,6 +68928,21 @@ PrefabInstance:
       propertyPath: m_SelectedVertices.Array.data[7]
       value: 23
       objectReference: {fileID: 0}
+    - target: {fileID: 3868677169257348517, guid: 915d24198eefa86449b4823cbc778b13,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 9.869784
+      objectReference: {fileID: 0}
+    - target: {fileID: 3868677169257348517, guid: 915d24198eefa86449b4823cbc778b13,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.00000014707256
+      objectReference: {fileID: 0}
+    - target: {fileID: 3868677169257348517, guid: 915d24198eefa86449b4823cbc778b13,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -17.095102
+      objectReference: {fileID: 0}
     - target: {fileID: 4210682415043759854, guid: 915d24198eefa86449b4823cbc778b13,
         type: 3}
       propertyPath: m_Mesh
@@ -68937,21 +68957,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Enabled
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5967728132014874962, guid: 915d24198eefa86449b4823cbc778b13,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 3.722963
-      objectReference: {fileID: 0}
-    - target: {fileID: 5967728132014874962, guid: 915d24198eefa86449b4823cbc778b13,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.50000125
-      objectReference: {fileID: 0}
-    - target: {fileID: 5967728132014874962, guid: 915d24198eefa86449b4823cbc778b13,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 4.853771
       objectReference: {fileID: 0}
     - target: {fileID: 5967728132014874962, guid: 915d24198eefa86449b4823cbc778b13,
         type: 3}

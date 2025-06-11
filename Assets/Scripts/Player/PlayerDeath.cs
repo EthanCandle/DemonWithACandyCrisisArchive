@@ -44,7 +44,9 @@ public class PlayerDeath : MonoBehaviour
         // play sound effect, player animation, freeze movement/input
         isDead = true;
         playerController.SetDead(true);
-
+        
+        // play death sound
+        FindObjectOfType<AudioManager>().PlaySoundInstantiate(deathSFX);
         playerController.LosePlayerControl();
         StartCoroutine(RespawnDelay());
         SetFakeCamera();
@@ -63,7 +65,7 @@ public class PlayerDeath : MonoBehaviour
         SetPlayerPosition();
         isDead = false; // removes being dead on this script
         playerController.SetDead(false); // sets the player's script to not dead
-    EndFakeCamera(); // disables the fake camera
+        EndFakeCamera(); // disables the fake camera
         playerController.GainPlayerControl();
         //print($"DEATH RespawnPoint:{playerRespawnPoint} Player is now: {playerController.gameObject.transform.position}");
     }
@@ -82,7 +84,7 @@ public class PlayerDeath : MonoBehaviour
         playerController.gameObject.transform.position = placeToPutPlayer; // teleports player to cp
         playerController.SetCameraRotation(playerRotationPoint); // sets camera to cp's rotation
         playerController.SetCharacterController(true); // re enables the character controller so they can move
-
+        playerController.SetYVelocityToZero();
     }
     public IEnumerator GivePlayerControl()
     {

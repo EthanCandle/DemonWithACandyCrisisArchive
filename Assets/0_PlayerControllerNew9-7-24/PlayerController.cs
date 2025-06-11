@@ -1032,4 +1032,10 @@ public class PlayerController : MonoBehaviour
         SetCharacterController(true); // re enables the character controller so they can move
 
     }
+
+    public void SetYVelocityToZero()
+    {
+        _verticalVelocity = 0;
+    }
+
 }

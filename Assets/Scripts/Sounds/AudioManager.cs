@@ -3,6 +3,7 @@ using System;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
+using System.Collections.Generic;
 public class AudioManager : MonoBehaviour
 {
     // FindObjectOfType<AudioManager>().PlaySoundInstantiate(deathSFX);
@@ -23,7 +24,8 @@ public class AudioManager : MonoBehaviour
     public float fadeInOutSpeed = 0.5f;
     public float songVolumeMax; // this is the music's current volume before transitioning
 
-    public AudioMixerGroup audioMixerGroupMusic, audioMixerGroupSFX;
+    public List<AudioMixerGroup> audioMixerGroupMusics, audioMixerGroupSFXs;
+
 
     public bool inMainMenuFirstTime = true;
 
@@ -423,7 +425,10 @@ public class AudioManager : MonoBehaviour
 
     public void MuteVolumeSFX()
     {
-        audioMixerGroupSFX.audioMixer.SetFloat("SFXVolume", -80);
+        for (int i = 0; i < audioMixerGroupSFXs.Count; i++)
+        {
+            audioMixerGroupSFXs[i].audioMixer.SetFloat("volume", -80);
+        }
         //AdjustVolumeSFX(0);
         isMuted = true;
     }
@@ -437,7 +442,13 @@ public class AudioManager : MonoBehaviour
     public void AdjustVolumeSFX(float volume)
     {
         float dB = Mathf.Lerp(-20, 20f, volume / 100f);
-        audioMixerGroupSFX.audioMixer.SetFloat("SFXVolume", dB);
+
+
+        for(int i = 0; i < audioMixerGroupSFXs.Count; i++)
+        {
+            audioMixerGroupSFXs[i].audioMixer.SetFloat("volume", dB);
+        }
+
     }
 
 
@@ -452,7 +463,10 @@ public class AudioManager : MonoBehaviour
 
     public void MuteVolumeMusic()
     {
-        audioMixerGroupMusic.audioMixer.SetFloat("MusicVolume", -80);
+        for (int i = 0; i < audioMixerGroupMusics.Count; i++)
+        {
+            audioMixerGroupMusics[i].audioMixer.SetFloat("volume", -80);
+        }
         //AdjustVolumeMusic(0);
         isMuted = true;
     }
@@ -466,8 +480,12 @@ public class AudioManager : MonoBehaviour
     public void AdjustVolumeMusic(float volume)
     {
         float dB = Mathf.Lerp(-20f, 20f, volume / 100f);
-        audioMixerGroupMusic.audioMixer.SetFloat("MusicVolume", dB);
-       // songCurrentlyPlaying.volume =
+
+        for (int i = 0; i < audioMixerGroupMusics.Count; i++)
+        {
+            audioMixerGroupMusics[i].audioMixer.SetFloat("volume", dB);
+        }
+        // songCurrentlyPlaying.volume =
     }
     //public void AdjustVolume(int volume = 100)
     //{

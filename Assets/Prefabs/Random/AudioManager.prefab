@@ -44,8 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6e6ce4a35b6ff94f9212f0f412fba97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentVolumeSFX: 50
-  currentVolumeMusic: 50
+  currentVolumeSFX: 10
+  currentVolumeMusic: 10
   isMuted: 0
   mainMenuMusic: []
   gamePlayMusic:
@@ -68,7 +68,10 @@ MonoBehaviour:
   fadeInOutTime: 1
   fadeInOutSpeed: 0.5
   songVolumeMax: 0
-  audioMixerGroupMusic: {fileID: 24300002, guid: 7f39a7cdf3aee3643ab811cfa12f5cae,
-    type: 2}
-  audioMixerGroupSFX: {fileID: 24300002, guid: e5c64160d8db3d54181c92225215f2b8, type: 2}
+  audioMixerGroupMusics:
+  - {fileID: 24300002, guid: 7f39a7cdf3aee3643ab811cfa12f5cae, type: 2}
+  - {fileID: 24300002, guid: a046120ea1fe42a4dba514d57b7993af, type: 2}
+  audioMixerGroupSFXs:
+  - {fileID: 24300002, guid: e5c64160d8db3d54181c92225215f2b8, type: 2}
+  - {fileID: 24300002, guid: ef51af42d9e1d40499e7ccd432289a0c, type: 2}
   inMainMenuFirstTime: 1

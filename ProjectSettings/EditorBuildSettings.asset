@@ -26,7 +26,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/LevelzScrap1MusicLevel.unity
     guid: 53e13a7f286179a439accdc6d6afade6
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Level1Backup.unity
     guid: 430dc98842b6d9f4993af9995310940c
   m_configObjects: {}

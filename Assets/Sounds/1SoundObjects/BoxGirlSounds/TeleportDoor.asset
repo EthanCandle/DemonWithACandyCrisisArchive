@@ -15,7 +15,7 @@ MonoBehaviour:
   nameOfSound: 
   clip: {fileID: 8300000, guid: de994bd122ab6f847ae5e1b9ccc692ac, type: 3}
   volume: 1
-  volumeOriginal: 0.35
+  volumeOriginal: 0.25
   pitch: 1
   loop: 0
   audioMixerGroup: {fileID: 24300002, guid: e5c64160d8db3d54181c92225215f2b8, type: 2}
