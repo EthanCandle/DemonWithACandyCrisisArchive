@@ -1,8 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEditor.Rendering;
 using UnityEngine;
+
 
 public class DebugStore : MonoBehaviour
 {
@@ -12,6 +14,7 @@ public class DebugStore : MonoBehaviour
     // should be free balling in main menu with shouldTriggerEffects = false
 
     public static DebugStore debugStore;
+    public DebugStats debugStatsLocal;
 
     public bool isInDebugStore = false, shouldTriggerEffects = false;
     public AudioManager audioManager;
@@ -27,21 +30,62 @@ public class DebugStore : MonoBehaviour
         debugStore = this;
         audioManager = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
 
-        DebugStats debugStats = new DebugStats { candyAmount = 0 };
+        LoadData();
+        //DebugStats debugStats = new DebugStats { candyAmount = 0 };
 
-        string json = JsonUtility.ToJson(debugStats);
-        print(json);
+        //string json = JsonUtility.ToJson(debugStats);
+        //print(json);
 
-        DebugStats debugStatsLoaded = JsonUtility.FromJson<DebugStats>(json);
-        print(debugStatsLoaded.candyAmount);
+        //DebugStats debugStatsLoaded = JsonUtility.FromJson<DebugStats>(json);
+        //print(debugStatsLoaded.candyAmount);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void SaveData()
     {
+        DebugStats debugStatsToSave;
+        if (debugStatsLocal == null)
+        {
+             debugStatsToSave = new DebugStats { candyAmount = 0 };
 
+        }
+        else
+        {
+             debugStatsToSave = new DebugStats { candyAmount = debugStatsLocal.candyAmount };
+
+        }
+
+        string json = JsonUtility.ToJson(debugStatsToSave);
+
+        File.WriteAllText(Application.dataPath + "/save.txt", json);
+        print(json);
     }
 
+    public void LoadData()
+    {
+        if (!File.Exists(Application.dataPath + "/save.txt"))
+        {
+            print("Doesn't exist!");
+            // if we don't have a save yet, make one
+            SaveData();
+        }
+        string saveString = File.ReadAllText(Application.dataPath + "/save.txt");
+
+        debugStatsLocal = JsonUtility.FromJson<DebugStats>(saveString);
+        print(debugStatsLocal.candyAmount);
+        TriggerEventListener();
+        SaveData();
+    }
+
+    public void DeleteData()
+    {
+        if (!File.Exists(Application.dataPath + "/save.txt"))
+        {
+            print("Doesn't exist!");
+            return;
+        }
+
+        // delete
+    }
     
     public void ToggleOptionsMenu()
     {
@@ -80,22 +124,33 @@ public class DebugStore : MonoBehaviour
         menuToDeactiveOnSummon.interactable = true;
     }
 
-    public event Action<int> OnCorrectWord;
-    public void CorrectWord()
+    public event Action<int> SetCandyAmount;
+    public void OnCandyCollected()
     {
         // this is the function that gets called when the player types the correct word, needs to subscribe to the inputtyper
         // this will call every script that subscribed to this function (UI mainly)
 
+        debugStatsLocal.candyAmount++;
+        TriggerEventListener();
 
-        if (OnCorrectWord != null)
+        SaveData();
+    }
+
+    public void TriggerEventListener()
+    {
+        if (SetCandyAmount != null)
         {
-            OnCorrectWord(1);
+            // increment by 1 when collecting a candy
+
+            print("IN listener");
+            print(debugStatsLocal.candyAmount);
+            SetCandyAmount(debugStatsLocal.candyAmount);
         }
     }
 
     private void OnDestroy()
     {
-        OnCorrectWord = null; // removes all listeners
+        SetCandyAmount = null; // removes all listeners
                               // InputAcceptor.current.GotCorrectWord -= CorrectWord; // makes it so the Gamemanager will call the function when the InputAcceptor gets the right word
     }
 }

@@ -11,12 +11,14 @@ public class FoodManager : MonoBehaviour
 
     public GameObject objectToBecomeInteractable; // door to the end the level with
 
-    public GameManager gm; 
+    public GameManager gm;
+    public DebugStore debugStore;
 
     // Start is called before the first frame update
     void Start()
     {
         gm = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
+        debugStore = FindObjectOfType<DebugStore>();
     }
 
     // Update is called once per frame
@@ -33,7 +35,7 @@ public class FoodManager : MonoBehaviour
         {
             FinishCollecting();
         }
-
+        debugStore.OnCandyCollected();
     }
 
     // probally wont need if going for a shop/collectable, but maybe for a trigger for teh door to be playable

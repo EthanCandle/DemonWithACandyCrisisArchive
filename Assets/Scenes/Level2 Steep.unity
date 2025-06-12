@@ -9880,6 +9880,7 @@ MonoBehaviour:
   candyToCollectTotal: 0
   objectToBecomeInteractable: {fileID: 1368976502}
   gm: {fileID: 0}
+  debugStore: {fileID: 0}
 --- !u!114 &845750424
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -37416,6 +37417,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Candy (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6574798018403375125, guid: 340929fbfe77a1b439c4cddf4cde7c52,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

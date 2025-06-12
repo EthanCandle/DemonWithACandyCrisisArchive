@@ -12866,7 +12866,7 @@ Transform:
   m_GameObject: {fileID: 1364695684}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 61, y: -11.5, z: 228}
+  m_LocalPosition: {x: 61, y: -11.5, z: 229.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -46160,6 +46160,11 @@ PrefabInstance:
       propertyPath: checkPointObjectList.Array.data[1]
       value: 
       objectReference: {fileID: 1694000226}
+    - target: {fileID: 7981648181068233770, guid: 7fc5378ba814e0140949770129586798,
+        type: 3}
+      propertyPath: candyToCollectNeeded
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7981648181068233770, guid: 7fc5378ba814e0140949770129586798,
         type: 3}
       propertyPath: objectToBecomeInteractable
