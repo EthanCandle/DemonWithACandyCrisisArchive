@@ -10,17 +10,47 @@ public class PlayerManager : MonoBehaviour
     // This was package was made 3/12/24 using Unity 2022.3.17f1
 
 
-    // Start is called before the first frame update
-    void Awake()
-    {
+    // this is now being used to alter the player's stats i guess
+    public PlayerController playerController;
+    public GameObject trialRunner; // players line runner trail
 
+    public float playerSprintSpeedBoost, playerWalkSpeedBoost;
+    public void Awake()
+    {
+        playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+    }
+    public void EnableTrailRunner(bool state)
+    {
+        trialRunner.SetActive(state);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void IncreasePlayerSpeed(bool state)
     {
-        
-    }
-    
+        if (state)
+        {
+            playerController.SprintSpeed = playerController.speedSprintHolder * 1.5f;
+            playerController.WalkSpeed = playerController.speedWalkHolder * 1.5f;
 
+        }
+        else
+        {
+            playerController.SprintSpeed = playerController.speedSprintHolder;
+            playerController.WalkSpeed = playerController.speedWalkHolder;
+
+        }
+    }
+
+    public void DecreasePlayerSpeed(bool state)
+    {
+        if (state)
+        {
+            playerController.SprintSpeed = playerController.speedSprintHolder / 4;
+            playerController.WalkSpeed = playerController.speedWalkHolder / 4;
+        }
+        else
+        {
+            playerController.SprintSpeed = playerController.speedSprintHolder;
+            playerController.WalkSpeed = playerController.speedWalkHolder;
+        }
+    }
 }

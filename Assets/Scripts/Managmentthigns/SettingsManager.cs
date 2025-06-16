@@ -9,7 +9,7 @@ public class SettingsManager : MonoBehaviour
     public GameManager gm; 
     public InputManager _input;
     public Settings settingsScript;
-
+    public DebugStore debugStoreScript;
     public bool isPaused = false;
     // Start is called before the first frame update
     void Start()
@@ -25,10 +25,17 @@ public class SettingsManager : MonoBehaviour
         {
             gm._input.pause = false;
 
+            // if in pause menu then remove it
             if (settingsScript != null && settingsScript.isInOptions)
             {
                 settingsScript.DesummonOptionsMenu();
             }
+            // else if in the debugStore then remove it
+            else if (debugStoreScript != null && debugStoreScript.isInDebugStore)
+            {
+                debugStoreScript.DesummonDebugMenu();
+            }
+            // else remove the pause menu
             else
             {
                 ChangePauseMenuState();
@@ -51,6 +58,10 @@ public class SettingsManager : MonoBehaviour
             if (settingsScript != null)
             {
                 settingsScript.DesummonOptionsMenu();
+            }
+            if (debugStoreScript != null)
+            {
+                debugStoreScript.DesummonDebugMenu();
             }
         }
     }

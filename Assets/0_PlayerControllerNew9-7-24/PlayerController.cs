@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
 
     [Header("Player")]
     [Tooltip("Move speed of the character in m/s")]
-    public float MoveSpeed = 7.0f;
+    public float WalkSpeed = 7.0f;
 
     [Tooltip("Sprint speed of the character in m/s")]
     public float SprintSpeed = 20.0f;
@@ -145,7 +145,7 @@ public class PlayerController : MonoBehaviour
     public GameObject bounceDirectionObj;
     public float bouncePower;
 
-    public float speedNormalHolder, speedSprintHolder;
+    public float speedWalkHolder, speedSprintHolder;
 
     public Coroutine speedCoroutine;
 
@@ -203,7 +203,7 @@ public class PlayerController : MonoBehaviour
 
         // turns on all general canvas that holds all player ui (they can be disabled indiviually)
         playerCanvasAnimator.SetTrigger("On");
-        speedNormalHolder = MoveSpeed;
+        speedWalkHolder = WalkSpeed;
         speedSprintHolder = SprintSpeed;
     }
 
@@ -420,7 +420,7 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            targetSpeed = MoveSpeed;
+            targetSpeed = WalkSpeed;
         }
         // a simplistic acceleration and deceleration designed to be easy to remove, replace, or iterate upon
 
@@ -1002,7 +1002,7 @@ public class PlayerController : MonoBehaviour
             StopCoroutine(speedCoroutine);
         }
 
-        MoveSpeed = speedNormalHolder * speedMult / 4;
+        WalkSpeed = speedWalkHolder * speedMult / 4;
         SprintSpeed = speedSprintHolder * speedMult;
         speedCoroutine = StartCoroutine(ReduceSpeedGradually());
     }
@@ -1019,7 +1019,7 @@ public class PlayerController : MonoBehaviour
         }
         print("End");
         SprintSpeed = speedSprintHolder;
-        MoveSpeed = speedNormalHolder;
+        WalkSpeed = speedWalkHolder;
         speedCoroutine = null;
     }
 

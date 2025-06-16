@@ -2776,6 +2776,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelTransition: {fileID: 0}
+  confirmationPopup: {fileID: 5617904042853130956, guid: e5ee741c84a28f848a49ed1827b8dfec,
+    type: 3}
 --- !u!1 &6681886271532581788
 GameObject:
   m_ObjectHideFlags: 0

@@ -11,13 +11,13 @@ public class ButtonSFXOnHover : MonoBehaviour, IPointerEnterHandler, IPointerCli
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        print($"{Time.unscaledTime}, {lastPlayTime}");
+      //  print($"{Time.unscaledTime}, {lastPlayTime}");
 
         if (Time.unscaledTime - lastPlayTime > minDelayBetweenPlays)
-        {
-            print("OnPointerEnter Triggered");
+        {//
+          //  print("OnPointerEnter Triggered");
             // buttonHoverSFX
-            print(FindObjectOfType<AudioManager>().buttonHoverSFX.nameOfSound);
+           // print(FindObjectOfType<AudioManager>().buttonHoverSFX.nameOfSound);
             FindObjectOfType<AudioManager>().PlaySoundInstantiate(FindObjectOfType<AudioManager>().buttonHoverSFX);
             lastPlayTime = Time.unscaledTime;
         }
@@ -38,13 +38,13 @@ public class ButtonSFXOnHover : MonoBehaviour, IPointerEnterHandler, IPointerCli
     //}    
     public void OnPointerClick(PointerEventData eventData)
     {
-        print($"{Time.unscaledTime}, {lastPlayTime}");
+        //print($"{Time.unscaledTime}, {lastPlayTime}");
 
         if (Time.unscaledTime - lastPlayTime > minDelayBetweenPlays)
         {
-            print("OnPointerEnter Triggered");
+          //  print("OnPointerEnter Triggered");
             // buttonHoverSFX
-            print(FindObjectOfType<AudioManager>().buttonHoverSFX.nameOfSound);
+            //print(FindObjectOfType<AudioManager>().buttonHoverSFX.nameOfSound);
             FindObjectOfType<AudioManager>().PlaySoundInstantiate(FindObjectOfType<AudioManager>().buttonHoverSFX);
             lastPlayTime = Time.unscaledTime;
         }

@@ -1,0 +1,19 @@
+{
+    "items": [
+        {
+            "nameOfItem": "trail_runner",
+            "isPurchased": true,
+            "isEnabled": false
+        },
+        {
+            "nameOfItem": "speed_boost",
+            "isPurchased": true,
+            "isEnabled": false
+        },
+        {
+            "nameOfItem": "speed_penalty",
+            "isPurchased": true,
+            "isEnabled": false
+        }
+    ]
+}

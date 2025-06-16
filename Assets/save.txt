@@ -1,1 +1,1 @@
-{"candyAmount":121}
+{"candyAmount":6716}
