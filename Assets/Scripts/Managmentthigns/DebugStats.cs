@@ -5,5 +5,5 @@ using UnityEngine;
 public class DebugStats
 {
     public int candyAmount = 0;
-
+    public int skinNumber = 0;
 }

@@ -38,9 +38,12 @@ public class DebugStore : MonoBehaviour
 
     public string saveLocation = Application.dataPath + "/save.txt";
     public string shopItemLocation = Application.dataPath + "/shopItem.txt";
+    public string skinLocation = Application.dataPath + "/skin.txt";
 
 
     public PlayerManager playerManager;
+    public CandyManager candyManager;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -61,7 +64,19 @@ public class DebugStore : MonoBehaviour
         //DebugStats debugStatsLoaded = JsonUtility.FromJson<DebugStats>(json);
         //print(debugStatsLoaded.candyAmount);
     }
-
+    public void PopulateDictionary()
+    {
+        functionDictionary = new Dictionary<string, Action<bool>>()
+        {
+            {"trail_runner", TrailRunner},
+            {"speed_boost", IncreasePlayerSpeed},
+            {"speed_penalty", DecreasePlayerSpeed},
+            {"dash_distance_increase", IncreasePlayerDashDistance},
+            {"dash_distance_decrease", DecreasePlayerDashDistance},
+            {"candy_outline", ChangeCandyOutline},
+            {"skin_random", ChangePlayerSkin},
+        };
+    }
     public void SetVariables()
     {
         debugStore = this;
@@ -85,33 +100,32 @@ public class DebugStore : MonoBehaviour
         DebugStats debugStatsToSave;
         if (debugStatsLocal == null)
         {
-             debugStatsToSave = new DebugStats { candyAmount = 0 };
+             debugStatsToSave = new DebugStats { candyAmount = 0, skinNumber = 0};
 
         }
         else
         {
-             debugStatsToSave = new DebugStats { candyAmount = debugStatsLocal.candyAmount };
+             debugStatsToSave = new DebugStats { candyAmount = debugStatsLocal.candyAmount, skinNumber = playerManager.skinNumber};
 
         }
 
         string json = JsonUtility.ToJson(debugStatsToSave);
 
         File.WriteAllText(saveLocation, json);
-        print(json);
+ 
     }
 
     public void LoadCandyData()
     {
         if (!File.Exists(saveLocation))
         {
-            print("Doesn't exist!");
             // if we don't have a save yet, make one
             SaveCandyData();
         }
         string saveString = File.ReadAllText(saveLocation);
 
         debugStatsLocal = JsonUtility.FromJson<DebugStats>(saveString);
-        print(debugStatsLocal.candyAmount);
+       
         TriggerEventListener();
     }
 
@@ -345,6 +359,7 @@ public class DebugStore : MonoBehaviour
             return false;
         }
     }
+
     public void PurchaseSomething(ShopItemData itemData)
     {
         // called by the shop button
@@ -378,24 +393,17 @@ public class DebugStore : MonoBehaviour
         LoadAllButtons();
     }
 
-    public void PopulateDictionary()
-    {
-        functionDictionary = new Dictionary<string, Action<bool>>()
-        {
-            { "trail_runner", TrailRunner},
-            {"speed_boost", IncreasePlayerSpeed},
-            {"speed_penalty", DecreasePlayerSpeed}
-        };
-    }
+
 
     public void TriggerAllItems()
     {
-        // if we aren't supposed to trigger the effects (only not in main menu) then don't trigger
-        if (!shouldTriggerEffects)
-        {
-            print("failewd to trigger effects");
-            return;
-        }
+        //// if we aren't supposed to trigger the effects (only not in main menu) then don't trigger
+        //if (!shouldTriggerEffects)
+        //{
+        //    ChangePlayerSkin()
+        //    print("failewd to trigger effects");
+        //    return;
+        //}
         print("triggered all effects");
         string saveString = File.ReadAllText(shopItemLocation);
 
@@ -553,4 +561,97 @@ public class DebugStore : MonoBehaviour
 
     }
 
+    public void IncreasePlayerDashDistance(bool state)
+    {
+        if (state)
+        {
+            DisableOtherItem("dash_distance_decrease");
+        }
+
+        if (!shouldTriggerEffects)
+            return;
+
+        if (!CheckIfItemIsEnabled("dash_distance_decrease"))
+        {
+            playerManager.IncreaseDashDistance(state);
+        }
+    }
+
+    public void DecreasePlayerDashDistance(bool state)
+    {
+        // if true then disable speed boost
+        if (state)
+        {
+            DisableOtherItem("dash_distance_increase");
+        }
+
+        // if we aren't supposed to trigger effects then stop
+        if (!shouldTriggerEffects)
+        {
+            return;
+        }
+
+        // if speed is enabled then don't continue
+        if (!CheckIfItemIsEnabled("dash_distance_increase"))
+        {
+            playerManager.DecreaseDashDistance(state);
+        }
+    }
+
+    public void ChangeCandyOutline(bool state)
+    {        
+        // if we aren't supposed to trigger effects then stop
+        if (!shouldTriggerEffects)
+        {
+            return;
+        }
+        candyManager.ChangeOutline(state);
+
+    }
+
+    public void ChangePlayerSkin(bool state)
+    {
+        if (state)
+        {
+            // if on default then change to something else
+            if (debugStatsLocal.skinNumber == 0)
+            {
+                debugStatsLocal.skinNumber = UnityEngine.Random.Range(1, playerManager.skinObjects.Count);
+           
+            }
+            print($"current skin: {debugStatsLocal.skinNumber}");
+            playerManager.EnableSkin(debugStatsLocal.skinNumber);
+        }
+        else
+        {
+            int oldNum = debugStatsLocal.skinNumber;
+            debugStatsLocal.skinNumber = UnityEngine.Random.Range(1, playerManager.skinObjects.Count);
+
+            if (oldNum == debugStatsLocal.skinNumber)
+            {
+                // go down a skin if we rolled the same one (alows the OG demon skin
+                debugStatsLocal.skinNumber--;
+            }
+            // set to default skin
+            print($"current skin: {debugStatsLocal.skinNumber}");
+            playerManager.EnableSkin(0);
+
+
+        }
+
+        SaveCandyData(); // saves skin number 
+
+    }
+
+    // other ideas for debug stuff:
+    /*
+     Bigger outline for candy
+    Bigger outline for player
+    Change transition time?
+    Increase/Decrease dash distance
+    Bounce pad going higher?
+    Jump higher
+
+
+    */
 }

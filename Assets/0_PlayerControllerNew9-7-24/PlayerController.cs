@@ -145,7 +145,8 @@ public class PlayerController : MonoBehaviour
     public GameObject bounceDirectionObj;
     public float bouncePower;
 
-    public float speedWalkHolder, speedSprintHolder;
+    public float speedWalkHolder, speedSprintHolder, jumpHeightHolder, jumpHoldTimeHolder, jumpBufferTimeHolder;
+    public float gravityHolder, dashSpeedHolder, dashDurationHolder, dashRechargeTimeHolder;
 
     public Coroutine speedCoroutine;
 
@@ -203,8 +204,25 @@ public class PlayerController : MonoBehaviour
 
         // turns on all general canvas that holds all player ui (they can be disabled indiviually)
         playerCanvasAnimator.SetTrigger("On");
+
+        AssignHolderVariables();
+
+    }
+
+    public void AssignHolderVariables()
+    {
         speedWalkHolder = WalkSpeed;
         speedSprintHolder = SprintSpeed;
+
+        jumpHeightHolder = JumpHeight;
+        jumpHoldTimeHolder = jumpTimeHold;
+        jumpBufferTimeHolder = timeToHoldJumpBufferMax;
+
+        gravityHolder = Gravity;
+
+        dashSpeedHolder = dashSpeed;
+        dashDurationHolder = dashDuration;
+        dashRechargeTimeHolder = dashRechargeTime;
     }
 
     public void GainPlayerControl()

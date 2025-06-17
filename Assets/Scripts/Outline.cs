@@ -61,7 +61,7 @@ public class Outline : MonoBehaviour {
 
   [SerializeField, Range(0f, 100f)]
     public float outlineWidthCurrent = 2; /// added, replaces old one same thing but now we can change this one
-    public float outlineWidth = 2f;
+    public float outlineWidth = 2f, outlineWidthHolder = 2f;
     public float distanceFromCamera;
     public float distanceRemoveOffSetMultiplier = 2.0f;
     public bool shouldChange = true;
@@ -94,7 +94,7 @@ public class Outline : MonoBehaviour {
 
     outlineMaskMaterial.name = "OutlineMask (Instance)";
     outlineFillMaterial.name = "OutlineFill (Instance)";
-
+        outlineWidthHolder = outlineWidthCurrent;
     // Retrieve or generate smooth normals
     LoadSmoothNormals();
 
@@ -332,4 +332,17 @@ public class Outline : MonoBehaviour {
         break;
     }
   }
+
+
+
+    public void ChangeOutlineVisible()
+    {
+        outlineMode = Mode.OutlineVisible;
+    }
+
+    public void ChangeOutlineAll()
+    {
+        outlineMode = Mode.OutlineAll;
+    }
+
 }
