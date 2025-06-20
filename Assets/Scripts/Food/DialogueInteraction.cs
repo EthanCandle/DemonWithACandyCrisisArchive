@@ -124,7 +124,7 @@ public class DialogueInteraction : MonoBehaviour
                 if (shouldKillSelfAtEnd)
                 {
                     isDead = true;
-                    Destroy(gameObject, 5f);
+                    Destroy(gameObject, 3f);
                 }
             }
             return;

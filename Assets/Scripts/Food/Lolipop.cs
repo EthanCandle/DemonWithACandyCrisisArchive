@@ -41,6 +41,8 @@ public class Lolipop : MonoBehaviour
         PlaySoundEffect();
         SpawnParticle();
         Destroy(gameObject);
+
+        PlayerDebugStatsGlobalManager.Instance.dataLocal.candyCollectedDuringRun++;
     }
 
     public void SpawnParticle()

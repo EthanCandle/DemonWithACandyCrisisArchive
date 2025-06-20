@@ -145,6 +145,7 @@ MonoBehaviour:
   outlineColor: {r: 0, g: 0, b: 0, a: 1}
   outlineWidthCurrent: 2
   outlineWidth: 2
+  outlineWidthHolder: 2
   distanceFromCamera: 0
   distanceRemoveOffSetMultiplier: 2
   shouldChange: 1
@@ -892,6 +893,7 @@ MonoBehaviour:
   outlineColor: {r: 1, g: 0, b: 0, a: 1}
   outlineWidthCurrent: 2
   outlineWidth: 2
+  outlineWidthHolder: 2
   distanceFromCamera: 0
   distanceRemoveOffSetMultiplier: 2
   shouldChange: 1
@@ -4107,6 +4109,7 @@ MonoBehaviour:
   outlineColor: {r: 0, g: 0, b: 0, a: 1}
   outlineWidthCurrent: 2
   outlineWidth: 2
+  outlineWidthHolder: 2
   distanceFromCamera: 0
   distanceRemoveOffSetMultiplier: 2
   shouldChange: 1
@@ -8960,6 +8963,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2929367292997026496, guid: 340929fbfe77a1b439c4cddf4cde7c52,
     type: 3}
   m_PrefabInstance: {fileID: 784643289}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &798829555 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 8420167570392222347, guid: 908c0ef3aa2249440a20fdd225dabd80,
+    type: 3}
+  m_PrefabInstance: {fileID: 6658642913964489571}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &817789666
 GameObject:
@@ -50327,6 +50336,7 @@ MonoBehaviour:
   outlineColor: {r: 1, g: 0, b: 0, a: 1}
   outlineWidthCurrent: 2
   outlineWidth: 2
+  outlineWidthHolder: 2
   distanceFromCamera: 0
   distanceRemoveOffSetMultiplier: 2
   shouldChange: 1
@@ -52272,12 +52282,12 @@ PrefabInstance:
     - target: {fileID: 5161285370465794090, guid: 908c0ef3aa2249440a20fdd225dabd80,
         type: 3}
       propertyPath: dialougeToShowNormal.Array.data[1].dialogueText
-      value: This level has some steep platforms
+      value: Open up the Debug Store in the pause menu to buy perks
       objectReference: {fileID: 0}
     - target: {fileID: 5161285370465794090, guid: 908c0ef3aa2249440a20fdd225dabd80,
         type: 3}
       propertyPath: dialougeToShowNormal.Array.data[2].dialogueText
-      value: The lolipops are optional for this level
+      value: You can access the store anytime when paused or in the main menu
       objectReference: {fileID: 0}
     - target: {fileID: 5161285370465794090, guid: 908c0ef3aa2249440a20fdd225dabd80,
         type: 3}
@@ -52286,17 +52296,38 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5161285370465794090, guid: 908c0ef3aa2249440a20fdd225dabd80,
         type: 3}
+      propertyPath: dialougeToShowNormal.Array.data[4].dialogueText
+      value: I'll see you in level 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5161285370465794090, guid: 908c0ef3aa2249440a20fdd225dabd80,
+        type: 3}
+      propertyPath: dialougeToShowNormal.Array.data[4].dialogueAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 6b21ed5aaf535e64485a7a9e13704551,
+        type: 2}
+    - target: {fileID: 5161285370465794090, guid: 908c0ef3aa2249440a20fdd225dabd80,
+        type: 3}
+      propertyPath: dialougeToShowNormal.Array.data[4].objectAnimator
+      value: 
+      objectReference: {fileID: 798829555}
+    - target: {fileID: 5161285370465794090, guid: 908c0ef3aa2249440a20fdd225dabd80,
+        type: 3}
       propertyPath: dialougeToShowNormal.Array.data[0].AnimationToPlayName
-      value: Open
+      value: Idle
       objectReference: {fileID: 0}
     - target: {fileID: 5161285370465794090, guid: 908c0ef3aa2249440a20fdd225dabd80,
         type: 3}
       propertyPath: dialougeToShowNormal.Array.data[2].AnimationToPlayName
-      value: Close
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 5161285370465794090, guid: 908c0ef3aa2249440a20fdd225dabd80,
         type: 3}
       propertyPath: dialougeToShowNormal.Array.data[3].AnimationToPlayName
+      value: Close
+      objectReference: {fileID: 0}
+    - target: {fileID: 5161285370465794090, guid: 908c0ef3aa2249440a20fdd225dabd80,
+        type: 3}
+      propertyPath: dialougeToShowNormal.Array.data[4].AnimationToPlayName
       value: Close
       objectReference: {fileID: 0}
     - target: {fileID: 5161285370465794090, guid: 908c0ef3aa2249440a20fdd225dabd80,
@@ -52307,11 +52338,16 @@ PrefabInstance:
     - target: {fileID: 5161285370465794090, guid: 908c0ef3aa2249440a20fdd225dabd80,
         type: 3}
       propertyPath: dialougeToShowNormal.Array.data[2].shouldTransitionToThisAnimation
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5161285370465794090, guid: 908c0ef3aa2249440a20fdd225dabd80,
         type: 3}
       propertyPath: dialougeToShowNormal.Array.data[3].shouldTransitionToThisAnimation
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5161285370465794090, guid: 908c0ef3aa2249440a20fdd225dabd80,
+        type: 3}
+      propertyPath: dialougeToShowNormal.Array.data[4].shouldTransitionToThisAnimation
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5161285370465794090, guid: 908c0ef3aa2249440a20fdd225dabd80,
@@ -52326,12 +52362,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5161285370465794090, guid: 908c0ef3aa2249440a20fdd225dabd80,
         type: 3}
+      propertyPath: dialougeToShowNormal.Array.data[4].functionToCall.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5161285370465794090, guid: 908c0ef3aa2249440a20fdd225dabd80,
+        type: 3}
       propertyPath: dialougeToShowNormal.Array.data[3].functionToCall.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5161285370465794090, guid: 908c0ef3aa2249440a20fdd225dabd80,
         type: 3}
+      propertyPath: dialougeToShowNormal.Array.data[4].functionToCall.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5161285370465794090, guid: 908c0ef3aa2249440a20fdd225dabd80,
+        type: 3}
       propertyPath: dialougeToShowNormal.Array.data[3].functionToCall.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 6658642913964489574}
+    - target: {fileID: 5161285370465794090, guid: 908c0ef3aa2249440a20fdd225dabd80,
+        type: 3}
+      propertyPath: dialougeToShowNormal.Array.data[4].functionToCall.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 6658642913964489574}
     - target: {fileID: 5161285370465794090, guid: 908c0ef3aa2249440a20fdd225dabd80,
@@ -52346,7 +52397,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5161285370465794090, guid: 908c0ef3aa2249440a20fdd225dabd80,
         type: 3}
+      propertyPath: dialougeToShowNormal.Array.data[4].functionToCall.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5161285370465794090, guid: 908c0ef3aa2249440a20fdd225dabd80,
+        type: 3}
       propertyPath: dialougeToShowNormal.Array.data[3].functionToCall.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Teleport
+      objectReference: {fileID: 0}
+    - target: {fileID: 5161285370465794090, guid: 908c0ef3aa2249440a20fdd225dabd80,
+        type: 3}
+      propertyPath: dialougeToShowNormal.Array.data[4].functionToCall.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: Teleport
       objectReference: {fileID: 0}
     - target: {fileID: 5161285370465794090, guid: 908c0ef3aa2249440a20fdd225dabd80,
@@ -52356,7 +52417,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5161285370465794090, guid: 908c0ef3aa2249440a20fdd225dabd80,
         type: 3}
+      propertyPath: dialougeToShowNormal.Array.data[4].functionToCall.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: BGTeleport, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5161285370465794090, guid: 908c0ef3aa2249440a20fdd225dabd80,
+        type: 3}
       propertyPath: dialougeToShowNormal.Array.data[3].functionToCall.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 5161285370465794090, guid: 908c0ef3aa2249440a20fdd225dabd80,
+        type: 3}
+      propertyPath: dialougeToShowNormal.Array.data[4].functionToCall.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 6000501134516398997, guid: 908c0ef3aa2249440a20fdd225dabd80,

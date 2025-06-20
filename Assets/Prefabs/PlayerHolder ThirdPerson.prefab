@@ -609,6 +609,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f30f9283b1410447bf3db3004de199c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isInMainMenu: 0
   playerController: {fileID: 0}
   trialRunner: {fileID: 5592700083964832999}
   skinCurrent: {fileID: 0}
@@ -3611,7 +3612,7 @@ Transform:
   m_GameObject: {fileID: 3217460797952865927}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -2.975, z: 359.45276}
+  m_LocalPosition: {x: 0, y: 1.5250001, z: -8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -5382,7 +5383,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &6912681316985387733
 RectTransform:
   m_ObjectHideFlags: 0

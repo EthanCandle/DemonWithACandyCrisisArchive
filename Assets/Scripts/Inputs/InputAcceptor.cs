@@ -10,7 +10,7 @@ public class InputAcceptor : MonoBehaviour
 {
     /*
       * This is a script that you attach to any object, and requires 3 textObjects
-      *  - (0) Canvas
+      *  - (0) Canvas 
       *      - Purpose: Holds the next 4 objects within it as it direct children
       *  - (1) ShownText object: 
       *      - Purpose: Shows the text to the player in a default color

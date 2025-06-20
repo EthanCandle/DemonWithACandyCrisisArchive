@@ -7,17 +7,27 @@ using UnityEngine.SceneManagement;
 public class MainMenu : MonoBehaviour
 {
     public LevelTransitionManager levelTransition;
+    public PlayerDebugStatsGlobalManager playerStatManager;
 
     public GameObject confirmationPopup;
     private void Start()
     {
         levelTransition = GameObject.FindGameObjectWithTag("Transition").GetComponent<LevelTransitionManager>();
+        playerStatManager = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<PlayerDebugStatsGlobalManager>();
+
     }
 
 
-    public void PlayGame ()
+    public void PlayGame () // new game
     {
+        
         levelTransition.MoveToDifferentLevel(SceneManager.GetActiveScene().buildIndex +1);
+    }
+
+    public void PlayGameContinue()
+    {
+
+        levelTransition.MoveToDifferentLevel(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
     public void ResetLevel()
@@ -64,7 +74,7 @@ public class MainMenu : MonoBehaviour
     }
 
 
-    public void SpawnConfirmationPopup(Action onYes)
+    public void SpawnConfirmationPopup(Action onYes, bool shouldKillSelf = false)
     {
         // action is the function itself
         GameObject popUp = Instantiate(confirmationPopup, confirmationPopup.transform.position, confirmationPopup.transform.rotation);

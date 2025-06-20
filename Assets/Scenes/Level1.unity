@@ -2598,6 +2598,7 @@ MonoBehaviour:
   outlineColor: {r: 1, g: 0, b: 0, a: 1}
   outlineWidthCurrent: 2
   outlineWidth: 2
+  outlineWidthHolder: 2
   distanceFromCamera: 0
   distanceRemoveOffSetMultiplier: 2
   shouldChange: 1
@@ -6777,7 +6778,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
     objectAnimator: {fileID: 1896852945}
-    AnimationToPlayName: Idle
+    AnimationToPlayName: 
     shouldTransitionToThisAnimation: 0
   - dialogueAsset: {fileID: 11400000, guid: 6b21ed5aaf535e64485a7a9e13704551, type: 2}
     dialogueText: '*monch*...*monch*...*monch*...'
@@ -6813,11 +6814,11 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
     objectAnimator: {fileID: 1896852945}
-    AnimationToPlayName: Idle
+    AnimationToPlayName: 
     shouldTransitionToThisAnimation: 0
   dialougeToShowFinished:
   - dialogueAsset: {fileID: 11400000, guid: 6b21ed5aaf535e64485a7a9e13704551, type: 2}
-    dialogueText: Go on into the door to the next level.
+    dialogueText: Go on into the door to the next level, you'll see me there :).
     functionToCall:
       m_PersistentCalls:
         m_Calls: []
@@ -14472,6 +14473,7 @@ MonoBehaviour:
   outlineColor: {r: 0, g: 0, b: 0, a: 1}
   outlineWidthCurrent: 2
   outlineWidth: 2
+  outlineWidthHolder: 2
   distanceFromCamera: 0
   distanceRemoveOffSetMultiplier: 2
   shouldChange: 1
@@ -14494,6 +14496,7 @@ MonoBehaviour:
   outlineColor: {r: 1, g: 0, b: 0, a: 1}
   outlineWidthCurrent: 2
   outlineWidth: 2
+  outlineWidthHolder: 2
   distanceFromCamera: 0
   distanceRemoveOffSetMultiplier: 2
   shouldChange: 1
@@ -44301,6 +44304,7 @@ MonoBehaviour:
   outlineColor: {r: 0, g: 0, b: 0, a: 1}
   outlineWidthCurrent: 2
   outlineWidth: 2
+  outlineWidthHolder: 2
   distanceFromCamera: 0
   distanceRemoveOffSetMultiplier: 2
   shouldChange: 1
@@ -44323,6 +44327,7 @@ MonoBehaviour:
   outlineColor: {r: 1, g: 0, b: 0, a: 1}
   outlineWidthCurrent: 2
   outlineWidth: 2
+  outlineWidthHolder: 2
   distanceFromCamera: 0
   distanceRemoveOffSetMultiplier: 2
   shouldChange: 1

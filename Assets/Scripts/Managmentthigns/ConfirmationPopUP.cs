@@ -31,7 +31,7 @@ public class ConfirmationPopUP : MonoBehaviour
         yesButton.onClick.AddListener(() =>
         {
             onYesAction?.Invoke();
-            CloseOnYes();
+            CloseOnNo();
         });
 
     }

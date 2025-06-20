@@ -43,7 +43,7 @@ public class DebugStore : MonoBehaviour
 
     public PlayerManager playerManager;
     public CandyManager candyManager;
-
+    public MainMenu mainMenuScript;
     // Start is called before the first frame update
     void Start()
     {
@@ -131,15 +131,36 @@ public class DebugStore : MonoBehaviour
 
     public void DeleteData()
     {
-        if (!File.Exists(saveLocation))
+        if (mainMenuScript)
         {
-            print("Doesn't exist!");
-            return;
+            mainMenuScript.SpawnConfirmationPopup(DeleteDataLogic);
+        }
+        else
+        {
+            print("No main menu to spawn are you sure, still deleteing data");
+            DeleteDataLogic();
         }
 
         // delete
     }
     
+    public void DeleteDataLogic()
+    {
+        // deletes all the files save, but then adds them back with the default settings
+        print("deleted everything");
+        if (File.Exists(saveLocation))
+        {
+            File.Delete(saveLocation);
+
+        }
+        if (File.Exists(shopItemLocation))
+        {
+            File.Delete(shopItemLocation);
+        }
+        LoadCandyData(); // saves and loads
+        TriggerAllItems(); // makes everything remove itself and it does it
+
+    }
     public void ToggleOptionsMenu()
     {
         if (isInDebugStore)
@@ -237,7 +258,7 @@ public class DebugStore : MonoBehaviour
         }
         string json = JsonUtility.ToJson(shopItemCollectionLocal, true);
 
-        print("Saved file");
+
         File.WriteAllText(shopItemLocation, json);
     }
 
@@ -248,13 +269,13 @@ public class DebugStore : MonoBehaviour
    
         if (!File.Exists(shopItemLocation))
         {
-            print("Button save Doesn't exist!");
+
             // if we don't have a save yet, make one
             SaveAllButtons();
         }
         else
         {
-            print("Button save does exist!");
+
         }
         string saveString = File.ReadAllText(shopItemLocation);
 
@@ -292,7 +313,7 @@ public class DebugStore : MonoBehaviour
         // purchased -> enabled = green, disabled = red
         // not purchased -> can afford = white, can't afford = grey
         //        
-        print($"{itemData.nameOfItem}, {itemData.isPurchased},{itemData.isEnabled}");
+       // print($"{itemData.nameOfItem}, {itemData.isPurchased},{itemData.isEnabled}");
         if (itemData.isPurchased)
         {
             if (itemData.isEnabled)
@@ -371,7 +392,7 @@ public class DebugStore : MonoBehaviour
         // needs to disable being able to purchase the item again, should grey it out or x
         if (itemData.isPurchased)
         {
-            print("Already purchased");
+            //print("Already purchased");
 
             // if the button it clicked then we change enable/disable
             ToggleEnable(itemData);
@@ -601,10 +622,6 @@ public class DebugStore : MonoBehaviour
     public void ChangeCandyOutline(bool state)
     {        
         // if we aren't supposed to trigger effects then stop
-        if (!shouldTriggerEffects)
-        {
-            return;
-        }
         candyManager.ChangeOutline(state);
 
     }
@@ -619,21 +636,19 @@ public class DebugStore : MonoBehaviour
                 debugStatsLocal.skinNumber = UnityEngine.Random.Range(1, playerManager.skinObjects.Count);
            
             }
-            print($"current skin: {debugStatsLocal.skinNumber}");
+
             playerManager.EnableSkin(debugStatsLocal.skinNumber);
         }
         else
         {
-            int oldNum = debugStatsLocal.skinNumber;
-            debugStatsLocal.skinNumber = UnityEngine.Random.Range(1, playerManager.skinObjects.Count);
+            debugStatsLocal.skinNumber += 1;
 
-            if (oldNum == debugStatsLocal.skinNumber)
+            if(debugStatsLocal.skinNumber >= playerManager.skinObjects.Count)
             {
-                // go down a skin if we rolled the same one (alows the OG demon skin
-                debugStatsLocal.skinNumber--;
+
+                debugStatsLocal.skinNumber = 1;
             }
             // set to default skin
-            print($"current skin: {debugStatsLocal.skinNumber}");
             playerManager.EnableSkin(0);
 
 
@@ -642,6 +657,44 @@ public class DebugStore : MonoBehaviour
         SaveCandyData(); // saves skin number 
 
     }
+
+    //public void ChangePlayerSkin(bool state)
+    //{
+    //    if (state)
+    //    {
+    //        // if on default then change to something else
+    //        if (debugStatsLocal.skinNumber == 0)
+    //        {
+    //            debugStatsLocal.skinNumber = UnityEngine.Random.Range(1, playerManager.skinObjects.Count);
+
+    //        }
+
+    //        playerManager.EnableSkin(debugStatsLocal.skinNumber);
+    //    }
+    //    else
+    //    {
+    //        int oldNum = debugStatsLocal.skinNumber;
+    //        debugStatsLocal.skinNumber = UnityEngine.Random.Range(1, playerManager.skinObjects.Count);
+    //        print($"{oldNum}, {debugStatsLocal.skinNumber}");
+    //        if (oldNum == debugStatsLocal.skinNumber)
+    //        {
+
+    //            // go down a skin if we rolled the same one (alows the OG demon skin
+    //            debugStatsLocal.skinNumber--;
+    //            if (debugStatsLocal.skinNumber == 0)
+    //            {
+    //                debugStatsLocal.skinNumber = 2;
+    //            }
+    //        }
+    //        // set to default skin
+    //        playerManager.EnableSkin(0);
+
+
+    //    }
+
+    //    SaveCandyData(); // saves skin number 
+
+    //}
 
     // other ideas for debug stuff:
     /*

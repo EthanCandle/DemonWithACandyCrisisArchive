@@ -37,8 +37,8 @@ public class PlayerManager : MonoBehaviour
     {
         if (state)
         {
-            playerController.SprintSpeed = playerController.speedSprintHolder * 1.5f;
-            playerController.WalkSpeed = playerController.speedWalkHolder * 1.5f;
+            playerController.SprintSpeed = playerController.speedSprintHolder * 2f;
+            playerController.WalkSpeed = playerController.speedWalkHolder * 2f;
 
         }
         else
@@ -67,7 +67,7 @@ public class PlayerManager : MonoBehaviour
     {
         if (state)
         {
-            playerController.dashSpeed = playerController.dashSpeedHolder * 1.5f;
+            playerController.dashSpeed = playerController.dashSpeedHolder * 2f;
         }
         else
         {

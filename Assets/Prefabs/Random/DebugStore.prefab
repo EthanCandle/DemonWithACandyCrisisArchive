@@ -149,7 +149,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nameOfItem: trail_runner
-  costOfItem: 30
+  costOfItem: 15
   isPurchased: 0
   isEnabled: 0
   button: {fileID: 94483618259200329}
@@ -316,7 +316,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nameOfItem: dash_distance_decrease
-  costOfItem: 40
+  costOfItem: 5
   isPurchased: 0
   isEnabled: 0
   button: {fileID: 137004527565519097}
@@ -753,7 +753,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nameOfItem: skin_random
-  costOfItem: 12
+  costOfItem: 20
   isPurchased: 0
   isEnabled: 0
   button: {fileID: 1713290552026542263}
@@ -1055,7 +1055,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nameOfItem: speed_penalty
-  costOfItem: 40
+  costOfItem: 5
   isPurchased: 0
   isEnabled: 0
   button: {fileID: 2189436875981722833}
@@ -1357,7 +1357,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nameOfItem: speed_boost
-  costOfItem: 12
+  costOfItem: 30
   isPurchased: 0
   isEnabled: 0
   button: {fileID: 2479847392040531956}
@@ -1403,6 +1403,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 3237020712245977713}
   - {fileID: 2709080990296081651}
   - {fileID: 1881621162016975034}
   - {fileID: 2256329062977166888}
@@ -1713,11 +1714,11 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 686280681152400271}
+  m_Father: {fileID: 5896535503325733764}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.000030517578, y: 1080}
+  m_AnchoredPosition: {x: 0.000030517578, y: -0.00012207031}
   m_SizeDelta: {x: 1820, y: 980}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4193743054531103612
@@ -1831,7 +1832,6 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 3237020712245977713}
   - {fileID: 1973535690730597646}
   - {fileID: 5896535503325733764}
   m_Father: {fileID: 0}
@@ -1878,6 +1878,7 @@ MonoBehaviour:
   skinLocation: E:/0_Things/Unity/TypingGameWithPlayControllerItchio/Assets/skin.txt
   playerManager: {fileID: 0}
   candyManager: {fileID: 3817038305020016882}
+  mainMenuScript: {fileID: 0}
 --- !u!114 &3817038305020016882
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2062,7 +2063,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nameOfItem: candy_outline
-  costOfItem: 30
+  costOfItem: 1
   isPurchased: 0
   isEnabled: 0
   button: {fileID: 4145096536096985918}
@@ -3249,7 +3250,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nameOfItem: dash_distance_increase
-  costOfItem: 40
+  costOfItem: 45
   isPurchased: 0
   isEnabled: 0
   button: {fileID: 7586531108061396661}

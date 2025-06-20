@@ -24,9 +24,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Level5House.unity
     guid: bf36cb01a13407d4ea062022f491b6a2
   - enabled: 1
-    path: Assets/Scenes/LevelzScrap1MusicLevel.unity
-    guid: 53e13a7f286179a439accdc6d6afade6
-  - enabled: 0
-    path: Assets/Scenes/Level1Backup.unity
-    guid: 430dc98842b6d9f4993af9995310940c
+    path: Assets/Scenes/Level0 MainMenu 1.unity
+    guid: ab2717d69fa66af4fadfe43ac3a17c1a
   m_configObjects: {}

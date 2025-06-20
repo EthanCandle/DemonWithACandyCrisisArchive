@@ -639,6 +639,7 @@ public class PlayerController : MonoBehaviour
                 groundedOnceCheck = false;
                 _input.jump = false;
                 isJumping = true;
+                PlayerDebugStatsGlobalManager.Instance.dataLocal.amountPlayerJumps++;
             }
             else
             {
@@ -675,6 +676,7 @@ public class PlayerController : MonoBehaviour
                 groundedOnceCheck = false;
                 _input.jump = false;
                 isJumping = true;
+                PlayerDebugStatsGlobalManager.Instance.dataLocal.amountPlayerJumps++;
             }
 
             if (_hasAnimator)
@@ -935,6 +937,7 @@ public class PlayerController : MonoBehaviour
         dashRechargeCurrent = 0;
         // need to call deplete
         dashSlider.DepleteSlider();
+        PlayerDebugStatsGlobalManager.Instance.dataLocal.amountPlayerDashes++;
     }
 
     public void SetRechargeRate()
