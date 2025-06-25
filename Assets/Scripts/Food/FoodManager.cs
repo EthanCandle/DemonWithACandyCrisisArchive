@@ -29,6 +29,7 @@ public class FoodManager : MonoBehaviour
 
     public void CollectNormalCandy()
     {
+        PlayerDebugStatsGlobalManager.Instance.DataIncreaseCandy();
         candyToCollectTotal += 1;
         UpdateUI();
         if (candyToCollectTotal >= candyToCollectNeeded)
@@ -41,7 +42,7 @@ public class FoodManager : MonoBehaviour
     // probally wont need if going for a shop/collectable, but maybe for a trigger for teh door to be playable
     public void FinishCollecting()
     {
-        print("Finished collecting food, door is now interactable");
+       // print("Finished collecting food, door is now interactable");
         // doorObject.GetComponent<DialogueInteraction>().TurnOnAbleToTalkTo(); // makes the girl able to be opened
         objectToBecomeInteractable.GetComponent<DialogueInteraction>().TurnOnAbleToTalkTo();
     }

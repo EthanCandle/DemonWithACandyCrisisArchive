@@ -1,5 +1,75 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1675912570863762421
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3953641990992529816}
+  - component: {fileID: 8241183584483586780}
+  - component: {fileID: 4672132828688205052}
+  m_Layer: 0
+  m_Name: PlayerStatsManager
+  m_TagString: PlayerStats
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3953641990992529816
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1675912570863762421}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1946101926341785207}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8241183584483586780
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1675912570863762421}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dfe13c9299736ff44b9e5e08db95050e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dataLocal:
+    hasBeatenGame: 0
+    isInMainRun: 1
+    levelCurrentlyOnMainRun: 0
+    amountPlayerJumps: 0
+    amountPlayerDashes: 0
+    amountPlayerDies: 0
+    amountPlayerCandy: 0
+    fastestTimeToCompleteGame: 0
+    fastestLevelTimes: []
+  savePath: 
+--- !u!114 &4672132828688205052
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1675912570863762421}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0291791c1199674491f67bcb810773f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeCurrent: 0
+  isRunning: 1
 --- !u!1 &4763647196156443463
 GameObject:
   m_ObjectHideFlags: 0
@@ -10,7 +80,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1946101926341785207}
   - component: {fileID: 4338683139242813201}
-  - component: {fileID: 3474905429477036218}
   m_Layer: 0
   m_Name: AudioManager
   m_TagString: AudioManager
@@ -30,7 +99,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 3953641990992529816}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4338683139242813201
@@ -76,15 +146,3 @@ MonoBehaviour:
   - {fileID: 24300002, guid: e5c64160d8db3d54181c92225215f2b8, type: 2}
   - {fileID: 24300002, guid: ef51af42d9e1d40499e7ccd432289a0c, type: 2}
   inMainMenuFirstTime: 1
---- !u!114 &3474905429477036218
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4763647196156443463}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dfe13c9299736ff44b9e5e08db95050e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

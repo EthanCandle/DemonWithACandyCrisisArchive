@@ -20,19 +20,56 @@ public class MainMenu : MonoBehaviour
 
     public void PlayGame () // new game
     {
-        
-        levelTransition.MoveToDifferentLevel(SceneManager.GetActiveScene().buildIndex +1);
+        // done by nomal button
+        // reset and start timer
+        PlayerDebugStatsTimer.Instance.PauseTimer();
+        PlayerDebugStatsTimer.Instance.ResetTimer();
+        PlayerDebugStatsTimer.Instance.StartTimer();
+
+        PlayerDebugStatsGlobalManager.Instance.DataSetInMainGame(true);
+
+        // change this to be 
+        levelTransition.MoveToDifferentLevel(PlayerDebugStatsGlobalManager.Instance.DataGetLevelCount());
     }
 
     public void PlayGameContinue()
     {
+        // not used, might be if theres a continue button instead of just a play button
+        // just starts the timer
 
-        levelTransition.MoveToDifferentLevel(SceneManager.GetActiveScene().buildIndex + 1);
+        // ups the level count
+        PlayerDebugStatsGlobalManager.Instance.DataIncreaseLevelCount();
+
+        // called by the level transition
+        // return to main menu if its not in the main run
+        if (PlayerDebugStatsGlobalManager.Instance.dataLocal.isInMainRun)
+        {
+
+            // this should try to set the best time in the level select
+
+
+            levelTransition.MoveToDifferentLevel(SceneManager.GetActiveScene().buildIndex + 1);
+        }
+        else
+        {
+            // go back to main menu and reset the timer
+            BackToMainMenuLogic();
+            PlayerDebugStatsTimer.Instance.ResetTimer();
+            PlayerDebugStatsTimer.Instance.StartTimer();
+        }
+     
     }
 
     public void ResetLevel()
     {
-        // called by the button
+        // called by the button, should only reset time if not in main game
+        if (!PlayerDebugStatsGlobalManager.Instance.dataLocal.isInMainRun)
+        {
+            PlayerDebugStatsTimer.Instance.PauseTimer();
+            PlayerDebugStatsTimer.Instance.ResetTimer();
+            PlayerDebugStatsTimer.Instance.StartTimer();
+        }
+        // if in main run do nothing
         SpawnConfirmationPopup(ResetLevelLogic);
     }
 
@@ -49,11 +86,30 @@ public class MainMenu : MonoBehaviour
 
     public void BackToMainMenuLogic()
     {
+        // if in main run then save everything in timer, else stop
+        // called by main menu button, end game button should call something else
+
+        if (PlayerDebugStatsGlobalManager.Instance.dataLocal.isInMainRun)
+        {
+            PlayerDebugStatsGlobalManager.Instance.DataSetTimeCurrentToCompleteGame(PlayerDebugStatsTimer.Instance.GetTime());
+        }
+        PlayerDebugStatsTimer.Instance.PauseTimer();
+        PlayerDebugStatsTimer.Instance.ResetTimer();
         levelTransition.MoveToDifferentLevel(0);
     }
 
     public void PlayLevel(int levelToPlay)
     {
+        // called by level select buttons
+
+
+        // set main game to false and reset and start the timer
+        PlayerDebugStatsGlobalManager.Instance.DataSetInMainGame(false);
+        PlayerDebugStatsTimer.Instance.PauseTimer();
+        PlayerDebugStatsTimer.Instance.ResetTimer();
+        PlayerDebugStatsTimer.Instance.StartTimer();
+
+
         // called by pause menu button
         levelTransition.MoveToDifferentLevel(levelToPlay);
 

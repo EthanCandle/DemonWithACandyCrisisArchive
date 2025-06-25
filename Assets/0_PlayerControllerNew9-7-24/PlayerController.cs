@@ -344,12 +344,12 @@ public class PlayerController : MonoBehaviour
 
         if (Grounded && !lastCheckGrounded)
         {
-            print($"Ground: {Grounded}, LastGround: {lastCheckGrounded}");
+           // print($"Ground: {Grounded}, LastGround: {lastCheckGrounded}");
             FindObjectOfType<AudioManager>().PlaySoundInstantiate(landedSFX);
         }
         if (!Grounded && lastCheckGrounded)
         {
-            print($"Ground: {Grounded}, LastGround: {lastCheckGrounded}");
+           // print($"Ground: {Grounded}, LastGround: {lastCheckGrounded}");
 
         }
     }
@@ -545,7 +545,7 @@ public class PlayerController : MonoBehaviour
         // this prevents the player from hovering after leaving the ground assuming no slopes were detected
         if (Grounded == false && groundedOnceCheck && _verticalVelocity <= 0) // prevent stop jumping
         {
-            print("In grounded once check guard");
+           // print("In grounded once check guard");
             groundedOnceCheck = false;
             _verticalVelocity = fallSpeedInitial;
 
@@ -639,7 +639,7 @@ public class PlayerController : MonoBehaviour
                 groundedOnceCheck = false;
                 _input.jump = false;
                 isJumping = true;
-                PlayerDebugStatsGlobalManager.Instance.dataLocal.amountPlayerJumps++;
+                PlayerDebugStatsGlobalManager.Instance.DataIncreaseJumps();
             }
             else
             {
@@ -676,7 +676,7 @@ public class PlayerController : MonoBehaviour
                 groundedOnceCheck = false;
                 _input.jump = false;
                 isJumping = true;
-                PlayerDebugStatsGlobalManager.Instance.dataLocal.amountPlayerJumps++;
+                PlayerDebugStatsGlobalManager.Instance.DataIncreaseJumps();
             }
 
             if (_hasAnimator)
@@ -778,7 +778,7 @@ public class PlayerController : MonoBehaviour
     {
         speedCurrent = 0;
         _animator.SetFloat(_animIDSpeed, 0);
-        print(_animator.GetFloat(_animIDSpeed));
+        //print(_animator.GetFloat(_animIDSpeed));
     }
 
     // stops the jump and jump hold intputs from the input manager
@@ -937,7 +937,7 @@ public class PlayerController : MonoBehaviour
         dashRechargeCurrent = 0;
         // need to call deplete
         dashSlider.DepleteSlider();
-        PlayerDebugStatsGlobalManager.Instance.dataLocal.amountPlayerDashes++;
+        PlayerDebugStatsGlobalManager.Instance.DataIncreaseDash();
     }
 
     public void SetRechargeRate()

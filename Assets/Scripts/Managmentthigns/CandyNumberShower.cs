@@ -17,7 +17,7 @@ public class CandyNumberShower : MonoBehaviour
     }
     public void SetCandyAmount(int candyValue)
     {
-        print("In shower candy");
+        //print("In shower candy");
         candyAmount = candyValue;
         candyNumberText.text = candyAmount.ToString();
     }

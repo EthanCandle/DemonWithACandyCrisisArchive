@@ -20,7 +20,6 @@ public class ShopItemData : MonoBehaviour
 
         if (!isPurchased)
         {
-            print("Set text of cost");
             buttonText.text = costOfItem.ToString();
         }
 

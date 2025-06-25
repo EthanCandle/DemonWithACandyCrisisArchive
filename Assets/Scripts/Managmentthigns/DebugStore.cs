@@ -216,8 +216,8 @@ public class DebugStore : MonoBehaviour
         {
             // increment by 1 when collecting a candy
 
-            print("IN listener");
-            print(debugStatsLocal.candyAmount);
+           // print("IN listener");
+         //   print(debugStatsLocal.candyAmount);
             SetCandyAmount(debugStatsLocal.candyAmount);
         }
     }

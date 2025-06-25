@@ -212,7 +212,7 @@ public class AudioManager : MonoBehaviour
             songCurrentlyPlaying.volume -= fadeInOutSpeed * Time.unscaledDeltaTime;
             if (songCurrentlyPlaying.volume <= 0)
             {
-                print("Fully faded");
+               // print("Fully faded");
                 shouldFadeOut = false;
                 songCurrentlyPlaying.Stop();
             }
@@ -233,10 +233,10 @@ public class AudioManager : MonoBehaviour
 
     public void GetTransitionSpeed()
     {
-        print(songVolumeMax);
+       // print(songVolumeMax);
         songVolumeMax = songCurrentlyPlaying.volume;
         fadeInOutSpeed = songCurrentlyPlaying.volume / fadeInOutTime;
-        print(songVolumeMax);
+       // print(songVolumeMax);
     }
 
     public void FadeOut()

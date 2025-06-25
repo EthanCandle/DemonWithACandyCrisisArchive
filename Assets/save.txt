@@ -1,1 +1,1 @@
-{"candyAmount":18,"skinNumber":0}
+{"candyAmount":122,"skinNumber":0}

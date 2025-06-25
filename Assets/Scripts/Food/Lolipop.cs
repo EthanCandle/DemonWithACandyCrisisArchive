@@ -42,7 +42,7 @@ public class Lolipop : MonoBehaviour
         SpawnParticle();
         Destroy(gameObject);
 
-        PlayerDebugStatsGlobalManager.Instance.dataLocal.candyCollectedDuringRun++;
+        //PlayerDebugStatsGlobalManager.Instance.dataLocal.candyCollectedDuringRun++;
     }
 
     public void SpawnParticle()

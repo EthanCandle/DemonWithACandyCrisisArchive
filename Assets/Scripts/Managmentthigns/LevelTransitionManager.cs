@@ -15,7 +15,7 @@ public class LevelTransitionManager : MonoBehaviour
     void Start()
     {
         audioManager = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
-        print("Playing test sound");
+        //print("Playing test sound");
 
         if (audioManager.inMainMenuFirstTime)
         {
@@ -86,12 +86,44 @@ public class LevelTransitionManager : MonoBehaviour
 
     public void EndGame()
     {
-        PlayTransitionIn(SceneManager.GetActiveScene().buildIndex + 1);
+        print("End game");
+        // set level time
+
+
+
+        // called when hitting a end trigger by player 
+
+
+
+        // called by the level transition
+        // return to main menu if its not in the main run
+        if (PlayerDebugStatsGlobalManager.Instance.dataLocal.isInMainRun)
+        {
+            PlayerDebugStatsGlobalManager.Instance.DataCompletedLevelSelectLevelFromMainRunCaller();
+            // this should try to set the best time in the level select
+            print("INcrease level");
+            PlayerDebugStatsGlobalManager.Instance.DataIncreaseLevelCount();
+
+            PlayTransitionIn(SceneManager.GetActiveScene().buildIndex + 1);
+        }
+        else
+        {
+            PlayerDebugStatsGlobalManager.Instance.DataSetCompletedLevelLogic();
+            // go back to main menu and reset the timer
+            Cursor.lockState = CursorLockMode.None;
+            PlayTransitionIn(0);
+            PlayerDebugStatsTimer.Instance.PauseTimer();
+            PlayerDebugStatsTimer.Instance.ResetTimer();
+
+        }
+
     }
 
     public void MoveToDifferentLevel(int levelNum)
     {
         PlayTransitionIn(levelNum);
+
+
     }
 
     public void UnPauseTime()
@@ -106,6 +138,7 @@ public class LevelTransitionManager : MonoBehaviour
 
     public void LoadLevel(int levelNum)
     {
+
         SceneManager.LoadScene(levelNum);
     }
 

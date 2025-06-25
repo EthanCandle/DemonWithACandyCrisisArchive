@@ -50,7 +50,8 @@ public class PlayerDeath : MonoBehaviour
         playerController.LosePlayerControl();
         StartCoroutine(RespawnDelay());
         SetFakeCamera();
-        PlayerDebugStatsGlobalManager.Instance.dataLocal.amountPlayerDies++;
+
+        PlayerDebugStatsGlobalManager.Instance.DataIncreaseDies();
     }
 
     public IEnumerator RespawnDelay()

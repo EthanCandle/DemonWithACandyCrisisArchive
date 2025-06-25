@@ -47,7 +47,7 @@ public class DialogueInteraction : MonoBehaviour
         if (_input.interact && isPlayerWithinRange)
         {
             _input.interact = false;
-            print("talk");
+            //print("talk");
             Interact();
         }
 
@@ -70,12 +70,12 @@ public class DialogueInteraction : MonoBehaviour
         // if the text hasn't fully been typed out
         if (!HasManagerFinishedTypingOutText())
         {
-            print("Finishing the text now");
+           // print("Finishing the text now");
             // call function that will fully write out the text and prevent the next verse from being written
             DisplayLineImmediatly();
             return;
         }
-        print("Going onto next line/exiting");
+      //  print("Going onto next line/exiting");
         ContinueConversation();
     }
 
@@ -168,6 +168,7 @@ public class DialogueInteraction : MonoBehaviour
         else
         {
             TurnOffDialogueWindow();
+            TurnOffPromptWindow();
         }
         isPlayerWithinRange = false;
         dm.TurnOnPlayerMovement();

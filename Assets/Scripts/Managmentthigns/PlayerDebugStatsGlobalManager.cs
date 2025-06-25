@@ -9,36 +9,38 @@ public class PlayerDebugStatsGlobalManager : MonoBehaviour
 
     public static PlayerDebugStatsGlobalManager Instance;
 
-    public PlayerDebugStatsGlobal dataLocal = new PlayerDebugStatsGlobal();
-    public GameManager gm;
+    // this is accessable by any script, will be managed by something else
+    public PlayerDebugStatsGlobal dataLocal = null;
+
+
     public string savePath;
 
-    public float elapsedTimeCurrentRun = 0f, elapsedTimeBestRun;
-    public bool isRunning = true;
-    public TextMeshProUGUI timerText, statsText, candyCollectedText, deathText, dashesText, jumpsText;
+
+
+
     private void Awake()
     {
-        gm = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
-        //         PlayerDebugStatsGlobalManager.Instance.dataLocal.amountPlayerDies++;
+        //  PlayerDebugStatsGlobalManager.Instance.DataIncreaseDash();
+        //  PlayerDebugStatsGlobalManager.Instance.dataLocal.amountPlayerDies++;
+
+
         if (Instance == null)
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
-            savePath = Application.persistentDataPath + "/playerStats.txt";
+            savePath = Application.dataPath + "/playerStats.txt";
             Load(); // Load on start
         }
         else
         {
+            Instance.Save(); // saves each time a scene is loaded
             Destroy(gameObject);
         }
     }
 
     private void Update()
     {
-        if (isRunning)
-        {
-            elapsedTimeCurrentRun += Time.deltaTime;
-        }
+
     }
 
     public void Save()
@@ -46,13 +48,20 @@ public class PlayerDebugStatsGlobalManager : MonoBehaviour
         PlayerDebugStatsGlobal dataLocalToSave;
         if (dataLocal == null)
         {
-            dataLocalToSave = new PlayerDebugStatsGlobal {
-                amountPlayerJumps = 0,
+            print("is null");
+            dataLocalToSave = new PlayerDebugStatsGlobal
+            {
                 amountPlayerDashes = 0,
                 amountPlayerDies = 0,
-                timeToCompleteGame = 0,
-                levelCurrentlyOn = 1,
-                candyCollectedDuringRun = 0,
+                amountPlayerJumps = 0,
+                hasBeatenGame = false,
+                fastestLevelTimes = new List<float> { 0f, 0f, 0f, 0f, 0f, 0f },
+                currentLevelTimes = new List<float> { 0f, 0f, 0f, 0f, 0f, 0f },
+                fastestTimeToCompleteGame = 0,
+                amountPlayerCandy = 0,
+                isInMainRun = false,
+                currentTimeToCompleteGame = 0,
+                levelCurrentlyOnMainRun = 1,
             };
 
         }
@@ -60,12 +69,17 @@ public class PlayerDebugStatsGlobalManager : MonoBehaviour
         {
             dataLocalToSave = new PlayerDebugStatsGlobal
             {
-                amountPlayerJumps = dataLocal.amountPlayerJumps,
                 amountPlayerDashes = dataLocal.amountPlayerDashes,
                 amountPlayerDies = dataLocal.amountPlayerDies,
-                timeToCompleteGame = dataLocal.timeToCompleteGame,
-                levelCurrentlyOn = dataLocal.levelCurrentlyOn,
-                candyCollectedDuringRun = dataLocal.candyCollectedDuringRun,
+                amountPlayerJumps = dataLocal.amountPlayerJumps,
+                hasBeatenGame = dataLocal.hasBeatenGame,
+                fastestLevelTimes = dataLocal.fastestLevelTimes,
+                currentLevelTimes = dataLocal.currentLevelTimes,
+                fastestTimeToCompleteGame = dataLocal.fastestTimeToCompleteGame,
+                amountPlayerCandy = dataLocal.amountPlayerCandy,
+                isInMainRun = dataLocal.isInMainRun,
+                currentTimeToCompleteGame = dataLocal.currentTimeToCompleteGame,
+                levelCurrentlyOnMainRun = dataLocal.levelCurrentlyOnMainRun,
             };
 
         }
@@ -78,6 +92,8 @@ public class PlayerDebugStatsGlobalManager : MonoBehaviour
     {
         if (!File.Exists(savePath))
         {
+            print("it doesn't exist");
+            dataLocal = null;
             Save();
         }
 
@@ -94,125 +110,180 @@ public class PlayerDebugStatsGlobalManager : MonoBehaviour
         }
     }
 
-    public void IncreaseData(string nameOfVar)
+    public void DataIncreaseDash()
     {
+        dataLocal.amountPlayerDashes++;
+    }
 
+    public int DataGetDash()
+    {
+        return dataLocal.amountPlayerDashes;
     }
 
 
-    private void OnEnable()
+    public void DataIncreaseDies()
     {
-        SceneManager.sceneLoaded += OnSceneLoaded;
+        dataLocal.amountPlayerDies++;
     }
 
-    private void OnDisable()
+    public int DataGetDies()
     {
-        SceneManager.sceneLoaded -= OnSceneLoaded;
+        return dataLocal.amountPlayerDies;
     }
 
-    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+
+    public void DataIncreaseJumps()
     {
-        int sceneIndex = scene.buildIndex;
-        string sceneName = scene.name;
+        dataLocal.amountPlayerJumps++;
+    }
+    public int DataGetJumps()
+    {
+        return dataLocal.amountPlayerJumps;
+    }
 
-        Debug.Log($"Loaded scene: {sceneName} (Index: {sceneIndex})");
 
-        if(sceneIndex == dataLocal.levelCurrentlyOn)
+    public void DataIncreaseCandy()
+    {
+        dataLocal.amountPlayerCandy++;
+    }
+    public int DataGetCandy()
+    {
+        return dataLocal.amountPlayerCandy;
+    }
+
+    public void DataCompletedFullRun()
+    {
+        // called by end trigger at the last level load (need to hard code a check somewhere)
+
+        // check if current time is less then the old time, and set if it is
+        if(dataLocal.currentTimeToCompleteGame < dataLocal.fastestTimeToCompleteGame)
         {
-
+            DataSetTimeToCompleteWholeGame(dataLocal.currentTimeToCompleteGame);
         }
-        dataLocal.levelCurrentlyOn += 1; // incremenet to show next level is one wanted
 
-        if (sceneIndex == 0)
+    }
+
+    public void DataSetTimeToCompleteWholeGame(float setValue)
+    {
+        // called by something in only the last level
+        dataLocal.fastestTimeToCompleteGame = setValue;
+    }
+    public float DataGetTimeCompleteWholeGame()
+    {
+        return dataLocal.fastestTimeToCompleteGame;
+    }
+
+    public void DataSetTimeCurrentToCompleteGame(float setValue)
+    {
+        dataLocal.currentTimeToCompleteGame = setValue;
+    }
+    public float DataGetTimeCurrentToCompleteGame()
+    {
+       return dataLocal.currentTimeToCompleteGame;
+    }
+
+    public void DataSetCompletedWholeGame(bool state)
+    {
+        dataLocal.hasBeatenGame = state;
+    }
+
+    public bool DataGetCompletedWholeGame()
+    {
+        return dataLocal.hasBeatenGame;
+    }
+
+    public void DataSetCompletedLevelLogic()
+    {
+        // sets current level num's time
+        DataCompletedLevelSelectLevel(SceneManager.GetActiveScene().buildIndex-1, PlayerDebugStatsTimer.Instance.GetTime());
+    }
+
+    public void DataCompletedLevelSelectLevel(int levelNum, float timeToCheck)
+    {
+        // check if current level time is less then old time, then set if it is
+        // checks below 1.0 because floating rounding stuff and no level should be under 1 sec
+        if (timeToCheck < dataLocal.fastestLevelTimes[levelNum] || dataLocal.fastestLevelTimes[levelNum] <= 1.0)
         {
-            OnMainMenu();
+            DataSetLevelCompleteTime(levelNum, timeToCheck);
         }
 
 
-        // Example: Stop timer if this is the final level
-        if (sceneIndex == SceneManager.sceneCountInBuildSettings - 1) 
+    }
+
+    public void DataCompletedLevelSelectLevelFromMainRunCaller()
+    {
+        DataCompletedLevelSelectLevelFromMainRun(SceneManager.GetActiveScene().buildIndex - 1, PlayerDebugStatsTimer.Instance.GetTime());
+    }
+    
+
+    public void DataCompletedLevelSelectLevelFromMainRun(int levelNum, float timeToCheck)
+    {
+        // check if current level time is less then old time, then set if it is
+        // checks below 1.0 because floating rounding stuff and no level should be under 1 sec
+
+        // set current level's time since we can only do this once per run
+
+
+        float totalTimeBeforeCurrentLevel = 0;
+
+        for(int i = 0; i < dataLocal.levelCurrentlyOnMainRun-1; i++)
         {
-            OnFinalScene();
+            totalTimeBeforeCurrentLevel += dataLocal.currentLevelTimes[i];
         }
+
+        dataLocal.currentLevelTimes[levelNum] = timeToCheck - totalTimeBeforeCurrentLevel;
+
+        if (totalTimeBeforeCurrentLevel < dataLocal.fastestLevelTimes[levelNum] || dataLocal.fastestLevelTimes[levelNum] <= 1.0)
+        {
+            DataCompletedLevelSelectLevel(levelNum, timeToCheck - totalTimeBeforeCurrentLevel);
+        }
+
+
     }
 
-    public void OnMainMenu()
+
+    public void DataSetLevelCompleteTime(int levelNum, float setValue)
     {
-        // when going back to the main menu, remove the current elapsed time
-        //ResetTimer();
-        StopTimer();
-        SetTimerText();
+        dataLocal.fastestLevelTimes[levelNum] = setValue;
+    }
+    public float DataGetLevelCompleteTime(int levelNum)
+    {
+
+        return dataLocal.fastestLevelTimes[levelNum];
     }
 
-    public void OnFinalScene()
+
+    public void DataSetInMainGame(bool state)
     {
-      //  gm.TurnOnMouse();
-        StopTimer();
-
-        dataLocal.levelCurrentlyOn = 0; // default level
-        Debug.Log("Final time: " + GetFormattedTime());
-
-        SetStatsText();
+        dataLocal.isInMainRun = state;
     }
-
-    public void StopTimer()
+    public bool DataGetInMainGame()
     {
-        // 
-        isRunning = false;
+        return dataLocal.isInMainRun;
     }
 
-    public void ResetTimer()
-    {
-        // called when pressing the play button at the beggining (this holds the overall run timer)
-        elapsedTimeCurrentRun = 0f;
-        isRunning = true;
-    }
 
-    public void ResetLevelStats()
+    public void DataIncreaseLevelCount()
     {
-        ResetTimer();
-        dataLocal.levelCurrentlyOn = 1;
-    }
+        dataLocal.levelCurrentlyOnMainRun += 1;
 
-    public void SetTimerText()
-    {
-        timerText.text = "Time: " + GetFormattedTime();
+        // last level is level 6 which is index 7
+        if (dataLocal.levelCurrentlyOnMainRun >= SceneManager.sceneCountInBuildSettings - 1)
+        {
+            print(SceneManager.sceneCountInBuildSettings - 1);
+            // go back to level 1
+            DataResetLevelCount();
+        }
+        // add guard to reset level back to 1 after finishing the last level
     }
-
-    public string GetFormattedTime()
+    public int DataGetLevelCount()
     {
-        // used in final screen and stats
-        int minutes = Mathf.FloorToInt(elapsedTimeCurrentRun / 60f);
-        int seconds = Mathf.FloorToInt(elapsedTimeCurrentRun % 60f);
-        int milliseconds = Mathf.FloorToInt((elapsedTimeCurrentRun * 1000f) % 1000);
-        return $"{minutes:00}:{seconds:00}.{milliseconds:000}";
+        print(dataLocal.levelCurrentlyOnMainRun);
+        return dataLocal.levelCurrentlyOnMainRun;
     }
-
-    public void SetStatsText()
+    public void DataResetLevelCount()
     {
-        // statsText.text = $"Candy Collected: "
-        SetTimerText();
-        SetTextCandy();
-        SetTextDeath();
-        SetTextDash();
-        SetTextJump();
-    }
-
-    public void SetTextCandy()
-    {
-        candyCollectedText.text = $"Candy Collected: {dataLocal.candyCollectedDuringRun}";
-    }
-    public void SetTextDeath()
-    {
-        deathText.text = $"Total Deaths: {dataLocal.candyCollectedDuringRun}";
-    }
-    public void SetTextDash()
-    {
-        dashesText.text = $"Total Dashes: {dataLocal.candyCollectedDuringRun}";
-    }
-    public void SetTextJump()
-    {
-        jumpsText.text = $"Total Jumps: {dataLocal.candyCollectedDuringRun}";
+        dataLocal.levelCurrentlyOnMainRun = 1;
     }
 
 }
