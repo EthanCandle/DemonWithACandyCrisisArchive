@@ -28,36 +28,42 @@ public class MainMenu : MonoBehaviour
 
         PlayerDebugStatsGlobalManager.Instance.DataSetInMainGame(true);
 
+        PlayerDebugStatsGlobalManager.Instance.DataResetLevelCount();
+
+        PlayerDebugStatsTimer.Instance.SetTimer(0);
+
         // change this to be 
         levelTransition.MoveToDifferentLevel(PlayerDebugStatsGlobalManager.Instance.DataGetLevelCount());
     }
 
     public void PlayGameContinue()
     {
-        // not used, might be if theres a continue button instead of just a play button
-        // just starts the timer
+        // done by nomal button
+        // reset and start timer
+        PlayerDebugStatsTimer.Instance.PauseTimer();
+        PlayerDebugStatsTimer.Instance.ResetTimer();
+        PlayerDebugStatsTimer.Instance.StartTimer();
 
-        // ups the level count
-        PlayerDebugStatsGlobalManager.Instance.DataIncreaseLevelCount();
+        PlayerDebugStatsGlobalManager.Instance.DataSetInMainGame(true);
 
-        // called by the level transition
-        // return to main menu if its not in the main run
-        if (PlayerDebugStatsGlobalManager.Instance.dataLocal.isInMainRun)
+        // reset if we were past the final leve (end screen)
+        if (PlayerDebugStatsGlobalManager.Instance.dataLocal.levelCurrentlyOnMainRun >= SceneManager.sceneCountInBuildSettings - 1)
         {
-
-            // this should try to set the best time in the level select
-
-
-            levelTransition.MoveToDifferentLevel(SceneManager.GetActiveScene().buildIndex + 1);
+            print(SceneManager.sceneCountInBuildSettings - 1);
+            // go back to level 1
+            PlayerDebugStatsGlobalManager.Instance.DataResetLevelCount();
         }
-        else
+
+        float totalTimeBeforeCurrentLevel = 0;
+
+        for (int i = 0; i < PlayerDebugStatsGlobalManager.Instance.dataLocal.levelCurrentlyOnMainRun - 1; i++)
         {
-            // go back to main menu and reset the timer
-            BackToMainMenuLogic();
-            PlayerDebugStatsTimer.Instance.ResetTimer();
-            PlayerDebugStatsTimer.Instance.StartTimer();
+            totalTimeBeforeCurrentLevel += PlayerDebugStatsGlobalManager.Instance.dataLocal.currentLevelTimes[i];
         }
-     
+        PlayerDebugStatsTimer.Instance.SetTimer(totalTimeBeforeCurrentLevel);
+
+        // change this to be 
+        levelTransition.MoveToDifferentLevel(PlayerDebugStatsGlobalManager.Instance.DataGetLevelCount());
     }
 
     public void ResetLevel()
@@ -102,7 +108,10 @@ public class MainMenu : MonoBehaviour
     {
         // called by level select buttons
 
-
+        if(PlayerDebugStatsGlobalManager.Instance == null)
+        {
+            print("Instant null");
+        }
         // set main game to false and reset and start the timer
         PlayerDebugStatsGlobalManager.Instance.DataSetInMainGame(false);
         PlayerDebugStatsTimer.Instance.PauseTimer();

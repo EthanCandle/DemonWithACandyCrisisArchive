@@ -24,6 +24,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Level5House.unity
     guid: bf36cb01a13407d4ea062022f491b6a2
   - enabled: 1
-    path: Assets/Scenes/Level0 MainMenu 1.unity
+    path: Assets/Scenes/Level7 EndMenu.unity
     guid: ab2717d69fa66af4fadfe43ac3a17c1a
   m_configObjects: {}

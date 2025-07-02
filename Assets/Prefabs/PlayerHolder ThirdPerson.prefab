@@ -3612,7 +3612,7 @@ Transform:
   m_GameObject: {fileID: 3217460797952865927}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.5250001, z: -8}
+  m_LocalPosition: {x: 0, y: 1.525, z: -8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3889,6 +3889,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelTransition: {fileID: 0}
+  playerStatManager: {fileID: 0}
   confirmationPopup: {fileID: 5617904042853130956, guid: e5ee741c84a28f848a49ed1827b8dfec,
     type: 3}
 --- !u!114 &3541771867186955131
@@ -7099,7 +7100,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -671.64185, y: -476.8657}
+  m_AnchoredPosition: {x: -796.16003, y: -371.2}
   m_SizeDelta: {x: 287.249, y: 117.028}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1071280631130200415

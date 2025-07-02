@@ -91,7 +91,7 @@ public class LevelTransitionManager : MonoBehaviour
 
 
 
-        // called when hitting a end trigger by player 
+        // called when hitting a end trigger by player so its at the last level
 
 
 
@@ -101,8 +101,16 @@ public class LevelTransitionManager : MonoBehaviour
         {
             PlayerDebugStatsGlobalManager.Instance.DataCompletedLevelSelectLevelFromMainRunCaller();
             // this should try to set the best time in the level select
-            print("INcrease level");
+            print($"{SceneManager.GetActiveScene().buildIndex}, {SceneManager.sceneCountInBuildSettings - 1}");
             PlayerDebugStatsGlobalManager.Instance.DataIncreaseLevelCount();
+
+            if(SceneManager.GetActiveScene().buildIndex == SceneManager.sceneCountInBuildSettings - 2)
+            {
+                print("Completed full run");
+                // then we finished the game
+                PlayerDebugStatsGlobalManager.Instance.DataCompletedFullRun();
+
+            }
 
             PlayTransitionIn(SceneManager.GetActiveScene().buildIndex + 1);
         }

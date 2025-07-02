@@ -408,6 +408,7 @@ GameObject:
   - component: {fileID: 2486171907765800383}
   - component: {fileID: 6424200434378399332}
   - component: {fileID: 2910652318912919432}
+  - component: {fileID: 7929544835618041740}
   m_Layer: 6
   m_Name: BoxGirl Interact Sign
   m_TagString: Untagged
@@ -683,6 +684,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectToSet: {fileID: 0}
+--- !u!114 &7929544835618041740
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8964126141429560800}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17ab307f1cc1c4f47b6801eab1e857d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &7606147926978220922
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1134,6 +1147,7 @@ MonoBehaviour:
   outlineColor: {r: 0, g: 0, b: 0, a: 1}
   outlineWidthCurrent: 2
   outlineWidth: 2
+  outlineWidthHolder: 2
   distanceFromCamera: 0
   distanceRemoveOffSetMultiplier: 2
   shouldChange: 1
@@ -1183,6 +1197,7 @@ MonoBehaviour:
   outlineColor: {r: 1, g: 0, b: 0, a: 1}
   outlineWidthCurrent: 2
   outlineWidth: 2
+  outlineWidthHolder: 2
   distanceFromCamera: 0
   distanceRemoveOffSetMultiplier: 2
   shouldChange: 1

@@ -17,12 +17,16 @@ public class ShopItemData : MonoBehaviour
         // buttonAsset = GetComponent<Button>();
 
         // set price, will getr removed if already purchased
+        SetText();
 
+    }
+
+    public void SetText()
+    {
         if (!isPurchased)
         {
             buttonText.text = costOfItem.ToString();
         }
-
     }
 
     public void HasBeenPurchased()
@@ -45,7 +49,15 @@ public class ShopItemData : MonoBehaviour
             isEnabled = isEnabled
         };
     }
-
+    public ShopItemDataLowLevel GetNewData()
+    {
+        return new ShopItemDataLowLevel
+        {
+            nameOfItem = nameOfItem,
+            isPurchased = false,
+            isEnabled = false
+        };
+    }
 }
 
 // list of all buttons from where we get the shop item data from

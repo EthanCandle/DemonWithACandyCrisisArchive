@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CameraScaler : MonoBehaviour
 {
-
+    //attach to camera
     // Use this for initialization
     void Update()
     {

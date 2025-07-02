@@ -119,6 +119,7 @@ public class DebugStore : MonoBehaviour
     {
         if (!File.Exists(saveLocation))
         {
+            print("Save candyData didn't exist");
             // if we don't have a save yet, make one
             SaveCandyData();
         }
@@ -150,14 +151,21 @@ public class DebugStore : MonoBehaviour
         print("deleted everything");
         if (File.Exists(saveLocation))
         {
+            print("Deleted save candyData");
             File.Delete(saveLocation);
-
+            debugStatsLocal = null;
         }
         if (File.Exists(shopItemLocation))
         {
+            print("Deleted save shop item location");
             File.Delete(shopItemLocation);
+            shopItemCollectionLocal = null;
         }
-        LoadCandyData(); // saves and loads
+        PlayerDebugStatsGlobalManager.Instance.DeleteSave();
+
+
+        LoadCandyData(); // saves and loads candy amount
+        LoadButtonData(); // saves and loads the shop button's states
         TriggerAllItems(); // makes everything remove itself and it does it
 
     }
@@ -251,11 +259,27 @@ public class DebugStore : MonoBehaviour
 
     public void SaveAllButtons()
     {
-        shopItemCollectionLocal = new ShopItemCollection();
-        for (int i = 0; i < buttonObjects.Count; i++)
+
+        if (shopItemCollectionLocal == null)
         {
-            shopItemCollectionLocal.items.Add(buttonObjects[i].GetComponent<ShopItemData>().GetSaveData());
+            // if save doesn't exist, load everything with false bools
+            shopItemCollectionLocal = new ShopItemCollection();
+            for (int i = 0; i < buttonObjects.Count; i++)
+            {
+                shopItemCollectionLocal.items.Add(buttonObjects[i].GetComponent<ShopItemData>().GetNewData());
+                buttonObjects[i].GetComponent<ShopItemData>().SetText();
+            }
         }
+        else
+        {
+            // if save does exist, save everything with corosponding bools
+            shopItemCollectionLocal = new ShopItemCollection();
+            for (int i = 0; i < buttonObjects.Count; i++)
+            {
+                shopItemCollectionLocal.items.Add(buttonObjects[i].GetComponent<ShopItemData>().GetSaveData());
+            }
+        }
+
         string json = JsonUtility.ToJson(shopItemCollectionLocal, true);
 
 
@@ -269,7 +293,7 @@ public class DebugStore : MonoBehaviour
    
         if (!File.Exists(shopItemLocation))
         {
-
+            print("Shop item data doesn't exist");
             // if we don't have a save yet, make one
             SaveAllButtons();
         }

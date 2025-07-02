@@ -10,13 +10,13 @@ public class PlayerDebugStatsTimer : MonoBehaviour
 
     public bool isRunning = true;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
 //        PlayerDebugStatsTimer.Instance
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
+           // DontDestroyOnLoad(gameObject);
         }
         else
         {

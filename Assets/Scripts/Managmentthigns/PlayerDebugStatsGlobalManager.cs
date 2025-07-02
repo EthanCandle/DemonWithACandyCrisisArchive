@@ -12,7 +12,7 @@ public class PlayerDebugStatsGlobalManager : MonoBehaviour
     // this is accessable by any script, will be managed by something else
     public PlayerDebugStatsGlobal dataLocal = null;
 
-
+    public int levelCount = 6;
     public string savePath;
 
 
@@ -22,12 +22,16 @@ public class PlayerDebugStatsGlobalManager : MonoBehaviour
     {
         //  PlayerDebugStatsGlobalManager.Instance.DataIncreaseDash();
         //  PlayerDebugStatsGlobalManager.Instance.dataLocal.amountPlayerDies++;
-
+        if (transform.parent != null)
+        {
+           // transform.SetParent(null); // Unparent it to make it a root GameObject
+        }
 
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
+            levelCount = SceneManager.sceneCountInBuildSettings - 2;
+            //DontDestroyOnLoad(gameObject);
             savePath = Application.dataPath + "/playerStats.txt";
             Load(); // Load on start
         }
@@ -107,7 +111,9 @@ public class PlayerDebugStatsGlobalManager : MonoBehaviour
         if (File.Exists(savePath))
         {
             File.Delete(savePath);
+            dataLocal = null;
         }
+        Load();
     }
 
     public void DataIncreaseDash()
@@ -154,12 +160,15 @@ public class PlayerDebugStatsGlobalManager : MonoBehaviour
     public void DataCompletedFullRun()
     {
         // called by end trigger at the last level load (need to hard code a check somewhere)
+        PlayerDebugStatsTimer.Instance.PauseTimer();
+        DataSetTimeCurrentToCompleteGame(PlayerDebugStatsTimer.Instance.GetTime());
 
         // check if current time is less then the old time, and set if it is
-        if(dataLocal.currentTimeToCompleteGame < dataLocal.fastestTimeToCompleteGame)
+        if (dataLocal.currentTimeToCompleteGame < dataLocal.fastestTimeToCompleteGame || dataLocal.fastestTimeToCompleteGame <= 1.0)
         {
             DataSetTimeToCompleteWholeGame(dataLocal.currentTimeToCompleteGame);
         }
+        DataSetCompletedWholeGame(true);
 
     }
 
@@ -182,6 +191,7 @@ public class PlayerDebugStatsGlobalManager : MonoBehaviour
        return dataLocal.currentTimeToCompleteGame;
     }
 
+
     public void DataSetCompletedWholeGame(bool state)
     {
         dataLocal.hasBeatenGame = state;
@@ -200,6 +210,7 @@ public class PlayerDebugStatsGlobalManager : MonoBehaviour
 
     public void DataCompletedLevelSelectLevel(int levelNum, float timeToCheck)
     {
+        print($"{levelNum}, {timeToCheck}");
         // check if current level time is less then old time, then set if it is
         // checks below 1.0 because floating rounding stuff and no level should be under 1 sec
         if (timeToCheck < dataLocal.fastestLevelTimes[levelNum] || dataLocal.fastestLevelTimes[levelNum] <= 1.0)
@@ -218,6 +229,8 @@ public class PlayerDebugStatsGlobalManager : MonoBehaviour
 
     public void DataCompletedLevelSelectLevelFromMainRun(int levelNum, float timeToCheck)
     {
+        // time to check is the timer time
+
         // check if current level time is less then old time, then set if it is
         // checks below 1.0 because floating rounding stuff and no level should be under 1 sec
 
@@ -231,14 +244,22 @@ public class PlayerDebugStatsGlobalManager : MonoBehaviour
             totalTimeBeforeCurrentLevel += dataLocal.currentLevelTimes[i];
         }
 
+        print($"Total time before level: {totalTimeBeforeCurrentLevel}, Current timer: {timeToCheck} ");
+
         dataLocal.currentLevelTimes[levelNum] = timeToCheck - totalTimeBeforeCurrentLevel;
 
-        if (totalTimeBeforeCurrentLevel < dataLocal.fastestLevelTimes[levelNum] || dataLocal.fastestLevelTimes[levelNum] <= 1.0)
+        if (dataLocal.currentLevelTimes[levelNum] < dataLocal.fastestLevelTimes[levelNum] || dataLocal.fastestLevelTimes[levelNum] <= 1.0)
         {
             DataCompletedLevelSelectLevel(levelNum, timeToCheck - totalTimeBeforeCurrentLevel);
         }
 
 
+    }
+
+    public float DataGetLevelCompleteCurrentTime(int levelNum)
+    {
+
+        return dataLocal.currentLevelTimes[levelNum];
     }
 
 
@@ -268,12 +289,7 @@ public class PlayerDebugStatsGlobalManager : MonoBehaviour
         dataLocal.levelCurrentlyOnMainRun += 1;
 
         // last level is level 6 which is index 7
-        if (dataLocal.levelCurrentlyOnMainRun >= SceneManager.sceneCountInBuildSettings - 1)
-        {
-            print(SceneManager.sceneCountInBuildSettings - 1);
-            // go back to level 1
-            DataResetLevelCount();
-        }
+
         // add guard to reset level back to 1 after finishing the last level
     }
     public int DataGetLevelCount()
@@ -284,6 +300,9 @@ public class PlayerDebugStatsGlobalManager : MonoBehaviour
     public void DataResetLevelCount()
     {
         dataLocal.levelCurrentlyOnMainRun = 1;
+
+        // reset current run count
+        dataLocal.currentLevelTimes = new List<float> { 0f, 0f, 0f, 0f, 0f, 0f };
     }
 
 }
