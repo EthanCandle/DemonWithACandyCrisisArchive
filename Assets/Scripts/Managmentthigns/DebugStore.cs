@@ -24,7 +24,7 @@ public class DebugStore : MonoBehaviour
     public bool isMutedSFX = false, isMutedMusic = false;
     public GameObject muteObjectSFX, unMuteObjectSFX, muteObjectMusic, unMuteObjectMusic;
     public Animator debugStoreAnimator;
-    public CanvasGroup menuToDeactiveOnSummon; // should be main menu or pause menu
+    public CanvasGroup menuToDeactiveOnSummon, canvasGroupLocal; // should be main menu or pause menu
 
     public List<GameObject> buttonObjects;
 
@@ -43,6 +43,9 @@ public class DebugStore : MonoBehaviour
 
     public PlayerManager playerManager;
     public CandyManager candyManager;
+    public DebugTimeViewer timerManager;
+    public ReselectDefaultButton reselectButtonScript;
+
     public MainMenu mainMenuScript;
     // Start is called before the first frame update
     void Start()
@@ -75,12 +78,16 @@ public class DebugStore : MonoBehaviour
             {"dash_distance_decrease", DecreasePlayerDashDistance},
             {"candy_outline", ChangeCandyOutline},
             {"skin_random", ChangePlayerSkin},
+            {"level_solo_timer", ToggleLevelTimer},
+            {"level_all_timer", ToggleCurrentLevelTimer},
+            {"level_fastest_timer", ToggleFastestLevelTimer},
         };
     }
     public void SetVariables()
     {
         debugStore = this;
         audioManager = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
+        timerManager = GameObject.FindGameObjectWithTag("GlobalScripts").GetComponent<DebugTimeViewer>();
 
 
     }
@@ -134,7 +141,7 @@ public class DebugStore : MonoBehaviour
     {
         if (mainMenuScript)
         {
-            mainMenuScript.SpawnConfirmationPopup(DeleteDataLogic);
+            mainMenuScript.SpawnConfirmationPopup(DeleteDataLogic, mainMenuScript.mainMenuCG);
         }
         else
         {
@@ -192,7 +199,15 @@ public class DebugStore : MonoBehaviour
         isInDebugStore = true;
         debugStoreAnimator.SetTrigger("Move");
         menuToDeactiveOnSummon.interactable = false;
+        canvasGroupLocal.interactable = true;
         LoadButtonData();
+        StartCoroutine(DelayFrame());
+    }
+
+    public IEnumerator DelayFrame()
+    {
+        yield return null;
+        reselectButtonScript.SelectRandomButton();
     }
 
     public void DesummonDebugMenu()
@@ -205,8 +220,18 @@ public class DebugStore : MonoBehaviour
         isInDebugStore = false;
 
         menuToDeactiveOnSummon.interactable = true;
-       // TriggerAllItems(); 
-       // each button will trigger itself so we don't need to call it other than at the start
+        canvasGroupLocal.interactable = false;
+        StartCoroutine(DelayFrame());
+        // TriggerAllItems(); 
+        // each button will trigger itself so we don't need to call it other than at the start
+    }
+
+    public void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            IncreaseCandyAmount(100);
+        }
     }
 
     public event Action<int> SetCandyAmount;
@@ -262,6 +287,7 @@ public class DebugStore : MonoBehaviour
 
         if (shopItemCollectionLocal == null)
         {
+            print("shopItemCollectionLocal null");
             // if save doesn't exist, load everything with false bools
             shopItemCollectionLocal = new ShopItemCollection();
             for (int i = 0; i < buttonObjects.Count; i++)
@@ -272,11 +298,13 @@ public class DebugStore : MonoBehaviour
         }
         else
         {
+            print("shopItemCollectionLocal not null");
             // if save does exist, save everything with corosponding bools
             shopItemCollectionLocal = new ShopItemCollection();
             for (int i = 0; i < buttonObjects.Count; i++)
             {
                 shopItemCollectionLocal.items.Add(buttonObjects[i].GetComponent<ShopItemData>().GetSaveData());
+                buttonObjects[i].GetComponent<ShopItemData>().SetText();
             }
         }
 
@@ -356,10 +384,12 @@ public class DebugStore : MonoBehaviour
             if (CanAfford(itemData))
             {
                 itemData.ChangeButtonColor(CanAffordColor);
+                itemData.SetText();
             }
             else
             {
                 itemData.ChangeButtonColor(CantAffordColor);
+                itemData.SetText();
             }
         }
     }
@@ -449,7 +479,7 @@ public class DebugStore : MonoBehaviour
         //    print("failewd to trigger effects");
         //    return;
         //}
-        print("triggered all effects");
+       // print("triggered all effects");
         string saveString = File.ReadAllText(shopItemLocation);
 
         shopItemCollectionLocal = JsonUtility.FromJson<ShopItemCollection>(saveString);
@@ -458,10 +488,10 @@ public class DebugStore : MonoBehaviour
         for (int j = 0; j < shopItemCollectionLocal.items.Count; j++)
         {
             ShopItemDataLowLevel itemDataSaveDataLowLevel = shopItemCollectionLocal.items[j];
-            if (!itemDataSaveDataLowLevel.isPurchased)
-            {
-                continue;
-            }
+            //if (!itemDataSaveDataLowLevel.isPurchased)
+            //{
+            //    continue;
+            //}
             InterpreteDictionary(itemDataSaveDataLowLevel);
         }
     }
@@ -567,7 +597,7 @@ public class DebugStore : MonoBehaviour
         {
             return;
         }
-        print("Increase speed");
+       // print("Increase speed");
 
         if (!CheckIfItemIsEnabled("speed_penalty"))
         {
@@ -592,7 +622,7 @@ public class DebugStore : MonoBehaviour
         {
             return;
         }
-        print(CheckIfItemIsEnabled("speed_boost"));
+       // print(CheckIfItemIsEnabled("speed_boost"));
 
         // if speed is enabled then don't continue
         if (!CheckIfItemIsEnabled("speed_boost"))
@@ -682,53 +712,19 @@ public class DebugStore : MonoBehaviour
 
     }
 
-    //public void ChangePlayerSkin(bool state)
-    //{
-    //    if (state)
-    //    {
-    //        // if on default then change to something else
-    //        if (debugStatsLocal.skinNumber == 0)
-    //        {
-    //            debugStatsLocal.skinNumber = UnityEngine.Random.Range(1, playerManager.skinObjects.Count);
+    public void ToggleLevelTimer(bool state)
+    {
+      //  print("ToggleLevelTimer");
+        timerManager.ToggleLevelTimer(state);
+    }
 
-    //        }
+    public void ToggleCurrentLevelTimer(bool state)
+    {
+        timerManager.ToggleCurrentLevelTimer(state);
+    }
 
-    //        playerManager.EnableSkin(debugStatsLocal.skinNumber);
-    //    }
-    //    else
-    //    {
-    //        int oldNum = debugStatsLocal.skinNumber;
-    //        debugStatsLocal.skinNumber = UnityEngine.Random.Range(1, playerManager.skinObjects.Count);
-    //        print($"{oldNum}, {debugStatsLocal.skinNumber}");
-    //        if (oldNum == debugStatsLocal.skinNumber)
-    //        {
-
-    //            // go down a skin if we rolled the same one (alows the OG demon skin
-    //            debugStatsLocal.skinNumber--;
-    //            if (debugStatsLocal.skinNumber == 0)
-    //            {
-    //                debugStatsLocal.skinNumber = 2;
-    //            }
-    //        }
-    //        // set to default skin
-    //        playerManager.EnableSkin(0);
-
-
-    //    }
-
-    //    SaveCandyData(); // saves skin number 
-
-    //}
-
-    // other ideas for debug stuff:
-    /*
-     Bigger outline for candy
-    Bigger outline for player
-    Change transition time?
-    Increase/Decrease dash distance
-    Bounce pad going higher?
-    Jump higher
-
-
-    */
+    public void ToggleFastestLevelTimer(bool state)
+    {
+        timerManager.ToggleFastestLevelTimer(state);
+    }
 }

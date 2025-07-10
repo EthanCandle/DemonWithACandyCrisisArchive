@@ -47,7 +47,20 @@ public class DialogueInteraction : MonoBehaviour
         if (_input.interact && isPlayerWithinRange)
         {
             _input.interact = false;
+            _input.talk = false;
+            _input.dash = false;
+            _input.jumpHold = false;
+            _input.jump = false;
             //print("talk");
+            Interact();
+        }
+        else if (hasStartedConversation && _input.talk && isPlayerWithinRange)
+        {
+            _input.interact = false;
+            _input.talk = false;
+            _input.dash = false;
+            _input.jumpHold = false;
+            _input.jump = false;
             Interact();
         }
 

@@ -4,12 +4,14 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
+using System.IO;
+using System.Collections;
 public class AudioManager : MonoBehaviour
 {
     // FindObjectOfType<AudioManager>().PlaySoundInstantiate(deathSFX);
 
     public int currentVolumeSFX = 100, currentVolumeMusic = 100;
-    public bool isMuted;
+    public bool isSFXMuted, isMusicMuted;
     public Sound[] mainMenuMusic;
     public Sound[] gamePlayMusic;
     public Sound[] sounds;
@@ -29,9 +31,15 @@ public class AudioManager : MonoBehaviour
 
     public bool inMainMenuFirstTime = true;
 
+    public string volumeData = Application.dataPath + "/volumeData.txt";
+    public AudioSaveData audioDataLocal;
+    public Settings settingScript;
+
     // Start is called before the first frame update
     void Awake()
     {
+        print("Gett setting in audiomanager");
+        settingScript = GameObject.FindGameObjectWithTag("Options").GetComponent<Settings>();
         // create self if not already in
         if (instance == null)
         {
@@ -44,47 +52,15 @@ public class AudioManager : MonoBehaviour
         }
         DontDestroyOnLoad(gameObject);
 
-
-        //foreach (Sound s in sounds)
-        //{
-        //    s.source = gameObject.AddComponent<AudioSource>();
-
-        //    s.source.clip = s.clip;
-
-        //    s.source.volume = s.volume;
-        //    s.source.pitch = s.pitch;
-        //    s.source.loop = s.loop;
-
-        //}
-
-        //foreach (Sound s in mainMenuMusic)
-        //{
-        //    s.source = gameObject.AddComponent<AudioSource>();
-
-        //    s.source.clip = s.clip;
-
-        //    s.source.volume = s.volume;
-        //    s.source.pitch = s.pitch;
-        //    s.source.loop = s.loop;
-
-        //}
-        //foreach (Sound s in gamePlayMusic)
-        //{
-        //    s.source = gameObject.AddComponent<AudioSource>();
-
-        //    s.source.clip = s.clip;
-
-        //    s.source.volume = s.volume;
-        //    s.source.pitch = s.pitch;
-        //    s.source.loop = s.loop;
-        //    s.source.outputAudioMixerGroup = audioMixerGroupMusic;
-        //}
-
-        AdjustVolumeSFX(currentVolumeSFX);
-        AdjustVolumeMusic(currentVolumeMusic);
-
+        //AdjustVolumeSFX(currentVolumeSFX);
+        //AdjustVolumeMusic(currentVolumeMusic);
+        settingScript = GameObject.FindGameObjectWithTag("Options").GetComponent<Settings>();
+        LoadData();
     }
-
+    void Start()
+    {
+        settingScript = GameObject.FindGameObjectWithTag("Options").GetComponent<Settings>();
+    }
     public Sound FindSound(string name)
     {
         // goes through the sounds array
@@ -100,7 +76,7 @@ public class AudioManager : MonoBehaviour
 
     public void PlaySoundInstantiate(Sound sourceSound)
     {
-        if(sourceSound == null || isMuted)
+        if(sourceSound == null || isSFXMuted)
         {
             return;
         }
@@ -132,7 +108,7 @@ public class AudioManager : MonoBehaviour
 
     public void PlaySoundInstantiate(Sound sourceSound, float timeToPlayRatio)
     {
-        if (sourceSound == null || isMuted)
+        if (sourceSound == null || isSFXMuted)
         {
             return;
         }
@@ -189,21 +165,6 @@ public class AudioManager : MonoBehaviour
         Destroy(newGameObject, sourceSound.clip.length / sourceSound.pitch);
     }
 
-
-
-
-    private void Start()
-    {
-
-       // PlayRandomGamePlayMusic();
-        /*
-         * Lo-Fi
-         * Ambient, Good at 1.3 pitch. soft and child
-         * 
-         * BossaNova
-         * Moonlit I like, feels like main menu music, cafe loading screen
-        */
-    }
 
     private void Update()
     {
@@ -395,48 +356,30 @@ public class AudioManager : MonoBehaviour
         songCurrentlyPlaying = s.source;
     }
 
-    // these called by some sort of game manager
-    //public void IncreaseVolume(int amountToChange)
-    //{
-    //    currentVolume += amountToChange;
-    //    if (currentVolume > 100)
-    //    {
-    //        currentVolume = 100;
-    //    }
-    //    AdjustVolume(currentVolume);
-    //}
-
-    //public void DecreaseVolume(int amountToChange)
-    //{
-    //    currentVolume -= amountToChange;
-    //    if (currentVolume < 0)
-    //    {
-    //        currentVolume = 0;
-    //    }
-    //    AdjustVolume(currentVolume);
-    //}
 
     public void SetVolumeSFX(int amountToChange)
     {
-        currentVolumeSFX = amountToChange;
-        AdjustVolumeSFX(currentVolumeSFX);
-        isMuted = false;
+        audioDataLocal.sfxVolume = amountToChange;
+        audioDataLocal.isSFXMuted = false;
+        AdjustVolumeSFX(audioDataLocal.sfxVolume);
+
+
     }
 
     public void MuteVolumeSFX()
     {
-        for (int i = 0; i < audioMixerGroupSFXs.Count; i++)
-        {
-            audioMixerGroupSFXs[i].audioMixer.SetFloat("volume", -80);
-        }
-        //AdjustVolumeSFX(0);
-        isMuted = true;
+        audioDataLocal.isSFXMuted = true;
+        DirectSetVolumeSFX(-800);
+
+
     }
 
     public void UnMuteVolumeSFX()
     {
-        AdjustVolumeSFX(currentVolumeSFX);
-        isMuted = false;
+        audioDataLocal.isSFXMuted = false;
+        AdjustVolumeSFX(audioDataLocal.sfxVolume);
+
+
     }    
     
     public void AdjustVolumeSFX(float volume)
@@ -444,72 +387,171 @@ public class AudioManager : MonoBehaviour
         float dB = Mathf.Lerp(-20, 20f, volume / 100f);
 
 
-        for(int i = 0; i < audioMixerGroupSFXs.Count; i++)
-        {
-            audioMixerGroupSFXs[i].audioMixer.SetFloat("volume", dB);
-        }
+        DirectSetVolumeSFX(dB);
 
     }
 
-
+    public void DirectSetVolumeSFX(float volume)
+    {
+        for (int i = 0; i < audioMixerGroupSFXs.Count; i++)
+        {
+            audioMixerGroupSFXs[i].audioMixer.SetFloat("volume", volume);
+        }
+        SaveData();
+    }
 
 
     public void SetVolumeMusic(int amountToChange)
     {
-        currentVolumeMusic = amountToChange;
-        AdjustVolumeMusic(currentVolumeMusic);
-        isMuted = false;
+        audioDataLocal.musicVolume = amountToChange;
+        audioDataLocal.isMusicMuted = false;
+
+        print($"Music muted is: {audioDataLocal.isMusicMuted}, volume: {audioDataLocal.musicVolume}");
+        AdjustVolumeMusic(audioDataLocal.musicVolume);
+
     }
 
     public void MuteVolumeMusic()
     {
-        for (int i = 0; i < audioMixerGroupMusics.Count; i++)
-        {
-            audioMixerGroupMusics[i].audioMixer.SetFloat("volume", -80);
-        }
-        //AdjustVolumeMusic(0);
-        isMuted = true;
+        audioDataLocal.isMusicMuted = true;
+      //  print($"Music muted is: {audioDataLocal.isMusicMuted}");
+
+        DirectSetVolumeMusic(-800);
+
+
     }
 
     public void UnMuteVolumeMusic()
     {
-        AdjustVolumeMusic(currentVolumeMusic);
-        isMuted = false;
+        audioDataLocal.isMusicMuted = false;
+        //print($"Music muted is: {audioDataLocal.isMusicMuted}");
+
+        AdjustVolumeMusic(audioDataLocal.musicVolume);
+
+
     }
 
     public void AdjustVolumeMusic(float volume)
     {
         float dB = Mathf.Lerp(-20f, 20f, volume / 100f);
 
+        print(dB);
+        DirectSetVolumeMusic(dB);
+
+    }
+
+    public void DirectSetVolumeMusic(float volume)
+    {
+        print(volume);
         for (int i = 0; i < audioMixerGroupMusics.Count; i++)
         {
-            audioMixerGroupMusics[i].audioMixer.SetFloat("volume", dB);
+            print("Set music");
+            audioMixerGroupMusics[i].audioMixer.SetFloat("volume", volume);
+            print(volume);
         }
-        // songCurrentlyPlaying.volume =
+
+        float f;
+        print(audioMixerGroupMusics[0].audioMixer.GetFloat("volume", out f));
+        print(f);
+        SaveData();
     }
-    //public void AdjustVolume(int volume = 100)
-    //{
-    //    print("Adjust volume start");
-    //    // volume range is between 0-100
-    //    //foreach (Sound s in sounds)
-    //    //{
-    //    //    s.source.volume = volume / 100.0f * s.volumeOriginal;
-    //    //}
 
-    //    //foreach (Sound s in mainMenuMusic)
-    //    //{
-    //    //    s.source.volume = volume / 100.0f * s.volumeOriginal;
+    public void SaveData()
+    {
+       // print(audioDataLocal.isMusicMuted);
+        AudioSaveData audioSaveData;
 
-    //    //}
-    //    //foreach (Sound s in gamePlayMusic)
-    //    //{
-    //    //    s.source.volume = volume / 100.0f * s.volumeOriginal;
+        if (audioDataLocal == null)
+        {
+            audioSaveData = new AudioSaveData { sfxVolume = 50, musicVolume = 50, isSFXMuted = false, isMusicMuted = false };
+           // print("saving data is null");
+        }
+        else
+        {
+            audioSaveData = new AudioSaveData { sfxVolume = audioDataLocal.sfxVolume, musicVolume = audioDataLocal.musicVolume, isSFXMuted = audioDataLocal.isSFXMuted, isMusicMuted = audioDataLocal.isMusicMuted };
 
-    //    //}
-    //    print("Adjust volume end");
-    //}
+        }
 
 
+
+        string json = JsonUtility.ToJson(audioSaveData);
+
+        File.WriteAllText(volumeData, json);
+    }
+
+    public void LoadData()
+    {
+        if (!File.Exists(volumeData))
+        {
+            print("Save candyData didn't exist");
+            // if we don't have a save yet, make one
+            SaveData();
+        }
+        string saveString = File.ReadAllText(volumeData);
+
+        audioDataLocal = JsonUtility.FromJson<AudioSaveData>(saveString);
+
+        SetVolumeData();
+
+
+    }
+
+    public void SetVolumeData()
+    {
+        print("Set volume datat");
+        if (audioDataLocal.isMusicMuted)
+        {
+            SetVolumeMusic(audioDataLocal.musicVolume);
+            MuteVolumeMusic();
+            CallDelayFrameMusic();
+        }
+        else
+        {
+            SetVolumeMusic(audioDataLocal.musicVolume);
+
+        }
+
+        if (audioDataLocal.isSFXMuted)
+        {
+            SetVolumeSFX(audioDataLocal.sfxVolume);
+            MuteVolumeSFX();
+            CallDelayFrameSFX();
+        }
+        else
+        {
+            SetVolumeSFX(audioDataLocal.sfxVolume);
+        }
+    }
+
+    public void CallDelayFrameMusic()
+    {
+        StartCoroutine(DelayFrameMusic());
+    }
+
+    public void CallDelayFrameSFX()
+    {
+        StartCoroutine(DelayFrameSFX());
+    }
+
+    public IEnumerator DelayFrameMusic()
+    {
+
+        yield return null;
+        print("IN coroco");
+        settingScript = GameObject.FindGameObjectWithTag("Options").GetComponent<Settings>();
+        audioDataLocal.isMusicMuted = true;
+        settingScript.MuteMusic();
+
+    }   
+    public IEnumerator DelayFrameSFX()
+    {
+
+        yield return null;
+        print("IN coroco");
+        settingScript = GameObject.FindGameObjectWithTag("Options").GetComponent<Settings>();
+        audioDataLocal.isSFXMuted = true;
+        settingScript.MuteSFX();
+    }
 
 
 }

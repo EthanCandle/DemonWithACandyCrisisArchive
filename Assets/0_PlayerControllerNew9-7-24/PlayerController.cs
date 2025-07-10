@@ -808,7 +808,7 @@ public class PlayerController : MonoBehaviour
         }
 
         // if hte player isn't pressing the interact button or hasn't unlocked the dash then ignore
-        if (!_input.interact || !unlockedDash)
+        if (!_input.dash || !unlockedDash)
         {
             // print($"{_input.interact} {isDashing}");
             return;
@@ -824,7 +824,7 @@ public class PlayerController : MonoBehaviour
     public void StartDash()
     {
         // the initial press of the dash
-        _input.interact = false;
+        _input.dash = false;
         FindObjectOfType<AudioManager>().PlaySoundInstantiate(dashSFX);
         // only happens the first time the player presses interact
 

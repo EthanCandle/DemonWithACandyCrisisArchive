@@ -15,6 +15,8 @@ TagManager:
   - Death
   - AudioManager
   - PlayerStats
+  - GlobalScripts
+  - Options
   layers:
   - Default
   - TransparentFX

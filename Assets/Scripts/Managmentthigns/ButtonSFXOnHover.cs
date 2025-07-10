@@ -15,9 +15,10 @@ public class ButtonSFXOnHover : MonoBehaviour, IPointerEnterHandler, IPointerCli
 
         if (Time.unscaledTime - lastPlayTime > minDelayBetweenPlays)
         {//
-          //  print("OnPointerEnter Triggered");
+            print("OnPointerEnter Triggered");
             // buttonHoverSFX
            // print(FindObjectOfType<AudioManager>().buttonHoverSFX.nameOfSound);
+
             FindObjectOfType<AudioManager>().PlaySoundInstantiate(FindObjectOfType<AudioManager>().buttonHoverSFX);
             lastPlayTime = Time.unscaledTime;
         }

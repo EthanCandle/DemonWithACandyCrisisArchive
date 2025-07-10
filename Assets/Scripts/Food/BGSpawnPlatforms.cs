@@ -7,8 +7,9 @@ public class BGSpawnPlatforms : MonoBehaviour
     public GameObject movingPlatform;
     //public Animator movingPlatformAnimator;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
+        // awake so it despawns the platform before being removed by another box girl
         DeSpawnPlatform();
        // movingPlatformAnimator = movingPlatform.GetComponent<Animator>();
     }

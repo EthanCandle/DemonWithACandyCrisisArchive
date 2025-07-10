@@ -10,8 +10,9 @@ public class InputManager : MonoBehaviour
 	public Vector2 look;
 	public bool jump;
 	public bool jumpHold; //
+	public bool dash;
 	public bool sprint;
-	public bool interact;
+	public bool interact, talk;
 	public bool goBack;
 	public bool pause;
 	public bool one, two, three, four;
@@ -53,7 +54,7 @@ then call the input in another script with _input.{veryTopVar} == true;
 
 	public void OnBack(InputValue value)///
 	{
-		print("Q");
+		//print("Q");
 		goBack = value.isPressed;
 	}
 	
@@ -126,6 +127,14 @@ then call the input in another script with _input.{veryTopVar} == true;
 	public void OnPause(InputValue value)
 	{
         pause = (value.isPressed);
+	}
+	public void OnTalk(InputValue value)
+	{
+        talk = (value.isPressed);
+	}
+	public void OnDash(InputValue value)
+	{
+        dash = (value.isPressed);
 	}
 
 

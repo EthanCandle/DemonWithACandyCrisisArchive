@@ -14,6 +14,8 @@ public class SliderNew : MonoBehaviour
     public bool shouldDepleteSlider = false;
     public float depleteSpeed = 1000.0f, depleteSeconds = 0.1f;
 
+    public Color unFilledColor, filledColor;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -52,6 +54,7 @@ public class SliderNew : MonoBehaviour
     {
         // calls itself in the update to deplete the entire bar
         shouldDepleteSlider = true;
+        SetUnFilledColor();
         DecreaseSlider(depleteSpeed * Time.deltaTime);
         if(valueCurrent <= 0)
         {
@@ -64,7 +67,18 @@ public class SliderNew : MonoBehaviour
 
         SetSlider(maxValue);
         shouldDepleteSlider = false;
+        SetFilledColor();
        // print($"Max Filled Value to: {valueCurrent}");
+    }
+
+    public void SetFilledColor()
+    {
+        sliderFillImage.color = filledColor;
+    }
+
+    public void SetUnFilledColor()
+    {
+        sliderFillImage.color = unFilledColor;
     }
 
     public void SetSlider(float sliderValueNew)

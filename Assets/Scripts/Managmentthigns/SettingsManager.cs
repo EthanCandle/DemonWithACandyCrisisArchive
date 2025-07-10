@@ -21,10 +21,14 @@ public class SettingsManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (gm._input.pause)
+        // pause input or if we are already paused and they press back button)
+        if (gm._input.pause || (isPaused && gm._input.goBack))
         {
             gm._input.pause = false;
-
+            gm._input.dash = false;
+            gm._input.jump = false; 
+            gm._input.jumpHold = false;
+            gm._input.goBack = false;
             // if in pause menu then remove it
             if (settingsScript != null && settingsScript.isInOptions)
             {
@@ -40,7 +44,7 @@ public class SettingsManager : MonoBehaviour
             {
                 ChangePauseMenuState();
             }
-
+            settingsScript.ReselectButton();
         }
     }
 

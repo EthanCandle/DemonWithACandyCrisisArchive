@@ -13,13 +13,30 @@ public class Settings : MonoBehaviour
     public bool isMutedSFX = false, isMutedMusic = false;
     public GameObject muteObjectSFX, unMuteObjectSFX, muteObjectMusic, unMuteObjectMusic;
     public Animator optionsAnimator;
-    public CanvasGroup menuToDeactiveOnSummon;
+    public CanvasGroup menuToDeactiveOnSummon, canvasGroupLocal;
+
+    public ReselectDefaultButton reselectButtonScript;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         audioManager = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
+
+        if (audioManager.audioDataLocal.isMusicMuted)
+        {
+            print("Music muted");
+            MuteMusic();
+            audioManager.CallDelayFrameMusic();
+        }
+        if (audioManager.audioDataLocal.isSFXMuted)
+        {
+            print("Music muted");
+            MuteSFX();
+            audioManager.CallDelayFrameSFX();
+        }
         SetSliderOnStartSFX();
         SetSliderOnStartMusic();
+
+
     }
 
     // Update is called once per frame
@@ -32,24 +49,27 @@ public class Settings : MonoBehaviour
     {
         // call this whenever this thing is set active (need to see if theres a set active start_
         // makes it  so the slier starts on the correct value when it is made
-        volumeSliderSFX.value = audioManager.currentVolumeSFX;
+        volumeSliderSFX.value = audioManager.audioDataLocal.sfxVolume;
     }
     public void SetSliderOnStartMusic()
     {
         // call this whenever this thing is set active (need to see if theres a set active start_
         // makes it  so the slier starts on the correct value when it is made
-        volumeSliderMusic.value = audioManager.currentVolumeMusic;
+        print("Set slide on music");
+        volumeSliderMusic.value = audioManager.audioDataLocal.musicVolume;
     }
 
     public void ChangeVolumeSFX(Slider slider)
     {
-       // print((int)volumeSlider.value);
+        // print((int)volumeSlider.value);
+
         audioManager.SetVolumeSFX((int)slider.value);
         UnMuteSFX(); // just to remove the mute symbol
     }
     public void ChangeVolumeMusic(Slider slider)
     {
         // print((int)volumeSlider.value);
+
         audioManager.SetVolumeMusic((int)slider.value);
         UnMuteMusic(); // just to remove the mute symbol
     }
@@ -81,8 +101,12 @@ public class Settings : MonoBehaviour
         isMutedSFX = true;
         // called by button
         audioManager.MuteVolumeSFX();
-        muteObjectSFX.SetActive(true);
-        unMuteObjectSFX.SetActive(false);
+
+        if (muteObjectSFX != null)
+            muteObjectSFX.SetActive(true);
+
+        if (unMuteObjectSFX!= null)
+            unMuteObjectSFX.SetActive(false);
     }
 
     public void UnMuteSFX()
@@ -100,7 +124,10 @@ public class Settings : MonoBehaviour
         isMutedMusic = true;
         // called by button
         audioManager.MuteVolumeMusic();
+        if(muteObjectMusic != null)
         muteObjectMusic.SetActive(true);
+
+        if(unMuteObjectMusic != null)
         unMuteObjectMusic.SetActive(false);
     }
 
@@ -137,8 +164,20 @@ public class Settings : MonoBehaviour
         isInOptions = true;
         optionsAnimator.SetTrigger("Move");
         menuToDeactiveOnSummon.interactable = false;
+        canvasGroupLocal.interactable = true;
+        ReselectButton();
     }
 
+    public void ReselectButton()
+    {
+        StartCoroutine(DelayFrame());
+    }
+
+    public IEnumerator DelayFrame()
+    {
+        yield return null;
+        reselectButtonScript.SelectRandomButton();
+    }
     public void DesummonOptionsMenu()
     {
         if (isInOptions)
@@ -149,6 +188,8 @@ public class Settings : MonoBehaviour
         isInOptions = false;
 
         menuToDeactiveOnSummon.interactable = true;
+        canvasGroupLocal.interactable = false;
+        ReselectButton();
     }
 
 

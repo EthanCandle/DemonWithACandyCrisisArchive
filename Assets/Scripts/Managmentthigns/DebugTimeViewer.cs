@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 public class DebugTimeViewer : MonoBehaviour
 {
-    public TextMeshProUGUI levelTimerText, timeTimerText;
+    public TextMeshProUGUI levelTimerText, timeTimerText, fastestTimerText;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,6 +15,7 @@ public class DebugTimeViewer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // updates the timer text per seond
         timeTimerText.text = $"Time: {GetFormattedTime(PlayerDebugStatsTimer.Instance.GetTime())}";
     }
     //using UnityEngine.SceneManagement;
@@ -37,17 +38,42 @@ public class DebugTimeViewer : MonoBehaviour
     public void SetText()
     {
         List<float> levelTimes = PlayerDebugStatsGlobalManager.Instance.dataLocal.currentLevelTimes;
-        levelTimerText.text = $"Time : {GetFormattedTime(PlayerDebugStatsTimer.Instance.GetTime())}\n";
+        levelTimerText.text = $"Current Levels Time:\n";
         for (int i = 0; i < levelTimes.Count; i++)
         {
             levelTimerText.text += $"Level {i}: {GetFormattedTime(levelTimes[i])}\n";
         }
+
+        
+        List<float> fastestTimes = PlayerDebugStatsGlobalManager.Instance.dataLocal.fastestLevelTimes; 
+        fastestTimerText.text = $"Fastest Levels Time:\n";
+        for (int i = 0; i < fastestTimes.Count; i++)
+        {
+            fastestTimerText.text += $"Level {i}: {GetFormattedTime(fastestTimes[i])}\n";
+        }
     }
+
     public string GetFormattedTime(float timeCurrent)
     {
         int minutes = Mathf.FloorToInt(timeCurrent / 60f);
         int seconds = Mathf.FloorToInt(timeCurrent % 60f);
         int milliseconds = Mathf.FloorToInt((timeCurrent * 1000f) % 1000);
         return $"{minutes:00}:{seconds:00}.{milliseconds:000}";
+    }
+
+    public void ToggleLevelTimer(bool state)
+    {
+
+        timeTimerText.gameObject.SetActive(state);
+    }
+
+    public void ToggleCurrentLevelTimer(bool state)
+    {
+        levelTimerText.gameObject.SetActive(state);
+    }
+
+    public void ToggleFastestLevelTimer(bool state)
+    {
+        fastestTimerText.gameObject.SetActive(state);
     }
 }
