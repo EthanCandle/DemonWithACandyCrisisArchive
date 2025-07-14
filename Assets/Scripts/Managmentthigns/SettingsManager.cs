@@ -10,7 +10,13 @@ public class SettingsManager : MonoBehaviour
     public InputManager _input;
     public Settings settingsScript;
     public DebugStore debugStoreScript;
+    public ConfirmationPopUpManager popUpManager;
     public bool isPaused = false;
+
+    public MainMenu mainMenuScript;
+    public Sound summonSound, deSummonSound;
+
+    public bool unPaused;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,6 +27,7 @@ public class SettingsManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         // pause input or if we are already paused and they press back button)
         if (gm._input.pause || (isPaused && gm._input.goBack))
         {
@@ -29,6 +36,7 @@ public class SettingsManager : MonoBehaviour
             gm._input.jump = false; 
             gm._input.jumpHold = false;
             gm._input.goBack = false;
+            print($"{gm._input.jump}");
             // if in pause menu then remove it
             if (settingsScript != null && settingsScript.isInOptions)
             {
@@ -46,6 +54,12 @@ public class SettingsManager : MonoBehaviour
             }
             settingsScript.ReselectButton();
         }
+
+        if (unPaused)
+        {
+            gm.TurnOffPlayerJump();
+        }
+        //print($"{gm._input.jump}");
     }
 
     public void ChangePauseMenuState()
@@ -55,18 +69,23 @@ public class SettingsManager : MonoBehaviour
             OpenPauseMenu();
             isPaused = true;
         }
+        else if (mainMenuScript.DestroyAreYouSure())
+        {
+
+        }
         else
         {
+
             ClosePauseMenu();
             isPaused = false;
-            if (settingsScript != null)
-            {
-                settingsScript.DesummonOptionsMenu();
-            }
-            if (debugStoreScript != null)
-            {
-                debugStoreScript.DesummonDebugMenu();
-            }
+            //if (settingsScript != null)
+            //{
+            //    settingsScript.DesummonOptionsMenu();
+            //}
+            //if (debugStoreScript != null)
+            //{
+            //    debugStoreScript.DesummonDebugMenu();
+            //}
         }
     }
 
@@ -77,6 +96,7 @@ public class SettingsManager : MonoBehaviour
         gm.TurnOffTime();
         gm.TurnOffCamerControl();
         gm.TurnOffPlayerMovement();
+        FindObjectOfType<AudioManager>().PlaySoundInstantiate(summonSound);
     }
 
     public void ClosePauseMenu()
@@ -86,6 +106,23 @@ public class SettingsManager : MonoBehaviour
         gm.TurnOnTime();
         gm.TurnOnCamerControl();
         gm.TurnOnPlayerMovement();
+        gm.TurnOffPlayerJump();
+
+        print($"{gm._input.jump}");
+        print("closed pause menu");
+        FindObjectOfType<AudioManager>().PlaySoundInstantiate(deSummonSound);
+        StartCoroutine(DelayFrame());
+       
     }
 
+    public IEnumerator DelayFrame()
+    {
+        unPaused = true;
+        yield return null;
+        print("closed pause menu null");
+        unPaused = false;
+    }
+
+
 }
+

@@ -23,6 +23,7 @@ public class InputManager : MonoBehaviour
 	[Header("Mouse Cursor Settings")]
 	public bool cursorLocked = true;
 	public bool cursorInputForLook = true;
+	public float sensitivity;
 
 	public GameObject jumpText, jumpHoldText;
 
@@ -78,12 +79,13 @@ then call the input in another script with _input.{veryTopVar} == true;
 	{
 		if (cursorInputForLook)
 		{
-            look = (value.Get<Vector2>());
+            look = (value.Get<Vector2>() * sensitivity / 4);
 		}
 	}
 
 	public void OnJump(InputValue value)
 	{
+		print($"Set jump {value}");
 		jump = (value.isPressed);
 		//if (jump)
 		//{
@@ -130,6 +132,7 @@ then call the input in another script with _input.{veryTopVar} == true;
 	}
 	public void OnTalk(InputValue value)
 	{
+        print($"Set talk {value}");
         talk = (value.isPressed);
 	}
 	public void OnDash(InputValue value)

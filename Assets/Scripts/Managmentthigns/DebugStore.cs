@@ -47,6 +47,8 @@ public class DebugStore : MonoBehaviour
     public ReselectDefaultButton reselectButtonScript;
 
     public MainMenu mainMenuScript;
+
+    public Sound summonSound, deSummonSound, dataDeletionSound, cantAffordSound, boughtSound, enableSound, disableSound;
     // Start is called before the first frame update
     void Start()
     {
@@ -168,6 +170,7 @@ public class DebugStore : MonoBehaviour
             File.Delete(shopItemLocation);
             shopItemCollectionLocal = null;
         }
+        FindObjectOfType<AudioManager>().PlaySoundInstantiate(dataDeletionSound);
         PlayerDebugStatsGlobalManager.Instance.DeleteSave();
 
 
@@ -195,6 +198,7 @@ public class DebugStore : MonoBehaviour
         {
             debugStoreAnimator.SetTrigger("Move");
         }
+        FindObjectOfType<AudioManager>().PlaySoundInstantiate(summonSound);
         // called by options button
         isInDebugStore = true;
         debugStoreAnimator.SetTrigger("Move");
@@ -216,6 +220,9 @@ public class DebugStore : MonoBehaviour
         {
             debugStoreAnimator.SetTrigger("Move");
         }
+        print("debug menu pause");
+        FindObjectOfType<AudioManager>().PlaySoundInstantiate(deSummonSound);
+
         // called by back button
         isInDebugStore = false;
 
@@ -400,12 +407,12 @@ public class DebugStore : MonoBehaviour
         if (itemData.isEnabled)
         {
             itemData.isEnabled = false;
-
+            FindObjectOfType<AudioManager>().PlaySoundInstantiate(enableSound);
         }
         else
         {
             itemData.isEnabled = true;
-
+            FindObjectOfType<AudioManager>().PlaySoundInstantiate(disableSound);
         }
         InterpreteDictionary(itemData); // when trigger do its thing immedeeitly
     }
@@ -455,12 +462,16 @@ public class DebugStore : MonoBehaviour
             // deduct cost from candy int
             DecreaseCandyAmount(itemData.costOfItem);
 
+            
+            FindObjectOfType<AudioManager>().PlaySoundInstantiate(boughtSound);
             // set item as purchased on itself
             itemData.HasBeenPurchased();
-            ToggleEnable(itemData);
+            EnableTrue(itemData);
+            InterpreteDictionary(itemData); // when trigger do its thing immedeeitly
         }
         else
         {
+            FindObjectOfType<AudioManager>().PlaySoundInstantiate(cantAffordSound);
             print("Cant afford it");
         }
         ChangeButtonColor(itemData);

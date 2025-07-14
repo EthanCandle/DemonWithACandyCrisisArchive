@@ -84,6 +84,10 @@ public class GameManager : MonoBehaviour
         playerController.GainPlayerControl();
     }
 
+    public void TurnOffPlayerJump()
+    {
+        playerController._input.jump = false;
+    }
     public void TurnOffMouse()
     {
         _input.TurnOffMouse();

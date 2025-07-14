@@ -8,16 +8,18 @@ public class Settings : MonoBehaviour
     public bool isInOptions = false;
     public AudioManager audioManager;
     public int volume;
-    public Slider volumeSliderSFX, volumeSliderMusic;
+    public Slider volumeSliderSFX, volumeSliderMusic, controllerSensitivitySlider;
 
     public bool isMutedSFX = false, isMutedMusic = false;
     public GameObject muteObjectSFX, unMuteObjectSFX, muteObjectMusic, unMuteObjectMusic;
     public Animator optionsAnimator;
     public CanvasGroup menuToDeactiveOnSummon, canvasGroupLocal;
-
+    public Sound summonSound, deSummonSound;
     public ReselectDefaultButton reselectButtonScript;
+
+    public GameManager gm;
     // Start is called before the first frame update
-    void Awake()
+    void Start()
     {
         audioManager = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
 
@@ -33,10 +35,8 @@ public class Settings : MonoBehaviour
             MuteSFX();
             audioManager.CallDelayFrameSFX();
         }
-        SetSliderOnStartSFX();
-        SetSliderOnStartMusic();
 
-
+        CallDelayStartStuff();
     }
 
     // Update is called once per frame
@@ -45,6 +45,18 @@ public class Settings : MonoBehaviour
         
     }
 
+    public void CallDelayStartStuff()
+    {
+        StartCoroutine(DelayStartStuff());
+    }
+
+    public IEnumerator DelayStartStuff()
+    {
+        yield return null;
+        SetSliderOnStartSFX();
+        SetSliderOnStartMusic();
+        SetSliderOnStartController();
+    }
     public void SetSliderOnStartSFX()
     {
         // call this whenever this thing is set active (need to see if theres a set active start_
@@ -57,6 +69,13 @@ public class Settings : MonoBehaviour
         // makes it  so the slier starts on the correct value when it is made
         print("Set slide on music");
         volumeSliderMusic.value = audioManager.audioDataLocal.musicVolume;
+    }
+    public void SetSliderOnStartController()
+    {
+        // call this whenever this thing is set active (need to see if theres a set active start_
+        // makes it  so the slier starts on the correct value when it is made
+        print("Set slide on controller");
+        controllerSensitivitySlider.value = audioManager.audioDataLocal.controllerSensitivity;
     }
 
     public void ChangeVolumeSFX(Slider slider)
@@ -73,6 +92,14 @@ public class Settings : MonoBehaviour
         audioManager.SetVolumeMusic((int)slider.value);
         UnMuteMusic(); // just to remove the mute symbol
     }
+
+    public void ChangeControllerSensitivity(Slider slider)
+    {
+        // print((int)volumeSlider.value);
+
+        audioManager.SetControllerSensitivity((float)slider.value);
+    }
+
     public void ChangeMuteSFX()
     {
         if (isMutedSFX)
@@ -160,6 +187,7 @@ public class Settings : MonoBehaviour
         {
             optionsAnimator.SetTrigger("Move");
         }
+        FindObjectOfType<AudioManager>().PlaySoundInstantiate(summonSound);
         // called by options button
         isInOptions = true;
         optionsAnimator.SetTrigger("Move");
@@ -184,6 +212,8 @@ public class Settings : MonoBehaviour
         {
             optionsAnimator.SetTrigger("Move");
         }
+        print("options menu pause");
+        FindObjectOfType<AudioManager>().PlaySoundInstantiate(deSummonSound);
         // called by back button
         isInOptions = false;
 

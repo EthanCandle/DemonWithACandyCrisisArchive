@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 01168325da23df044ab1e1e2916d66a8, type: 3}
-  m_Name: BouncePadEcho
+  m_Name: EnableSound
   m_EditorClassIdentifier: 
-  nameOfSound: Bounce Boing
-  clip: {fileID: 8300000, guid: a21d30c577d194c4cae4f46331886c14, type: 3}
+  nameOfSound: 
+  clip: {fileID: 8300000, guid: e15a28f38ff257346b9cbba630ca4597, type: 3}
   volume: 1
-  volumeOriginal: 0.05
+  volumeOriginal: 0.75
   pitch: 1
   loop: 0
   audioMixerGroup: {fileID: 24300002, guid: e5c64160d8db3d54181c92225215f2b8, type: 2}

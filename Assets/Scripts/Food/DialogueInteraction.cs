@@ -30,6 +30,8 @@ public class DialogueInteraction : MonoBehaviour
 
 
     public InputManager _input;
+
+    public bool endingTalkingBool = false; // just used to fix jump bug
     // Start is called before the first frame update
     void Start()
     {
@@ -63,9 +65,43 @@ public class DialogueInteraction : MonoBehaviour
             _input.jump = false;
             Interact();
         }
+        else if(endingTalkingBool)
+        {
+            print("closed pause menu null else");
+            _input.interact = false;
+            _input.talk = false;
+            _input.dash = false;
+            _input.jumpHold = false;
+            _input.jump = false;
+            endingTalkingBool = false;
+        }
 
 
 
+    }
+
+    public IEnumerator DelayFrame()
+    {
+        print("closed pause menu null");
+        _input.interact = false;
+        _input.talk = false;
+        _input.dash = false;
+        _input.jumpHold = false;
+        _input.jump = false;
+        yield return null;
+        print("closed pause menu null");
+        _input.interact = false;
+        _input.talk = false;
+        _input.dash = false;
+        _input.jumpHold = false;
+        _input.jump = false;
+        yield return null;
+        print("closed pause menu null");
+        _input.interact = false;
+        _input.talk = false;
+        _input.dash = false;
+        _input.jumpHold = false;
+        _input.jump = false;
     }
 
     public void Interact()
@@ -183,9 +219,14 @@ public class DialogueInteraction : MonoBehaviour
             TurnOffDialogueWindow();
             TurnOffPromptWindow();
         }
+        // StartCoroutine(DelayFrame());
+        print("Ended to prevent jumnp");
+        StartCoroutine(DelayFrame());
+        endingTalkingBool = true;
         isPlayerWithinRange = false;
         dm.TurnOnPlayerMovement();
         hasStartedConversation = false;
+        StartCoroutine(DelayFrame());
     }
 
     public bool HasManagerFinishedTypingOutText()

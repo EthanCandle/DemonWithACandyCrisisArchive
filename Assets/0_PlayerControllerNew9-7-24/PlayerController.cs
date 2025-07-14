@@ -273,7 +273,7 @@ public class PlayerController : MonoBehaviour
 
         if (hasControl)
         {
-
+           // print($"{_input.jump} aa");
             JumpAndGravity(); // should be after ground check because it still thinks its on ground when we jump because we havn't moved yet causing a bug
             Move();
 
@@ -377,6 +377,7 @@ public class PlayerController : MonoBehaviour
     {
         if (_input.jump)
         {
+            print("jump in bufferJump");
             timeToHoldJumpBufferCurrent = timeToHoldJumpBufferMax;
             _input.jump = false;
         }
@@ -623,6 +624,7 @@ public class PlayerController : MonoBehaviour
             // Jump
             if (jumpBufferIsOn)
             {
+                print("In jump buffer");
                 FindObjectOfType<AudioManager>().PlaySoundInstantiate(jumpSFX);
                 AddJumpForce();
                 //  Debug.Log("Jump Velocity: " + _verticalVelocity);  // Should be ~7.67 m/s

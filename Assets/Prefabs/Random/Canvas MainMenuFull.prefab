@@ -147,6 +147,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3f7c3cdc4ccba94fabbb51c63be3acf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioManager: {fileID: 0}
 --- !u!114 &684081118565389712
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -441,6 +442,8 @@ MonoBehaviour:
   optionsAnimator: {fileID: 3033931275306661469}
   menuToDeactiveOnSummon: {fileID: 1486066972573153704}
   canvasGroupLocal: {fileID: 0}
+  summonSound: {fileID: 0}
+  deSummonSound: {fileID: 0}
   reselectButtonScript: {fileID: 0}
 --- !u!95 &3033931275306661469
 Animator:
@@ -1150,6 +1153,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3f7c3cdc4ccba94fabbb51c63be3acf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioManager: {fileID: 0}
 --- !u!114 &7427934450546599014
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1444,6 +1448,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3f7c3cdc4ccba94fabbb51c63be3acf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioManager: {fileID: 0}
 --- !u!1 &2433325914976050808
 GameObject:
   m_ObjectHideFlags: 0
@@ -2008,6 +2013,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3f7c3cdc4ccba94fabbb51c63be3acf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioManager: {fileID: 0}
 --- !u!114 &7020572769556283090
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2183,6 +2189,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3f7c3cdc4ccba94fabbb51c63be3acf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioManager: {fileID: 0}
 --- !u!1 &5142703819828320329
 GameObject:
   m_ObjectHideFlags: 0
@@ -2465,6 +2472,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3f7c3cdc4ccba94fabbb51c63be3acf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioManager: {fileID: 0}
 --- !u!114 &7004014867217011964
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2625,6 +2633,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3f7c3cdc4ccba94fabbb51c63be3acf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioManager: {fileID: 0}
 --- !u!114 &6932442241973746212
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2824,6 +2833,7 @@ GameObject:
   - component: {fileID: 8844854332092484386}
   - component: {fileID: 2417495708105990400}
   - component: {fileID: 4464691930913735949}
+  - component: {fileID: 8921068408364985254}
   m_Layer: 5
   m_Name: Canvas MainMenuFull
   m_TagString: Untagged
@@ -2942,7 +2952,10 @@ MonoBehaviour:
   isInDebugStore: 0
   isInLevelSelect: 0
   _input: {fileID: 0}
+  areYouSureScript: {fileID: 0}
   reselectButtonScript: {fileID: 0}
+  summonSound: {fileID: 11400000, guid: a2c6dc59a1019a84ebbd12ec720dea09, type: 2}
+  deSummonSound: {fileID: 11400000, guid: c6a63705053cc0341a9412aa781464e8, type: 2}
 --- !u!114 &4464691930913735949
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2961,6 +2974,22 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 7555042447715269548}
   - {fileID: 6681886271532581788}
+  validButtonsStore: []
+  allButtonsStore: []
+--- !u!114 &8921068408364985254
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6657691793747508391}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fb784c16525e13479af86ff2ffb75b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  confirmationCurrentlyUp: {fileID: 0}
+  isPopUp: 0
 --- !u!1 &7945203798023779812
 GameObject:
   m_ObjectHideFlags: 0
@@ -3183,6 +3212,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3f7c3cdc4ccba94fabbb51c63be3acf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioManager: {fileID: 0}
 --- !u!114 &2439523231440127349
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3531,6 +3561,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3f7c3cdc4ccba94fabbb51c63be3acf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioManager: {fileID: 0}
 --- !u!114 &2920374201374932412
 MonoBehaviour:
   m_ObjectHideFlags: 0

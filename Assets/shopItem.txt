@@ -2,53 +2,53 @@
     "items": [
         {
             "nameOfItem": "trail_runner",
-            "isPurchased": false,
-            "isEnabled": false
+            "isPurchased": true,
+            "isEnabled": true
         },
         {
             "nameOfItem": "speed_boost",
-            "isPurchased": false,
+            "isPurchased": true,
             "isEnabled": false
         },
         {
             "nameOfItem": "speed_penalty",
-            "isPurchased": false,
+            "isPurchased": true,
             "isEnabled": false
         },
         {
             "nameOfItem": "dash_distance_increase",
-            "isPurchased": false,
+            "isPurchased": true,
             "isEnabled": false
         },
         {
             "nameOfItem": "dash_distance_decrease",
-            "isPurchased": false,
+            "isPurchased": true,
             "isEnabled": false
         },
         {
             "nameOfItem": "candy_outline",
-            "isPurchased": false,
-            "isEnabled": false
+            "isPurchased": true,
+            "isEnabled": true
         },
         {
             "nameOfItem": "skin_random",
-            "isPurchased": false,
-            "isEnabled": false
+            "isPurchased": true,
+            "isEnabled": true
         },
         {
             "nameOfItem": "level_solo_timer",
-            "isPurchased": false,
-            "isEnabled": false
+            "isPurchased": true,
+            "isEnabled": true
         },
         {
             "nameOfItem": "level_all_timer",
-            "isPurchased": false,
-            "isEnabled": false
+            "isPurchased": true,
+            "isEnabled": true
         },
         {
             "nameOfItem": "level_fastest_timer",
-            "isPurchased": false,
-            "isEnabled": false
+            "isPurchased": true,
+            "isEnabled": true
         }
     ]
 }

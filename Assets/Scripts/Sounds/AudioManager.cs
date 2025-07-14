@@ -34,12 +34,13 @@ public class AudioManager : MonoBehaviour
     public string volumeData = Application.dataPath + "/volumeData.txt";
     public AudioSaveData audioDataLocal;
     public Settings settingScript;
-
+    public GameManager gm;
     // Start is called before the first frame update
     void Awake()
     {
-        print("Gett setting in audiomanager");
-        settingScript = GameObject.FindGameObjectWithTag("Options").GetComponent<Settings>();
+        //   print("Gett setting in audiomanager");
+
+
         // create self if not already in
         if (instance == null)
         {
@@ -60,6 +61,12 @@ public class AudioManager : MonoBehaviour
     void Start()
     {
         settingScript = GameObject.FindGameObjectWithTag("Options").GetComponent<Settings>();
+        GameObject gmObject = GameObject.FindGameObjectWithTag("GameManager");
+
+        if (gmObject != null && gmObject.TryGetComponent<GameManager>(out gm))
+        {
+            // gm is now assigned and usable
+        }
     }
     public Sound FindSound(string name)
     {
@@ -406,7 +413,7 @@ public class AudioManager : MonoBehaviour
         audioDataLocal.musicVolume = amountToChange;
         audioDataLocal.isMusicMuted = false;
 
-        print($"Music muted is: {audioDataLocal.isMusicMuted}, volume: {audioDataLocal.musicVolume}");
+       // print($"Music muted is: {audioDataLocal.isMusicMuted}, volume: {audioDataLocal.musicVolume}");
         AdjustVolumeMusic(audioDataLocal.musicVolume);
 
     }
@@ -435,24 +442,24 @@ public class AudioManager : MonoBehaviour
     {
         float dB = Mathf.Lerp(-20f, 20f, volume / 100f);
 
-        print(dB);
+      //  print(dB);
         DirectSetVolumeMusic(dB);
 
     }
 
     public void DirectSetVolumeMusic(float volume)
     {
-        print(volume);
+       // print(volume);
         for (int i = 0; i < audioMixerGroupMusics.Count; i++)
         {
-            print("Set music");
+        //    print("Set music");
             audioMixerGroupMusics[i].audioMixer.SetFloat("volume", volume);
-            print(volume);
+        //    print(volume);
         }
 
-        float f;
-        print(audioMixerGroupMusics[0].audioMixer.GetFloat("volume", out f));
-        print(f);
+       // float f;
+       // print(audioMixerGroupMusics[0].audioMixer.GetFloat("volume", out f));
+       // print(f);
         SaveData();
     }
 
@@ -463,12 +470,12 @@ public class AudioManager : MonoBehaviour
 
         if (audioDataLocal == null)
         {
-            audioSaveData = new AudioSaveData { sfxVolume = 50, musicVolume = 50, isSFXMuted = false, isMusicMuted = false };
+            audioSaveData = new AudioSaveData { sfxVolume = 50, musicVolume = 50, isSFXMuted = false, isMusicMuted = false, controllerSensitivity = 5 };
            // print("saving data is null");
         }
         else
         {
-            audioSaveData = new AudioSaveData { sfxVolume = audioDataLocal.sfxVolume, musicVolume = audioDataLocal.musicVolume, isSFXMuted = audioDataLocal.isSFXMuted, isMusicMuted = audioDataLocal.isMusicMuted };
+            audioSaveData = new AudioSaveData { sfxVolume = audioDataLocal.sfxVolume, musicVolume = audioDataLocal.musicVolume, isSFXMuted = audioDataLocal.isSFXMuted, isMusicMuted = audioDataLocal.isMusicMuted, controllerSensitivity = audioDataLocal.controllerSensitivity };
 
         }
 
@@ -492,13 +499,13 @@ public class AudioManager : MonoBehaviour
         audioDataLocal = JsonUtility.FromJson<AudioSaveData>(saveString);
 
         SetVolumeData();
-
+        LoadControllerSensitivity();
 
     }
 
     public void SetVolumeData()
     {
-        print("Set volume datat");
+      //  print("Set volume datat");
         if (audioDataLocal.isMusicMuted)
         {
             SetVolumeMusic(audioDataLocal.musicVolume);
@@ -537,6 +544,7 @@ public class AudioManager : MonoBehaviour
     {
 
         yield return null;
+        yield return null;
         print("IN coroco");
         settingScript = GameObject.FindGameObjectWithTag("Options").GetComponent<Settings>();
         audioDataLocal.isMusicMuted = true;
@@ -547,11 +555,36 @@ public class AudioManager : MonoBehaviour
     {
 
         yield return null;
+        yield return null;
         print("IN coroco");
         settingScript = GameObject.FindGameObjectWithTag("Options").GetComponent<Settings>();
         audioDataLocal.isSFXMuted = true;
         settingScript.MuteSFX();
     }
 
+    public void SetControllerSensitivity(float amountToChange)
+    {
+        print("set snesitity");
+        audioDataLocal.controllerSensitivity = amountToChange;
+        SaveData();
+        LoadControllerSensitivity();
+    }
 
+    public void LoadControllerSensitivity()
+    {
+        GameObject gmObject = GameObject.FindGameObjectWithTag("GameManager");
+
+        if (gmObject != null && gmObject.TryGetComponent<GameManager>(out gm))
+        {
+            // gm is now assigned and usable
+        }
+        if (gm == null)
+        {
+            return;
+        }
+        print("loaded snesitity");
+        print(gm);
+        gm._input.sensitivity = audioDataLocal.controllerSensitivity;
+        print(gm._input.sensitivity);
+    }
 }

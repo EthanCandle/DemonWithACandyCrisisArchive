@@ -2464,7 +2464,15 @@ MonoBehaviour:
   playerManager: {fileID: 0}
   candyManager: {fileID: 3817038305020016882}
   timerManager: {fileID: 0}
+  reselectButtonScript: {fileID: 0}
   mainMenuScript: {fileID: 0}
+  summonSound: {fileID: 11400000, guid: a2c6dc59a1019a84ebbd12ec720dea09, type: 2}
+  deSummonSound: {fileID: 11400000, guid: c6a63705053cc0341a9412aa781464e8, type: 2}
+  dataDeletionSound: {fileID: 11400000, guid: 73ffbedcc7eab3645b18922b9640f645, type: 2}
+  cantAffordSound: {fileID: 11400000, guid: 14987ba848eb57b45b2a8d8f7a514917, type: 2}
+  boughtSound: {fileID: 11400000, guid: d4327d1b1286f044896d3e0d1f3f8083, type: 2}
+  enableSound: {fileID: 11400000, guid: 3e8a856c1abed804980eb419d5558f6e, type: 2}
+  disableSound: {fileID: 11400000, guid: 74bb3997e2b8a0348bab54e7e459ef01, type: 2}
 --- !u!114 &3817038305020016882
 MonoBehaviour:
   m_ObjectHideFlags: 0

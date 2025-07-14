@@ -931,6 +931,10 @@ MonoBehaviour:
   noButton: {fileID: 1695504527801370274}
   messageText: {fileID: 2768381117121751163}
   blockerOfThisMenu: {fileID: 392901663805332005}
+  reselectButtonScript: {fileID: 0}
+  thingToMakeUnInteractiveHolder: {fileID: 0}
+  summonSound: {fileID: 11400000, guid: a2c6dc59a1019a84ebbd12ec720dea09, type: 2}
+  deSummonSound: {fileID: 11400000, guid: c6a63705053cc0341a9412aa781464e8, type: 2}
 --- !u!1 &5978427869633372755
 GameObject:
   m_ObjectHideFlags: 0

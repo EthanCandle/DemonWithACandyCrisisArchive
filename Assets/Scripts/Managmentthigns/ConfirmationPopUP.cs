@@ -13,10 +13,13 @@ public class ConfirmationPopUP : MonoBehaviour
     public GameObject blockerOfThisMenu; // prevents pressing again on this one
     public ReselectDefaultButton reselectButtonScript;
     public CanvasGroup thingToMakeUnInteractiveHolder;
+
+    public Sound summonSound, deSummonSound;
     // Start is called before the first frame update
     void Start()
     {
         blockerOfThisMenu.SetActive(false);
+        FindObjectOfType<AudioManager>().PlaySoundInstantiate(summonSound);
     }
 
     // Update is called once per frame
@@ -59,6 +62,8 @@ public class ConfirmationPopUP : MonoBehaviour
     public void CloseOnNo()
     {
         thingToMakeUnInteractiveHolder.interactable = true;
+        print("close on no pause");
+        FindObjectOfType<AudioManager>().PlaySoundInstantiate(deSummonSound);
         Destroy(gameObject);
     }
 

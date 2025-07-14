@@ -19,8 +19,11 @@ public class MainMenu : MonoBehaviour
 
     public InputManager _input;
     public ConfirmationPopUP areYouSureScript;
+    public ConfirmationPopUpManager popUpManager;
 
     public ReselectDefaultButton reselectButtonScript;
+
+    public Sound summonSound, deSummonSound;
     private void Start()
     {
         levelTransition = GameObject.FindGameObjectWithTag("Transition").GetComponent<LevelTransitionManager>();
@@ -174,9 +177,9 @@ public class MainMenu : MonoBehaviour
             _input.pause = false;
             _input.goBack = false;
 
-            if(areYouSureScript != null)
+            if(DestroyAreYouSure())
             {
-                areYouSureScript.CloseOnNo();
+               
             }
             else if (settingsScript != null && settingsScript.isInOptions)
             {
@@ -201,21 +204,28 @@ public class MainMenu : MonoBehaviour
         
         isInLevelSelect = false;
         levelSelectObject.gameObject.SetActive(false);
-
+        FindObjectOfType<AudioManager>().PlaySoundInstantiate(deSummonSound);
     }
 
     public void TurnOnLevelSelect()
     {
+
         mainMenuCG.interactable = false;
         print("main menu not interactable");
         isInLevelSelect = true;
         levelSelectObject.gameObject.SetActive(true);
         reselectButtonScript.SelectRandomButton();
+        FindObjectOfType<AudioManager>().PlaySoundInstantiate(summonSound);
     }
 
-    public void DestroyAreYouSure()
+    public bool DestroyAreYouSure()
     {
-
+        if (areYouSureScript != null)
+        {
+            areYouSureScript.CloseOnNo();
+            return true;
+        }
+        return false;
     }
 
 }

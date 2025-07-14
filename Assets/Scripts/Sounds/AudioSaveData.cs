@@ -6,5 +6,6 @@ using UnityEngine;
 public class AudioSaveData
 {
     public int sfxVolume, musicVolume;
+    public float controllerSensitivity;
     public bool isSFXMuted, isMusicMuted;
 }
