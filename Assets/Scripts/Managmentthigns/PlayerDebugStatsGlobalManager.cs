@@ -169,7 +169,7 @@ public class PlayerDebugStatsGlobalManager : MonoBehaviour
             DataSetTimeToCompleteWholeGame(dataLocal.currentTimeToCompleteGame);
         }
         DataSetCompletedWholeGame(true);
-
+        ReselectDefaultButton.instance.OpenedMenuPausedButtons();
     }
 
     public void DataSetTimeToCompleteWholeGame(float setValue)

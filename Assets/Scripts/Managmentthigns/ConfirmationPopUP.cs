@@ -38,8 +38,8 @@ public class ConfirmationPopUP : MonoBehaviour
         thingToMakeUnInteractiveHolder = thingToMakeUnInteractive;
         thingToMakeUnInteractiveHolder.interactable = false;
         onYesAction = onYes;
-        SetReselectButton(reselectButtonScriptNew);
-        yesButton.onClick.RemoveAllListeners();
+        ReselectDefaultButton.instance.SetButton(noButton);
+       yesButton.onClick.RemoveAllListeners();
         yesButton.onClick.AddListener(() =>
         {
             onYesAction?.Invoke();
@@ -64,6 +64,7 @@ public class ConfirmationPopUP : MonoBehaviour
         thingToMakeUnInteractiveHolder.interactable = true;
         print("close on no pause");
         FindObjectOfType<AudioManager>().PlaySoundInstantiate(deSummonSound);
+        ReselectDefaultButton.instance.GoBackToPreviousButton();
         Destroy(gameObject);
     }
 

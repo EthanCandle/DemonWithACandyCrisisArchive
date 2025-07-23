@@ -9,18 +9,42 @@ using UnityEngine.InputSystem;
 
 public class ReselectDefaultButton : MonoBehaviour
 {
+    public static ReselectDefaultButton instance;
+
     public GameObject  currentButton; // Assign your default/fallback button in Inspector
+    public Button previousButton;
 
     public List<GameObject> defaultButtons;
     public List<Button> validButtonsStore;
     public Button[] allButtonsStore;
 
+    public bool shouldReselectButton = true;
+
+    void Start()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+            return;
+        }
+       // DontDestroyOnLoad(gameObject);
+
+
+    }
     void Update()
     {
+        if (!shouldReselectButton)
+        {
+            return;
+        }
         if ((EventSystem.current.currentSelectedGameObject == null || !EventSystem.current.currentSelectedGameObject.activeInHierarchy) && Gamepad.current != null)
         {
 
-         //   print("setting random button");
+            print("setting random button");
             // Check if the user is trying to navigate with controller
             Vector2 nav = Gamepad.current.leftStick.ReadValue();
             bool dpadPressed = Gamepad.current.dpad.ReadValue() != Vector2.zero;
@@ -52,18 +76,15 @@ public class ReselectDefaultButton : MonoBehaviour
                 else
                 {
                     SelectRandomButton();
-                  //  Debug.Log($"{selectedObj.name} is NOT interactable.");
+                    Debug.Log($"{selectedObj.name} is NOT interactable.");
                 }
+
+                //print(EventSystem.current.currentSelectedGameObject.name);
             }
 
-           // print(EventSystem.current.currentSelectedGameObject.name);
         }
     }
 
-    void Start()
-    {
-        SelectRandomButton();
-    }
 
     public bool CheckButton(GameObject defaultButton)
     {
@@ -186,11 +207,44 @@ public class ReselectDefaultButton : MonoBehaviour
         currentButton = defaultButtons[0];
         EventSystem.current.SetSelectedGameObject(defaultButtons[0]);
     }    
-    
-    public void SetButton(Button buttonToSet)
+
+    public void SetAndGoToButton(Button buttonToSet)
     {
-        EventSystem.current.SetSelectedGameObject(buttonToSet.gameObject);
-        currentButton = buttonToSet.gameObject;
+        // call for hte main menu buttons
+        SetPreviousButton(buttonToSet);
+        SetButton(buttonToSet);
     }
 
+    public void SetPreviousButton(Button buttonToSet)
+    {
+        previousButton = buttonToSet;
+    }
+    
+    public void GoBackToPreviousButton()
+    {
+        if(previousButton == null)
+        {
+
+            return;
+        }
+        SetButton(previousButton);
+    }
+    public void SetButton(Button buttonToSet)
+    {
+
+        currentButton = buttonToSet.gameObject;
+        EventSystem.current.SetSelectedGameObject(buttonToSet.gameObject);
+        print(currentButton.name);
+    }
+
+    public void ClosedMenuGoToGamePlay()
+    {
+        shouldReselectButton = false;
+        EventSystem.current.SetSelectedGameObject(null);
+    }
+
+    public void OpenedMenuPausedButtons()
+    {
+        shouldReselectButton = true;
+    }
 }

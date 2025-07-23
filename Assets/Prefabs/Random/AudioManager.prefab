@@ -661,7 +661,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentVolumeSFX: 50
   currentVolumeMusic: 50
-  isMuted: 0
+  isSFXMuted: 0
+  isMusicMuted: 0
   mainMenuMusic: []
   gamePlayMusic:
   - {fileID: 11400000, guid: 0633721ca5a46a641994d6c69d47c977, type: 2}
@@ -690,6 +691,15 @@ MonoBehaviour:
   - {fileID: 24300002, guid: e5c64160d8db3d54181c92225215f2b8, type: 2}
   - {fileID: 24300002, guid: ef51af42d9e1d40499e7ccd432289a0c, type: 2}
   inMainMenuFirstTime: 1
+  volumeData: E:/0_Things/Unity/TypingGameWithPlayControllerItchio/Assets/volumeData.txt
+  audioDataLocal:
+    sfxVolume: 0
+    musicVolume: 0
+    controllerSensitivity: 0
+    isSFXMuted: 0
+    isMusicMuted: 0
+  settingScript: {fileID: 0}
+  gm: {fileID: 0}
 --- !u!1 &8681546393746961218
 GameObject:
   m_ObjectHideFlags: 0
@@ -701,6 +711,7 @@ GameObject:
   - component: {fileID: 7291174764621378564}
   - component: {fileID: 8734652873196595011}
   - component: {fileID: 6467889445166484146}
+  - component: {fileID: 2686394681778661607}
   m_Layer: 0
   m_Name: EmptyObjectToHoldScripts
   m_TagString: GlobalScripts
@@ -764,3 +775,21 @@ MonoBehaviour:
   levelTimerText: {fileID: 895468576005107780}
   timeTimerText: {fileID: 5238420667848688388}
   fastestTimerText: {fileID: 8042054853481362368}
+--- !u!114 &2686394681778661607
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8681546393746961218}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8bb9f07ecb612e49882fee0c0aed652, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentButton: {fileID: 0}
+  previousButton: {fileID: 0}
+  defaultButtons: []
+  validButtonsStore: []
+  allButtonsStore: []
+  shouldReselectButton: 0

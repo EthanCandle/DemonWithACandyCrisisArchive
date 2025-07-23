@@ -3,7 +3,7 @@
         {
             "nameOfItem": "trail_runner",
             "isPurchased": true,
-            "isEnabled": true
+            "isEnabled": false
         },
         {
             "nameOfItem": "speed_boost",
@@ -12,23 +12,23 @@
         },
         {
             "nameOfItem": "speed_penalty",
-            "isPurchased": true,
+            "isPurchased": false,
             "isEnabled": false
         },
         {
             "nameOfItem": "dash_distance_increase",
-            "isPurchased": true,
+            "isPurchased": false,
             "isEnabled": false
         },
         {
             "nameOfItem": "dash_distance_decrease",
-            "isPurchased": true,
+            "isPurchased": false,
             "isEnabled": false
         },
         {
             "nameOfItem": "candy_outline",
             "isPurchased": true,
-            "isEnabled": true
+            "isEnabled": false
         },
         {
             "nameOfItem": "skin_random",
@@ -42,8 +42,8 @@
         },
         {
             "nameOfItem": "level_all_timer",
-            "isPurchased": true,
-            "isEnabled": true
+            "isPurchased": false,
+            "isEnabled": false
         },
         {
             "nameOfItem": "level_fastest_timer",

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEditor.Rendering;
 using UnityEngine;
+using UnityEngine.UI;
 
 
 public class DebugStore : MonoBehaviour
@@ -47,6 +48,7 @@ public class DebugStore : MonoBehaviour
     public ReselectDefaultButton reselectButtonScript;
 
     public MainMenu mainMenuScript;
+    public Button debugStoreDefaultButton;
 
     public Sound summonSound, deSummonSound, dataDeletionSound, cantAffordSound, boughtSound, enableSound, disableSound;
     // Start is called before the first frame update
@@ -139,11 +141,11 @@ public class DebugStore : MonoBehaviour
         TriggerEventListener();
     }
 
-    public void DeleteData()
+    public void DeleteData(Button button)
     {
         if (mainMenuScript)
         {
-            mainMenuScript.SpawnConfirmationPopup(DeleteDataLogic, mainMenuScript.mainMenuCG);
+            mainMenuScript.SpawnConfirmationPopup(DeleteDataLogic, mainMenuScript.mainMenuCG, button);
         }
         else
         {
@@ -179,7 +181,7 @@ public class DebugStore : MonoBehaviour
         TriggerAllItems(); // makes everything remove itself and it does it
 
     }
-    public void ToggleOptionsMenu()
+    public void ToggleOptionsMenu(Button button)
     {
         if (isInDebugStore)
         {
@@ -187,12 +189,12 @@ public class DebugStore : MonoBehaviour
         }
         else
         {
-            SummonDebugMenu();
+            SummonDebugMenu(button);
         }
     }
 
     // called by buttons, 
-    public void SummonDebugMenu()
+    public void SummonDebugMenu(Button button)
     {
         if (!isInDebugStore)
         {
@@ -205,15 +207,12 @@ public class DebugStore : MonoBehaviour
         menuToDeactiveOnSummon.interactable = false;
         canvasGroupLocal.interactable = true;
         LoadButtonData();
-        StartCoroutine(DelayFrame());
-    }
 
-    public IEnumerator DelayFrame()
-    {
-        yield return null;
-        reselectButtonScript.SelectRandomButton();
-    }
+        print("Summon debug");
+        ReselectDefaultButton.instance.SetPreviousButton(button);
+        ReselectDefaultButton.instance.SetButton(debugStoreDefaultButton);
 
+    }
     public void DesummonDebugMenu()
     {
         if (isInDebugStore)
@@ -228,7 +227,9 @@ public class DebugStore : MonoBehaviour
 
         menuToDeactiveOnSummon.interactable = true;
         canvasGroupLocal.interactable = false;
-        StartCoroutine(DelayFrame());
+        ReselectDefaultButton.instance.GoBackToPreviousButton();
+
+
         // TriggerAllItems(); 
         // each button will trigger itself so we don't need to call it other than at the start
     }

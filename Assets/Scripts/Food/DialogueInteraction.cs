@@ -172,8 +172,7 @@ public class DialogueInteraction : MonoBehaviour
 
                 if (shouldKillSelfAtEnd)
                 {
-                    isDead = true;
-                    Destroy(gameObject, 3f);
+                    KillSelf();
                 }
             }
             return;
@@ -181,6 +180,12 @@ public class DialogueInteraction : MonoBehaviour
 
          DisplayNextLine(); // displays the line
         // also need to play the function, the animation, and assign the name and sprite
+    }
+
+    public void KillSelf()
+    {
+        isDead = true;
+        Destroy(gameObject, 3f);
     }
 
     public bool IsOnLastLineOfDialogue()

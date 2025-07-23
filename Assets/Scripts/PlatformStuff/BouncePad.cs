@@ -6,10 +6,14 @@ public class BouncePad : MonoBehaviour
 {
     public Sound boingSFX;
     public float bounceStength = 6;
-    // Start is called before the first frame update
-    void Start()
+
+    public  float lastPlayTime;
+    public  float minDelayBetweenPlays = 0.05f;
+
+    public AudioManager audioManager;
+    public void Awake()
     {
-        
+        audioManager = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
     }
 
     // Update is called once per frame
@@ -36,6 +40,15 @@ public class BouncePad : MonoBehaviour
     public void BouncePlayer(GameObject objToBounce)
     {
         objToBounce.gameObject.GetComponent<PlayerController>().Bounce(bounceStength);
-        FindObjectOfType<AudioManager>().PlaySoundInstantiate(boingSFX);
+        PlaySound();
+    }
+
+    public void PlaySound()
+    {
+        if (Time.unscaledTime - lastPlayTime > minDelayBetweenPlays)
+        {
+            audioManager.PlaySoundInstantiate(boingSFX);
+            lastPlayTime = Time.unscaledTime;
+        }
     }
 }

@@ -85,7 +85,7 @@ then call the input in another script with _input.{veryTopVar} == true;
 
 	public void OnJump(InputValue value)
 	{
-		print($"Set jump {value}");
+		//print($"Set jump {value}");
 		jump = (value.isPressed);
 		//if (jump)
 		//{
@@ -132,7 +132,7 @@ then call the input in another script with _input.{veryTopVar} == true;
 	}
 	public void OnTalk(InputValue value)
 	{
-        print($"Set talk {value}");
+        //print($"Set talk {value}");
         talk = (value.isPressed);
 	}
 	public void OnDash(InputValue value)

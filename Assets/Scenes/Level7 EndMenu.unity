@@ -1061,6 +1061,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 270}
+--- !u!114 &183363912 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6467889445166484146, guid: 6c46e4498cb8c8f479f4612549a89cc6,
+    type: 3}
+  m_PrefabInstance: {fileID: 1979965685877880915}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a9d559aa216c1b4888034e9332c0901, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &202651463
 GameObject:
   m_ObjectHideFlags: 0
@@ -3258,7 +3270,6 @@ GameObject:
   m_Component:
   - component: {fileID: 510097825}
   - component: {fileID: 510097826}
-  - component: {fileID: 510097827}
   m_Layer: 0
   m_Name: Geometry
   m_TagString: Player
@@ -3309,22 +3320,6 @@ MonoBehaviour:
   playerSprintSpeedBoost: 0
   playerWalkSpeedBoost: 0
   skinNumber: 0
---- !u!114 &510097827
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 510097824}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f8bb9f07ecb612e49882fee0c0aed652, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentButton: {fileID: 0}
-  defaultButtons: []
-  validButtonsStore: []
-  allButtonsStore: []
 --- !u!1 &514235591
 GameObject:
   m_ObjectHideFlags: 0
@@ -7916,6 +7911,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3f7c3cdc4ccba94fabbb51c63be3acf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioManager: {fileID: 0}
 --- !u!114 &893795038
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7962,7 +7958,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1150077870}
         m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
-        m_MethodName: BackToMainMenu
+        m_MethodName: BackToMainMenuLogic
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -8716,6 +8712,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3f7c3cdc4ccba94fabbb51c63be3acf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioManager: {fileID: 0}
 --- !u!114 &954888301
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -77902,7 +77899,13 @@ MonoBehaviour:
   isInDebugStore: 0
   isInLevelSelect: 0
   _input: {fileID: 0}
+  areYouSureScript: {fileID: 0}
+  popUpManager: {fileID: 0}
   reselectButtonScript: {fileID: 0}
+  summonSound: {fileID: 0}
+  deSummonSound: {fileID: 0}
+  levelSelectDefaultButton: {fileID: 0}
+  mainMenuDefaultButton: {fileID: 0}
 --- !u!114 &1150077871
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -79506,6 +79509,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3f7c3cdc4ccba94fabbb51c63be3acf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioManager: {fileID: 0}
 --- !u!114 &1470223146
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -80586,6 +80590,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3f7c3cdc4ccba94fabbb51c63be3acf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioManager: {fileID: 0}
 --- !u!114 &1636418071
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -82736,6 +82741,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2686394681778661607, guid: 6c46e4498cb8c8f479f4612549a89cc6,
+        type: 3}
+      propertyPath: shouldReselectButton
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3108498347232843423, guid: 6c46e4498cb8c8f479f4612549a89cc6,
         type: 3}
       propertyPath: m_Enabled
@@ -82904,6 +82914,16 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 186624761929997107, guid: cc9fe48cd39e0964f8a978bb3a7d40b5,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 186624761929997107, guid: cc9fe48cd39e0964f8a978bb3a7d40b5,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 330253053529418999, guid: cc9fe48cd39e0964f8a978bb3a7d40b5,
         type: 3}
       propertyPath: m_IsActive
@@ -83019,6 +83039,16 @@ PrefabInstance:
       propertyPath: defaultButtons.Array.data[2]
       value: 
       objectReference: {fileID: 1787996858}
+    - target: {fileID: 4928541733866892300, guid: cc9fe48cd39e0964f8a978bb3a7d40b5,
+        type: 3}
+      propertyPath: timerManager
+      value: 
+      objectReference: {fileID: 183363912}
+    - target: {fileID: 4928541733866892300, guid: cc9fe48cd39e0964f8a978bb3a7d40b5,
+        type: 3}
+      propertyPath: playerManager
+      value: 
+      objectReference: {fileID: 510097826}
     - target: {fileID: 5184258715385159365, guid: cc9fe48cd39e0964f8a978bb3a7d40b5,
         type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -83028,6 +83058,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Delete Save Button
+      objectReference: {fileID: 0}
+    - target: {fileID: 5942817084707126895, guid: cc9fe48cd39e0964f8a978bb3a7d40b5,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5942817084707126895, guid: cc9fe48cd39e0964f8a978bb3a7d40b5,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5942817084707126895, guid: cc9fe48cd39e0964f8a978bb3a7d40b5,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6063813096042615757, guid: cc9fe48cd39e0964f8a978bb3a7d40b5,
         type: 3}

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour
 {
@@ -24,6 +25,9 @@ public class MainMenu : MonoBehaviour
     public ReselectDefaultButton reselectButtonScript;
 
     public Sound summonSound, deSummonSound;
+
+    public Button levelSelectDefaultButton, mainMenuDefaultButton;
+
     private void Start()
     {
         levelTransition = GameObject.FindGameObjectWithTag("Transition").GetComponent<LevelTransitionManager>();
@@ -34,6 +38,7 @@ public class MainMenu : MonoBehaviour
 
     public void PlayGame () // new game
     {
+        ReselectDefaultButton.instance.ClosedMenuGoToGamePlay();
         // done by nomal button
         // reset and start timer
         PlayerDebugStatsTimer.Instance.PauseTimer();
@@ -52,6 +57,7 @@ public class MainMenu : MonoBehaviour
 
     public void PlayGameContinue()
     {
+        ReselectDefaultButton.instance.ClosedMenuGoToGamePlay();
         // done by nomal button
         // reset and start timer
         PlayerDebugStatsTimer.Instance.PauseTimer();
@@ -66,6 +72,7 @@ public class MainMenu : MonoBehaviour
             print(SceneManager.sceneCountInBuildSettings - 1);
             // go back to level 1
             PlayerDebugStatsGlobalManager.Instance.DataResetLevelCount();
+
         }
 
         float totalTimeBeforeCurrentLevel = 0;
@@ -80,7 +87,7 @@ public class MainMenu : MonoBehaviour
         levelTransition.MoveToDifferentLevel(PlayerDebugStatsGlobalManager.Instance.DataGetLevelCount());
     }
 
-    public void ResetLevel()
+    public void ResetLevel(Button button)
     {
         // called by pause button
         // called by the button, should only reset time if not in main game
@@ -91,18 +98,18 @@ public class MainMenu : MonoBehaviour
             PlayerDebugStatsTimer.Instance.StartTimer();
         }
         // if in main run do nothing
-        SpawnConfirmationPopup(ResetLevelLogic, pauseMenuCG);
+        SpawnConfirmationPopup(ResetLevelLogic, pauseMenuCG, button);
     }
 
     public void ResetLevelLogic()
     {
         levelTransition.MoveToDifferentLevel(SceneManager.GetActiveScene().buildIndex);
     }
-    public void BackToMainMenu()
+    public void BackToMainMenu(Button button)
     {
         // called by pause menu button
         // called by the button
-        SpawnConfirmationPopup(BackToMainMenuLogic, pauseMenuCG);
+        SpawnConfirmationPopup(BackToMainMenuLogic, pauseMenuCG, button);
     }
 
     public void BackToMainMenuLogic()
@@ -121,9 +128,10 @@ public class MainMenu : MonoBehaviour
 
     public void PlayLevel(int levelToPlay)
     {
+        ReselectDefaultButton.instance.ClosedMenuGoToGamePlay();
         // called by level select buttons
 
-        if(PlayerDebugStatsGlobalManager.Instance == null)
+        if (PlayerDebugStatsGlobalManager.Instance == null)
         {
             print("Instant null");
         }
@@ -141,10 +149,10 @@ public class MainMenu : MonoBehaviour
 
 
 
-    public void QuitGame ()
+    public void QuitGame (Button button)
     {
         // called by the button
-        SpawnConfirmationPopup(QuitGameLogic, mainMenuCG);
+        SpawnConfirmationPopup(QuitGameLogic, mainMenuCG, button);
     }
 
     public void QuitGameLogic()
@@ -154,13 +162,13 @@ public class MainMenu : MonoBehaviour
     }
 
 
-    public void SpawnConfirmationPopup(Action onYes, CanvasGroup canvasGroup, bool shouldKillSelf = false)
+    public void SpawnConfirmationPopup(Action onYes, CanvasGroup canvasGroup, Button button)
     {
         // action is the function itself
         GameObject popUp = Instantiate(confirmationPopup, confirmationPopup.transform.position, confirmationPopup.transform.rotation);
         ConfirmationPopUP popUpScript = popUp.GetComponent<ConfirmationPopUP>();
         popUpScript.Show(onYes, canvasGroup,reselectButtonScript);
-        reselectButtonScript.SelectRandomButton();
+        ReselectDefaultButton.instance.SetPreviousButton(button);
         areYouSureScript = popUpScript;
     }
 
@@ -205,17 +213,23 @@ public class MainMenu : MonoBehaviour
         isInLevelSelect = false;
         levelSelectObject.gameObject.SetActive(false);
         FindObjectOfType<AudioManager>().PlaySoundInstantiate(deSummonSound);
+
+        ReselectDefaultButton.instance.GoBackToPreviousButton();
     }
 
-    public void TurnOnLevelSelect()
+    public void TurnOnLevelSelect(Button button)
     {
 
         mainMenuCG.interactable = false;
         print("main menu not interactable");
         isInLevelSelect = true;
         levelSelectObject.gameObject.SetActive(true);
-        reselectButtonScript.SelectRandomButton();
+       // reselectButtonScript.SelectRandomButton();
         FindObjectOfType<AudioManager>().PlaySoundInstantiate(summonSound);
+
+        ReselectDefaultButton.instance.SetPreviousButton(button);
+        ReselectDefaultButton.instance.SetButton(levelSelectDefaultButton);
+
     }
 
     public bool DestroyAreYouSure()

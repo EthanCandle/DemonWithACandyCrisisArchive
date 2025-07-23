@@ -30,7 +30,7 @@ public class BoxGirlFunctions : MonoBehaviour
 
     public void SpawnParticlesDoor(GameObject objectToSpawnAt, GameObject particlesToSummon)
     {
-        Instantiate(particlesToSummon, objectToSpawnAt.transform.position, teleportParticleDoor.transform.rotation);
+        Instantiate(particlesToSummon, objectToSpawnAt.transform.position, objectToSpawnAt.transform.rotation);
     }
 
     public void SetDoorFalse(GameObject objectToChange)

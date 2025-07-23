@@ -10,6 +10,8 @@ public class ShaderUnscaledTime : MonoBehaviour
     public List<Material> matchingMaterials = new List<Material>();
 
     public static ShaderUnscaledTime Instance;
+
+    public bool isShaderOn = true;
     void Awake()
     {
         if (transform.parent != null)
@@ -39,6 +41,11 @@ public class ShaderUnscaledTime : MonoBehaviour
 
     void Update()
     {
+        if (!isShaderOn)
+        {
+            return;
+        }
+
         float unscaled = Time.unscaledTime;
         foreach (Material mat in matchingMaterials)
         {
@@ -59,4 +66,21 @@ public class ShaderUnscaledTime : MonoBehaviour
                 matchingMaterials.Add(mat);
         }
     }
+
+    public void EnableShader()
+    {
+        // called by debug store button
+        ToggleShader(true);
+    }
+
+    public void DisableShader()
+    {
+        ToggleShader(false);
+    }
+
+    public void ToggleShader(bool state)
+    {
+        isShaderOn = state;
+    }
+
 }

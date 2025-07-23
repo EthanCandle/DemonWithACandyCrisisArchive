@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 4519799810721104166}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: -0.49, z: 0}
+  m_LocalPosition: {x: -0, y: -0.449, z: 0.003}
   m_LocalScale: {x: 3.746135, y: 3.746135, z: 3.746135}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -71,7 +71,7 @@ MonoBehaviour:
   m_EndAngleFade: 180
   m_UVScale: {x: 1, y: 1}
   m_UVBias: {x: 0, y: 0}
-  m_DecalLayerMask: 4294967295
+  m_DecalLayerMask: 8
   m_ScaleMode: 1
   m_Offset: {x: 0, y: 0, z: 25}
   m_Size: {x: 0.8, y: 0.8, z: 50}
@@ -625,6 +625,7 @@ MonoBehaviour:
     AnimationToPlayName: Close
     shouldTransitionToThisAnimation: 1
   _input: {fileID: 0}
+  endingTalkingBool: 0
 --- !u!114 &2000985832754677923
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -696,6 +697,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17ab307f1cc1c4f47b6801eab1e857d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  movingPlatform: {fileID: 0}
 --- !u!1001 &7606147926978220922
 PrefabInstance:
   m_ObjectHideFlags: 0

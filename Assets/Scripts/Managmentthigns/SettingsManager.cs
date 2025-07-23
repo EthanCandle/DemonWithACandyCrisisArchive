@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SettingsManager : MonoBehaviour
 {
@@ -16,6 +17,7 @@ public class SettingsManager : MonoBehaviour
     public MainMenu mainMenuScript;
     public Sound summonSound, deSummonSound;
 
+    public Button pauseMenuDefaultButton;
     public bool unPaused;
     // Start is called before the first frame update
     void Start()
@@ -52,7 +54,7 @@ public class SettingsManager : MonoBehaviour
             {
                 ChangePauseMenuState();
             }
-            settingsScript.ReselectButton();
+           // settingsScript.ReselectButton();
         }
 
         if (unPaused)
@@ -97,6 +99,10 @@ public class SettingsManager : MonoBehaviour
         gm.TurnOffCamerControl();
         gm.TurnOffPlayerMovement();
         FindObjectOfType<AudioManager>().PlaySoundInstantiate(summonSound);
+
+        ReselectDefaultButton.instance.SetPreviousButton(pauseMenuDefaultButton);
+        ReselectDefaultButton.instance.SetButton(pauseMenuDefaultButton);
+        ReselectDefaultButton.instance.OpenedMenuPausedButtons();
     }
 
     public void ClosePauseMenu()
@@ -112,7 +118,9 @@ public class SettingsManager : MonoBehaviour
         print("closed pause menu");
         FindObjectOfType<AudioManager>().PlaySoundInstantiate(deSummonSound);
         StartCoroutine(DelayFrame());
-       
+
+        // causes button selector to stop
+        ReselectDefaultButton.instance.ClosedMenuGoToGamePlay();
     }
 
     public IEnumerator DelayFrame()

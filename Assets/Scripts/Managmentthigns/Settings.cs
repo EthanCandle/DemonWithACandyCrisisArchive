@@ -17,6 +17,7 @@ public class Settings : MonoBehaviour
     public Sound summonSound, deSummonSound;
     public ReselectDefaultButton reselectButtonScript;
 
+    public Button settingsDefaultButton;
     public GameManager gm;
     // Start is called before the first frame update
     void Start()
@@ -168,7 +169,7 @@ public class Settings : MonoBehaviour
 
     }
 
-    public void ToggleOptionsMenu()
+    public void ToggleOptionsMenu(Button button)
     {
         if (isInOptions)
         {
@@ -176,12 +177,12 @@ public class Settings : MonoBehaviour
         }
         else
         {
-            SummonOptionsMenu();
+            SummonOptionsMenu(button);
         }
     }
 
     // called by buttons, 
-    public void SummonOptionsMenu()
+    public void SummonOptionsMenu(Button button)
     {
         if (!isInOptions)
         {
@@ -193,7 +194,10 @@ public class Settings : MonoBehaviour
         optionsAnimator.SetTrigger("Move");
         menuToDeactiveOnSummon.interactable = false;
         canvasGroupLocal.interactable = true;
-        ReselectButton();
+       // ReselectButton();
+
+        ReselectDefaultButton.instance.SetPreviousButton(button);
+        ReselectDefaultButton.instance.SetButton(settingsDefaultButton);
     }
 
     public void ReselectButton()
@@ -219,7 +223,8 @@ public class Settings : MonoBehaviour
 
         menuToDeactiveOnSummon.interactable = true;
         canvasGroupLocal.interactable = false;
-        ReselectButton();
+
+        ReselectDefaultButton.instance.GoBackToPreviousButton();
     }
 
 
