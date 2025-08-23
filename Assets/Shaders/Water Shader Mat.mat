@@ -109,10 +109,10 @@ Material:
     - _DstBlend: 0
     - _DstBlendAlpha: 0
     - _EnvironmentReflections: 1
-    - _FlowSpeed: 0.2
-    - _FoamDensity: 5
-    - _FoamSpeed: 1
-    - _FoamThickness: 5
+    - _FlowSpeed: 1
+    - _FoamDensity: 0.1
+    - _FoamSpeed: 0.25
+    - _FoamThickness: 4.5
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
@@ -129,7 +129,7 @@ Material:
     - _SrcBlend: 1
     - _SrcBlendAlpha: 1
     - _Surface: 0
-    - _UnscaledTime: 69.39419
+    - _UnscaledTime: 744.6391
     - _WaveHeight: 0
     - _WaveSpread: 0
     - _WorkflowMode: 1

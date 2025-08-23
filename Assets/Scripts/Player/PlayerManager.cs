@@ -14,7 +14,7 @@ public class PlayerManager : MonoBehaviour
     public PlayerController playerController;
     public GameObject trialRunner; // players line runner trail
 
-    public GameObject skinCurrent;
+    public GameObject skinCurrent, crownObject;
     public List<GameObject> skinObjects;
 
     public float playerSprintSpeedBoost, playerWalkSpeedBoost;
@@ -100,5 +100,16 @@ public class PlayerManager : MonoBehaviour
         skinObjects[skinNumber].SetActive(true);
     }
 
+    public void EnableCrown(bool state)
+    {
+        if (state)
+        {
+            crownObject.SetActive(true);
+        }
+        else
+        {
+            crownObject.SetActive(false);
+        }
+    }
 
 }

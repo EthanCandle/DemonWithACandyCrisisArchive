@@ -5,6 +5,8 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEditor.Rendering;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
+
 public class DialogueManager : MonoBehaviour
 {
     public TextMeshProUGUI dialogueText; // text to set for the dialogue
@@ -25,6 +27,21 @@ public class DialogueManager : MonoBehaviour
 
     public Sound talkingSFX;
     public Sound windowGoingInSFX, windowGoingOutSFX;
+
+    public PlayerInput playerInput;
+    public bool isUsingKeyboard = true;
+
+    public SettingsManager settingsManagerScript;
+
+    public Coroutine typingCoroutine;
+
+    private void Awake()
+    {
+        playerInput = FindObjectOfType<PlayerInput>();
+        settingsManagerScript = GameObject.FindGameObjectWithTag("PlayerMenu").GetComponent<SettingsManager>();
+    }
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -36,6 +53,7 @@ public class DialogueManager : MonoBehaviour
     {
         // hide the dialouge, re enable player movement
         // canvasToShowText.SetActive(false);
+        settingsManagerScript.allowedToPause = true;
         dialogueAnimation.Play("GoingDown");
         FindObjectOfType<AudioManager>().PlaySoundInstantiate(windowGoingOutSFX);
         //   TurnOnPlayerMovement();
@@ -46,6 +64,7 @@ public class DialogueManager : MonoBehaviour
         // have animation of it popping up instead of insta appearing
         //TurnOffPlayerMovement();
         canvasToShowText.SetActive(true);
+        settingsManagerScript.allowedToPause = false;
         dialogueAnimation.Play("GoingUp");
         FindObjectOfType<AudioManager>().PlaySoundInstantiate(windowGoingInSFX);
     }
@@ -70,7 +89,13 @@ public class DialogueManager : MonoBehaviour
         // need to replace with typing it out instead like most visual novels
         // should be ienumerator that calls itself in the big for loop
 
-          StartCoroutine(TypeOutText(data.dialogueText));
+        // stop previous coroutine
+        if (typingCoroutine != null)
+        {
+            StopCoroutine(typingCoroutine);
+        }
+
+        typingCoroutine = StartCoroutine(TypeOutText(data.dialogueText));
         // display name and avatar
         avatarImage.texture = data.dialogueAsset.avatarTexture;
         nameText.text = data.dialogueAsset.nameOfSelf;
@@ -125,7 +150,17 @@ public class DialogueManager : MonoBehaviour
     {
         // need to replace with typing it out instead like most visual novels
         // should be ienumerator that calls itself in the big for loop
-        promptText.text = $"(E) {textToShow}"; // prints like "(E) Talk"
+
+        print(playerInput.currentControlScheme);
+        if (playerInput.currentControlScheme == "KeyboardMouse" || playerInput.currentControlScheme == "Keyboard")
+        {
+            promptText.text = $"(E) {textToShow}"; // prints like "(E) Talk"
+        }
+        else
+        {
+            promptText.text = $"(RB/North Button) {textToShow}"; // prints like "(E) Talk"
+        }
+
 
     }
     public void TurnOffPlayerMovement()
@@ -137,5 +172,6 @@ public class DialogueManager : MonoBehaviour
     {
         gm.TurnOnPlayerMovement();
     }
+
 
 }

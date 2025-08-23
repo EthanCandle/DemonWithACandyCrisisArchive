@@ -157,7 +157,7 @@ then call the input in another script with _input.{veryTopVar} == true;
 
 	public void SetCursorState(bool isMouseLocked)
 	{//
-		//print($"set cursor state{isMouseLocked}");
+		print($"set cursor state{isMouseLocked}");
         //Cursor.lockState = newState ? CursorLockMode.Locked : CursorLockMode.None;
 
         if (isMouseLocked)
@@ -168,6 +168,7 @@ then call the input in another script with _input.{veryTopVar} == true;
         {
             Cursor.lockState = CursorLockMode.None;
         }
+		cursorLocked = isMouseLocked;
     }
 
 

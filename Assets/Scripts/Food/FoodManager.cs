@@ -7,18 +7,21 @@ public class FoodManager : MonoBehaviour
     // keep track of how much food has been gotten, trigger the door to open to be intereacted with, hold objects needed 
     // for platforming relavence
     // maybe keep player health or bonus or something
-    public int candyToCollectNeeded = 10, candyToCollectTotal = 0;
+    public int candyToCollectNeeded = 10, candyToCollectTotal = 0, candyTotalInScene = 0;
 
     public GameObject objectToBecomeInteractable; // door to the end the level with
+    GameObject[] taggedObjects;
 
     public GameManager gm;
     public DebugStore debugStore;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         gm = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
         debugStore = FindObjectOfType<DebugStore>();
+
+        SetTotalCandy();
     }
 
     // Update is called once per frame
@@ -27,6 +30,11 @@ public class FoodManager : MonoBehaviour
         
     }
 
+    public void SetTotalCandy()
+    {
+        taggedObjects = GameObject.FindGameObjectsWithTag("Food");
+        candyTotalInScene = taggedObjects.Length;
+    }
     public void CollectNormalCandy()
     {
         PlayerDebugStatsGlobalManager.Instance.DataIncreaseCandy();

@@ -10,13 +10,13 @@ public class MainMenu : MonoBehaviour
     public LevelTransitionManager levelTransition;
     public PlayerDebugStatsGlobalManager playerStatManager;
 
-    public GameObject confirmationPopup, levelSelectObject;
+    public GameObject confirmationPopup, levelSelectObject, controlsObject;
     public CanvasGroup mainMenuCG, pauseMenuCG;
 
-
+    public SettingsManager settingManagerScript;
     public Settings settingsScript;
     public DebugStore debugStoreScript;
-    public bool isInOptions, isInDebugStore, isInLevelSelect;
+    public bool isInOptions, isInDebugStore, isInLevelSelect, isInControls;
 
     public InputManager _input;
     public ConfirmationPopUP areYouSureScript;
@@ -26,13 +26,16 @@ public class MainMenu : MonoBehaviour
 
     public Sound summonSound, deSummonSound;
 
-    public Button levelSelectDefaultButton, mainMenuDefaultButton;
+    public Button levelSelectDefaultButton, mainMenuDefaultButton, controlsDefaultButton;
 
-    private void Start()
+    public List<GameObject> playerUI;
+
+    private void Awake()
     {
         levelTransition = GameObject.FindGameObjectWithTag("Transition").GetComponent<LevelTransitionManager>();
         playerStatManager = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<PlayerDebugStatsGlobalManager>();
         reselectButtonScript = gameObject.GetComponent<ReselectDefaultButton>();
+        settingManagerScript = GetComponent<SettingsManager>();
     }
 
 
@@ -202,6 +205,10 @@ public class MainMenu : MonoBehaviour
             {
                 TurnOffLevelSelect();
             }
+            else if (isInControls)
+            {
+                TurnOffControls();
+            }
 
         }
     }
@@ -230,6 +237,32 @@ public class MainMenu : MonoBehaviour
         ReselectDefaultButton.instance.SetPreviousButton(button);
         ReselectDefaultButton.instance.SetButton(levelSelectDefaultButton);
 
+    }   
+    
+    public void TurnOffControls()
+    {
+        mainMenuCG.interactable = true;
+
+        isInControls = false;
+        controlsObject.gameObject.SetActive(false);
+        FindObjectOfType<AudioManager>().PlaySoundInstantiate(deSummonSound);
+
+        ReselectDefaultButton.instance.GoBackToPreviousButton();
+    }
+
+    public void TurnOnControls(Button button)
+    {
+
+        mainMenuCG.interactable = false;
+        print("main menu not interactable");
+        isInControls = true;
+        controlsObject.gameObject.SetActive(true);
+       // reselectButtonScript.SelectRandomButton();
+        FindObjectOfType<AudioManager>().PlaySoundInstantiate(summonSound);
+
+        ReselectDefaultButton.instance.SetPreviousButton(button);
+        ReselectDefaultButton.instance.SetButton(controlsDefaultButton);
+
     }
 
     public bool DestroyAreYouSure()
@@ -241,5 +274,14 @@ public class MainMenu : MonoBehaviour
         }
         return false;
     }
+
+    public void TogglePlayerUI(bool state)
+    {
+        for(int i = 0; i < playerUI.Count; i++)
+        {
+            playerUI[i].SetActive(state);
+        }
+    }
+
 
 }

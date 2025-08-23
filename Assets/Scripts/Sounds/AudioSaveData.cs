@@ -7,5 +7,5 @@ public class AudioSaveData
 {
     public int sfxVolume, musicVolume;
     public float controllerSensitivity;
-    public bool isSFXMuted, isMusicMuted;
+    public bool isSFXMuted, isMusicMuted, isParticlesMuted, isShadersMuted, isMainMenuCandyMuted;
 }

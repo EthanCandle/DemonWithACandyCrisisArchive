@@ -1,27 +1,27 @@
 {
-    "hasBeatenGame": true,
+    "hasBeatenGame": false,
     "isInMainRun": true,
-    "levelCurrentlyOnMainRun": 8,
-    "amountPlayerJumps": 245,
-    "amountPlayerDashes": 454,
-    "amountPlayerDies": 11,
-    "amountPlayerCandy": 335,
-    "fastestTimeToCompleteGame": 83.79894256591797,
-    "currentTimeToCompleteGame": 496.7679138183594,
+    "levelCurrentlyOnMainRun": 1,
+    "amountPlayerJumps": 6,
+    "amountPlayerDashes": 17,
+    "amountPlayerDies": 0,
+    "amountPlayerCandy": 8,
+    "fastestTimeToCompleteGame": 0.0,
+    "currentTimeToCompleteGame": 0.0,
     "fastestLevelTimes": [
-        -460.63140869140627,
-        22.69567108154297,
-        32.24275207519531,
-        38.354469299316409,
-        54.39592361450195,
-        34.11488342285156
+        51.55415725708008,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
     ],
     "currentLevelTimes": [
-        -460.63140869140627,
-        28.27845001220703,
-        98.11824798583985,
-        108.48008728027344,
-        137.399169921875,
-        50.002471923828128
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
     ]
 }

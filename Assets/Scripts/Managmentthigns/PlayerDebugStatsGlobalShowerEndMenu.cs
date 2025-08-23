@@ -43,7 +43,7 @@ public class PlayerDebugStatsGlobalShowerEndMenu : MonoBehaviour
         levelTimeText.text = "";
         for (int i = 0; i < PlayerDebugStatsGlobalManager.Instance.levelCount; i++)
         {
-            levelTimeText.text += $"Level {i + 1}: {GetFormattedTime(PlayerDebugStatsGlobalManager.Instance.DataGetLevelCompleteCurrentTime(i))}\n\n";
+            levelTimeText.text += $"Level {i + 1}: {GetFormattedTime(PlayerDebugStatsGlobalManager.Instance.DataGetLevelCompleteCurrentTime(i))}\n";
         }
     }
 

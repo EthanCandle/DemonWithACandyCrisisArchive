@@ -131,7 +131,7 @@ public class PlayerController : MonoBehaviour
 
     public float dashSpeed = 15.0f, dashDuration = 1.0f;
     public float dashRechargeCurrent = 0.0f, dashRechargeMax = 100.0f, dashRechargeRate = 25.0f, dashRechargeTime = 1.0f;
-    public bool isDashing = false, isJumping = false, isDead = false, isBouncing, hasGravity = true;
+    public bool isDashing = false, isJumping = false, isDead = false, isBouncing, hasGravity = true, hasWon = false;
     public bool unlockedDash = true, canDash;
 
     public SliderNew dashSlider;
@@ -151,6 +151,10 @@ public class PlayerController : MonoBehaviour
     public Coroutine speedCoroutine;
 
     public TextMeshProUGUI jumpHoldTimeLeft, coyoteTimeLeft;
+
+    public Vector3 spawnPosition;
+    public Quaternion spawnRotation;
+    public GameObject playerFakeCamera;
     private bool IsCurrentDeviceMouse
     {
         get
@@ -207,6 +211,8 @@ public class PlayerController : MonoBehaviour
 
         AssignHolderVariables();
 
+        spawnPosition = transform.position;
+        spawnRotation = transform.rotation;
     }
 
     public void AssignHolderVariables()
@@ -303,6 +309,11 @@ public class PlayerController : MonoBehaviour
         }
         jumpHoldTimeLeft.text = jumpTimeHold.ToString();
         coyoteTimeLeft.text = coyoteJumpTime.ToString();
+
+        if (hasWon)
+        {
+            AddGravityUnscaledTime();
+        }
     }
 
     private void LateUpdate()
@@ -750,6 +761,20 @@ public class PlayerController : MonoBehaviour
 
         }
     }
+    public void AddGravityUnscaledTime()
+    {
+        if (!hasGravity)
+        {
+            return;
+        }
+        // apply gravity over time if under terminal (multiply by delta time twice to linearly speed up over time)
+        if (_verticalVelocity < _terminalVelocity && _controller.enabled == true)
+        {
+            _verticalVelocity += Gravity * Time.deltaTime;
+            _controller.Move(new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.unscaledDeltaTime);
+
+        }
+    }
 
     public void CheckIfRoofed()
     {
@@ -1048,17 +1073,53 @@ public class PlayerController : MonoBehaviour
 
     public void SetPlayerPosition(GameObject placeToPutPlayer)
     {
+        SetPlayerPosition(placeToPutPlayer.transform);
+
+    }
+
+    public void SetPlayerPosition(Transform placeToPutPlayer)
+    {
+        SetPlayerPosition(placeToPutPlayer.position, placeToPutPlayer.rotation);
+    }
+
+    public void SetPlayerPosition(Vector3 placeToPutPlayer, Quaternion rotationOfPlayer)
+    {
         // moves player to set vector position
         SetCharacterController(false); // need it to be false to prevent gravity and other movements being applied and re-teleporting the player back to where they were
-        transform.position = placeToPutPlayer.transform.position; // teleports player to cp
-        SetCameraRotation(placeToPutPlayer.transform.rotation); // sets camera to cp's rotation
+        transform.position = placeToPutPlayer; // teleports player to cp
+        SetCameraRotation(rotationOfPlayer); // sets camera to cp's rotation
         SetCharacterController(true); // re enables the character controller so they can move
 
     }
+
+    public void SetPlayerPositionBackToSpawn()
+    {
+        SetPlayerPosition(spawnPosition, spawnRotation);
+    }
+
 
     public void SetYVelocityToZero()
     {
         _verticalVelocity = 0;
     }
 
+    public void HasWonLevel()
+    {
+        hasWon = true;
+        SetFakeCamera();
+    }
+
+    public void SetFakeCamera()
+    {
+        print("Fake");
+        playerFakeCamera.transform.position = _mainCamera.transform.position;
+        playerFakeCamera.transform.rotation = _mainCamera.transform.rotation;
+        playerFakeCamera.SetActive(true);
+    }
+
+    public void EndFakeCamera()
+    {
+        print("End Fake");
+        playerFakeCamera.SetActive(false);
+    }
 }

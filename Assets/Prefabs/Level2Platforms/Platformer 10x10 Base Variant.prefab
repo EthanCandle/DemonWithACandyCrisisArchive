@@ -1378,6 +1378,11 @@ PrefabInstance:
       propertyPath: m_SelectedVertices.Array.data[23]
       value: 15
       objectReference: {fileID: 0}
+    - target: {fileID: 1549317904712668152, guid: 262e45dbe2d52c143b88509a961cc7fe,
+        type: 3}
+      propertyPath: m_RenderingLayerMask
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 2474652997615251720, guid: 262e45dbe2d52c143b88509a961cc7fe,
         type: 3}
       propertyPath: m_Size.z

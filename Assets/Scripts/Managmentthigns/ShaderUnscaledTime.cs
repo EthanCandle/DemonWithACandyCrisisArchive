@@ -11,7 +11,7 @@ public class ShaderUnscaledTime : MonoBehaviour
 
     public static ShaderUnscaledTime Instance;
 
-    public bool isShaderOn = true;
+    public bool isShaderMuted = true;
     void Awake()
     {
         if (transform.parent != null)
@@ -41,7 +41,7 @@ public class ShaderUnscaledTime : MonoBehaviour
 
     void Update()
     {
-        if (!isShaderOn)
+        if (isShaderMuted)
         {
             return;
         }
@@ -80,7 +80,7 @@ public class ShaderUnscaledTime : MonoBehaviour
 
     public void ToggleShader(bool state)
     {
-        isShaderOn = state;
+        isShaderMuted = state;
     }
 
 }

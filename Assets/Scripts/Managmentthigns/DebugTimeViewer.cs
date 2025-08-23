@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 public class DebugTimeViewer : MonoBehaviour
 {
-    public TextMeshProUGUI levelTimerText, timeTimerText, fastestTimerText;
+    public TextMeshProUGUI levelTimerText, timeTimerText, fastestTimerText, debugStatsText;
     // Start is called before the first frame update
     void Start()
     {
@@ -41,16 +41,20 @@ public class DebugTimeViewer : MonoBehaviour
         levelTimerText.text = $"Current Levels Time:\n";
         for (int i = 0; i < levelTimes.Count; i++)
         {
-            levelTimerText.text += $"Level {i}: {GetFormattedTime(levelTimes[i])}\n";
+            levelTimerText.text += $"Level {i+1}: {GetFormattedTime(levelTimes[i])}\n";
         }
+        levelTimerText.text += $"Final Time: {GetFormattedTime(PlayerDebugStatsGlobalManager.Instance.dataLocal.currentTimeToCompleteGame)}\n";
 
-        
         List<float> fastestTimes = PlayerDebugStatsGlobalManager.Instance.dataLocal.fastestLevelTimes; 
         fastestTimerText.text = $"Fastest Levels Time:\n";
         for (int i = 0; i < fastestTimes.Count; i++)
         {
-            fastestTimerText.text += $"Level {i}: {GetFormattedTime(fastestTimes[i])}\n";
+            fastestTimerText.text += $"Level {i+1}: {GetFormattedTime(fastestTimes[i])}\n";
+   
         }
+
+        fastestTimerText.text += $"Final Time: {GetFormattedTime(PlayerDebugStatsGlobalManager.Instance.dataLocal.fastestTimeToCompleteGame)}\n";
+
     }
 
     public string GetFormattedTime(float timeCurrent)
@@ -75,5 +79,10 @@ public class DebugTimeViewer : MonoBehaviour
     public void ToggleFastestLevelTimer(bool state)
     {
         fastestTimerText.gameObject.SetActive(state);
+    }
+
+    public void ToggleDebugStats(bool state)
+    {
+        debugStatsText.gameObject.SetActive(state);
     }
 }

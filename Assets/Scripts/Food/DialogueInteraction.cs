@@ -67,7 +67,7 @@ public class DialogueInteraction : MonoBehaviour
         }
         else if(endingTalkingBool)
         {
-            print("closed pause menu null else");
+           // print("closed pause menu null else");
             _input.interact = false;
             _input.talk = false;
             _input.dash = false;
@@ -82,21 +82,21 @@ public class DialogueInteraction : MonoBehaviour
 
     public IEnumerator DelayFrame()
     {
-        print("closed pause menu null");
+      //  print("closed pause menu null");
         _input.interact = false;
         _input.talk = false;
         _input.dash = false;
         _input.jumpHold = false;
         _input.jump = false;
         yield return null;
-        print("closed pause menu null");
+      //  print("closed pause menu null");
         _input.interact = false;
         _input.talk = false;
         _input.dash = false;
         _input.jumpHold = false;
         _input.jump = false;
         yield return null;
-        print("closed pause menu null");
+        //print("closed pause menu null");
         _input.interact = false;
         _input.talk = false;
         _input.dash = false;
@@ -163,22 +163,37 @@ public class DialogueInteraction : MonoBehaviour
         if (IsOnLastLineOfDialogue())
         {
 
-            FinishedTalking();
+
 
             // if the player is in the npcs normal dialogue route
-            if (dialogueState == DialogueState.Normal)
-            {
-                hasFinishedConversation = true;
 
-                if (shouldKillSelfAtEnd)
-                {
-                    KillSelf();
-                }
+            hasFinishedConversation = true;
+            FinishedTalking();
+            if (shouldKillSelfAtEnd)
+            {
+
+                KillSelf();
+                return;
             }
+
+            
+
+            if (dialogueDataCurrent.shouldKillSelfAfterThis)
+            {
+                FinishedTalking();
+                KillSelf();
+            }
+
             return;
         }
 
-         DisplayNextLine(); // displays the line
+        if (dialogueDataCurrent.shouldKillSelfAfterThis)
+        {
+            FinishedTalking();
+            KillSelf();
+        }
+
+        DisplayNextLine(); // displays the line
         // also need to play the function, the animation, and assign the name and sprite
     }
 
@@ -225,7 +240,7 @@ public class DialogueInteraction : MonoBehaviour
             TurnOffPromptWindow();
         }
         // StartCoroutine(DelayFrame());
-        print("Ended to prevent jumnp");
+        //print("Ended to prevent jumnp");
         StartCoroutine(DelayFrame());
         endingTalkingBool = true;
         isPlayerWithinRange = false;

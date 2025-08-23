@@ -183,11 +183,11 @@ QualitySettings:
     lodBias: 2
     maximumLODLevel: 0
     enableLODCrossFade: 1
-    streamingMipmapsActive: 0
+    streamingMipmapsActive: 1
     streamingMipmapsAddAllCameras: 1
-    streamingMipmapsMemoryBudget: 512
-    streamingMipmapsRenderersPerFrame: 512
-    streamingMipmapsMaxLevelReduction: 2
+    streamingMipmapsMemoryBudget: 5120
+    streamingMipmapsRenderersPerFrame: 5120
+    streamingMipmapsMaxLevelReduction: 7
     streamingMipmapsMaxFileIORequests: 1024
     particleRaycastBudget: 2048
     asyncUploadTimeSlice: 2
@@ -210,4 +210,4 @@ QualitySettings:
   m_PerPlatformDefaultQuality:
     Server: 0
     Standalone: 3
-    WebGL: 0
+    WebGL: 3

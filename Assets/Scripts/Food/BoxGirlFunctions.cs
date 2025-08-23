@@ -30,6 +30,10 @@ public class BoxGirlFunctions : MonoBehaviour
 
     public void SpawnParticlesDoor(GameObject objectToSpawnAt, GameObject particlesToSummon)
     {
+        if (AudioManager.instance.audioDataLocal.isParticlesMuted)
+        {
+            return;
+        }
         Instantiate(particlesToSummon, objectToSpawnAt.transform.position, objectToSpawnAt.transform.rotation);
     }
 
@@ -86,6 +90,10 @@ public class BoxGirlFunctions : MonoBehaviour
 
     public void SpawnParticlesBoxGirl(GameObject objectToSpawnAt)
     {
+        if (AudioManager.instance.audioDataLocal.isParticlesMuted)
+        {
+            return;
+        }
         Instantiate(teleportParticleBoxGirl, objectToSpawnAt.transform.position + new Vector3(0,-2,0), teleportParticleBoxGirl.transform.rotation);
     }
 

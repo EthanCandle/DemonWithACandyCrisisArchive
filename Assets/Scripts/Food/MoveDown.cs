@@ -5,6 +5,7 @@ using UnityEngine;
 public class MoveDown : MonoBehaviour
 {
     public float speed = 2f;
+    public int lowPosition = -50, highPosition = 10;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,9 +17,9 @@ public class MoveDown : MonoBehaviour
     {
         transform.Translate(Vector3.down * speed * Time.unscaledDeltaTime);
 
-        if(transform.position.y <= -50)
+        if(transform.position.y <= lowPosition)
         {
-            transform.position = new Vector3(transform.position.x, 10, transform.position.z);
+            transform.position = new Vector3(transform.position.x, highPosition, transform.position.z);
         }
     }
 }

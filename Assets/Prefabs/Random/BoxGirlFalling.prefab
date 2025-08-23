@@ -1546,6 +1546,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 2
+  lowPosition: -50
+  highPosition: 10
 --- !u!114 &660683674650873950
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1559,8 +1561,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectToRotate: {fileID: 402077968385311558}
-  speedMin: 0
-  speedMax: 0
+  speedMin: 0.5
+  speedMax: 2
+  speedCurrent: 0
   direction: 0
   xPow: 0
   yPow: 0

@@ -64,8 +64,8 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -9103484930961366303, guid: 3cc3ac5142fd756498e7eb20c869ae6b, type: 3}
-  - {fileID: 3291926621068253372, guid: 3cc3ac5142fd756498e7eb20c869ae6b, type: 3}
+  - {fileID: 2100000, guid: e89704024a7fead459064e93bc81b678, type: 2}
+  - {fileID: 2100000, guid: 3b7ea91da17259143a26777eb414fbee, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -103,6 +103,7 @@ MonoBehaviour:
   outlineColor: {r: 0.018393278, g: 1, b: 0, a: 1}
   outlineWidthCurrent: 2
   outlineWidth: 2
+  outlineWidthHolder: 2
   distanceFromCamera: 0
   distanceRemoveOffSetMultiplier: 2
   shouldChange: 1
@@ -143,8 +144,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectToRotate: {fileID: 5408506404284863453}
-  speedMin: 1
-  speedMax: 2
+  speedMin: 0.5
+  speedMax: 1
+  speedCurrent: 0
   direction: 0
   xPow: 0
   yPow: 0

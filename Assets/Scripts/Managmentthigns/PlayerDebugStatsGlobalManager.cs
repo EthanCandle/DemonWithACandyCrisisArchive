@@ -50,9 +50,10 @@ public class PlayerDebugStatsGlobalManager : MonoBehaviour
     public void Save()
     {
         PlayerDebugStatsGlobal dataLocalToSave;
+
         if (dataLocal == null)
         {
-            print("is null");
+            Debug.Log("is null");
             dataLocalToSave = new PlayerDebugStatsGlobal
             {
                 amountPlayerDashes = 0,
@@ -67,7 +68,6 @@ public class PlayerDebugStatsGlobalManager : MonoBehaviour
                 currentTimeToCompleteGame = 0,
                 levelCurrentlyOnMainRun = 1,
             };
-
         }
         else
         {
@@ -85,34 +85,70 @@ public class PlayerDebugStatsGlobalManager : MonoBehaviour
                 currentTimeToCompleteGame = dataLocal.currentTimeToCompleteGame,
                 levelCurrentlyOnMainRun = dataLocal.levelCurrentlyOnMainRun,
             };
-
         }
 
         string json = JsonUtility.ToJson(dataLocalToSave, true);
-        File.WriteAllText(savePath, json);
+
+        if (HTMLPlatformUtil.IsWebGLBuild())
+        {
+            PlayerPrefs.SetString("PlayerDebugStatsGlobal", json);
+            PlayerPrefs.Save();
+        }
+        else
+        {
+            File.WriteAllText(savePath, json);
+        }
     }
 
     public void Load()
     {
-        if (!File.Exists(savePath))
+        string json = "";
+
+        if (HTMLPlatformUtil.IsWebGLBuild())
         {
-            print("it doesn't exist");
-            dataLocal = null;
-            Save();
+            if (!PlayerPrefs.HasKey("PlayerDebugStatsGlobal"))
+            {
+                Debug.Log("it doesn't exist (WebGL)");
+                dataLocal = null;
+                Save(); // create default
+            }
+
+            json = PlayerPrefs.GetString("PlayerDebugStatsGlobal");
+        }
+        else
+        {
+            if (!File.Exists(savePath))
+            {
+                Debug.Log("it doesn't exist (Standalone)");
+                dataLocal = null;
+                Save(); // create default
+            }
+
+            json = File.ReadAllText(savePath);
         }
 
-
-        string json = File.ReadAllText(savePath);
         dataLocal = JsonUtility.FromJson<PlayerDebugStatsGlobal>(json);
     }
 
+
     public void DeleteSave()
     {
-        if (File.Exists(savePath))
+        if (HTMLPlatformUtil.IsWebGLBuild())
         {
-            File.Delete(savePath);
-            dataLocal = null;
+            if (PlayerPrefs.HasKey("PlayerDebugStatsGlobal"))
+            {
+                PlayerPrefs.DeleteKey("PlayerDebugStatsGlobal");
+            }
         }
+        else
+        {
+            if (File.Exists(savePath))
+            {
+                File.Delete(savePath);
+            }
+        }
+
+        dataLocal = null;
         Load();
     }
 
@@ -294,7 +330,7 @@ public class PlayerDebugStatsGlobalManager : MonoBehaviour
     }
     public int DataGetLevelCount()
     {
-        print(dataLocal.levelCurrentlyOnMainRun);
+       // print(dataLocal.levelCurrentlyOnMainRun);
         return dataLocal.levelCurrentlyOnMainRun;
     }
     public void DataResetLevelCount()

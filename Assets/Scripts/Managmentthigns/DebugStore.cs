@@ -47,6 +47,8 @@ public class DebugStore : MonoBehaviour
     public DebugTimeViewer timerManager;
     public ReselectDefaultButton reselectButtonScript;
 
+    public SpawnRandomlyDOwn spawnRandomlyScript;
+
     public MainMenu mainMenuScript;
     public Button debugStoreDefaultButton;
 
@@ -71,6 +73,12 @@ public class DebugStore : MonoBehaviour
         //DebugStats debugStatsLoaded = JsonUtility.FromJson<DebugStats>(json);
         //print(debugStatsLoaded.candyAmount);
     }
+
+    public void DeleteAudioDataReference()
+    {
+        audioManager.DeleteDataLogic();
+    }
+
     public void PopulateDictionary()
     {
         functionDictionary = new Dictionary<string, Action<bool>>()
@@ -85,6 +93,11 @@ public class DebugStore : MonoBehaviour
             {"level_solo_timer", ToggleLevelTimer},
             {"level_all_timer", ToggleCurrentLevelTimer},
             {"level_fastest_timer", ToggleFastestLevelTimer},
+            {"candy_in_scene", ToggleSceneCandyTotal},
+            {"player_crown", TogglePlayerCrown},
+            {"player_ui",TogglePlayerUI },
+            {"debug_stats",ToggleDebugStats},
+
         };
     }
     public void SetVariables()
@@ -109,35 +122,62 @@ public class DebugStore : MonoBehaviour
     public void SaveCandyData()
     {
         DebugStats debugStatsToSave;
+
         if (debugStatsLocal == null)
         {
-             debugStatsToSave = new DebugStats { candyAmount = 0, skinNumber = 0};
-
+            debugStatsToSave = new DebugStats { candyAmount = 0, skinNumber = 0 };
         }
         else
         {
-             debugStatsToSave = new DebugStats { candyAmount = debugStatsLocal.candyAmount, skinNumber = playerManager.skinNumber};
-
+           // print(playerManager.skinNumber);
+            debugStatsToSave = new DebugStats
+            {
+                candyAmount = debugStatsLocal.candyAmount,
+                skinNumber = playerManager.skinNumber
+            };
         }
 
         string json = JsonUtility.ToJson(debugStatsToSave);
 
-        File.WriteAllText(saveLocation, json);
- 
+        if (HTMLPlatformUtil.IsWebGLBuild())
+        {
+            PlayerPrefs.SetString("CandyData", json);
+            PlayerPrefs.Save();
+        }
+        else
+        {
+            File.WriteAllText(saveLocation, json);
+        }
     }
 
     public void LoadCandyData()
     {
-        if (!File.Exists(saveLocation))
+        string saveString = "";
+
+        if (HTMLPlatformUtil.IsWebGLBuild())
         {
-            print("Save candyData didn't exist");
-            // if we don't have a save yet, make one
-            SaveCandyData();
+            if (!PlayerPrefs.HasKey("CandyData"))
+            {
+                Debug.Log("Candy data not found in PlayerPrefs, creating default.");
+                SaveCandyData();
+            }
+
+            saveString = PlayerPrefs.GetString("CandyData");
         }
-        string saveString = File.ReadAllText(saveLocation);
+        else
+        {
+            if (!File.Exists(saveLocation))
+            {
+                Debug.Log("Candy data file not found, creating default.");
+                SaveCandyData();
+            }
+
+            saveString = File.ReadAllText(saveLocation);
+        }
 
         debugStatsLocal = JsonUtility.FromJson<DebugStats>(saveString);
-       
+        //print(debugStatsLocal.skinNumber);
+        //print(playerManager.skinNumber);
         TriggerEventListener();
     }
 
@@ -158,29 +198,57 @@ public class DebugStore : MonoBehaviour
     
     public void DeleteDataLogic()
     {
-        // deletes all the files save, but then adds them back with the default settings
+        // deletes all the files/save, then adds them back with default settings
         print("deleted everything");
-        if (File.Exists(saveLocation))
+
+        if (HTMLPlatformUtil.IsWebGLBuild())
         {
-            print("Deleted save candyData");
-            File.Delete(saveLocation);
-            debugStatsLocal = null;
+            if (PlayerPrefs.HasKey("CandyData"))
+            {
+                PlayerPrefs.DeleteKey("CandyData");
+                debugStatsLocal = null;
+                print("Deleted CandyData from PlayerPrefs");
+            }
+
+            if (PlayerPrefs.HasKey("ShopItemData"))
+            {
+                PlayerPrefs.DeleteKey("ShopItemData");
+                shopItemCollectionLocal = null;
+                print("Deleted ShopItemData from PlayerPrefs");
+            }
+
+            PlayerPrefs.Save();
         }
-        if (File.Exists(shopItemLocation))
+        else
         {
-            print("Deleted save shop item location");
-            File.Delete(shopItemLocation);
-            shopItemCollectionLocal = null;
+            if (File.Exists(saveLocation))
+            {
+                File.Delete(saveLocation);
+                debugStatsLocal = null;
+                print("Deleted save candyData");
+            }
+
+            if (File.Exists(shopItemLocation))
+            {
+                File.Delete(shopItemLocation);
+                shopItemCollectionLocal = null;
+                print("Deleted save shop item location");
+            }
         }
+
         FindObjectOfType<AudioManager>().PlaySoundInstantiate(dataDeletionSound);
         PlayerDebugStatsGlobalManager.Instance.DeleteSave();
 
-
-        LoadCandyData(); // saves and loads candy amount
-        LoadButtonData(); // saves and loads the shop button's states
-        TriggerAllItems(); // makes everything remove itself and it does it
+        LoadCandyData();   // saves and loads candy amount
+        LoadButtonData();  // saves and loads the shop button's states
+        TriggerAllItems(); // makes everything remove itself
+        if (spawnRandomlyScript)
+        {
+            spawnRandomlyScript.SetCandy();
+        }
 
     }
+
     public void ToggleOptionsMenu(Button button)
     {
         if (isInDebugStore)
@@ -236,9 +304,13 @@ public class DebugStore : MonoBehaviour
 
     public void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P))
+        if (Input.GetKeyDown(KeyCode.Equals))
         {
-            IncreaseCandyAmount(100);
+            if (HTMLPlatformUtil.IsEditor())
+            {
+                IncreaseCandyAmount(100);
+            }
+            //  
         }
     }
 
@@ -248,7 +320,7 @@ public class DebugStore : MonoBehaviour
         // this is the function that gets called when the player types the correct word, needs to subscribe to the inputtyper
         // this will call every script that subscribed to this function (UI mainly)
         IncreaseCandyAmount(1); // could add a multipler for more candy per thing
-
+        SetCandyTotalText();
     }
 
     public void TriggerEventListener()
@@ -319,28 +391,54 @@ public class DebugStore : MonoBehaviour
         string json = JsonUtility.ToJson(shopItemCollectionLocal, true);
 
 
-        File.WriteAllText(shopItemLocation, json);
+        if (HTMLPlatformUtil.IsWebGLBuild())
+        {
+            PlayerPrefs.SetString("ShopItemData", json);
+            PlayerPrefs.Save();
+        }
+        else
+        {
+            File.WriteAllText(shopItemLocation, json);
+        }
     }
 
 
     public void LoadButtonData()
     {
 
-   
-        if (!File.Exists(shopItemLocation))
+        string saveString = "";
+
+        if (HTMLPlatformUtil.IsWebGLBuild())
         {
-            print("Shop item data doesn't exist");
-            // if we don't have a save yet, make one
-            SaveAllButtons();
+            if (!PlayerPrefs.HasKey("ShopItemData"))
+            {
+                Debug.Log("Shop item data doesn't exist (WebGL)");
+                SaveAllButtons(); // creates default save
+            }
+
+            saveString = PlayerPrefs.GetString("ShopItemData");
         }
         else
         {
+            if (!File.Exists(shopItemLocation))
+            {
+                Debug.Log("Shop item data doesn't exist (Standalone)");
+                SaveAllButtons(); // creates default save
+            }
 
+            saveString = File.ReadAllText(shopItemLocation);
         }
-        string saveString = File.ReadAllText(shopItemLocation);
 
         shopItemCollectionLocal = JsonUtility.FromJson<ShopItemCollection>(saveString);
+        if (PlayerPrefs.HasKey("CandyData"))
+        {
+            Debug.Log("CandyData: " + PlayerPrefs.GetString("CandyData"));
+        }
 
+        if (PlayerPrefs.HasKey("ShopItemData"))
+        {
+            Debug.Log("ShopItemData: " + PlayerPrefs.GetString("ShopItemData"));
+        }
         LoadAllButtons();
     }
     public void LoadAllButtons()
@@ -469,6 +567,11 @@ public class DebugStore : MonoBehaviour
             itemData.HasBeenPurchased();
             EnableTrue(itemData);
             InterpreteDictionary(itemData); // when trigger do its thing immedeeitly
+
+            if (spawnRandomlyScript)
+            {
+                spawnRandomlyScript.SetCandy();
+            }
         }
         else
         {
@@ -491,8 +594,30 @@ public class DebugStore : MonoBehaviour
         //    print("failewd to trigger effects");
         //    return;
         //}
-       // print("triggered all effects");
-        string saveString = File.ReadAllText(shopItemLocation);
+        // print("triggered all effects");
+
+        string saveString = "";
+
+        if (HTMLPlatformUtil.IsWebGLBuild())
+        {
+            if (!PlayerPrefs.HasKey("ShopItemData"))
+            {
+                Debug.Log("Shop item data doesn't exist (WebGL)");
+                SaveAllButtons(); // creates default save
+            }
+
+            saveString = PlayerPrefs.GetString("ShopItemData");
+        }
+        else
+        {
+            if (!File.Exists(shopItemLocation))
+            {
+                Debug.Log("Shop item data doesn't exist (Standalone)");
+                SaveAllButtons(); // creates default save
+            }
+
+            saveString = File.ReadAllText(shopItemLocation);
+        }
 
         shopItemCollectionLocal = JsonUtility.FromJson<ShopItemCollection>(saveString);
 
@@ -694,6 +819,7 @@ public class DebugStore : MonoBehaviour
 
     public void ChangePlayerSkin(bool state)
     {
+     //   print(playerManager.skinNumber);
         if (state)
         {
             // if on default then change to something else
@@ -702,8 +828,10 @@ public class DebugStore : MonoBehaviour
                 debugStatsLocal.skinNumber = UnityEngine.Random.Range(1, playerManager.skinObjects.Count);
            
             }
-
+         //   print(debugStatsLocal.skinNumber);
             playerManager.EnableSkin(debugStatsLocal.skinNumber);
+          //  print(debugStatsLocal.skinNumber);
+          //  print(playerManager.skinNumber);
         }
         else
         {
@@ -719,9 +847,9 @@ public class DebugStore : MonoBehaviour
 
 
         }
-
+       // print(playerManager.skinNumber);
         SaveCandyData(); // saves skin number 
-
+      //  print(playerManager.skinNumber);
     }
 
     public void ToggleLevelTimer(bool state)
@@ -739,4 +867,34 @@ public class DebugStore : MonoBehaviour
     {
         timerManager.ToggleFastestLevelTimer(state);
     }
+
+    public void ToggleSceneCandyTotal(bool state)
+    {
+        candyManager.ToggleCandyText(state);
+    }
+
+    public void SetCandyTotalText()
+    {
+        candyManager.SetCandyText();
+    }
+
+    public void TogglePlayerCrown(bool state)
+    {
+        playerManager.EnableCrown(state);
+        if (candyManager.fm)
+        {
+            candyManager.fm.gm.checkPointManager.isActive = state;
+        }
+
+    }
+        
+    public void TogglePlayerUI(bool state)
+    {
+        mainMenuScript.TogglePlayerUI(!state);
+    }
+    public void ToggleDebugStats(bool state)
+    {
+        timerManager.ToggleDebugStats(state);
+    }
+
 }

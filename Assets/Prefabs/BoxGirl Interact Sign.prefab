@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1334039776435337005}
-  - component: {fileID: 4327938724436765184}
   - component: {fileID: 7966704203412831136}
   m_Layer: 0
   m_Name: Shadow
@@ -17,7 +16,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1334039776435337005
 Transform:
   m_ObjectHideFlags: 0
@@ -33,25 +32,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 6000501134516398997}
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
---- !u!119 &4327938724436765184
-Projector:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4519799810721104166}
-  m_Enabled: 0
-  serializedVersion: 2
-  m_NearClipPlane: 0.1
-  m_FarClipPlane: 100
-  m_FieldOfView: 60
-  m_AspectRatio: 1
-  m_Orthographic: 0
-  m_OrthographicSize: 10
-  m_Material: {fileID: 0}
-  m_IgnoreLayers:
-    serializedVersion: 2
-    m_Bits: 0
 --- !u!114 &7966704203412831136
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -431,6 +411,7 @@ Transform:
   m_Children:
   - {fileID: 7927688022347297937}
   - {fileID: 1334039776435337005}
+  - {fileID: 506392476906020932}
   - {fileID: 6897985276917505078}
   - {fileID: 4577411289985407122}
   - {fileID: 2712672474490970434}
@@ -546,6 +527,7 @@ MonoBehaviour:
     objectAnimator: {fileID: 0}
     AnimationToPlayName: 
     shouldTransitionToThisAnimation: 0
+    shouldKillSelfAfterThis: 0
   dialougeToShowCurrent: []
   dialougeToShowLocked:
   - dialogueAsset: {fileID: 11400000, guid: 6b21ed5aaf535e64485a7a9e13704551, type: 2}
@@ -556,6 +538,7 @@ MonoBehaviour:
     objectAnimator: {fileID: 8420167570392222347}
     AnimationToPlayName: Jump
     shouldTransitionToThisAnimation: 1
+    shouldKillSelfAfterThis: 0
   dialougeToShowNormal:
   - dialogueAsset: {fileID: 11400000, guid: 6b21ed5aaf535e64485a7a9e13704551, type: 2}
     dialogueText: Hi, I am Box Girl
@@ -565,6 +548,7 @@ MonoBehaviour:
     objectAnimator: {fileID: 8420167570392222347}
     AnimationToPlayName: 
     shouldTransitionToThisAnimation: 0
+    shouldKillSelfAfterThis: 0
   - dialogueAsset: {fileID: 11400000, guid: 6b21ed5aaf535e64485a7a9e13704551, type: 2}
     dialogueText: I'm here to help you get back to hell...
     functionToCall:
@@ -573,6 +557,7 @@ MonoBehaviour:
     objectAnimator: {fileID: 8420167570392222347}
     AnimationToPlayName: 
     shouldTransitionToThisAnimation: 0
+    shouldKillSelfAfterThis: 0
   - dialogueAsset: {fileID: 11400000, guid: 6b21ed5aaf535e64485a7a9e13704551, type: 2}
     dialogueText: but I haven't been able to get much sleep account on me being stuck
       in this box.
@@ -582,6 +567,7 @@ MonoBehaviour:
     objectAnimator: {fileID: 8420167570392222347}
     AnimationToPlayName: 
     shouldTransitionToThisAnimation: 0
+    shouldKillSelfAfterThis: 0
   - dialogueAsset: {fileID: 11400000, guid: 6b21ed5aaf535e64485a7a9e13704551, type: 2}
     dialogueText: Find me some of those green lolipops next time you see me and maybe
       I can help you out.
@@ -590,7 +576,7 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 2486171907765800383}
           m_TargetAssemblyTypeName: BGDoorRemove, Assembly-CSharp
-          m_MethodName: RemoveDoor
+          m_MethodName: 
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -615,6 +601,7 @@ MonoBehaviour:
     objectAnimator: {fileID: 8420167570392222347}
     AnimationToPlayName: 
     shouldTransitionToThisAnimation: 0
+    shouldKillSelfAfterThis: 0
   dialougeToShowFinished:
   - dialogueAsset: {fileID: 11400000, guid: 6b21ed5aaf535e64485a7a9e13704551, type: 2}
     dialogueText: This is the finished text, go do the objective
@@ -624,6 +611,7 @@ MonoBehaviour:
     objectAnimator: {fileID: 8420167570392222347}
     AnimationToPlayName: Close
     shouldTransitionToThisAnimation: 1
+    shouldKillSelfAfterThis: 0
   _input: {fileID: 0}
   endingTalkingBool: 0
 --- !u!114 &2000985832754677923
@@ -698,6 +686,90 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movingPlatform: {fileID: 0}
+--- !u!1001 &7201099341814497568
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 6000501134516398997}
+    m_Modifications:
+    - target: {fileID: 3159878021416384273, guid: c2a46987873f3d943812fe553cb5efbd,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3159878021416384273, guid: c2a46987873f3d943812fe553cb5efbd,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4090704323664591796, guid: c2a46987873f3d943812fe553cb5efbd,
+        type: 3}
+      propertyPath: m_Name
+      value: Shadow (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7271168201957761380, guid: c2a46987873f3d943812fe553cb5efbd,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7271168201957761380, guid: c2a46987873f3d943812fe553cb5efbd,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7271168201957761380, guid: c2a46987873f3d943812fe553cb5efbd,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7271168201957761380, guid: c2a46987873f3d943812fe553cb5efbd,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.70710677
+      objectReference: {fileID: 0}
+    - target: {fileID: 7271168201957761380, guid: c2a46987873f3d943812fe553cb5efbd,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.70710677
+      objectReference: {fileID: 0}
+    - target: {fileID: 7271168201957761380, guid: c2a46987873f3d943812fe553cb5efbd,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7271168201957761380, guid: c2a46987873f3d943812fe553cb5efbd,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7271168201957761380, guid: c2a46987873f3d943812fe553cb5efbd,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 7271168201957761380, guid: c2a46987873f3d943812fe553cb5efbd,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 7271168201957761380, guid: c2a46987873f3d943812fe553cb5efbd,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -90
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c2a46987873f3d943812fe553cb5efbd, type: 3}
+--- !u!4 &506392476906020932 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7271168201957761380, guid: c2a46987873f3d943812fe553cb5efbd,
+    type: 3}
+  m_PrefabInstance: {fileID: 7201099341814497568}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7606147926978220922
 PrefabInstance:
   m_ObjectHideFlags: 0

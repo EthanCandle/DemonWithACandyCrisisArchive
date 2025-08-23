@@ -10,8 +10,9 @@ public class Settings : MonoBehaviour
     public int volume;
     public Slider volumeSliderSFX, volumeSliderMusic, controllerSensitivitySlider;
 
-    public bool isMutedSFX = false, isMutedMusic = false;
+    public bool isMutedSFX = false, isMutedMusic = false, isMutedParticles, isMutedShaders, isMutedMainMenuCandy;
     public GameObject muteObjectSFX, unMuteObjectSFX, muteObjectMusic, unMuteObjectMusic;
+    public GameObject muteObjectParticles, unMuteObjectParticles, muteObjectShaders, unMuteObjectShaders, muteObjectCandy, unMuteObjectCandy;
     public Animator optionsAnimator;
     public CanvasGroup menuToDeactiveOnSummon, canvasGroupLocal;
     public Sound summonSound, deSummonSound;
@@ -19,6 +20,9 @@ public class Settings : MonoBehaviour
 
     public Button settingsDefaultButton;
     public GameManager gm;
+
+    public SpawnRandomlyDOwn spawnRandomMainMenuCandy;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -48,7 +52,34 @@ public class Settings : MonoBehaviour
 
     public void CallDelayStartStuff()
     {
+        audioManager = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
+
         StartCoroutine(DelayStartStuff());
+
+        if (audioManager.audioDataLocal.isShadersMuted)
+        {
+            MuteShaders();
+        }
+        else
+        {
+            UnMuteShaders();
+        }
+        if (audioManager.audioDataLocal.isParticlesMuted)
+        {
+            MuteParticles();
+        }
+        else
+        {
+            UnMuteParticles();
+        }        
+        if (audioManager.audioDataLocal.isMainMenuCandyMuted)
+        {
+            MuteMainMenuCandy();
+        }
+        else
+        { 
+            UnMuteMainMenuCandy();
+        }
     }
 
     public IEnumerator DelayStartStuff()
@@ -123,7 +154,8 @@ public class Settings : MonoBehaviour
         {
             MuteMusic();
         }
-    }
+    }   
+
     public void MuteSFX()
     {
         isMutedSFX = true;
@@ -168,6 +200,106 @@ public class Settings : MonoBehaviour
         unMuteObjectMusic.SetActive(true);
 
     }
+
+    public void UnMuteBothSounds() {
+        muteObjectMusic.SetActive(false);
+        unMuteObjectMusic.SetActive(true);
+        muteObjectSFX.SetActive(false);
+        unMuteObjectSFX.SetActive(true);
+    }
+
+
+    public void ChangeMuteParticles()
+    {
+        if (isMutedParticles)
+        {
+            UnMuteParticles();
+        }
+        else
+        {
+            MuteParticles();
+        }
+    }
+    public void ChangeMuteShaders()
+    {
+
+        if (isMutedShaders)
+        {
+            UnMuteShaders();
+        }
+        else
+        {
+            MuteShaders();
+        }
+    }
+
+    public void MuteParticles()
+    {
+        isMutedParticles = true;
+        muteObjectParticles.SetActive(true);
+        unMuteObjectParticles.SetActive(false);
+        AudioManager.instance.SetMuteParticles(true);
+    }
+
+    public void UnMuteParticles()
+    {
+        isMutedParticles = false;
+        muteObjectParticles.SetActive(false);
+        unMuteObjectParticles.SetActive(true);
+        AudioManager.instance.SetMuteParticles(false);
+    }
+
+    public void MuteShaders()
+    {
+        isMutedShaders = true;
+        muteObjectShaders.SetActive(true);
+        unMuteObjectShaders.SetActive(false);
+        AudioManager.instance.SetMuteShaders(true);
+    }
+
+    public void UnMuteShaders()
+    {
+        isMutedShaders = false;
+        muteObjectShaders.SetActive(false);
+        unMuteObjectShaders.SetActive(true);
+        AudioManager.instance.SetMuteShaders(false);
+    }
+
+    public void ChangeMainMenuCandy()
+    {
+        if(spawnRandomMainMenuCandy == null)
+        {
+            return;
+        }
+
+        if (isMutedMainMenuCandy)
+        {
+            UnMuteMainMenuCandy();
+        }
+        else
+        {
+            MuteMainMenuCandy();
+        }
+    }
+
+    public void MuteMainMenuCandy()
+    {
+        isMutedMainMenuCandy = true;
+        muteObjectCandy.SetActive(true);
+        unMuteObjectCandy.SetActive(false);
+        AudioManager.instance.SetMuteMainMenuCandy(true);
+    }
+
+    public void UnMuteMainMenuCandy()
+    {
+        print("unmute candy");
+        isMutedMainMenuCandy = false;
+        muteObjectCandy.SetActive(false);
+        unMuteObjectCandy.SetActive(true);
+        AudioManager.instance.SetMuteMainMenuCandy(false);
+    }
+
+
 
     public void ToggleOptionsMenu(Button button)
     {

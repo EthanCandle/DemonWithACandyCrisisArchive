@@ -13,15 +13,19 @@ public class GameManager : MonoBehaviour
     public FoodManager fm;
     public TypingManager tm;
     public PlayerController playerController;
-
+    public CheckPointManager checkPointManager;
     public InputManager _input;
+
     //public GameManager gm;  gm = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         _input = playerController.gameObject.GetComponent<InputManager>();
+        checkPointManager = GetComponent<CheckPointManager>();
+
+
     StartGame();
     }
 
@@ -37,6 +41,11 @@ public class GameManager : MonoBehaviour
     public void StartGame()
     {
         SwitchToPlatformer();
+    }
+    public void GetInputScript()
+    {
+        playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+        _input = playerController.gameObject.GetComponent<InputManager>();
     }
 
     public void SwitchGames()

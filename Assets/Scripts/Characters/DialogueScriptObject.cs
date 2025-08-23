@@ -12,5 +12,6 @@ public struct DialogueData
     public UnityEvent functionToCall;       // Function reference
     public Animator objectAnimator;         // Animator reference from the GameObject
     public string AnimationToPlayName;
-    public bool shouldTransitionToThisAnimation;
+    public bool shouldTransitionToThisAnimation; // should it play the jump animation
+    public bool shouldKillSelfAfterThis;
 }

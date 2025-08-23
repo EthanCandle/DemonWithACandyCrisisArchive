@@ -573,9 +573,10 @@ MonoBehaviour:
   gameStateCurrent: 0
   platformerArea: {fileID: 0}
   typingArea: {fileID: 0}
-  fm: {fileID: 0}
-  tm: {fileID: 0}
+  fm: {fileID: 7981648181068233770}
+  tm: {fileID: 7430119863567798846}
   playerController: {fileID: 0}
+  checkPointManager: {fileID: 7545090175226002083}
   _input: {fileID: 0}
 --- !u!114 &7981648181068233770
 MonoBehaviour:
@@ -591,8 +592,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   candyToCollectNeeded: 2
   candyToCollectTotal: 0
+  candyTotalInScene: 0
   objectToBecomeInteractable: {fileID: 0}
   gm: {fileID: 0}
+  debugStore: {fileID: 0}
 --- !u!114 &7430119863567798846
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -632,6 +635,8 @@ MonoBehaviour:
   talkingSFX: {fileID: 11400000, guid: a799eb3ff4737b640a3dc0f9aa4f9855, type: 2}
   windowGoingInSFX: {fileID: 11400000, guid: b347ffd3f5ecae4409da7c8a930416e9, type: 2}
   windowGoingOutSFX: {fileID: 11400000, guid: d332c8ab6a8e72b489bb4184b7e8cee5, type: 2}
+  playerInput: {fileID: 0}
+  isUsingKeyboard: 1
 --- !u!114 &7545090175226002083
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -645,7 +650,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   checkPointObjectList: []
+  initialPosition: {x: 0, y: 0, z: 0}
   playerController: {fileID: 0}
+  isActive: 0
 --- !u!114 &6538873962043478002
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -5,40 +5,47 @@ using UnityEngine.UI;
 
 public class SettingsManager : MonoBehaviour
 {
-    public GameObject pauseMenu;
-
+    public GameObject pauseMenu, controlsObject;
+    public CanvasGroup pauseMenuCanvasGroup;
     public GameManager gm; 
     public InputManager _input;
     public Settings settingsScript;
     public DebugStore debugStoreScript;
     public ConfirmationPopUpManager popUpManager;
-    public bool isPaused = false;
+    public bool isPaused = false, isInControls;
 
     public MainMenu mainMenuScript;
     public Sound summonSound, deSummonSound;
 
-    public Button pauseMenuDefaultButton;
-    public bool unPaused;
+    public Button pauseMenuDefaultButton, controlsDefaultButton;
+    public bool unPaused, allowedToPause = false;
     // Start is called before the first frame update
     void Start()
     {
         gm = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
         pauseMenu.SetActive(false);
+        allowedToPause = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-
+       // Debug.LogAssertion(allowedToPause);
         // pause input or if we are already paused and they press back button)
         if (gm._input.pause || (isPaused && gm._input.goBack))
         {
+            if (!allowedToPause)
+            {
+               // Debug.LogAssertion(allowedToPause);
+                return;
+            }
+           //Debug.LogAssertion(allowedToPause);
             gm._input.pause = false;
             gm._input.dash = false;
             gm._input.jump = false; 
             gm._input.jumpHold = false;
             gm._input.goBack = false;
-            print($"{gm._input.jump}");
+            //print($"{gm._input.jump}");
             // if in pause menu then remove it
             if (settingsScript != null && settingsScript.isInOptions)
             {
@@ -49,11 +56,16 @@ public class SettingsManager : MonoBehaviour
             {
                 debugStoreScript.DesummonDebugMenu();
             }
+            else if (isInControls)
+            {
+                TurnOffControls();
+            }
             // else remove the pause menu
             else
             {
                 ChangePauseMenuState();
             }
+
            // settingsScript.ReselectButton();
         }
 
@@ -70,6 +82,7 @@ public class SettingsManager : MonoBehaviour
         {
             OpenPauseMenu();
             isPaused = true;
+
         }
         else if (mainMenuScript.DestroyAreYouSure())
         {
@@ -129,6 +142,31 @@ public class SettingsManager : MonoBehaviour
         yield return null;
         print("closed pause menu null");
         unPaused = false;
+    }
+    public void TurnOffControls()
+    {
+        //mainMenuCG.interactable = true;
+
+        isInControls = false;
+        controlsObject.gameObject.SetActive(false);
+        FindObjectOfType<AudioManager>().PlaySoundInstantiate(deSummonSound);
+        pauseMenuCanvasGroup.interactable = true;
+        ReselectDefaultButton.instance.GoBackToPreviousButton();
+    }
+
+    public void TurnOnControls(Button button)
+    {
+
+       // mainMenuCG.interactable = false;
+        print("main menu not interactable");
+        isInControls = true;
+        controlsObject.gameObject.SetActive(true);
+        // reselectButtonScript.SelectRandomButton();
+        FindObjectOfType<AudioManager>().PlaySoundInstantiate(summonSound);
+        pauseMenuCanvasGroup.interactable = false;
+        ReselectDefaultButton.instance.SetPreviousButton(button);
+        ReselectDefaultButton.instance.SetButton(controlsDefaultButton);
+
     }
 
 

@@ -47,6 +47,10 @@ public class Lolipop : MonoBehaviour
 
     public void SpawnParticle()
     {
+        if (AudioManager.instance.audioDataLocal.isParticlesMuted)
+        {
+            return;
+        }
         Instantiate(particleEffect, transform.position , particleEffect.transform.rotation);
 
     }

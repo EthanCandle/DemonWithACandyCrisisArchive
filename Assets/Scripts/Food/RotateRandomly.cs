@@ -5,7 +5,7 @@ using UnityEngine;
 public class RotateRandomly : MonoBehaviour
 {
     public GameObject objectToRotate;
-    public float speedMin, speedMax;
+    public float speedMin, speedMax, speedCurrent;
     public float direction;
     public float xPow, yPow, zPow;
 
@@ -24,6 +24,8 @@ public class RotateRandomly : MonoBehaviour
         {
             direction = 1;
         }
+
+        speedCurrent = Random.Range(speedMin, speedMax);
     }
 
     // Update is called once per frame
@@ -35,7 +37,7 @@ public class RotateRandomly : MonoBehaviour
 
     public void RotateChild()
     {
-        objectToRotate.transform.Rotate(xPow * Time.deltaTime, yPow * Time.deltaTime, zPow * Time.deltaTime);
+        objectToRotate.transform.Rotate(xPow * speedCurrent * Time.unscaledDeltaTime, yPow * speedCurrent * Time.unscaledDeltaTime, zPow * speedCurrent * Time.unscaledDeltaTime);
     }
 
 }

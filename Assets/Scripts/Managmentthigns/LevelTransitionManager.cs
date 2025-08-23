@@ -32,7 +32,16 @@ public class LevelTransitionManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+      //  print(audioManager.gm.fm.debugStore.mainMenuScript.settingManagerScript.allowedToPause);
+
+        if (Input.GetKeyDown(KeyCode.RightBracket))
+        {
+            if (HTMLPlatformUtil.IsEditor())
+            {
+                EndGame();
+            }
+            //   
+        }
     }
     
     public void DoNotPlayTransition()
@@ -43,11 +52,26 @@ public class LevelTransitionManager : MonoBehaviour
 
     public void PlayTransitionOut()
     {
+        print("Going Out");
         FindObjectOfType<AudioManager>().PlaySoundInstantiate(goingOutSFX);
         PauseTime();
         levelTransitionUIHolder.SetActive(true);
         levelTransAnimator.Play("GoingOut");
         audioManager.FadeIn();
+
+        float duration = 1;
+
+        foreach (var clip in levelTransAnimator.runtimeAnimatorController.animationClips)
+        {
+            if (clip.name == "GoingOut")
+            {
+                duration = clip.length;
+                break;
+            }
+        }
+
+        SetSettingAllowedToPause(false); 
+        StartCoroutine(DelayForStartingGame(duration, true));
     }
 
     public void PlayTransitionIn(int levelNum = 0)
@@ -70,6 +94,7 @@ public class LevelTransitionManager : MonoBehaviour
             }
         }
         StartCoroutine(WaitToLoadNextScene(duration, levelNum));
+        SetSettingAllowedToPause(false);
     }
 
     IEnumerator WaitToLoadNextScene(float timeToWait, int levelToGoTo)
@@ -77,6 +102,50 @@ public class LevelTransitionManager : MonoBehaviour
 
         yield return new WaitForSecondsRealtime(timeToWait);
         LoadLevel(levelToGoTo);
+    }
+
+    IEnumerator DelayForStartingGame(float timeToWait, bool state)
+    {
+        
+        yield return new WaitForSecondsRealtime(timeToWait);
+        SetSettingAllowedToPause(state);
+    }
+
+    public void SetSettingAllowedToPause(bool state)
+    {
+        if (!audioManager.gm)
+        {
+            return;
+        }
+        if (audioManager == null)
+        {
+            Debug.LogError("audioManager is null");
+        }
+        else if (audioManager.gm == null)
+        {
+            Debug.LogError("audioManager.gm is null");
+        }
+        else if (audioManager.gm.fm == null)
+        {
+            Debug.LogError("audioManager.gm.fm is null");
+        }
+        else if (audioManager.gm.fm.debugStore == null)
+        {
+            Debug.LogError("audioManager.gm.fm.debugStore is null");
+        }
+        else if (audioManager.gm.fm.debugStore.mainMenuScript == null)
+        {
+            Debug.LogError("audioManager.gm.fm.debugStore.mainMenuScript is null");
+        }
+        else if (audioManager.gm.fm.debugStore.mainMenuScript.settingManagerScript == null)
+        {
+            Debug.LogError("audioManager.gm.fm.debugStore.mainMenuScript.settingManagerScript is null");
+        }
+        print(state);
+        Debug.LogWarning(audioManager.gm.fm.debugStore.mainMenuScript.settingManagerScript.allowedToPause);
+        audioManager.gm.fm.debugStore.mainMenuScript.settingManagerScript.allowedToPause = state;
+        Debug.LogWarning(audioManager.gm.fm.debugStore.mainMenuScript.settingManagerScript.allowedToPause);
+        print(state);
     }
 
     public void StartGame()
@@ -93,7 +162,7 @@ public class LevelTransitionManager : MonoBehaviour
 
         // called when hitting a end trigger by player so its at the last level
 
-
+        audioManager.gm.playerController.HasWonLevel();
 
         // called by the level transition
         // return to main menu if its not in the main run

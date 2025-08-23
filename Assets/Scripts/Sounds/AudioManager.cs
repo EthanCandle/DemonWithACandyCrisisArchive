@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 using System.Collections.Generic;
 using System.IO;
 using System.Collections;
+using TMPro;
 public class AudioManager : MonoBehaviour
 {
     // FindObjectOfType<AudioManager>().PlaySoundInstantiate(deathSFX);
@@ -35,6 +36,8 @@ public class AudioManager : MonoBehaviour
     public AudioSaveData audioDataLocal;
     public Settings settingScript;
     public GameManager gm;
+
+    public TextMeshProUGUI songVolumeText;
     // Start is called before the first frame update
     void Awake()
     {
@@ -175,6 +178,26 @@ public class AudioManager : MonoBehaviour
 
     private void Update()
     {
+        if (songVolumeText.isActiveAndEnabled)
+        {
+            songVolumeText.text = $"Music Level: {songCurrentlyPlaying.volume}\n" +
+    $"Music Volume: {audioDataLocal.musicVolume}\n" +
+    $"SFX Volume: {audioDataLocal.sfxVolume}\n" +
+    $"Controller Sensitivity: {audioDataLocal.controllerSensitivity}\n" +
+    $"IsShaderMuted: {audioDataLocal.isShadersMuted}\n" +
+    $"IsParticlesMuted: {audioDataLocal.isParticlesMuted}\n";
+
+            if(gm && gm.playerController)
+            {
+                songVolumeText.text += $"Dash Charge: {gm.playerController.dashRechargeCurrent}\n";
+            }
+            else
+            {
+                songVolumeText.text += $"Dash Charge: 0\n";
+            }
+
+        }
+
         if (shouldFadeOut)
         {
             songCurrentlyPlaying.volume -= fadeInOutSpeed * Time.unscaledDeltaTime;
@@ -364,9 +387,14 @@ public class AudioManager : MonoBehaviour
     }
 
 
-    public void SetVolumeSFX(int amountToChange)
+    public void SetVolumeSFX(int amountToChange, bool onlySetVolume = false)
     {
         audioDataLocal.sfxVolume = amountToChange;
+
+        if (onlySetVolume)
+        {
+            return;
+        }
         audioDataLocal.isSFXMuted = false;
         AdjustVolumeSFX(audioDataLocal.sfxVolume);
 
@@ -408,9 +436,14 @@ public class AudioManager : MonoBehaviour
     }
 
 
-    public void SetVolumeMusic(int amountToChange)
+    public void SetVolumeMusic(int amountToChange, bool onlySetVolume = false)
     {
         audioDataLocal.musicVolume = amountToChange;
+        if (onlySetVolume)
+        {
+            return;
+        }
+
         audioDataLocal.isMusicMuted = false;
 
        // print($"Music muted is: {audioDataLocal.isMusicMuted}, volume: {audioDataLocal.musicVolume}");
@@ -465,50 +498,137 @@ public class AudioManager : MonoBehaviour
 
     public void SaveData()
     {
-       // print(audioDataLocal.isMusicMuted);
         AudioSaveData audioSaveData;
 
         if (audioDataLocal == null)
         {
-            audioSaveData = new AudioSaveData { sfxVolume = 50, musicVolume = 50, isSFXMuted = false, isMusicMuted = false, controllerSensitivity = 5 };
-           // print("saving data is null");
+            audioSaveData = new AudioSaveData
+            {
+                sfxVolume = 50,
+                musicVolume = 50,
+                isSFXMuted = false,
+                isMusicMuted = false,
+                controllerSensitivity = 5,
+                isShadersMuted = false,
+                isParticlesMuted = false,
+                isMainMenuCandyMuted = false,
+            };
+          // print("audio save is null");
         }
         else
         {
-            audioSaveData = new AudioSaveData { sfxVolume = audioDataLocal.sfxVolume, musicVolume = audioDataLocal.musicVolume, isSFXMuted = audioDataLocal.isSFXMuted, isMusicMuted = audioDataLocal.isMusicMuted, controllerSensitivity = audioDataLocal.controllerSensitivity };
-
+            audioSaveData = new AudioSaveData
+            {
+                sfxVolume = audioDataLocal.sfxVolume,
+                musicVolume = audioDataLocal.musicVolume,
+                isSFXMuted = audioDataLocal.isSFXMuted,
+                isMusicMuted = audioDataLocal.isMusicMuted,
+                controllerSensitivity = audioDataLocal.controllerSensitivity,
+                isShadersMuted = audioDataLocal.isShadersMuted,
+                isParticlesMuted = audioDataLocal.isParticlesMuted,
+                isMainMenuCandyMuted = audioDataLocal.isMainMenuCandyMuted,
+            };
+           // print("audio save is not null");
         }
-
-
-
+       // print(audioSaveData.musicVolume);
         string json = JsonUtility.ToJson(audioSaveData);
 
-        File.WriteAllText(volumeData, json);
+        if (HTMLPlatformUtil.IsWebGLBuild())
+        {
+            PlayerPrefs.SetString("AudioSettings", json);
+            PlayerPrefs.Save();
+        }
+        else
+        {
+            File.WriteAllText(volumeData, json);
+        }
+
     }
 
     public void LoadData()
     {
-        if (!File.Exists(volumeData))
+        if (audioDataLocal == null)
         {
-            print("Save candyData didn't exist");
-            // if we don't have a save yet, make one
-            SaveData();
+            //print("is null");
         }
-        string saveString = File.ReadAllText(volumeData);
+        else
+        {
+           // print(audioDataLocal.sfxVolume);
+        }
+        string saveString = "";
+
+        if (HTMLPlatformUtil.IsWebGLBuild())
+        {
+            if (!PlayerPrefs.HasKey("AudioSettings"))
+            {
+                Debug.Log("Audio settings not found in PlayerPrefs, saving defaults.");
+                audioDataLocal = null;
+                SaveData();
+            }
+            else
+            {
+               // Debug.Log("Audio settings is  found in PlayerPrefs, saving defaults.");
+            }
+
+            saveString = PlayerPrefs.GetString("AudioSettings");
+        }
+        else
+        {
+            if (!File.Exists(volumeData))
+            {
+                Debug.Log("Audio settings file not found, saving defaults.");
+                audioDataLocal = null;
+                SaveData();
+            }
+
+            saveString = File.ReadAllText(volumeData);
+        }
 
         audioDataLocal = JsonUtility.FromJson<AudioSaveData>(saveString);
 
+       // print(audioDataLocal.musicVolume);
         SetVolumeData();
         LoadControllerSensitivity();
+        LoadMuteParticles();
+        LoadMuteShaders();
+        LoadMuteMainMenuCandy();
 
+        settingScript.CallDelayStartStuff();
+        //print(audioDataLocal.musicVolume);
+    }
+
+    public void DeleteDataLogic()
+    {
+        if (PlayerPrefs.HasKey("AudioSettings"))
+        {
+            print("Deleted data");
+            PlayerPrefs.DeleteKey("AudioSettings");
+        }
+        if (File.Exists(volumeData))
+        {
+            File.Delete(volumeData);
+            print("Deleted data");
+        }
+        audioDataLocal = null;
+
+    }
+
+    public void DeleteData()
+    {
+        DeleteDataLogic();
+        LoadData();
+        settingScript.UnMuteBothSounds();
     }
 
     public void SetVolumeData()
     {
-      //  print("Set volume datat");
+        //  print("Set volume datat");
+        // print(audioDataLocal.musicVolume);
+       
         if (audioDataLocal.isMusicMuted)
         {
-            SetVolumeMusic(audioDataLocal.musicVolume);
+            print("ismuted");
+            SetVolumeMusic(audioDataLocal.musicVolume , true);
             MuteVolumeMusic();
             CallDelayFrameMusic();
         }
@@ -520,7 +640,7 @@ public class AudioManager : MonoBehaviour
 
         if (audioDataLocal.isSFXMuted)
         {
-            SetVolumeSFX(audioDataLocal.sfxVolume);
+            SetVolumeSFX(audioDataLocal.sfxVolume, true);
             MuteVolumeSFX();
             CallDelayFrameSFX();
         }
@@ -528,6 +648,7 @@ public class AudioManager : MonoBehaviour
         {
             SetVolumeSFX(audioDataLocal.sfxVolume);
         }
+       // print(audioDataLocal.musicVolume);
     }
 
     public void CallDelayFrameMusic()
@@ -542,29 +663,38 @@ public class AudioManager : MonoBehaviour
 
     public IEnumerator DelayFrameMusic()
     {
-
-        yield return null;
-        yield return null;
-        print("IN coroco");
         settingScript = GameObject.FindGameObjectWithTag("Options").GetComponent<Settings>();
+        audioDataLocal.isMusicMuted = true;
+        settingScript.MuteMusic();
+        yield return null;
+
+        audioDataLocal.isMusicMuted = true;
+        settingScript.MuteMusic();
+        yield return null;
+       // print("IN coroco");
+
         audioDataLocal.isMusicMuted = true;
         settingScript.MuteMusic();
 
     }   
     public IEnumerator DelayFrameSFX()
     {
-
-        yield return null;
-        yield return null;
-        print("IN coroco");
         settingScript = GameObject.FindGameObjectWithTag("Options").GetComponent<Settings>();
+
         audioDataLocal.isSFXMuted = true;
+        settingScript.MuteSFX();
+        yield return null;
+        audioDataLocal.isSFXMuted = true;
+        settingScript.MuteSFX();
+        yield return null;
+      //  print("IN coroco");
+     audioDataLocal.isSFXMuted = true;
         settingScript.MuteSFX();
     }
 
     public void SetControllerSensitivity(float amountToChange)
     {
-        print("set snesitity");
+       // print("set snesitity");
         audioDataLocal.controllerSensitivity = amountToChange;
         SaveData();
         LoadControllerSensitivity();
@@ -581,10 +711,75 @@ public class AudioManager : MonoBehaviour
         if (gm == null)
         {
             return;
+        }        
+        
+        if (gm._input== null)
+        {
+            gm.GetInputScript();
         }
-        print("loaded snesitity");
-        print(gm);
+        //print("loaded snesitity");
+      //  print(gm);
+      if(audioDataLocal == null)
+        {
+            print("Audio data null in controller sensitityivty");
+            return;
+        }
         gm._input.sensitivity = audioDataLocal.controllerSensitivity;
-        print(gm._input.sensitivity);
+       // print(gm._input.sensitivity);
     }
+
+    public void SetMuteParticles(bool state)
+    {
+        audioDataLocal.isParticlesMuted = state;
+        SaveData();
+
+    }
+
+    public void LoadMuteParticles()
+    {
+        settingScript.isMutedParticles = audioDataLocal.isParticlesMuted;
+        SaveData();
+    }
+
+    public void SetMuteShaders(bool state)
+    {
+        audioDataLocal.isShadersMuted = state;
+        //print(state);
+       // print(audioDataLocal.isShadersMuted);
+       if(ShaderUnscaledTime.Instance != null)
+        {
+            ShaderUnscaledTime.Instance.ToggleShader(state);
+        }
+
+        SaveData();
+
+    }
+
+    public void LoadMuteShaders()
+    {
+        settingScript.isMutedShaders = audioDataLocal.isShadersMuted;
+        SaveData();
+    }
+
+    public void SetMuteMainMenuCandy(bool state)
+    {
+        settingScript = GameObject.FindGameObjectWithTag("Options").GetComponent<Settings>();
+        audioDataLocal.isMainMenuCandyMuted = state;
+
+        if(settingScript.spawnRandomMainMenuCandy != null)
+        {
+            settingScript.spawnRandomMainMenuCandy.ToggleCandy(!state);
+        }
+
+        SaveData();
+
+    }
+
+    public void LoadMuteMainMenuCandy()
+    {
+        settingScript.isMutedMainMenuCandy = audioDataLocal.isMainMenuCandyMuted;
+        SaveData();
+    }
+
+
 }
