@@ -38,6 +38,15 @@ public class MainMenu : MonoBehaviour
         settingManagerScript = GetComponent<SettingsManager>();
     }
 
+    public void TurnOffPausing()
+    {
+        if (settingManagerScript)
+        {
+            print("Turnning off pausing");
+            settingManagerScript.TurnOffAllowedToPause();
+        }
+
+    }
 
     public void PlayGame () // new game
     {
@@ -53,7 +62,7 @@ public class MainMenu : MonoBehaviour
         PlayerDebugStatsGlobalManager.Instance.DataResetLevelCount();
 
         PlayerDebugStatsTimer.Instance.SetTimer(0);
-
+        TurnOffPausing();
         // change this to be 
         levelTransition.MoveToDifferentLevel(PlayerDebugStatsGlobalManager.Instance.DataGetLevelCount());
     }
@@ -85,7 +94,7 @@ public class MainMenu : MonoBehaviour
             totalTimeBeforeCurrentLevel += PlayerDebugStatsGlobalManager.Instance.dataLocal.currentLevelTimes[i];
         }
         PlayerDebugStatsTimer.Instance.SetTimer(totalTimeBeforeCurrentLevel);
-
+        TurnOffPausing();
         // change this to be 
         levelTransition.MoveToDifferentLevel(PlayerDebugStatsGlobalManager.Instance.DataGetLevelCount());
     }
@@ -100,12 +109,14 @@ public class MainMenu : MonoBehaviour
             PlayerDebugStatsTimer.Instance.ResetTimer();
             PlayerDebugStatsTimer.Instance.StartTimer();
         }
+        ReselectDefaultButton.instance.ClosedMenuGoToGamePlay();
         // if in main run do nothing
         SpawnConfirmationPopup(ResetLevelLogic, pauseMenuCG, button);
     }
 
     public void ResetLevelLogic()
     {
+        TurnOffPausing();
         levelTransition.MoveToDifferentLevel(SceneManager.GetActiveScene().buildIndex);
     }
     public void BackToMainMenu(Button button)
@@ -124,8 +135,10 @@ public class MainMenu : MonoBehaviour
         {
             PlayerDebugStatsGlobalManager.Instance.DataSetTimeCurrentToCompleteGame(PlayerDebugStatsTimer.Instance.GetTime());
         }
+        TurnOffPausing();
         PlayerDebugStatsTimer.Instance.PauseTimer();
         PlayerDebugStatsTimer.Instance.ResetTimer();
+        
         levelTransition.MoveToDifferentLevel(0);
     }
 
@@ -144,7 +157,7 @@ public class MainMenu : MonoBehaviour
         PlayerDebugStatsTimer.Instance.ResetTimer();
         PlayerDebugStatsTimer.Instance.StartTimer();
 
-
+        TurnOffPausing();
         // called by pause menu button
         levelTransition.MoveToDifferentLevel(levelToPlay);
 

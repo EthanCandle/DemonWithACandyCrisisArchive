@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerEndLevel : MonoBehaviour
 {
     public LevelTransitionManager levelTransManager;
+    public bool canTriggerEnding = true;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,8 +21,10 @@ public class PlayerEndLevel : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("End"))
+        if (other.gameObject.CompareTag("End") && canTriggerEnding)
         {
+            canTriggerEnding = false;
+            print("triggered end level");
             levelTransManager.EndGame();
         }       
     }

@@ -21,7 +21,7 @@ public class SpawnRandomlyDOwn : MonoBehaviour
     public void RemoveAllCandy()
     {
         // called by button deleting data
-        print("Remove all main candy ");
+       // print("Remove all main candy ");
         for (int i = 0; i < candySpawned.Count; i++)
         {
             Destroy(candySpawned[i]);

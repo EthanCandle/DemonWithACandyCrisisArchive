@@ -76,7 +76,7 @@ public class LevelTransitionManager : MonoBehaviour
 
     public void PlayTransitionIn(int levelNum = 0)
     {
-       
+        print("Trans in");
         PauseTime();
         levelTransitionUIHolder.SetActive(true);
         levelTransAnimator.Play("GoingIn");
@@ -94,6 +94,7 @@ public class LevelTransitionManager : MonoBehaviour
             }
         }
         StartCoroutine(WaitToLoadNextScene(duration, levelNum));
+
         SetSettingAllowedToPause(false);
     }
 
@@ -108,6 +109,8 @@ public class LevelTransitionManager : MonoBehaviour
     {
         
         yield return new WaitForSecondsRealtime(timeToWait);
+        print("Allow pausing");
+        print(state);
         SetSettingAllowedToPause(state);
     }
 

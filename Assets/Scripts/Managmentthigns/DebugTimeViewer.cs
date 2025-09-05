@@ -17,6 +17,10 @@ public class DebugTimeViewer : MonoBehaviour
     {
         // updates the timer text per seond
         timeTimerText.text = $"Time: {GetFormattedTime(PlayerDebugStatsTimer.Instance.GetTime())}";
+       // timeTimerText.text += $"\nTime: {GetFormattedTime(PlayerDebugStatsTimer.Instance.GetTime())}";
+
+
+
     }
     //using UnityEngine.SceneManagement;
     void OnEnable()

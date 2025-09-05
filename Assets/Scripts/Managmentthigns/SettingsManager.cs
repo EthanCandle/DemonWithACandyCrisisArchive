@@ -24,6 +24,7 @@ public class SettingsManager : MonoBehaviour
     {
         gm = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
         pauseMenu.SetActive(false);
+        print("Allowed to pause in state is now false");
         allowedToPause = false;
     }
 
@@ -169,6 +170,18 @@ public class SettingsManager : MonoBehaviour
 
     }
 
+    public void TurnOffAllowedToPause()
+    {
+        allowedToPause = false;
+        pauseMenuCanvasGroup.interactable = false;
+    }
 
+    public void TurnOnAllowedToPause()
+    {
+        print("allowed to pause in function");
+        
+        allowedToPause = true;
+        print(allowedToPause);
+    }
 }
 

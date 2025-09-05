@@ -585,6 +585,7 @@ MonoBehaviour:
   isMutedMusic: 0
   isMutedParticles: 0
   isMutedShaders: 0
+  isMutedMainMenuCandy: 0
   muteObjectSFX: {fileID: 0}
   unMuteObjectSFX: {fileID: 0}
   muteObjectMusic: {fileID: 0}
@@ -593,6 +594,8 @@ MonoBehaviour:
   unMuteObjectParticles: {fileID: 0}
   muteObjectShaders: {fileID: 0}
   unMuteObjectShaders: {fileID: 0}
+  muteObjectCandy: {fileID: 0}
+  unMuteObjectCandy: {fileID: 0}
   optionsAnimator: {fileID: 3033931275306661469}
   menuToDeactiveOnSummon: {fileID: 1486066972573153704}
   canvasGroupLocal: {fileID: 0}
@@ -601,6 +604,7 @@ MonoBehaviour:
   reselectButtonScript: {fileID: 0}
   settingsDefaultButton: {fileID: 0}
   gm: {fileID: 0}
+  spawnRandomMainMenuCandy: {fileID: 0}
 --- !u!95 &3033931275306661469
 Animator:
   serializedVersion: 5
@@ -5115,6 +5119,7 @@ MonoBehaviour:
   controlsObject: {fileID: 6899332371994242112}
   mainMenuCG: {fileID: 1486066972573153704}
   pauseMenuCG: {fileID: 0}
+  settingManagerScript: {fileID: 0}
   settingsScript: {fileID: 0}
   debugStoreScript: {fileID: 0}
   isInOptions: 0
@@ -8102,16 +8107,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: OptionsMenu
-      objectReference: {fileID: 0}
-    - target: {fileID: 3780182488343339235, guid: 50ba054ef288022419ee2c3d89e36615,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 6657691793747508391}
-    - target: {fileID: 3780182488343339235, guid: 50ba054ef288022419ee2c3d89e36615,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 5579155172362497595, guid: 50ba054ef288022419ee2c3d89e36615,
         type: 3}

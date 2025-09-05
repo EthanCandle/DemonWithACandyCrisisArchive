@@ -22,11 +22,11 @@ public class Settings : MonoBehaviour
     public GameManager gm;
 
     public SpawnRandomlyDOwn spawnRandomMainMenuCandy;
-
+    public bool onStartMusic = true, onStartSFX = true;
     // Start is called before the first frame update
     void Start()
     {
-        audioManager = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
+        audioManager = AudioManager.instance;
 
         if (audioManager.audioDataLocal.isMusicMuted)
         {
@@ -34,14 +34,27 @@ public class Settings : MonoBehaviour
             MuteMusic();
             audioManager.CallDelayFrameMusic();
         }
+        else
+        {
+            print($"Music not muted: {audioManager.isMusicMuted}");
+            UnMuteMusic();
+        }
         if (audioManager.audioDataLocal.isSFXMuted)
         {
             print("Music muted");
             MuteSFX();
             audioManager.CallDelayFrameSFX();
         }
-
+        else
+        {
+            UnMuteSFX();
+        }
+        SetSliderOnStartSFX();
+        SetSliderOnStartMusic();
+        SetSliderOnStartController();
         CallDelayStartStuff();
+
+        audioManager.SetControllerSensitivity((float)controllerSensitivitySlider.value);
     }
 
     // Update is called once per frame
@@ -50,9 +63,17 @@ public class Settings : MonoBehaviour
         
     }
 
+    public void DeleteDataVolume()
+    {
+        audioManager.DeleteData();
+        SetSliderOnStartSFX();
+        SetSliderOnStartMusic();
+        SetSliderOnStartController();
+    }
+
     public void CallDelayStartStuff()
     {
-        audioManager = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
+        audioManager = AudioManager.instance;
 
         StartCoroutine(DelayStartStuff());
 
@@ -85,9 +106,9 @@ public class Settings : MonoBehaviour
     public IEnumerator DelayStartStuff()
     {
         yield return null;
-        SetSliderOnStartSFX();
-        SetSliderOnStartMusic();
-        SetSliderOnStartController();
+        //SetSliderOnStartSFX();
+        //SetSliderOnStartMusic();
+        //SetSliderOnStartController();
     }
     public void SetSliderOnStartSFX()
     {
@@ -113,16 +134,35 @@ public class Settings : MonoBehaviour
     public void ChangeVolumeSFX(Slider slider)
     {
         // print((int)volumeSlider.value);
+        if (onStartSFX)
+        {
+            audioManager.SetVolumeSFX((int)slider.value, true);
+            //unMuteObjectSFX.SetActive(false);
+            onStartSFX = false;
+        }
+        else
+        {
+            audioManager.SetVolumeSFX((int)slider.value);
+            UnMuteSFX(); // just to remove the mute symbol
+        }
 
-        audioManager.SetVolumeSFX((int)slider.value);
-        UnMuteSFX(); // just to remove the mute symbol
     }
     public void ChangeVolumeMusic(Slider slider)
     {
         // print((int)volumeSlider.value);
+        if (onStartMusic)
+        {
+            print("in on start music");
+            audioManager.SetVolumeMusic((int)slider.value);
+            //unMuteObjectMusic.SetActive(false);
+            onStartMusic = false;
+        }
+        else
+        {
+            audioManager.SetVolumeMusic((int)slider.value);
+            UnMuteMusic(); // just to remove the mute symbol
+        }
 
-        audioManager.SetVolumeMusic((int)slider.value);
-        UnMuteMusic(); // just to remove the mute symbol
     }
 
     public void ChangeControllerSensitivity(Slider slider)
@@ -267,10 +307,10 @@ public class Settings : MonoBehaviour
 
     public void ChangeMainMenuCandy()
     {
-        if(spawnRandomMainMenuCandy == null)
-        {
-            return;
-        }
+        //if(spawnRandomMainMenuCandy == null)
+        //{
+        //    return;
+        //}
 
         if (isMutedMainMenuCandy)
         {

@@ -186,6 +186,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Candy (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 9135959171841323154, guid: 340929fbfe77a1b439c4cddf4cde7c52,
+        type: 3}
+      propertyPath: m_Size.z
+      value: 3.44
+      objectReference: {fileID: 0}
+    - target: {fileID: 9135959171841323154, guid: 340929fbfe77a1b439c4cddf4cde7c52,
+        type: 3}
+      propertyPath: m_Offset.z
+      value: 1.72
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -625,6 +635,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Candy (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 9135959171841323154, guid: 340929fbfe77a1b439c4cddf4cde7c52,
+        type: 3}
+      propertyPath: m_Size.z
+      value: 3.44
+      objectReference: {fileID: 0}
+    - target: {fileID: 9135959171841323154, guid: 340929fbfe77a1b439c4cddf4cde7c52,
+        type: 3}
+      propertyPath: m_Offset.z
+      value: 1.72
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -848,6 +868,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Candy (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9135959171841323154, guid: 340929fbfe77a1b439c4cddf4cde7c52,
+        type: 3}
+      propertyPath: m_Size.z
+      value: 3.44
+      objectReference: {fileID: 0}
+    - target: {fileID: 9135959171841323154, guid: 340929fbfe77a1b439c4cddf4cde7c52,
+        type: 3}
+      propertyPath: m_Offset.z
+      value: 1.72
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1291,6 +1321,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Candy (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 9135959171841323154, guid: 340929fbfe77a1b439c4cddf4cde7c52,
+        type: 3}
+      propertyPath: m_Size.z
+      value: 3.44
+      objectReference: {fileID: 0}
+    - target: {fileID: 9135959171841323154, guid: 340929fbfe77a1b439c4cddf4cde7c52,
+        type: 3}
+      propertyPath: m_Offset.z
+      value: 1.72
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1382,6 +1422,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Candy (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9135959171841323154, guid: 340929fbfe77a1b439c4cddf4cde7c52,
+        type: 3}
+      propertyPath: m_Size.z
+      value: 3.44
+      objectReference: {fileID: 0}
+    - target: {fileID: 9135959171841323154, guid: 340929fbfe77a1b439c4cddf4cde7c52,
+        type: 3}
+      propertyPath: m_Offset.z
+      value: 1.72
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4261,6 +4311,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Candy (19)
       objectReference: {fileID: 0}
+    - target: {fileID: 9135959171841323154, guid: 340929fbfe77a1b439c4cddf4cde7c52,
+        type: 3}
+      propertyPath: m_Size.z
+      value: 3.44
+      objectReference: {fileID: 0}
+    - target: {fileID: 9135959171841323154, guid: 340929fbfe77a1b439c4cddf4cde7c52,
+        type: 3}
+      propertyPath: m_Offset.z
+      value: 1.72
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4609,6 +4669,16 @@ PrefabInstance:
       propertyPath: movingPlatform
       value: 
       objectReference: {fileID: 799398524}
+    - target: {fileID: 7966704203412831136, guid: 908c0ef3aa2249440a20fdd225dabd80,
+        type: 3}
+      propertyPath: m_Size.z
+      value: 3.44
+      objectReference: {fileID: 0}
+    - target: {fileID: 7966704203412831136, guid: 908c0ef3aa2249440a20fdd225dabd80,
+        type: 3}
+      propertyPath: m_Offset.z
+      value: 1.72
+      objectReference: {fileID: 0}
     - target: {fileID: 8964126141429560800, guid: 908c0ef3aa2249440a20fdd225dabd80,
         type: 3}
       propertyPath: m_Name
@@ -5010,6 +5080,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Candy (11)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9135959171841323154, guid: 340929fbfe77a1b439c4cddf4cde7c52,
+        type: 3}
+      propertyPath: m_Size.z
+      value: 3.44
+      objectReference: {fileID: 0}
+    - target: {fileID: 9135959171841323154, guid: 340929fbfe77a1b439c4cddf4cde7c52,
+        type: 3}
+      propertyPath: m_Offset.z
+      value: 1.72
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5790,6 +5870,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Candy (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 9135959171841323154, guid: 340929fbfe77a1b439c4cddf4cde7c52,
+        type: 3}
+      propertyPath: m_Size.z
+      value: 3.44
+      objectReference: {fileID: 0}
+    - target: {fileID: 9135959171841323154, guid: 340929fbfe77a1b439c4cddf4cde7c52,
+        type: 3}
+      propertyPath: m_Offset.z
+      value: 1.72
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6201,6 +6291,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Candy (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 9135959171841323154, guid: 340929fbfe77a1b439c4cddf4cde7c52,
+        type: 3}
+      propertyPath: m_Size.z
+      value: 3.44
+      objectReference: {fileID: 0}
+    - target: {fileID: 9135959171841323154, guid: 340929fbfe77a1b439c4cddf4cde7c52,
+        type: 3}
+      propertyPath: m_Offset.z
+      value: 1.72
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6275,6 +6375,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Candy (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 9135959171841323154, guid: 340929fbfe77a1b439c4cddf4cde7c52,
+        type: 3}
+      propertyPath: m_Size.z
+      value: 3.44
+      objectReference: {fileID: 0}
+    - target: {fileID: 9135959171841323154, guid: 340929fbfe77a1b439c4cddf4cde7c52,
+        type: 3}
+      propertyPath: m_Offset.z
+      value: 1.72
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6348,6 +6458,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Candy (10)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9135959171841323154, guid: 340929fbfe77a1b439c4cddf4cde7c52,
+        type: 3}
+      propertyPath: m_Size.z
+      value: 3.44
+      objectReference: {fileID: 0}
+    - target: {fileID: 9135959171841323154, guid: 340929fbfe77a1b439c4cddf4cde7c52,
+        type: 3}
+      propertyPath: m_Offset.z
+      value: 1.72
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6428,6 +6548,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Candy (10)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9135959171841323154, guid: 340929fbfe77a1b439c4cddf4cde7c52,
+        type: 3}
+      propertyPath: m_Size.z
+      value: 3.44
+      objectReference: {fileID: 0}
+    - target: {fileID: 9135959171841323154, guid: 340929fbfe77a1b439c4cddf4cde7c52,
+        type: 3}
+      propertyPath: m_Offset.z
+      value: 1.72
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6946,6 +7076,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Candy (17)
       objectReference: {fileID: 0}
+    - target: {fileID: 9135959171841323154, guid: 340929fbfe77a1b439c4cddf4cde7c52,
+        type: 3}
+      propertyPath: m_Size.z
+      value: 3.44
+      objectReference: {fileID: 0}
+    - target: {fileID: 9135959171841323154, guid: 340929fbfe77a1b439c4cddf4cde7c52,
+        type: 3}
+      propertyPath: m_Offset.z
+      value: 1.72
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7416,7 +7556,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &386159576
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7867,6 +8007,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Candy (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9135959171841323154, guid: 340929fbfe77a1b439c4cddf4cde7c52,
+        type: 3}
+      propertyPath: m_Size.z
+      value: 3.44
+      objectReference: {fileID: 0}
+    - target: {fileID: 9135959171841323154, guid: 340929fbfe77a1b439c4cddf4cde7c52,
+        type: 3}
+      propertyPath: m_Offset.z
+      value: 1.72
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -8411,6 +8561,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Candy (15)
       objectReference: {fileID: 0}
+    - target: {fileID: 9135959171841323154, guid: 340929fbfe77a1b439c4cddf4cde7c52,
+        type: 3}
+      propertyPath: m_Size.z
+      value: 3.44
+      objectReference: {fileID: 0}
+    - target: {fileID: 9135959171841323154, guid: 340929fbfe77a1b439c4cddf4cde7c52,
+        type: 3}
+      propertyPath: m_Offset.z
+      value: 1.72
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -8655,6 +8815,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Candy (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9135959171841323154, guid: 340929fbfe77a1b439c4cddf4cde7c52,
+        type: 3}
+      propertyPath: m_Size.z
+      value: 3.44
+      objectReference: {fileID: 0}
+    - target: {fileID: 9135959171841323154, guid: 340929fbfe77a1b439c4cddf4cde7c52,
+        type: 3}
+      propertyPath: m_Offset.z
+      value: 1.72
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -8954,7 +9124,7 @@ PrefabInstance:
     - target: {fileID: 2731909549485147139, guid: 06462ad49746ce64d845cff6dea407e4,
         type: 3}
       propertyPath: m_VersionIndex
-      value: 2730
+      value: 2733
       objectReference: {fileID: 0}
     - target: {fileID: 4320616953062745605, guid: 06462ad49746ce64d845cff6dea407e4,
         type: 3}
@@ -8969,7 +9139,7 @@ PrefabInstance:
     - target: {fileID: 4702615459762054270, guid: 06462ad49746ce64d845cff6dea407e4,
         type: 3}
       propertyPath: m_VersionIndex
-      value: 1672
+      value: 1675
       objectReference: {fileID: 0}
     - target: {fileID: 4959099916176842583, guid: 06462ad49746ce64d845cff6dea407e4,
         type: 3}
@@ -9278,6 +9448,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Candy (9)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9135959171841323154, guid: 340929fbfe77a1b439c4cddf4cde7c52,
+        type: 3}
+      propertyPath: m_Size.z
+      value: 3.44
+      objectReference: {fileID: 0}
+    - target: {fileID: 9135959171841323154, guid: 340929fbfe77a1b439c4cddf4cde7c52,
+        type: 3}
+      propertyPath: m_Offset.z
+      value: 1.72
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -10293,6 +10473,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9135959171841323154, guid: 340929fbfe77a1b439c4cddf4cde7c52,
+        type: 3}
+      propertyPath: m_Size.z
+      value: 3.44
+      objectReference: {fileID: 0}
+    - target: {fileID: 9135959171841323154, guid: 340929fbfe77a1b439c4cddf4cde7c52,
+        type: 3}
+      propertyPath: m_Offset.z
+      value: 1.72
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -11383,6 +11573,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Candy (9)
       objectReference: {fileID: 0}
+    - target: {fileID: 9135959171841323154, guid: 340929fbfe77a1b439c4cddf4cde7c52,
+        type: 3}
+      propertyPath: m_Size.z
+      value: 3.44
+      objectReference: {fileID: 0}
+    - target: {fileID: 9135959171841323154, guid: 340929fbfe77a1b439c4cddf4cde7c52,
+        type: 3}
+      propertyPath: m_Offset.z
+      value: 1.72
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -11461,6 +11661,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9135959171841323154, guid: 340929fbfe77a1b439c4cddf4cde7c52,
+        type: 3}
+      propertyPath: m_Size.z
+      value: 3.44
+      objectReference: {fileID: 0}
+    - target: {fileID: 9135959171841323154, guid: 340929fbfe77a1b439c4cddf4cde7c52,
+        type: 3}
+      propertyPath: m_Offset.z
+      value: 1.72
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -12463,6 +12673,16 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9135959171841323154, guid: 340929fbfe77a1b439c4cddf4cde7c52,
+        type: 3}
+      propertyPath: m_Size.z
+      value: 3.44
+      objectReference: {fileID: 0}
+    - target: {fileID: 9135959171841323154, guid: 340929fbfe77a1b439c4cddf4cde7c52,
+        type: 3}
+      propertyPath: m_Offset.z
+      value: 1.72
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -12649,6 +12869,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Candy (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9135959171841323154, guid: 340929fbfe77a1b439c4cddf4cde7c52,
+        type: 3}
+      propertyPath: m_Size.z
+      value: 3.44
+      objectReference: {fileID: 0}
+    - target: {fileID: 9135959171841323154, guid: 340929fbfe77a1b439c4cddf4cde7c52,
+        type: 3}
+      propertyPath: m_Offset.z
+      value: 1.72
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -27821,6 +28051,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Candy (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 9135959171841323154, guid: 340929fbfe77a1b439c4cddf4cde7c52,
+        type: 3}
+      propertyPath: m_Size.z
+      value: 3.44
+      objectReference: {fileID: 0}
+    - target: {fileID: 9135959171841323154, guid: 340929fbfe77a1b439c4cddf4cde7c52,
+        type: 3}
+      propertyPath: m_Offset.z
+      value: 1.72
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -28484,7 +28724,7 @@ PrefabInstance:
     - target: {fileID: 2731909549485147139, guid: 06462ad49746ce64d845cff6dea407e4,
         type: 3}
       propertyPath: m_VersionIndex
-      value: 2730
+      value: 2733
       objectReference: {fileID: 0}
     - target: {fileID: 4320616953062745605, guid: 06462ad49746ce64d845cff6dea407e4,
         type: 3}
@@ -28499,7 +28739,7 @@ PrefabInstance:
     - target: {fileID: 4702615459762054270, guid: 06462ad49746ce64d845cff6dea407e4,
         type: 3}
       propertyPath: m_VersionIndex
-      value: 1672
+      value: 1675
       objectReference: {fileID: 0}
     - target: {fileID: 4959099916176842583, guid: 06462ad49746ce64d845cff6dea407e4,
         type: 3}
@@ -35698,6 +35938,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Candy (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 9135959171841323154, guid: 340929fbfe77a1b439c4cddf4cde7c52,
+        type: 3}
+      propertyPath: m_Size.z
+      value: 3.44
+      objectReference: {fileID: 0}
+    - target: {fileID: 9135959171841323154, guid: 340929fbfe77a1b439c4cddf4cde7c52,
+        type: 3}
+      propertyPath: m_Offset.z
+      value: 1.72
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -40616,6 +40866,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Candy (13)
       objectReference: {fileID: 0}
+    - target: {fileID: 9135959171841323154, guid: 340929fbfe77a1b439c4cddf4cde7c52,
+        type: 3}
+      propertyPath: m_Size.z
+      value: 3.44
+      objectReference: {fileID: 0}
+    - target: {fileID: 9135959171841323154, guid: 340929fbfe77a1b439c4cddf4cde7c52,
+        type: 3}
+      propertyPath: m_Offset.z
+      value: 1.72
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -40923,6 +41183,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Candy (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9135959171841323154, guid: 340929fbfe77a1b439c4cddf4cde7c52,
+        type: 3}
+      propertyPath: m_Size.z
+      value: 3.44
+      objectReference: {fileID: 0}
+    - target: {fileID: 9135959171841323154, guid: 340929fbfe77a1b439c4cddf4cde7c52,
+        type: 3}
+      propertyPath: m_Offset.z
+      value: 1.72
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -41652,6 +41922,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Candy (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 9135959171841323154, guid: 340929fbfe77a1b439c4cddf4cde7c52,
+        type: 3}
+      propertyPath: m_Size.z
+      value: 3.44
+      objectReference: {fileID: 0}
+    - target: {fileID: 9135959171841323154, guid: 340929fbfe77a1b439c4cddf4cde7c52,
+        type: 3}
+      propertyPath: m_Offset.z
+      value: 1.72
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -41725,6 +42005,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Candy (12)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9135959171841323154, guid: 340929fbfe77a1b439c4cddf4cde7c52,
+        type: 3}
+      propertyPath: m_Size.z
+      value: 3.44
+      objectReference: {fileID: 0}
+    - target: {fileID: 9135959171841323154, guid: 340929fbfe77a1b439c4cddf4cde7c52,
+        type: 3}
+      propertyPath: m_Offset.z
+      value: 1.72
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -41961,6 +42251,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9135959171841323154, guid: 340929fbfe77a1b439c4cddf4cde7c52,
+        type: 3}
+      propertyPath: m_Size.z
+      value: 3.44
+      objectReference: {fileID: 0}
+    - target: {fileID: 9135959171841323154, guid: 340929fbfe77a1b439c4cddf4cde7c52,
+        type: 3}
+      propertyPath: m_Offset.z
+      value: 1.72
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -42376,6 +42676,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Candy (20)
       objectReference: {fileID: 0}
+    - target: {fileID: 9135959171841323154, guid: 340929fbfe77a1b439c4cddf4cde7c52,
+        type: 3}
+      propertyPath: m_Size.z
+      value: 3.44
+      objectReference: {fileID: 0}
+    - target: {fileID: 9135959171841323154, guid: 340929fbfe77a1b439c4cddf4cde7c52,
+        type: 3}
+      propertyPath: m_Offset.z
+      value: 1.72
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -42443,6 +42753,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Candy (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9135959171841323154, guid: 340929fbfe77a1b439c4cddf4cde7c52,
+        type: 3}
+      propertyPath: m_Size.z
+      value: 3.44
+      objectReference: {fileID: 0}
+    - target: {fileID: 9135959171841323154, guid: 340929fbfe77a1b439c4cddf4cde7c52,
+        type: 3}
+      propertyPath: m_Offset.z
+      value: 1.72
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -42518,11 +42838,139 @@ PrefabInstance:
       propertyPath: m_Name
       value: Candy (18)
       objectReference: {fileID: 0}
+    - target: {fileID: 9135959171841323154, guid: 340929fbfe77a1b439c4cddf4cde7c52,
+        type: 3}
+      propertyPath: m_Size.z
+      value: 3.44
+      objectReference: {fileID: 0}
+    - target: {fileID: 9135959171841323154, guid: 340929fbfe77a1b439c4cddf4cde7c52,
+        type: 3}
+      propertyPath: m_Offset.z
+      value: 1.72
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 340929fbfe77a1b439c4cddf4cde7c52, type: 3}
+--- !u!1 &1403988918
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1403988921}
+  - component: {fileID: 1403988920}
+  - component: {fileID: 1403988919}
+  m_Layer: 0
+  m_Name: Directional Light (5)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1403988919
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1403988918}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Version: 3
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_LightLayerMask: 1
+  m_RenderingLayers: 2
+  m_CustomShadowLayers: 0
+  m_ShadowLayerMask: 1
+  m_ShadowRenderingLayers: 1
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
+  m_SoftShadowQuality: 0
+--- !u!108 &1403988920
+Light:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1403988918}
+  m_Enabled: 1
+  serializedVersion: 10
+  m_Type: 1
+  m_Shape: 0
+  m_Color: {r: 0.86136365, g: 0.695, b: 1, a: 1}
+  m_Intensity: 0.3
+  m_Range: 10
+  m_SpotAngle: 30
+  m_InnerSpotAngle: 21.80208
+  m_CookieSize: 10
+  m_Shadows:
+    m_Type: 0
+    m_Resolution: -1
+    m_CustomResolution: -1
+    m_Strength: 1
+    m_Bias: 0.05
+    m_NormalBias: 0.4
+    m_NearPlane: 0.2
+    m_CullingMatrixOverride:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 0
+      e11: 1
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+    m_UseCullingMatrixOverride: 0
+  m_Cookie: {fileID: 0}
+  m_DrawHalo: 0
+  m_Flare: {fileID: 0}
+  m_RenderMode: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RenderingLayerMask: 2
+  m_Lightmapping: 4
+  m_LightShadowCasterMode: 0
+  m_AreaSize: {x: 1, y: 1}
+  m_BounceIntensity: 1
+  m_ColorTemperature: 6570
+  m_UseColorTemperature: 0
+  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_UseBoundingSphereOverride: 0
+  m_UseViewFrustumForShadowCasterCull: 1
+  m_ShadowRadius: 0
+  m_ShadowAngle: 0
+--- !u!4 &1403988921
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1403988918}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.30294597, y: 0.16185817, z: -0.19409288, w: 0.9188872}
+  m_LocalPosition: {x: 0.7141824, y: -5.870322, z: 25.285229}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 38.285, y: 13.246, z: -19.238}
 --- !u!1 &1415490554
 GameObject:
   m_ObjectHideFlags: 0
@@ -42859,6 +43307,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 408476208924845317, guid: 915d24198eefa86449b4823cbc778b13,
+        type: 3}
+      propertyPath: m_Size.z
+      value: 3.44
+      objectReference: {fileID: 0}
+    - target: {fileID: 408476208924845317, guid: 915d24198eefa86449b4823cbc778b13,
+        type: 3}
+      propertyPath: m_Offset.z
+      value: 1.72
       objectReference: {fileID: 0}
     - target: {fileID: 1275145329762793428, guid: 915d24198eefa86449b4823cbc778b13,
         type: 3}
@@ -43695,6 +44153,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 250ad10637fe43b45bae96e22956ae58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cameraObj: {fileID: 0}
 --- !u!1001 &1481842922
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -46212,6 +46671,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Candy (9)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9135959171841323154, guid: 340929fbfe77a1b439c4cddf4cde7c52,
+        type: 3}
+      propertyPath: m_Size.z
+      value: 3.44
+      objectReference: {fileID: 0}
+    - target: {fileID: 9135959171841323154, guid: 340929fbfe77a1b439c4cddf4cde7c52,
+        type: 3}
+      propertyPath: m_Offset.z
+      value: 1.72
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -49076,7 +49545,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 2030138380}
-  m_VersionIndex: 2686
+  m_VersionIndex: 2689
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -49170,6 +49639,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Candy (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9135959171841323154, guid: 340929fbfe77a1b439c4cddf4cde7c52,
+        type: 3}
+      propertyPath: m_Size.z
+      value: 3.44
+      objectReference: {fileID: 0}
+    - target: {fileID: 9135959171841323154, guid: 340929fbfe77a1b439c4cddf4cde7c52,
+        type: 3}
+      propertyPath: m_Offset.z
+      value: 1.72
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -49630,6 +50109,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Candy (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 9135959171841323154, guid: 340929fbfe77a1b439c4cddf4cde7c52,
+        type: 3}
+      propertyPath: m_Size.z
+      value: 3.44
+      objectReference: {fileID: 0}
+    - target: {fileID: 9135959171841323154, guid: 340929fbfe77a1b439c4cddf4cde7c52,
+        type: 3}
+      propertyPath: m_Offset.z
+      value: 1.72
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -49984,6 +50473,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Candy (12)
       objectReference: {fileID: 0}
+    - target: {fileID: 9135959171841323154, guid: 340929fbfe77a1b439c4cddf4cde7c52,
+        type: 3}
+      propertyPath: m_Size.z
+      value: 3.44
+      objectReference: {fileID: 0}
+    - target: {fileID: 9135959171841323154, guid: 340929fbfe77a1b439c4cddf4cde7c52,
+        type: 3}
+      propertyPath: m_Offset.z
+      value: 1.72
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -50001,6 +50500,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 408476208924845317, guid: 915d24198eefa86449b4823cbc778b13,
+        type: 3}
+      propertyPath: m_Size.z
+      value: 3.44
+      objectReference: {fileID: 0}
+    - target: {fileID: 408476208924845317, guid: 915d24198eefa86449b4823cbc778b13,
+        type: 3}
+      propertyPath: m_Offset.z
+      value: 1.72
       objectReference: {fileID: 0}
     - target: {fileID: 1275145329762793428, guid: 915d24198eefa86449b4823cbc778b13,
         type: 3}
@@ -53052,6 +53561,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Candy (16)
       objectReference: {fileID: 0}
+    - target: {fileID: 9135959171841323154, guid: 340929fbfe77a1b439c4cddf4cde7c52,
+        type: 3}
+      propertyPath: m_Size.z
+      value: 3.44
+      objectReference: {fileID: 0}
+    - target: {fileID: 9135959171841323154, guid: 340929fbfe77a1b439c4cddf4cde7c52,
+        type: 3}
+      propertyPath: m_Offset.z
+      value: 1.72
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -53285,11 +53804,139 @@ PrefabInstance:
       propertyPath: m_Name
       value: Candy (14)
       objectReference: {fileID: 0}
+    - target: {fileID: 9135959171841323154, guid: 340929fbfe77a1b439c4cddf4cde7c52,
+        type: 3}
+      propertyPath: m_Size.z
+      value: 3.44
+      objectReference: {fileID: 0}
+    - target: {fileID: 9135959171841323154, guid: 340929fbfe77a1b439c4cddf4cde7c52,
+        type: 3}
+      propertyPath: m_Offset.z
+      value: 1.72
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 340929fbfe77a1b439c4cddf4cde7c52, type: 3}
+--- !u!1 &1875713593
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1875713596}
+  - component: {fileID: 1875713595}
+  - component: {fileID: 1875713594}
+  m_Layer: 0
+  m_Name: Directional Light (4)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1875713594
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1875713593}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Version: 3
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_LightLayerMask: 1
+  m_RenderingLayers: 2
+  m_CustomShadowLayers: 0
+  m_ShadowLayerMask: 1
+  m_ShadowRenderingLayers: 1
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
+  m_SoftShadowQuality: 0
+--- !u!108 &1875713595
+Light:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1875713593}
+  m_Enabled: 1
+  serializedVersion: 10
+  m_Type: 1
+  m_Shape: 0
+  m_Color: {r: 0.86136365, g: 0.695, b: 1, a: 1}
+  m_Intensity: 0.3
+  m_Range: 10
+  m_SpotAngle: 30
+  m_InnerSpotAngle: 21.80208
+  m_CookieSize: 10
+  m_Shadows:
+    m_Type: 0
+    m_Resolution: -1
+    m_CustomResolution: -1
+    m_Strength: 1
+    m_Bias: 0.05
+    m_NormalBias: 0.4
+    m_NearPlane: 0.2
+    m_CullingMatrixOverride:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 0
+      e11: 1
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+    m_UseCullingMatrixOverride: 0
+  m_Cookie: {fileID: 0}
+  m_DrawHalo: 0
+  m_Flare: {fileID: 0}
+  m_RenderMode: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RenderingLayerMask: 2
+  m_Lightmapping: 4
+  m_LightShadowCasterMode: 0
+  m_AreaSize: {x: 1, y: 1}
+  m_BounceIntensity: 1
+  m_ColorTemperature: 6570
+  m_UseColorTemperature: 0
+  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_UseBoundingSphereOverride: 0
+  m_UseViewFrustumForShadowCasterCull: 1
+  m_ShadowRadius: 0
+  m_ShadowAngle: 0
+--- !u!4 &1875713596
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1875713593}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.86396587, y: 0.25169536, z: -0.022793736, w: 0.43553755}
+  m_LocalPosition: {x: 0.7141824, y: -5.870322, z: 25.285229}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 49.823, y: 163.812, z: 139.958}
 --- !u!43 &1882442395
 Mesh:
   m_ObjectHideFlags: 0
@@ -60953,6 +61600,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Candy (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 9135959171841323154, guid: 340929fbfe77a1b439c4cddf4cde7c52,
+        type: 3}
+      propertyPath: m_Size.z
+      value: 3.44
+      objectReference: {fileID: 0}
+    - target: {fileID: 9135959171841323154, guid: 340929fbfe77a1b439c4cddf4cde7c52,
+        type: 3}
+      propertyPath: m_Offset.z
+      value: 1.72
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -61800,6 +62457,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Candy (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9135959171841323154, guid: 340929fbfe77a1b439c4cddf4cde7c52,
+        type: 3}
+      propertyPath: m_Size.z
+      value: 3.44
+      objectReference: {fileID: 0}
+    - target: {fileID: 9135959171841323154, guid: 340929fbfe77a1b439c4cddf4cde7c52,
+        type: 3}
+      propertyPath: m_Offset.z
+      value: 1.72
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -62898,6 +63565,16 @@ PrefabInstance:
       propertyPath: movingPlatform
       value: 
       objectReference: {fileID: 344431547}
+    - target: {fileID: 7966704203412831136, guid: 908c0ef3aa2249440a20fdd225dabd80,
+        type: 3}
+      propertyPath: m_Size.z
+      value: 3.44
+      objectReference: {fileID: 0}
+    - target: {fileID: 7966704203412831136, guid: 908c0ef3aa2249440a20fdd225dabd80,
+        type: 3}
+      propertyPath: m_Offset.z
+      value: 1.72
+      objectReference: {fileID: 0}
     - target: {fileID: 8964126141429560800, guid: 908c0ef3aa2249440a20fdd225dabd80,
         type: 3}
       propertyPath: m_Name
@@ -70585,6 +71262,8 @@ SceneRoots:
   - {fileID: 640032151}
   - {fileID: 588237429}
   - {fileID: 386159578}
+  - {fileID: 1875713596}
+  - {fileID: 1403988921}
   - {fileID: 2117837712}
   - {fileID: 1965290797}
   - {fileID: 4831869221973335804}

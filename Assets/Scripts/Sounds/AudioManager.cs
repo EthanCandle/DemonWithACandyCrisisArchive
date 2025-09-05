@@ -37,7 +37,7 @@ public class AudioManager : MonoBehaviour
     public Settings settingScript;
     public GameManager gm;
 
-    public TextMeshProUGUI songVolumeText;
+    public TextMeshProUGUI songVolumeText, otherText;
     // Start is called before the first frame update
     void Awake()
     {
@@ -195,7 +195,12 @@ public class AudioManager : MonoBehaviour
             {
                 songVolumeText.text += $"Dash Charge: 0\n";
             }
-
+            songVolumeText.text +=
+    $"Candy Collected: {PlayerDebugStatsGlobalManager.Instance.DataGetCandy()}\n" +
+    $"Deaths: {(PlayerDebugStatsGlobalManager.Instance.DataGetDies())}\n" +
+    $"Dashes: {PlayerDebugStatsGlobalManager.Instance.DataGetDash()}\n" +
+    $"Jumps: {PlayerDebugStatsGlobalManager.Instance.DataGetJumps()}\n" +
+    $"Level On: {PlayerDebugStatsGlobalManager.Instance.DataGetLevelCount()}\n";
         }
 
         if (shouldFadeOut)
@@ -243,6 +248,7 @@ public class AudioManager : MonoBehaviour
         // sets the fade in to true, gets teh new transition speed based on the volume of the song, mutes teh song so it comes back in teh fade
         PlayLevelMusic();
         shouldFadeIn = true;
+        shouldFadeOut = false;
         GetTransitionSpeed();
         songCurrentlyPlaying.volume = 0;
     }
@@ -428,6 +434,10 @@ public class AudioManager : MonoBehaviour
 
     public void DirectSetVolumeSFX(float volume)
     {
+        //if (audioDataLocal.isSFXMuted)
+        //{
+        //    return;
+        //}
         for (int i = 0; i < audioMixerGroupSFXs.Count; i++)
         {
             audioMixerGroupSFXs[i].audioMixer.SetFloat("volume", volume);
@@ -482,7 +492,11 @@ public class AudioManager : MonoBehaviour
 
     public void DirectSetVolumeMusic(float volume)
     {
-       // print(volume);
+        //if (audioDataLocal.isMusicMuted)
+        //{
+        //    return;
+        //}
+        // print(volume);
         for (int i = 0; i < audioMixerGroupMusics.Count; i++)
         {
         //    print("Set music");
@@ -586,7 +600,9 @@ public class AudioManager : MonoBehaviour
 
         audioDataLocal = JsonUtility.FromJson<AudioSaveData>(saveString);
 
-       // print(audioDataLocal.musicVolume);
+         print(audioDataLocal.isMusicMuted);
+
+        settingScript.audioManager = instance;
         SetVolumeData();
         LoadControllerSensitivity();
         LoadMuteParticles();
@@ -622,7 +638,7 @@ public class AudioManager : MonoBehaviour
 
     public void SetVolumeData()
     {
-        //  print("Set volume datat");
+          print("Set volume datat");
         // print(audioDataLocal.musicVolume);
        
         if (audioDataLocal.isMusicMuted)
@@ -634,6 +650,7 @@ public class AudioManager : MonoBehaviour
         }
         else
         {
+            print("is not muted");
             SetVolumeMusic(audioDataLocal.musicVolume);
 
         }
@@ -694,7 +711,7 @@ public class AudioManager : MonoBehaviour
 
     public void SetControllerSensitivity(float amountToChange)
     {
-       // print("set snesitity");
+        print($"set snesitity: {amountToChange}");
         audioDataLocal.controllerSensitivity = amountToChange;
         SaveData();
         LoadControllerSensitivity();
@@ -725,7 +742,8 @@ public class AudioManager : MonoBehaviour
             return;
         }
         gm._input.sensitivity = audioDataLocal.controllerSensitivity;
-       // print(gm._input.sensitivity);
+        print(gm._input.sensitivity);
+        print(audioDataLocal.controllerSensitivity);
     }
 
     public void SetMuteParticles(bool state)

@@ -281,14 +281,30 @@ public class PlayerDebugStatsGlobalManager : MonoBehaviour
         }
 
         print($"Total time before level: {totalTimeBeforeCurrentLevel}, Current timer: {timeToCheck} ");
+        float levelCurrentTime = timeToCheck - totalTimeBeforeCurrentLevel;
 
-        dataLocal.currentLevelTimes[levelNum] = timeToCheck - totalTimeBeforeCurrentLevel;
+        print(levelCurrentTime);
+        dataLocal.currentLevelTimes[levelNum] = levelCurrentTime;
 
         if (dataLocal.currentLevelTimes[levelNum] < dataLocal.fastestLevelTimes[levelNum] || dataLocal.fastestLevelTimes[levelNum] <= 1.0)
         {
             DataCompletedLevelSelectLevel(levelNum, timeToCheck - totalTimeBeforeCurrentLevel);
         }
 
+        if(levelCurrentTime <= 1.0f)
+        {
+            AudioManager.instance.otherText.text = $"Last Level time: {levelCurrentTime}\n" +
+                $"Level num: {levelNum}\n" +
+                $"Time To Check was: {timeToCheck}\n" +
+                $"Calculated time to remove: {totalTimeBeforeCurrentLevel}\n" +
+                $"Fastest time for that level: {dataLocal.fastestLevelTimes[levelNum]}\n" +
+                $"Current time for that level: {dataLocal.currentLevelTimes[levelNum]}\n" +
+                $"Time it should have been was: {timeToCheck - totalTimeBeforeCurrentLevel}\n";
+            for (int i = 0; i < dataLocal.levelCurrentlyOnMainRun - 1; i++)
+            {
+                AudioManager.instance.otherText.text += $"Level times: {dataLocal.currentLevelTimes[i]}\n";
+            }
+        }
 
     }
 
@@ -339,6 +355,9 @@ public class PlayerDebugStatsGlobalManager : MonoBehaviour
 
         // reset current run count
         dataLocal.currentLevelTimes = new List<float> { 0f, 0f, 0f, 0f, 0f, 0f };
+
+        dataLocal.currentTimeToCompleteGame = 0;
+
     }
 
 }
