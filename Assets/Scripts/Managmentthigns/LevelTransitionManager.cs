@@ -11,6 +11,8 @@ public class LevelTransitionManager : MonoBehaviour
     public Sound goingInSFX, goingOutSFX, test;
 
     public AudioManager audioManager;
+
+    public TimelineController timeLineController;
     // Start is called before the first frame update
     void Start()
     {
@@ -160,7 +162,11 @@ public class LevelTransitionManager : MonoBehaviour
     {
         print("End game");
         // set level time
+        if (timeLineController)
+        {
 
+//			return;
+        }
 
 
         // called when hitting a end trigger by player so its at the last level

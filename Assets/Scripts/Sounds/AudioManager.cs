@@ -42,7 +42,7 @@ public class AudioManager : MonoBehaviour
     void Awake()
     {
         //   print("Gett setting in audiomanager");
-
+        volumeData = Application.dataPath + "/volumeData.txt";
 
         // create self if not already in
         if (instance == null)

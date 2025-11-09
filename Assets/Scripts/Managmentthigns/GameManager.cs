@@ -26,7 +26,7 @@ public class GameManager : MonoBehaviour
         checkPointManager = GetComponent<CheckPointManager>();
 
 
-    StartGame();
+        StartGame();
     }
 
     // Update is called once per frame
@@ -83,7 +83,51 @@ public class GameManager : MonoBehaviour
 
     }
 
-    public void TurnOffPlayerMovement()
+    public void TurnOffGame()
+    {
+		TurnOnMouse();
+	    TurnOffTime();
+	    TurnOffCamerControl();
+		TurnOffPlayerMovement();
+	}
+
+    public void TurnOnGame()
+    {
+		TurnOffMouse();
+		TurnOnTime();
+		TurnOnCamerControl();
+		TurnOnPlayerMovement();
+		TurnOffPlayerJump();
+	}
+
+    public void TurnOffPlayerUI()
+	{
+		playerController.playerCanvasAnimator.ResetTrigger("On");
+		playerController.playerCanvasAnimator.SetTrigger("Off");
+
+	}
+	public void TurnOnPlayerUI()
+	{
+		playerController.playerCanvasAnimator.ResetTrigger("Off");
+		playerController.playerCanvasAnimator.SetTrigger("On");
+	}
+
+	public void GivePlayerControls()
+    {
+        // used in the timeline controller to give player controls after cutscene
+		TurnOnCamerControl();
+		TurnOnPlayerMovement();
+		TurnOffPlayerJump();
+	}
+
+    public void RemovePlayerControls()
+    {
+		// used in the timeline controller to remove  player controls before the cutscene
+		TurnOffCamerControl();
+		TurnOffPlayerMovement();
+	}
+
+	public void TurnOffPlayerMovement()
     {
         playerController.LosePlayerControl();
     }

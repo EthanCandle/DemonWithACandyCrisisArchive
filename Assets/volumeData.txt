@@ -1,1 +1,1 @@
-{"sfxVolume":0,"musicVolume":0,"controllerSensitivity":10.0,"isSFXMuted":true,"isMusicMuted":true}
+{"sfxVolume":47,"musicVolume":39,"controllerSensitivity":1.6002552509307862,"isSFXMuted":false,"isMusicMuted":false,"isParticlesMuted":false,"isShadersMuted":false,"isMainMenuCandyMuted":false}

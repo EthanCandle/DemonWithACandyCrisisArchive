@@ -61,6 +61,7 @@ public class DebugStore : MonoBehaviour
         FunctionIfNotInMainMenu();
         saveLocation = Application.dataPath + "/save.txt";
         shopItemLocation = Application.dataPath + "/shopItem.txt";
+        skinLocation = Application.dataPath + "/skin.txt";
         LoadCandyData();
 
         LoadButtonData();

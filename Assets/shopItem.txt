@@ -17,7 +17,7 @@
         },
         {
             "nameOfItem": "dash_distance_increase",
-            "isPurchased": false,
+            "isPurchased": true,
             "isEnabled": false
         },
         {
@@ -62,7 +62,7 @@
         },
         {
             "nameOfItem": "player_ui",
-            "isPurchased": false,
+            "isPurchased": true,
             "isEnabled": false
         },
         {

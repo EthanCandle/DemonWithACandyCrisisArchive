@@ -108,11 +108,8 @@ public class SettingsManager : MonoBehaviour
     public void OpenPauseMenu()
     {
         pauseMenu.SetActive(true);
-        gm.TurnOnMouse();
-        gm.TurnOffTime();
-        gm.TurnOffCamerControl();
-        gm.TurnOffPlayerMovement();
-        FindObjectOfType<AudioManager>().PlaySoundInstantiate(summonSound);
+		gm.TurnOffGame();
+		FindObjectOfType<AudioManager>().PlaySoundInstantiate(summonSound);
 
         ReselectDefaultButton.instance.SetPreviousButton(pauseMenuDefaultButton);
         ReselectDefaultButton.instance.SetButton(pauseMenuDefaultButton);
@@ -122,13 +119,10 @@ public class SettingsManager : MonoBehaviour
     public void ClosePauseMenu()
     {
         pauseMenu.SetActive(false);
-        gm.TurnOffMouse();
-        gm.TurnOnTime();
-        gm.TurnOnCamerControl();
-        gm.TurnOnPlayerMovement();
-        gm.TurnOffPlayerJump();
 
-        print($"{gm._input.jump}");
+		gm.TurnOnGame();
+
+		print($"{gm._input.jump}");
         print("closed pause menu");
         FindObjectOfType<AudioManager>().PlaySoundInstantiate(deSummonSound);
         StartCoroutine(DelayFrame());
