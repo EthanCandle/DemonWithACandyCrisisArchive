@@ -2407,6 +2407,7 @@ MonoBehaviour:
     objectAnimator: {fileID: 0}
     AnimationToPlayName: 
     shouldTransitionToThisAnimation: 0
+    shouldKillSelfAfterThis: 0
   dialougeToShowCurrent: []
   dialougeToShowLocked:
   - dialogueAsset: {fileID: 11400000, guid: 6b21ed5aaf535e64485a7a9e13704551, type: 2}
@@ -2417,6 +2418,7 @@ MonoBehaviour:
     objectAnimator: {fileID: 1516686037}
     AnimationToPlayName: Jump
     shouldTransitionToThisAnimation: 1
+    shouldKillSelfAfterThis: 0
   dialougeToShowNormal:
   - dialogueAsset: {fileID: 11400000, guid: 6b21ed5aaf535e64485a7a9e13704551, type: 2}
     dialogueText: Hi, I am Box Girl
@@ -2426,6 +2428,7 @@ MonoBehaviour:
     objectAnimator: {fileID: 1516686037}
     AnimationToPlayName: 
     shouldTransitionToThisAnimation: 0
+    shouldKillSelfAfterThis: 0
   - dialogueAsset: {fileID: 11400000, guid: 6b21ed5aaf535e64485a7a9e13704551, type: 2}
     dialogueText: I'm here to help you get back to hell...
     functionToCall:
@@ -2434,6 +2437,7 @@ MonoBehaviour:
     objectAnimator: {fileID: 1516686037}
     AnimationToPlayName: 
     shouldTransitionToThisAnimation: 0
+    shouldKillSelfAfterThis: 0
   - dialogueAsset: {fileID: 11400000, guid: 6b21ed5aaf535e64485a7a9e13704551, type: 2}
     dialogueText: but I haven't been able to get much sleep account on me being stuck
       in this box.
@@ -2443,6 +2447,7 @@ MonoBehaviour:
     objectAnimator: {fileID: 1516686037}
     AnimationToPlayName: 
     shouldTransitionToThisAnimation: 0
+    shouldKillSelfAfterThis: 0
   - dialogueAsset: {fileID: 11400000, guid: 6b21ed5aaf535e64485a7a9e13704551, type: 2}
     dialogueText: Find me some of those green lolipops next time you see me and maybe
       I can help you out.
@@ -2476,6 +2481,7 @@ MonoBehaviour:
     objectAnimator: {fileID: 1516686037}
     AnimationToPlayName: 
     shouldTransitionToThisAnimation: 0
+    shouldKillSelfAfterThis: 0
   dialougeToShowFinished:
   - dialogueAsset: {fileID: 11400000, guid: 6b21ed5aaf535e64485a7a9e13704551, type: 2}
     dialogueText: This is the finished text, go do the objective
@@ -2485,7 +2491,9 @@ MonoBehaviour:
     objectAnimator: {fileID: 1516686037}
     AnimationToPlayName: Close
     shouldTransitionToThisAnimation: 1
+    shouldKillSelfAfterThis: 0
   _input: {fileID: 0}
+  endingTalkingBool: 0
 --- !u!54 &325396237
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2797,6 +2805,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1593027063}
     m_Modifications:
+    - target: {fileID: 176859228533168212, guid: 5c99790009516cd479140b56fb5e77a1,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 176859228533168212, guid: 5c99790009516cd479140b56fb5e77a1,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 390273058470106818, guid: 5c99790009516cd479140b56fb5e77a1,
         type: 3}
       propertyPath: m_LocalPosition.y
@@ -2840,6 +2858,11 @@ PrefabInstance:
     - target: {fileID: 5206430894687764870, guid: 5c99790009516cd479140b56fb5e77a1,
         type: 3}
       propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5952195294221188360, guid: 5c99790009516cd479140b56fb5e77a1,
+        type: 3}
+      propertyPath: m_AnchorMax.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6108481233487024298, guid: 5c99790009516cd479140b56fb5e77a1,
@@ -6771,6 +6794,7 @@ MonoBehaviour:
     objectAnimator: {fileID: 0}
     AnimationToPlayName: 
     shouldTransitionToThisAnimation: 0
+    shouldKillSelfAfterThis: 0
   dialougeToShowCurrent: []
   dialougeToShowLocked:
   - dialogueAsset: {fileID: 11400000, guid: 6b21ed5aaf535e64485a7a9e13704551, type: 2}
@@ -6781,6 +6805,7 @@ MonoBehaviour:
     objectAnimator: {fileID: 1896852945}
     AnimationToPlayName: 
     shouldTransitionToThisAnimation: 0
+    shouldKillSelfAfterThis: 0
   dialougeToShowNormal:
   - dialogueAsset: {fileID: 11400000, guid: 6b21ed5aaf535e64485a7a9e13704551, type: 2}
     dialogueText: <i>You hand her the lolipops through the box hole</i>
@@ -6790,6 +6815,7 @@ MonoBehaviour:
     objectAnimator: {fileID: 1896852945}
     AnimationToPlayName: 
     shouldTransitionToThisAnimation: 0
+    shouldKillSelfAfterThis: 0
   - dialogueAsset: {fileID: 11400000, guid: 6b21ed5aaf535e64485a7a9e13704551, type: 2}
     dialogueText: '*monch*...*monch*...*monch*...'
     functionToCall:
@@ -6798,6 +6824,7 @@ MonoBehaviour:
     objectAnimator: {fileID: 1896852945}
     AnimationToPlayName: 
     shouldTransitionToThisAnimation: 0
+    shouldKillSelfAfterThis: 0
   - dialogueAsset: {fileID: 11400000, guid: 6b21ed5aaf535e64485a7a9e13704551, type: 2}
     dialogueText: Thank you!
     functionToCall:
@@ -6806,6 +6833,7 @@ MonoBehaviour:
     objectAnimator: {fileID: 1896852945}
     AnimationToPlayName: Idle
     shouldTransitionToThisAnimation: 1
+    shouldKillSelfAfterThis: 0
   - dialogueAsset: {fileID: 11400000, guid: 6b21ed5aaf535e64485a7a9e13704551, type: 2}
     dialogueText: I'll be taking the door with me
     functionToCall:
@@ -6826,6 +6854,7 @@ MonoBehaviour:
     objectAnimator: {fileID: 1896852945}
     AnimationToPlayName: 
     shouldTransitionToThisAnimation: 0
+    shouldKillSelfAfterThis: 0
   dialougeToShowFinished:
   - dialogueAsset: {fileID: 11400000, guid: 6b21ed5aaf535e64485a7a9e13704551, type: 2}
     dialogueText: Go on into the door to the next level, you'll see me there :).
@@ -6835,7 +6864,9 @@ MonoBehaviour:
     objectAnimator: {fileID: 1896852945}
     AnimationToPlayName: Close
     shouldTransitionToThisAnimation: 1
+    shouldKillSelfAfterThis: 0
   _input: {fileID: 0}
+  endingTalkingBool: 0
 --- !u!54 &921372331
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -7446,6 +7477,11 @@ PrefabInstance:
         type: 3}
       propertyPath: dialougeToShowNormal.Array.data[3].shouldTransitionToThisAnimation
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5161285370465794090, guid: 908c0ef3aa2249440a20fdd225dabd80,
+        type: 3}
+      propertyPath: dialougeToShowNormal.Array.data[3].functionToCall.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: RemoveDoor
       objectReference: {fileID: 0}
     - target: {fileID: 6000501134516398997, guid: 908c0ef3aa2249440a20fdd225dabd80,
         type: 3}

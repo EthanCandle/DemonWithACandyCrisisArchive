@@ -721,6 +721,17 @@
                 },
                 {
                     "name": "",
+                    "id": "630794cb-c783-48df-9867-935623a53ebc",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KeyboardMouse",
+                    "action": "Talk",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "87571b75-8e8e-46ce-911d-eed89808550b",
                     "path": "<Keyboard>/leftCtrl",
                     "interactions": "",

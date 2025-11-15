@@ -120,14 +120,14 @@ public class Settings : MonoBehaviour
     {
         // call this whenever this thing is set active (need to see if theres a set active start_
         // makes it  so the slier starts on the correct value when it is made
-        print("Set slide on music");
+       // print("Set slide on music");
         volumeSliderMusic.value = audioManager.audioDataLocal.musicVolume;
     }
     public void SetSliderOnStartController()
     {
         // call this whenever this thing is set active (need to see if theres a set active start_
         // makes it  so the slier starts on the correct value when it is made
-        print("Set slide on controller");
+        //print("Set slide on controller");
         controllerSensitivitySlider.value = audioManager.audioDataLocal.controllerSensitivity;
     }
 
@@ -152,7 +152,7 @@ public class Settings : MonoBehaviour
         // print((int)volumeSlider.value);
         if (onStartMusic)
         {
-            print("in on start music");
+           // print("in on start music");
             audioManager.SetVolumeMusic((int)slider.value);
             //unMuteObjectMusic.SetActive(false);
             onStartMusic = false;
@@ -332,7 +332,7 @@ public class Settings : MonoBehaviour
 
     public void UnMuteMainMenuCandy()
     {
-        print("unmute candy");
+        //print("unmute candy");
         isMutedMainMenuCandy = false;
         muteObjectCandy.SetActive(false);
         unMuteObjectCandy.SetActive(true);

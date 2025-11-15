@@ -208,7 +208,7 @@ public class PlayerController : MonoBehaviour
 
         // turns on all general canvas that holds all player ui (they can be disabled indiviually)
         playerCanvasAnimator.SetTrigger("On");
-
+        print("player turn on ui");
         AssignHolderVariables();
 
         spawnPosition = transform.position;

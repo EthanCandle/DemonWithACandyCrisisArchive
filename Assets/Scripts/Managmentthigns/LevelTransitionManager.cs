@@ -147,10 +147,10 @@ public class LevelTransitionManager : MonoBehaviour
             Debug.LogError("audioManager.gm.fm.debugStore.mainMenuScript.settingManagerScript is null");
         }
         print(state);
-        Debug.LogWarning(audioManager.gm.fm.debugStore.mainMenuScript.settingManagerScript.allowedToPause);
+       // Debug.LogWarning(audioManager.gm.fm.debugStore.mainMenuScript.settingManagerScript.allowedToPause);
         audioManager.gm.fm.debugStore.mainMenuScript.settingManagerScript.allowedToPause = state;
-        Debug.LogWarning(audioManager.gm.fm.debugStore.mainMenuScript.settingManagerScript.allowedToPause);
-        print(state);
+       // Debug.LogWarning(audioManager.gm.fm.debugStore.mainMenuScript.settingManagerScript.allowedToPause);
+       // print(state);
     }
 
     public void StartGame()

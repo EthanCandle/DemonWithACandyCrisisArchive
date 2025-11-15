@@ -8,12 +8,14 @@ public class TimelineController : MonoBehaviour
 	public PlayableDirector director;
 	public GameManager gm;
 	public bool isBeginningAnimation = true; // if this is an animation for the start of a level
-
+	public bool isTimelineOn = false;
 	public void Start()
 	{
 		gm = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
+		print("in start of timeline script");
 		if (isBeginningAnimation)
 		{
+			print("played timeline");
 			director.stopped += GivePlayerControl;
 			PlayTimeline();
 		}
@@ -22,11 +24,25 @@ public class TimelineController : MonoBehaviour
 			director.stopped += GoToNextLevel;
 		}
 	}
+
+	private void Update()
+	{
+		if (gm._input.talk)
+		{
+			if (isTimelineOn)
+			{
+				CallToEnd();
+				isTimelineOn = false;
+			}
+
+		}
+	}
+
 	public void PlayTimeline()
 	{
 		// starts the animation
 		director.Play();
-
+		isTimelineOn = true;
 		// stops player movement, and camera movement
 		RemovePlayerControls();
 	}

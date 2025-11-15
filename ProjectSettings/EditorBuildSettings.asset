@@ -15,8 +15,8 @@ EditorBuildSettings:
     path: Assets/Scenes/Level2 Steep Redone.unity
     guid: 9cb3fd931a6a773409cc4d4af2bfa36a
   - enabled: 1
-    path: Assets/Scenes/Level3OpenSlopes.unity
-    guid: 8c701a555c7631d4585919130976ba8a
+    path: Assets/Scenes/Level3 Rising Up.unity
+    guid: 8a7ebf2d56600d0438f61181679229f2
   - enabled: 1
     path: Assets/Scenes/Level4WaterStuff.unity
     guid: 3e170a98fd5fe0740a0bd2956528c4e6
