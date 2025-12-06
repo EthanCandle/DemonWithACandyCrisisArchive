@@ -85,6 +85,8 @@ GameObject:
   m_Component:
   - component: {fileID: 6760183231143243888}
   - component: {fileID: 4546172940671688675}
+  - component: {fileID: 7480172191825773065}
+  - component: {fileID: 7189770207591720188}
   m_Layer: 5
   m_Name: CandyNumber Shower
   m_TagString: Untagged
@@ -128,6 +130,36 @@ MonoBehaviour:
   candyNumberText: {fileID: 722284758626474354}
   candyAmount: 0
   debugStore: {fileID: 0}
+--- !u!114 &7480172191825773065
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2469255383244388020}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fa4b146c3f97994e8858c90d6811cb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shouldIncrease: 1
+  speedToDecrease: 1
+  alphaCurrent: 0
+  isFadeIn: 1
+  isFadeOut: 0
+  cg: {fileID: 7189770207591720188}
+--- !u!225 &7189770207591720188
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2469255383244388020}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
 --- !u!1 &2496279875358796316
 GameObject:
   m_ObjectHideFlags: 0

@@ -136,7 +136,7 @@ public class PlayerController : MonoBehaviour
 
     public SliderNew dashSlider;
     public Animator playerCanvasAnimator;
-    public GameObject dashUI;
+    public GameObject dashUI, lolipopCanvas;
 
     public float posLow, posHigh;
 
@@ -208,14 +208,21 @@ public class PlayerController : MonoBehaviour
 
         // turns on all general canvas that holds all player ui (they can be disabled indiviually)
         playerCanvasAnimator.SetTrigger("On");
-        print("player turn on ui");
+		lolipopCanvas.gameObject.SetActive(false);
+        StartCoroutine(DelayLoli());
+		print("player turn on ui");
         AssignHolderVariables();
 
         spawnPosition = transform.position;
         spawnRotation = transform.rotation;
     }
-
-    public void AssignHolderVariables()
+	public IEnumerator DelayLoli()
+	{
+		lolipopCanvas.gameObject.SetActive(false);
+		yield return null;
+		lolipopCanvas.gameObject.SetActive(false);
+	}
+	public void AssignHolderVariables()
     {
         speedWalkHolder = WalkSpeed;
         speedSprintHolder = SprintSpeed;
@@ -233,11 +240,13 @@ public class PlayerController : MonoBehaviour
 
     public void GainPlayerControl()
     {
+        print("gain control");
         SetPlayerControl(true);
         _playerInput.actions["Move"].Enable();
         _playerInput.actions["Jump"].Enable();
         _playerInput.actions["JumpHold"].Enable();
-    }
+		//lolipopCanvas.gameObject.SetActive(true);
+	}
 
     public void LosePlayerControl()
     {
@@ -253,6 +262,7 @@ public class PlayerController : MonoBehaviour
     public void GainCameraControl()
     {
         LockCameraPosition = false;
+
     }
 
     public void LoseCameraControl()

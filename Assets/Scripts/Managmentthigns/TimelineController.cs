@@ -8,8 +8,8 @@ public class TimelineController : MonoBehaviour
 	public PlayableDirector director;
 	public GameManager gm;
 	public bool isBeginningAnimation = true; // if this is an animation for the start of a level
-	public bool isTimelineOn = false;
-	public void Start()
+	public bool isTimelineOn = false, canSkip = false;
+	public void Awake()
 	{
 		gm = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
 		print("in start of timeline script");
@@ -23,19 +23,27 @@ public class TimelineController : MonoBehaviour
 		{
 			director.stopped += GoToNextLevel;
 		}
+		StartCoroutine(DelayFrameSkip());
 	}
 
 	private void Update()
 	{
-		if (gm._input.talk)
+		if (gm._input.talk && canSkip)
 		{
 			if (isTimelineOn)
 			{
-				CallToEnd();
 				isTimelineOn = false;
+				CallToEnd();
+				print("is timeline now false");
+				isTimelineOn = false;
+				canSkip = false;
 			}
 
 		}
+		//director.time = director.duration;
+		//print($"{director.time}");
+		//// Evaluate forces the director to visually update immediately
+		//director.Evaluate();
 	}
 
 	public void PlayTimeline()
@@ -58,15 +66,24 @@ public class TimelineController : MonoBehaviour
 
 	public void SkipToEnd()
 	{
-		// Jump to the last frame
 		director.time = director.duration;
-
-		// Evaluate forces the director to visually update immediately
 		director.Evaluate();
-
-		// Optionally stop it so it doesn’t keep running
 		director.Stop();
+		print($"{director.time}");
 	}
+
+
+	public IEnumerator DelayFrameSkip()
+	{
+
+		// Wait one frame for Timeline graph initialization
+		yield return new WaitForSeconds(0.2f);
+		//yield return null;
+		canSkip = true;
+		// Now safely skip to the end
+
+	}
+
 
 	public void GivePlayerControl(PlayableDirector d = null)
 	{

@@ -742,8 +742,8 @@ public class AudioManager : MonoBehaviour
             return;
         }
         gm._input.sensitivity = audioDataLocal.controllerSensitivity;
-        print(gm._input.sensitivity);
-        print(audioDataLocal.controllerSensitivity);
+       // print(gm._input.sensitivity);
+       // print(audioDataLocal.controllerSensitivity);
     }
 
     public void SetMuteParticles(bool state)

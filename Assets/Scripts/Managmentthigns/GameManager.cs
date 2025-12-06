@@ -34,9 +34,9 @@ public class GameManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-           // SwitchGames();
-        }
-    }
+			// SwitchGames();
+		}
+	}
 
     public void StartGame()
     {
@@ -104,12 +104,17 @@ public class GameManager : MonoBehaviour
 	{
 		playerController.playerCanvasAnimator.ResetTrigger("On");
 		playerController.playerCanvasAnimator.SetTrigger("Off");
-
+		playerController.lolipopCanvas.SetActive(false);
+		playerController.lolipopCanvas.SetActive(false);
+		print("off");
+        print($"{playerController.lolipopCanvas.activeSelf}");
 	}
 	public void TurnOnPlayerUI()
 	{
 		playerController.playerCanvasAnimator.ResetTrigger("Off");
 		playerController.playerCanvasAnimator.SetTrigger("On");
+		playerController.lolipopCanvas.SetActive(true);
+        print("on");
 	}
 
 	public void GivePlayerControls()

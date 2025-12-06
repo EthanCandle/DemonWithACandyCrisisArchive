@@ -17,7 +17,7 @@
         },
         {
             "nameOfItem": "dash_distance_increase",
-            "isPurchased": true,
+            "isPurchased": false,
             "isEnabled": false
         },
         {
@@ -37,8 +37,8 @@
         },
         {
             "nameOfItem": "level_solo_timer",
-            "isPurchased": false,
-            "isEnabled": false
+            "isPurchased": true,
+            "isEnabled": true
         },
         {
             "nameOfItem": "level_all_timer",
@@ -67,8 +67,8 @@
         },
         {
             "nameOfItem": "debug_stats",
-            "isPurchased": false,
-            "isEnabled": false
+            "isPurchased": true,
+            "isEnabled": true
         }
     ]
 }

@@ -290,6 +290,7 @@ public class MainMenu : MonoBehaviour
 
     public void TogglePlayerUI(bool state)
     {
+        //print("turn on ui from pause menu");
         for(int i = 0; i < playerUI.Count; i++)
         {
             playerUI[i].SetActive(state);
