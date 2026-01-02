@@ -7,8 +7,8 @@
         },
         {
             "nameOfItem": "speed_boost",
-            "isPurchased": false,
-            "isEnabled": false
+            "isPurchased": true,
+            "isEnabled": true
         },
         {
             "nameOfItem": "speed_penalty",
@@ -17,8 +17,8 @@
         },
         {
             "nameOfItem": "dash_distance_increase",
-            "isPurchased": false,
-            "isEnabled": false
+            "isPurchased": true,
+            "isEnabled": true
         },
         {
             "nameOfItem": "dash_distance_decrease",
@@ -27,13 +27,13 @@
         },
         {
             "nameOfItem": "candy_outline",
-            "isPurchased": false,
-            "isEnabled": false
+            "isPurchased": true,
+            "isEnabled": true
         },
         {
             "nameOfItem": "skin_random",
-            "isPurchased": false,
-            "isEnabled": false
+            "isPurchased": true,
+            "isEnabled": true
         },
         {
             "nameOfItem": "level_solo_timer",
@@ -52,23 +52,23 @@
         },
         {
             "nameOfItem": "candy_in_scene",
-            "isPurchased": false,
-            "isEnabled": false
+            "isPurchased": true,
+            "isEnabled": true
         },
         {
             "nameOfItem": "player_crown",
-            "isPurchased": false,
-            "isEnabled": false
+            "isPurchased": true,
+            "isEnabled": true
         },
         {
             "nameOfItem": "player_ui",
-            "isPurchased": true,
+            "isPurchased": false,
             "isEnabled": false
         },
         {
             "nameOfItem": "debug_stats",
-            "isPurchased": true,
-            "isEnabled": true
+            "isPurchased": false,
+            "isEnabled": false
         }
     ]
 }

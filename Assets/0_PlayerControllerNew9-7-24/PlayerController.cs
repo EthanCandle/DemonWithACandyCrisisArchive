@@ -118,6 +118,7 @@ public class PlayerController : MonoBehaviour
     public CharacterController _controller;
     public InputManager _input;
     public GameObject _mainCamera;
+    public PlayerDeath playerDeathScript;
 
     public const float _threshold = 0.01f;
 
@@ -154,7 +155,16 @@ public class PlayerController : MonoBehaviour
 
     public Vector3 spawnPosition;
     public Quaternion spawnRotation;
-    public GameObject playerFakeCamera;
+    public GameObject playerFakeCamera, angledCameraAngleObject;
+
+    public float stunTime = 0.5f;
+    public bool isPushed, shouldBePushed;
+    public GameObject enemyCurrentTouched;
+    public Vector3 enemyPosition = new Vector3(0, 0, 0);
+    public AnimationClip stunClip;
+
+    public bool hasSceneCameraView = false;
+    public ToggleObjectInput cameraSceneView;
     private bool IsCurrentDeviceMouse
     {
         get
@@ -206,23 +216,25 @@ public class PlayerController : MonoBehaviour
             TurnOffDash();
         }
 
+
+        stunTime = stunClip.length / _animator.GetFloat("AnimationSpeed");
         // turns on all general canvas that holds all player ui (they can be disabled indiviually)
         playerCanvasAnimator.SetTrigger("On");
-		lolipopCanvas.gameObject.SetActive(false);
+        //lolipopCanvas.gameObject.SetActive(false);
         StartCoroutine(DelayLoli());
-		print("player turn on ui");
+        print("player turn on ui");
         AssignHolderVariables();
 
         spawnPosition = transform.position;
         spawnRotation = transform.rotation;
     }
-	public IEnumerator DelayLoli()
-	{
-		lolipopCanvas.gameObject.SetActive(false);
-		yield return null;
-		lolipopCanvas.gameObject.SetActive(false);
-	}
-	public void AssignHolderVariables()
+    public IEnumerator DelayLoli()
+    {
+        //lolipopCanvas.gameObject.SetActive(false);
+        yield return null;
+        //lolipopCanvas.gameObject.SetActive(false);
+    }
+    public void AssignHolderVariables()
     {
         speedWalkHolder = WalkSpeed;
         speedSprintHolder = SprintSpeed;
@@ -245,8 +257,8 @@ public class PlayerController : MonoBehaviour
         _playerInput.actions["Move"].Enable();
         _playerInput.actions["Jump"].Enable();
         _playerInput.actions["JumpHold"].Enable();
-		//lolipopCanvas.gameObject.SetActive(true);
-	}
+        //lolipopCanvas.gameObject.SetActive(true);
+    }
 
     public void LosePlayerControl()
     {
@@ -269,7 +281,7 @@ public class PlayerController : MonoBehaviour
     {
         LockCameraPosition = true;
     }
-    
+
 
     public void SetPlayerControl(bool playerControlState = true)
     {
@@ -286,10 +298,14 @@ public class PlayerController : MonoBehaviour
     {
         //print(_animator.GetFloat(_animIDSpeed));
         ///_hasAnimator = TryGetComponent(out _animator); // prolly not needed? since its already at start
-
+        if (isPushed == true)
+        {
+            PlayerPush(enemyPosition);
+            return;
+        }
         if (hasControl)
         {
-           // print($"{_input.jump} aa");
+            // print($"{_input.jump} aa");
             JumpAndGravity(); // should be after ground check because it still thinks its on ground when we jump because we havn't moved yet causing a bug
             Move();
 
@@ -308,7 +324,7 @@ public class PlayerController : MonoBehaviour
 
             AddGravity();
         }
-        if(transform.position.y < posLow)
+        if (transform.position.y < posLow)
         {
             posLow = transform.position.y;
         }
@@ -324,6 +340,13 @@ public class PlayerController : MonoBehaviour
         {
             AddGravityUnscaledTime();
         }
+
+        if (UnityEngine.Input.GetKeyDown(KeyCode.Q) && hasSceneCameraView)
+        {
+			cameraSceneView.ToggleChild();
+
+        }
+
     }
 
     private void LateUpdate()
@@ -365,12 +388,12 @@ public class PlayerController : MonoBehaviour
 
         if (Grounded && !lastCheckGrounded)
         {
-           // print($"Ground: {Grounded}, LastGround: {lastCheckGrounded}");
+            // print($"Ground: {Grounded}, LastGround: {lastCheckGrounded}");
             FindObjectOfType<AudioManager>().PlaySoundInstantiate(landedSFX);
         }
         if (!Grounded && lastCheckGrounded)
         {
-           // print($"Ground: {Grounded}, LastGround: {lastCheckGrounded}");
+            // print($"Ground: {Grounded}, LastGround: {lastCheckGrounded}");
 
         }
     }
@@ -407,7 +430,8 @@ public class PlayerController : MonoBehaviour
         {
             timeToHoldJumpBufferCurrent -= 1 * Time.deltaTime;
             jumpBufferIsOn = true;
-            if (timeToHoldJumpBufferCurrent <= 0) {
+            if (timeToHoldJumpBufferCurrent <= 0)
+            {
                 jumpBufferIsOn = false;
             }
         }
@@ -567,7 +591,7 @@ public class PlayerController : MonoBehaviour
         // this prevents the player from hovering after leaving the ground assuming no slopes were detected
         if (Grounded == false && groundedOnceCheck && _verticalVelocity <= 0) // prevent stop jumping
         {
-           // print("In grounded once check guard");
+            // print("In grounded once check guard");
             groundedOnceCheck = false;
             _verticalVelocity = fallSpeedInitial;
 
@@ -878,10 +902,10 @@ public class PlayerController : MonoBehaviour
     {
         // increases the players speed, prevents input, moves in current held direction
 
-     //   print("Dashing");
+        //   print("Dashing");
         // normalise input direction
         Vector3 inputDirection = new Vector3(_input.move.x, 0.0f, _input.move.y).normalized;
-      //  print(_input.move);
+        //  print(_input.move);
         // note: Vector2's != operator uses approximation so is not floating point error prone, and is cheaper than magnitude
         // if there is a move input rotate player when the player is moving
         if (_input.move != Vector2.zero)
@@ -897,7 +921,7 @@ public class PlayerController : MonoBehaviour
             // if no input i guess (should make player dash forwards from camera
             _targetRotation = _mainCamera.transform.eulerAngles.y;
         }
-       // _playerInput.actions["Move"].Disable();
+        // _playerInput.actions["Move"].Disable();
 
 
 
@@ -905,7 +929,7 @@ public class PlayerController : MonoBehaviour
         canMove = false;
         // move the player
         _controller.Move(targetDirection.normalized * (dashSpeed * Time.deltaTime));
-        
+
 
     }
 
@@ -913,7 +937,7 @@ public class PlayerController : MonoBehaviour
     {
         yield return new WaitForSeconds(dashDuration);
         StopDash();
-      //  print("Stop dashing");
+        //  print("Stop dashing");
         // end the dash and regive player movement
     }
 
@@ -926,14 +950,21 @@ public class PlayerController : MonoBehaviour
 
     public void SetCameraRotation(Quaternion rotation)
     {
-        print("Set cam rotation");
+        // print("Set cam rotation");
         // sets the player's camera to a set angle (should be on respawn)
 
         gameObject.transform.rotation = rotation;
         _cinemachineTargetYaw = gameObject.transform.rotation.eulerAngles.y;
         //CinemachineCameraTarget.transform.localRotation = Quaternion.Euler(0, gameObject.transform.rotation.eulerAngles.y, 0);
-        print(rotation.eulerAngles);        print(gameObject.transform.rotation.eulerAngles);
+        //print(rotation.eulerAngles);        print(gameObject.transform.rotation.eulerAngles);
         print(CinemachineCameraTarget.transform.rotation.eulerAngles);
+
+    }
+
+    public void SetCameraRotationCutscene()
+    {
+
+        _cinemachineTargetPitch = angledCameraAngleObject.transform.rotation.eulerAngles.x;
 
     }
 
@@ -1131,5 +1162,101 @@ public class PlayerController : MonoBehaviour
     {
         print("End Fake");
         playerFakeCamera.SetActive(false);
+    }
+
+
+    public void PushedFromEnemyMethod(GameObject enemy)
+    {
+        // if they are already being pushed, don't push again
+        if (isPushed)
+        {
+            return;
+        }
+        // changes the players speed to 0
+        SetSpeedToZero();
+        // sets isPushed to true because they are pushed
+        isPushed = true;
+
+
+
+        // adjusts the stun animation time
+        stunTime = stunClip.length / _animator.GetFloat("AnimationSpeed");
+        // sets teh animation trigger for being pushed
+        _animator.SetBool("Pushed", true);
+        // starts the timer to stop being stunned (not being able to move)
+        StartCoroutine(Stunned());
+        // starts the timer to stop being pushed in a direction
+        StartCoroutine(BeingPushed());
+        // gets the enemy that touched the player
+        enemyPosition = enemy.transform.position;
+        // stop the players speed again
+        SetSpeedToZero();
+    }
+
+    // prevent moving
+    public IEnumerator Stunned()
+    {
+        // resets the players y fall speed to 0
+        _verticalVelocity = 0;
+        yield return new WaitForSeconds(stunTime);
+        // sets isPushed to false because they aren't being pushed or stunned anymore
+        isPushed = false;
+        // so player can move and jump now since they aren't stunned
+        canMove = true;
+        canJump = true;
+        // resets pushed bool to false
+        _animator.SetBool("Pushed", false);
+    }
+
+    // move the player
+    public IEnumerator BeingPushed()
+    {
+        // 
+        shouldBePushed = true;
+        // half the time of the stun time because of the get up animation
+        yield return new WaitForSeconds(stunTime / 2);
+        shouldBePushed = false;
+    }
+
+    public void PlayerPush(Vector3 enemyPosition)
+    {
+        // stops player from moving up in the y axis
+        if (_verticalVelocity > 0)
+        {
+            _verticalVelocity = 0;
+        }
+        // manuelly controls their y falling speed exponentially
+        _verticalVelocity -= Mathf.Pow(20, Time.deltaTime + 1) * Time.deltaTime;
+
+        // if player should be pushed at this moment
+        if (shouldBePushed)
+        {
+            // pushes player from enemy object position
+            PushForce(default, enemyPosition);
+        }
+        else
+        {
+            _controller.Move(new Vector3(0, _verticalVelocity * Time.deltaTime, 0));
+
+        }
+        StopJumpInputs();
+        canMove = false;
+        canJump = false;
+        coyoteJumpTime = 0;
+        jumpTimeHold = 0;
+    }
+    public void PushForce(float multiplier = 1, Vector3 direction = default(Vector3))
+    {
+        //_verticalVelocity = Mathf.Sqrt(JumpHeight * -2f * Gravity * multiplier);
+
+        Vector3 targetDirection = Quaternion.Euler(direction.x - gameObject.transform.position.x, 0, direction.z - gameObject.transform.position.z)
+        * new Vector3(direction.x - gameObject.transform.position.x, 0, direction.z - gameObject.transform.position.z);
+        //print((direction.x - gameObject.transform.position.x));
+
+        //  print((direction.z - gameObject.transform.position.z));
+        // move the player
+        _controller.Move(-targetDirection.normalized * (10 * Time.deltaTime) + new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
+
+
     }
 }

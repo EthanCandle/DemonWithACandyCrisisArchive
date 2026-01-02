@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class SettingsManager : MonoBehaviour
 {
-    public GameObject pauseMenu, controlsObject;
+    public GameObject pauseMenu, controlsObject, candyNumberObject;
     public CanvasGroup pauseMenuCanvasGroup;
     public GameManager gm; 
     public InputManager _input;
@@ -26,14 +26,37 @@ public class SettingsManager : MonoBehaviour
         pauseMenu.SetActive(false);
         print("Allowed to pause in state is now false");
         allowedToPause = false;
-    }
+		candyNumberObject.SetActive(false);
+	}
 
     // Update is called once per frame
     void Update()
-    {
-       // Debug.LogAssertion(allowedToPause);
-        // pause input or if we are already paused and they press back button)
-        if (gm._input.pause || (isPaused && gm._input.goBack))
+	{
+		if (Input.GetKeyDown(KeyCode.Z))
+		{
+			gm.TurnOffCamerControl();
+
+		}
+		if (Input.GetKeyDown(KeyCode.X))
+		{
+			gm.TurnOnCamerControl();
+
+		}
+		if (Input.GetKeyDown(KeyCode.C))
+        {
+            Time.timeScale = 0;
+            gm.TurnOffCamerControl();
+			gm.TurnOnMouse();
+		}
+		if (Input.GetKeyDown(KeyCode.V))
+		{
+			Time.timeScale = 1; 
+            gm.TurnOnCamerControl();
+            gm.TurnOffMouse();
+		}
+		// Debug.LogAssertion(allowedToPause);
+		// pause input or if we are already paused and they press back button)
+		if (gm._input.pause || (isPaused && gm._input.goBack))
         {
             if (!allowedToPause)
             {
@@ -108,6 +131,7 @@ public class SettingsManager : MonoBehaviour
     public void OpenPauseMenu()
     {
         pauseMenu.SetActive(true);
+        candyNumberObject.SetActive(true);
 		gm.TurnOffGame();
 		FindObjectOfType<AudioManager>().PlaySoundInstantiate(summonSound);
 
@@ -119,7 +143,7 @@ public class SettingsManager : MonoBehaviour
     public void ClosePauseMenu()
     {
         pauseMenu.SetActive(false);
-
+		candyNumberObject.SetActive(false);
 		gm.TurnOnGame();
 
 		print($"{gm._input.jump}");

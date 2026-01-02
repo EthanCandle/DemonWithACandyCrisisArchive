@@ -36,8 +36,9 @@ public class DebugStore : MonoBehaviour
     public static readonly Color DisabledColor = Color.red;
 
     public Dictionary<string, Action<bool>> functionDictionary;
+	public Dictionary<string, bool> settingsDictionary;
 
-    public string saveLocation = Application.dataPath + "/save.txt";
+	public string saveLocation = Application.dataPath + "/save.txt";
     public string shopItemLocation = Application.dataPath + "/shopItem.txt";
     public string skinLocation = Application.dataPath + "/skin.txt";
 
@@ -82,6 +83,7 @@ public class DebugStore : MonoBehaviour
 
     public void PopulateDictionary()
     {
+        print("Populated dictionary");
         functionDictionary = new Dictionary<string, Action<bool>>()
         {
             {"trail_runner", TrailRunner},
@@ -100,7 +102,27 @@ public class DebugStore : MonoBehaviour
             {"debug_stats",ToggleDebugStats},
 
         };
-    }
+
+        settingsDictionary = new Dictionary<string, bool>()
+        {
+			{"trail_runner", false},
+			{"speed_boost", false},
+			{"speed_penalty", false},
+			{"dash_distance_increase", false},
+			{"dash_distance_decrease", false},
+			{"candy_outline", false},
+			{"skin_random", false},
+			{"level_solo_timer", false},
+			{"level_all_timer", false},
+			{"level_fastest_timer", false},
+			{"candy_in_scene", false},
+			{"player_crown", false},
+			{"player_ui",false },
+			{"debug_stats",false},
+		};
+
+
+	}
     public void SetVariables()
     {
         debugStore = this;
@@ -110,7 +132,47 @@ public class DebugStore : MonoBehaviour
 
     }
 
-    public void FunctionIfNotInMainMenu()
+    public ShopItemDataLowLevel GetShopItemDataLowLevelItem(string nameOfItem)
+    {
+        for(int i = 0; i < shopItemCollectionLocal.items.Count; i++)
+        {
+            if (shopItemCollectionLocal.items[i].nameOfItem == nameOfItem)
+            {
+                return shopItemCollectionLocal.items[i];
+
+			}
+        }
+        return null;
+    }
+
+    public bool GetShopItemDataLowLevelStatus(string nameOfSetting)
+    {
+        if (settingsDictionary.TryGetValue(nameOfSetting, out bool enableBool)){
+            return enableBool;
+        }
+        else
+        {
+            print($"Failed to get setting: {nameOfSetting}");
+            return false;
+        }
+        // if doesn't exist then return false
+        // gets name
+        // returns bool of if the debug setting is enabled/disabled
+    }
+	public void SetShopItemDataLowLevelStatus(string nameOfSetting, bool state)
+	{
+        ShopItemDataLowLevel item = GetShopItemDataLowLevelItem(nameOfSetting);
+		if (item == null)
+		{
+            print("Item doesn't exist");
+			return;
+		}
+        item.isEnabled = state;
+
+        InterpreteDictionary(item);
+	}
+
+	public void FunctionIfNotInMainMenu()
     {
         if (!shouldTriggerEffects)
         {
@@ -313,7 +375,22 @@ public class DebugStore : MonoBehaviour
             }
             //  
         }
-    }
+
+		if (Input.GetKeyDown(KeyCode.JoystickButton9))
+		{
+
+            SetShopItemDataLowLevelStatus("player_ui", !GetShopItemDataLowLevelStatus("player_ui"));
+
+		}
+		//foreach (var setting in settingsDictionary)
+		//{
+		//	Debug.Log($"{setting.Key} = {setting.Value}");
+		//}
+		//      if (GetShopItemDataLowLevelStatus("Player UI"))
+		//      {
+		//          Debug.LogError("Have Player UI");
+		//      }
+	}
 
     public event Action<int> SetCandyAmount;
     public void OnCandyCollected()
@@ -379,7 +456,7 @@ public class DebugStore : MonoBehaviour
         }
         else
         {
-            print("shopItemCollectionLocal not null");
+           // print("shopItemCollectionLocal not null");
             // if save does exist, save everything with corosponding bools
             shopItemCollectionLocal = new ShopItemCollection();
             for (int i = 0; i < buttonObjects.Count; i++)
@@ -506,30 +583,34 @@ public class DebugStore : MonoBehaviour
         // if player presses button again, it disables it, else it enables it
         if (itemData.isEnabled)
         {
-            itemData.isEnabled = false;
-            FindObjectOfType<AudioManager>().PlaySoundInstantiate(enableSound);
-        }
+
+            EnableFalse(itemData);
+		}
         else
         {
-            itemData.isEnabled = true;
-            FindObjectOfType<AudioManager>().PlaySoundInstantiate(disableSound);
-        }
+			EnableTrue(itemData);
+		}
         InterpreteDictionary(itemData); // when trigger do its thing immedeeitly
     }
 
     public void EnableTrue(ShopItemData itemData)
     {
         itemData.isEnabled = true;
-        ChangeButtonColor(itemData);
-    }
+		settingsDictionary[itemData.nameOfItem] = itemData.isEnabled;
+		ChangeButtonColor(itemData);
+		FindObjectOfType<AudioManager>().PlaySoundInstantiate(enableSound);
+	}
     public void EnableFalse(ShopItemData itemData)
     {
         itemData.isEnabled = false;
-        ChangeButtonColor(itemData);
-    }
+		settingsDictionary[itemData.nameOfItem] = itemData.isEnabled;
+		ChangeButtonColor(itemData);
+		FindObjectOfType<AudioManager>().PlaySoundInstantiate(disableSound);
+
+	}
 
 
-    public bool CanAfford(ShopItemData itemData)
+	public bool CanAfford(ShopItemData itemData)
     {
         // returns true if cost of item is less than the player's current candy amount
         if (debugStatsLocal.candyAmount >= itemData.costOfItem)
@@ -638,7 +719,9 @@ public class DebugStore : MonoBehaviour
         // go through each thing in the save and do its corrosponding 
         if (functionDictionary.TryGetValue(itemData.nameOfItem, out var action))
         {
-            action.Invoke(itemData.isEnabled);
+            // set the value of it
+			settingsDictionary[itemData.nameOfItem] = itemData.isEnabled;
+			action.Invoke(itemData.isEnabled);
         }
         else
         {
@@ -884,10 +967,17 @@ public class DebugStore : MonoBehaviour
         playerManager.EnableCrown(state);
         if (candyManager.fm)
         {
+            // allows checkpoint teleportation
             candyManager.fm.gm.checkPointManager.isActive = state;
         }
+        // allows scene camear view
+        if (playerManager.playerController)
+        {
+			playerManager.playerController.hasSceneCameraView = state;
+		}
 
-    }
+
+	}
         
     public void TogglePlayerUI(bool state)
     {

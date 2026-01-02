@@ -3063,7 +3063,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0.20784314, b: 0.032675687, a: 0.6862745}
+  m_Color: {r: 0, g: 0.20784314, b: 0.032675687, a: 0.85882354}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -3561,7 +3561,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2256329062977166888}
   m_Layer: 5
-  m_Name: StoreButtons
+  m_Name: StoreButtons Normal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3694,6 +3694,7 @@ MonoBehaviour:
   candyManager: {fileID: 3817038305020016882}
   timerManager: {fileID: 0}
   reselectButtonScript: {fileID: 0}
+  spawnRandomlyScript: {fileID: 0}
   mainMenuScript: {fileID: 0}
   debugStoreDefaultButton: {fileID: 4553335979737558440}
   summonSound: {fileID: 11400000, guid: a2c6dc59a1019a84ebbd12ec720dea09, type: 2}

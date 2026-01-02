@@ -9,7 +9,7 @@ using UnityEngine.InputSystem;
 public class PlayerMovementScript : MonoBehaviour
 {
     public GameObject playerObj;
-    public ThirdPersonController pc;
+    public PlayerController pc;
     public PlayerInput pi;
     public bool isPushed, shouldBePushed;
     public GameObject enemyCurrentTouched;
@@ -20,8 +20,8 @@ public float stunTime = 0.5f;
 
     public void Start()
     {
-        //print(stunClip.apparentSpeed);
-        stunTime = stunClip.length / pAnimator.GetFloat("AnimationSpeed");
+		//print(stunClip.apparentSpeed);    public AnimationClip stunClip;
+		stunTime = stunClip.length / pAnimator.GetFloat("AnimationSpeed");
         //print((stunClip.length + " " + pAnimator.GetFloat("AnimationSpeed")));
     }
     public void Update()

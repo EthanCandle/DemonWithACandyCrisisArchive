@@ -30,6 +30,12 @@ public class TimelineController : MonoBehaviour
 	{
 		if (gm._input.talk && canSkip)
 		{
+			if (DebugStore.debugStore.mainMenuScript.settingManagerScript.isPaused)
+			{
+				// prevent triggering when paused
+				return;
+			}
+
 			if (isTimelineOn)
 			{
 				isTimelineOn = false;
@@ -70,6 +76,7 @@ public class TimelineController : MonoBehaviour
 		director.Evaluate();
 		director.Stop();
 		print($"{director.time}");
+		gm.playerController.playerDeathScript.Respawn();
 	}
 
 
@@ -90,6 +97,7 @@ public class TimelineController : MonoBehaviour
 		gm.GivePlayerControls();
 		// this should also fade in the ui
 		gm.TurnOnPlayerUI();
+		isTimelineOn = false;
 		print("Turn on ui from timeline");
 	}
 

@@ -291,10 +291,24 @@ public class MainMenu : MonoBehaviour
     public void TogglePlayerUI(bool state)
     {
         //print("turn on ui from pause menu");
-        for(int i = 0; i < playerUI.Count; i++)
+        //for(int i = 0; i < playerUI.Count; i++)
+        //{
+        //    playerUI[i].SetActive(state);
+        //}
+
+        if(settingManagerScript == null || settingManagerScript.gm == null)
         {
-            playerUI[i].SetActive(state);
+            return;
         }
+        if (state){
+			settingManagerScript.gm.TurnOnPlayerUI();
+
+
+		}
+        else
+        {
+			settingManagerScript.gm.TurnOffPlayerUI();
+		}
     }
 
 

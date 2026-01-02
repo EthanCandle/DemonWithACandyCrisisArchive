@@ -234,7 +234,7 @@ public class ReselectDefaultButton : MonoBehaviour
 
         currentButton = buttonToSet.gameObject;
         EventSystem.current.SetSelectedGameObject(buttonToSet.gameObject);
-        print(currentButton.name);
+       // print(currentButton.name);
     }
 
     public void ClosedMenuGoToGamePlay()

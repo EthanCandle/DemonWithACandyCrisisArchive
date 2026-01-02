@@ -18,7 +18,8 @@ public class PlayerDeath : MonoBehaviour
     void Start()
     {
         playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
-        playerRespawnPoint = playerController.gameObject.transform.position;
+        playerController.playerDeathScript = this;
+		playerRespawnPoint = playerController.gameObject.transform.position;
         playerRotationPoint = playerController.gameObject.transform.rotation;
     }
 

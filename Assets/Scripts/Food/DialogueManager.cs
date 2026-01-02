@@ -151,7 +151,7 @@ public class DialogueManager : MonoBehaviour
         // need to replace with typing it out instead like most visual novels
         // should be ienumerator that calls itself in the big for loop
 
-        print(playerInput.currentControlScheme);
+       // print(playerInput.currentControlScheme);
         if (playerInput.currentControlScheme == "KeyboardMouse" || playerInput.currentControlScheme == "Keyboard")
         {
             promptText.text = $"(E) {textToShow}"; // prints like "(E) Talk"

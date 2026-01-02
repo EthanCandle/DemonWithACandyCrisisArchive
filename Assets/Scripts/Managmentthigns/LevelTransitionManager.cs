@@ -112,7 +112,7 @@ public class LevelTransitionManager : MonoBehaviour
         
         yield return new WaitForSecondsRealtime(timeToWait);
         print("Allow pausing");
-        print(state);
+        //print(state);
         SetSettingAllowedToPause(state);
     }
 

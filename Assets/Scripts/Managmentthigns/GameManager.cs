@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 public enum GameState { Platformer, Typing }
@@ -34,8 +35,9 @@ public class GameManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-			// SwitchGames();
-		}
+            // SwitchGames();
+        }
+		//print(DebugStore.debugStore.GetShopItemDataLowLevelStatus("player_ui"));
 	}
 
     public void StartGame()
@@ -104,16 +106,40 @@ public class GameManager : MonoBehaviour
 	{
 		playerController.playerCanvasAnimator.ResetTrigger("On");
 		playerController.playerCanvasAnimator.SetTrigger("Off");
-		playerController.lolipopCanvas.SetActive(false);
-		playerController.lolipopCanvas.SetActive(false);
+		playerController.lolipopCanvas.transform.parent.gameObject.SetActive(false);
+		playerController.lolipopCanvas.transform.parent.gameObject.SetActive(false);
+        StartCoroutine(DelayTurnOffPlayerUI());
 		print("off");
         print($"{playerController.lolipopCanvas.activeSelf}");
 	}
+
+    public IEnumerator DelayTurnOffPlayerUI()
+    {
+        yield return null; yield return null;
+		playerController.playerCanvasAnimator.ResetTrigger("On");
+		playerController.playerCanvasAnimator.SetTrigger("Off");
+        playerController.lolipopCanvas.transform.parent.gameObject.SetActive(false);
+        playerController.lolipopCanvas.transform.parent.gameObject.SetActive(false);
+		print("off");
+		print($"{playerController.lolipopCanvas.activeSelf}");
+	}
+
 	public void TurnOnPlayerUI()
 	{
+        print("Turning on player UI Attempt");
+        if (DebugStore.debugStore.GetShopItemDataLowLevelStatus("player_ui")){
+            print("failed to turn on because player ui is off");
+            return;
+        }
+		if (DebugStore.debugStore.GetShopItemDataLowLevelStatus("Player UI"))
+		{
+			print("failed to turn on because player ui is asdaoff");
+			return;
+		}
+		print(DebugStore.debugStore.GetShopItemDataLowLevelStatus("player_ui"));
 		playerController.playerCanvasAnimator.ResetTrigger("Off");
 		playerController.playerCanvasAnimator.SetTrigger("On");
-		playerController.lolipopCanvas.SetActive(true);
+        playerController.lolipopCanvas.transform.parent.gameObject.SetActive(true);
         print("on");
 	}
 
