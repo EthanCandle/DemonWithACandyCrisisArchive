@@ -604,6 +604,8 @@ MonoBehaviour:
   enemyPosition: {x: 0, y: 0, z: 0}
   stunClip: {fileID: -203655887218126122, guid: 2870520909265ff498f497b4fc374a79,
     type: 3}
+  hasSceneCameraView: 0
+  cameraSceneView: {fileID: 0}
 --- !u!114 &8458144827836217339
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -971,7 +973,7 @@ MonoBehaviour:
   CameraDistance: 8
   CameraCollisionFilter:
     serializedVersion: 2
-    m_Bits: 499
+    m_Bits: 243
   IgnoreTag: Player
   CameraRadius: 0.15
   DampingIntoCollision: 0

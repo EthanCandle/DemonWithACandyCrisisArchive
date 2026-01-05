@@ -671,6 +671,7 @@ MonoBehaviour:
   objectToBecomeInteractable: {fileID: 0}
   gm: {fileID: 0}
   debugStore: {fileID: 0}
+  soundEffect: {fileID: 11400000, guid: cbdffcadfedbe3a45b5a9cd93b4dd5a7, type: 2}
 --- !u!114 &7430119863567798846
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public static class HTMLPlatformUtil
 {
-    /*
+	/*
      
     if (HTMLPlatformUtil.IsWebGLBuild())
     {
@@ -14,7 +14,15 @@ public static class HTMLPlatformUtil
     */
 
 
-    public static bool IsWebGLBuild()
+	//HTMLPlatformUtil.IsWebGLBuild()
+	/*
+        if (HTMLPlatformUtil.IsWebGLBuild())
+        {
+           
+        }
+     */
+
+	public static bool IsWebGLBuild()
     {
 #if UNITY_WEBGL// && !UNITY_EDITOR
        // Debug.Log("Hello html");
@@ -42,5 +50,19 @@ public static class HTMLPlatformUtil
         return false;
 #endif
     }
+
+
+	/*
+	if (HTMLPlatformUtil.IsDemo())
+	{
+
+	}
+ */
+	public static bool IsDemo()
+    {
+        return true; // change to false when building out
+    }
+
+
 }
 

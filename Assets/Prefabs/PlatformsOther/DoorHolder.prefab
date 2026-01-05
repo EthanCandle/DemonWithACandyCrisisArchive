@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4172119496451537191}
   - component: {fileID: 7481844516126450862}
+  - component: {fileID: 4437794051049346020}
   m_Layer: 6
   m_Name: DoorHolder
   m_TagString: Untagged
@@ -54,6 +55,20 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &4437794051049346020
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4629735420144904830}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b7124e5f821aae488db8ad9da683b45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetScript: {fileID: 0}
+  scriptShouldStartOff: 1
 --- !u!1 &6203590813681368999
 GameObject:
   m_ObjectHideFlags: 0

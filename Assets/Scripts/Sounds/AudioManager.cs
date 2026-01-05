@@ -522,7 +522,7 @@ public class AudioManager : MonoBehaviour
                 musicVolume = 50,
                 isSFXMuted = false,
                 isMusicMuted = false,
-                controllerSensitivity = 5,
+                controllerSensitivity = 1.5f,
                 isShadersMuted = false,
                 isParticlesMuted = false,
                 isMainMenuCandyMuted = false,
@@ -786,6 +786,7 @@ public class AudioManager : MonoBehaviour
 
         if(settingScript.spawnRandomMainMenuCandy != null)
         {
+            print($"not null, should stop :{state}");
             settingScript.spawnRandomMainMenuCandy.ToggleCandy(!state);
         }
 

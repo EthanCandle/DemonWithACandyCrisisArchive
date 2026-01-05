@@ -14,9 +14,9 @@ public class FoodManager : MonoBehaviour
 
     public GameManager gm;
     public DebugStore debugStore;
-
-    // Start is called before the first frame update
-    void Awake()
+	public Sound soundEffect;
+	// Start is called before the first frame update
+	void Awake()
     {
         gm = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
         debugStore = FindObjectOfType<DebugStore>();
@@ -45,7 +45,8 @@ public class FoodManager : MonoBehaviour
             FinishCollecting();
         }
         debugStore.OnCandyCollected();
-    }
+		FindObjectOfType<AudioManager>().PlaySoundInstantiate(soundEffect);
+	}
 
     // probally wont need if going for a shop/collectable, but maybe for a trigger for teh door to be playable
     public void FinishCollecting()

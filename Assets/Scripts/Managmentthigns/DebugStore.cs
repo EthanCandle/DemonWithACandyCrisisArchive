@@ -378,8 +378,11 @@ public class DebugStore : MonoBehaviour
 
 		if (Input.GetKeyDown(KeyCode.JoystickButton9))
 		{
+			if (HTMLPlatformUtil.IsEditor())
+			{
+				SetShopItemDataLowLevelStatus("player_ui", !GetShopItemDataLowLevelStatus("player_ui"));
+			}
 
-            SetShopItemDataLowLevelStatus("player_ui", !GetShopItemDataLowLevelStatus("player_ui"));
 
 		}
 		//foreach (var setting in settingsDictionary)

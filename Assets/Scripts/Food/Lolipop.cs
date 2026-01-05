@@ -38,7 +38,7 @@ public class Lolipop : MonoBehaviour
     {
         fm.CollectNormalCandy();
         // delete self
-        PlaySoundEffect();
+       // PlaySoundEffect();
         SpawnParticle();
         Destroy(gameObject);
 

@@ -2,23 +2,23 @@
     "items": [
         {
             "nameOfItem": "trail_runner",
-            "isPurchased": false,
-            "isEnabled": false
+            "isPurchased": true,
+            "isEnabled": true
         },
         {
             "nameOfItem": "speed_boost",
             "isPurchased": true,
-            "isEnabled": true
+            "isEnabled": false
         },
         {
             "nameOfItem": "speed_penalty",
-            "isPurchased": false,
+            "isPurchased": true,
             "isEnabled": false
         },
         {
             "nameOfItem": "dash_distance_increase",
-            "isPurchased": true,
-            "isEnabled": true
+            "isPurchased": false,
+            "isEnabled": false
         },
         {
             "nameOfItem": "dash_distance_decrease",
@@ -62,13 +62,13 @@
         },
         {
             "nameOfItem": "player_ui",
-            "isPurchased": false,
-            "isEnabled": false
+            "isPurchased": true,
+            "isEnabled": true
         },
         {
             "nameOfItem": "debug_stats",
-            "isPurchased": false,
-            "isEnabled": false
+            "isPurchased": true,
+            "isEnabled": true
         }
     ]
 }

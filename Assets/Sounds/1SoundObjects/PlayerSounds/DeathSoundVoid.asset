@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01168325da23df044ab1e1e2916d66a8, type: 3}
+  m_Name: DeathSoundVoid
+  m_EditorClassIdentifier: 
+  nameOfSound: 
+  clip: {fileID: 8300000, guid: ffb3faa6806fa13449bffe9bc5b31d36, type: 3}
+  volume: 1
+  volumeOriginal: 1
+  pitch: 0.5
+  loop: 0
+  audioMixerGroup: {fileID: 24300002, guid: e5c64160d8db3d54181c92225215f2b8, type: 2}
+  source: {fileID: 0}

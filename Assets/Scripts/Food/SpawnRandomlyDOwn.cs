@@ -64,7 +64,7 @@ public class SpawnRandomlyDOwn : MonoBehaviour
     public void ToggleCandy(bool state)
     {
         shouldSpawnCandy = state;
-
+        print($"toggle candy: {state}");
         if (shouldSpawnCandy)
         {
             SpawnAllCandy();
@@ -80,6 +80,11 @@ public class SpawnRandomlyDOwn : MonoBehaviour
     {
         yield return null;
         RemoveAllCandy();
+
+        if (!shouldSpawnCandy)
+        {
+            yield break; // should fail if we aren't supposed to spawn them
+        }
         if (debugStore)
         {
             numberToSpawn = debugStore.debugStatsLocal.candyAmount;

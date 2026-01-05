@@ -32,28 +32,32 @@ public class SettingsManager : MonoBehaviour
     // Update is called once per frame
     void Update()
 	{
-		if (Input.GetKeyDown(KeyCode.Z))
-		{
-			gm.TurnOffCamerControl();
-
-		}
-		if (Input.GetKeyDown(KeyCode.X))
-		{
-			gm.TurnOnCamerControl();
-
-		}
-		if (Input.GetKeyDown(KeyCode.C))
+        if (HTMLPlatformUtil.IsEditor())
         {
-            Time.timeScale = 0;
-            gm.TurnOffCamerControl();
-			gm.TurnOnMouse();
+			if (Input.GetKeyDown(KeyCode.Z))
+			{
+				gm.TurnOffCamerControl();
+
+			}
+			if (Input.GetKeyDown(KeyCode.X))
+			{
+				gm.TurnOnCamerControl();
+
+			}
+			if (Input.GetKeyDown(KeyCode.C))
+			{
+				Time.timeScale = 0;
+				gm.TurnOffCamerControl();
+				gm.TurnOnMouse();
+			}
+			if (Input.GetKeyDown(KeyCode.V))
+			{
+				Time.timeScale = 1;
+				gm.TurnOnCamerControl();
+				gm.TurnOffMouse();
+			}
 		}
-		if (Input.GetKeyDown(KeyCode.V))
-		{
-			Time.timeScale = 1; 
-            gm.TurnOnCamerControl();
-            gm.TurnOffMouse();
-		}
+
 		// Debug.LogAssertion(allowedToPause);
 		// pause input or if we are already paused and they press back button)
 		if (gm._input.pause || (isPaused && gm._input.goBack))
