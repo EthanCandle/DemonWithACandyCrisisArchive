@@ -39,8 +39,12 @@ public class EnemyPushBackPlayer : MonoBehaviour
 
     public void StopScript()
     {
-		isAlive = false; 
-        colliderProp.isTrigger = false;
+		isAlive = false;
+		if (!colliderProp)
+		{
+			return;
+		}
+		colliderProp.isTrigger = false;
 		colliderProp.convex = false;
 
 	}
@@ -48,6 +52,10 @@ public class EnemyPushBackPlayer : MonoBehaviour
     public void StartScript()
     {
         isAlive = true;
+        if (!colliderProp)
+        {
+            return;
+        }
 		colliderProp.convex = true;
 		colliderProp.isTrigger = true;
 	}

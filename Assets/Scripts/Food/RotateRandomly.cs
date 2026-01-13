@@ -5,7 +5,7 @@ using UnityEngine;
 public class RotateRandomly : MonoBehaviour
 {
     public GameObject objectToRotate;
-    public float speedMin, speedMax, speedCurrent;
+    public float speedMin = 0.01f, speedMax = 0.075f, speedCurrent;
     public float direction;
     public float xPow, yPow, zPow;
 
@@ -13,6 +13,10 @@ public class RotateRandomly : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if(objectToRotate == null)
+        {
+            objectToRotate = gameObject;
+        }
         xPow = Random.Range(-100, 101) / 100.0f * 180.0f;
         yPow = Random.Range(-100, 101) / 100.0f * 180.0f;
         zPow = Random.Range(-100, 101) / 100.0f * 180.0f;

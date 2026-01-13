@@ -1084,6 +1084,8 @@ public class PlayerController : MonoBehaviour
         hasGravity = true;
     }
 
+    // input: speedMult, the increase in speed the player should get (2 means it goes from 20 speed to 40 speed)
+    // automatically reduces the temp speed
     public void SetTempSpeed(float speedMult)
     {
         if (speedCoroutine != null)
@@ -1096,21 +1098,31 @@ public class PlayerController : MonoBehaviour
         speedCoroutine = StartCoroutine(ReduceSpeedGradually());
     }
 
+    // called as a IEnumerator for the yield return null (rather than relying on Update)
+    // increases Player's speed to 40. Linearly reduces until it goes back to 20 over 4 seconds
     public IEnumerator ReduceSpeedGradually()
     {
-        float speed = 4f;  // Adjust to control intensity
-        print($"{SprintSpeed}, {speedSprintHolder}");
-        while (SprintSpeed > speedSprintHolder)
-        {
-            print(SprintSpeed);
-            SprintSpeed = Mathf.Lerp(SprintSpeed, speedSprintHolder, 1 / speed * Time.deltaTime);
-            yield return null;
-        }
-        print("End");
-        SprintSpeed = speedSprintHolder;
-        WalkSpeed = speedWalkHolder;
-        speedCoroutine = null;
-    }
+		float duration = 4f;
+		float elapsed = 0f;
+
+		float startSprint = SprintSpeed;
+		float startWalk = WalkSpeed;
+
+		while (elapsed < duration)
+		{
+			elapsed += Time.deltaTime;
+			float t = elapsed / duration;
+
+			SprintSpeed = Mathf.Lerp(startSprint, speedSprintHolder, t);
+			WalkSpeed = Mathf.Lerp(startWalk, speedWalkHolder, t);
+
+			yield return null;
+		}
+
+		SprintSpeed = speedSprintHolder;
+		WalkSpeed = speedWalkHolder;
+		speedCoroutine = null;
+	}
 
     public void SetPlayerPosition(GameObject placeToPutPlayer)
     {
@@ -1245,18 +1257,39 @@ public class PlayerController : MonoBehaviour
         coyoteJumpTime = 0;
         jumpTimeHold = 0;
     }
+
+
+    /*
+     * Inputs:
+     * multiplier: Strenght of push the player should recieve
+     * direction: the position of the object that pushed the Player
+     * 
+     * Called by an Enemy to push the player away from their position
+     * 
+     * Outputs:
+     * No outputs
+     */
     public void PushForce(float multiplier = 1, Vector3 direction = default(Vector3))
     {
-        //_verticalVelocity = Mathf.Sqrt(JumpHeight * -2f * Gravity * multiplier);
-
         Vector3 targetDirection = Quaternion.Euler(direction.x - gameObject.transform.position.x, 0, direction.z - gameObject.transform.position.z)
         * new Vector3(direction.x - gameObject.transform.position.x, 0, direction.z - gameObject.transform.position.z);
-        //print((direction.x - gameObject.transform.position.x));
 
-        //  print((direction.z - gameObject.transform.position.z));
         // move the player
         _controller.Move(-targetDirection.normalized * (10 * Time.deltaTime) + new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
-
-
     }
+
+    /*
+     * Disables the Player's Gravity
+     */
+    public void DisableGravity()
+    {
+        hasGravity = false;
+	}
+	/*
+     * Enables the Player's Gravity
+     */
+	public void EnableGravity()
+    {
+        hasGravity = true;
+	}
 }

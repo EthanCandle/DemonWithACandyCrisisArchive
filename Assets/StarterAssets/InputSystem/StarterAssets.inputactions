@@ -708,6 +708,17 @@
                 },
                 {
                     "name": "",
+                    "id": "035cb572-ce3f-4899-ace7-ceccfcd9080d",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";KeyboardMouse",
+                    "action": "Dash",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "de511de0-ee67-40f4-a454-a508edddb90f",
                     "path": "<Gamepad>/rightShoulder",
                     "interactions": "",

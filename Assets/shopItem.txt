@@ -2,17 +2,17 @@
     "items": [
         {
             "nameOfItem": "trail_runner",
-            "isPurchased": true,
-            "isEnabled": true
+            "isPurchased": false,
+            "isEnabled": false
         },
         {
             "nameOfItem": "speed_boost",
-            "isPurchased": true,
+            "isPurchased": false,
             "isEnabled": false
         },
         {
             "nameOfItem": "speed_penalty",
-            "isPurchased": true,
+            "isPurchased": false,
             "isEnabled": false
         },
         {
@@ -27,18 +27,18 @@
         },
         {
             "nameOfItem": "candy_outline",
-            "isPurchased": true,
-            "isEnabled": true
+            "isPurchased": false,
+            "isEnabled": false
         },
         {
             "nameOfItem": "skin_random",
-            "isPurchased": true,
-            "isEnabled": true
+            "isPurchased": false,
+            "isEnabled": false
         },
         {
             "nameOfItem": "level_solo_timer",
-            "isPurchased": true,
-            "isEnabled": true
+            "isPurchased": false,
+            "isEnabled": false
         },
         {
             "nameOfItem": "level_all_timer",
@@ -52,23 +52,23 @@
         },
         {
             "nameOfItem": "candy_in_scene",
-            "isPurchased": true,
-            "isEnabled": true
+            "isPurchased": false,
+            "isEnabled": false
         },
         {
             "nameOfItem": "player_crown",
-            "isPurchased": true,
-            "isEnabled": true
+            "isPurchased": false,
+            "isEnabled": false
         },
         {
             "nameOfItem": "player_ui",
-            "isPurchased": true,
-            "isEnabled": true
+            "isPurchased": false,
+            "isEnabled": false
         },
         {
             "nameOfItem": "debug_stats",
-            "isPurchased": true,
-            "isEnabled": true
+            "isPurchased": false,
+            "isEnabled": false
         }
     ]
 }

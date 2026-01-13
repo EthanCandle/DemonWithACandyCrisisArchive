@@ -190,11 +190,13 @@ public class AudioManager : MonoBehaviour
             if(gm && gm.playerController)
             {
                 songVolumeText.text += $"Dash Charge: {gm.playerController.dashRechargeCurrent}\n";
-            }
+				songVolumeText.text += $"Player Speed: {gm.playerController.speedCurrent}\n";
+			}
             else
             {
                 songVolumeText.text += $"Dash Charge: 0\n";
-            }
+				songVolumeText.text += $"Player Speed: 0\n";
+			}
             songVolumeText.text +=
     $"Candy Collected: {PlayerDebugStatsGlobalManager.Instance.DataGetCandy()}\n" +
     $"Deaths: {(PlayerDebugStatsGlobalManager.Instance.DataGetDies())}\n" +

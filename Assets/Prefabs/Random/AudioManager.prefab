@@ -343,7 +343,7 @@ MonoBehaviour:
     currentTimeToCompleteGame: 0
     fastestLevelTimes: []
     currentLevelTimes: []
-  levelCount: 6
+  levelCount: 7
   savePath: 
 --- !u!114 &4672132828688205052
 MonoBehaviour:
