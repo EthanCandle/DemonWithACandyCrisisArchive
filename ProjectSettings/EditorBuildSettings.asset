@@ -32,4 +32,19 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Level8 BoxHouse Mirrored.unity
     guid: 412d7b20d829cc9409d4b56139405a42
+  - enabled: 1
+    path: Assets/Scenes/Level9 Monodash Mirrored.unity
+    guid: 9f0d3c877f9b7644788aeb4e262bbadd
+  - enabled: 1
+    path: Assets/Scenes/Level10 Water Level Mirroed.unity
+    guid: 5ef29ca9229f5594e9993ac9d80721d1
+  - enabled: 1
+    path: Assets/Scenes/Level11 Rising Up Mirroed.unity
+    guid: e4b68b9221c0492439b2afbb79ee809d
+  - enabled: 1
+    path: Assets/Scenes/Level12 Steep Mirroed.unity
+    guid: acc30962ead9789498fece7100d1146a
+  - enabled: 1
+    path: Assets/Scenes/Level13 Redone Mirroed.unity
+    guid: 21368d5a3b3ca274e81b071dac894edb
   m_configObjects: {}

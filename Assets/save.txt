@@ -1,1 +1,0 @@
-{"candyAmount":67,"skinNumber":0}

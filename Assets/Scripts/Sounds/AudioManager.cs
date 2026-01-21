@@ -32,17 +32,17 @@ public class AudioManager : MonoBehaviour
 
     public bool inMainMenuFirstTime = true;
 
-    public string volumeData = Application.dataPath + "/volumeData.txt";
+    public string audioDataName = "/audioData.txt";
     public AudioSaveData audioDataLocal;
     public Settings settingScript;
     public GameManager gm;
 
     public TextMeshProUGUI songVolumeText, otherText;
-    // Start is called before the first frame update
-    void Awake()
+	// Start is called before the first frame update
+	void Awake()
     {
-        //   print("Gett setting in audiomanager");
-        volumeData = Application.dataPath + "/volumeData.txt";
+		// appends the save path to the local name
+		audioDataName = HTMLPlatformUtil.GetSavePath() + audioDataName;
 
         // create self if not already in
         if (instance == null)
@@ -556,7 +556,7 @@ public class AudioManager : MonoBehaviour
         }
         else
         {
-            File.WriteAllText(volumeData, json);
+            File.WriteAllText(audioDataName, json);
         }
 
     }
@@ -590,14 +590,14 @@ public class AudioManager : MonoBehaviour
         }
         else
         {
-            if (!File.Exists(volumeData))
+            if (!File.Exists(audioDataName))
             {
                 Debug.Log("Audio settings file not found, saving defaults.");
                 audioDataLocal = null;
                 SaveData();
             }
 
-            saveString = File.ReadAllText(volumeData);
+            saveString = File.ReadAllText(audioDataName);
         }
 
         audioDataLocal = JsonUtility.FromJson<AudioSaveData>(saveString);
@@ -622,9 +622,9 @@ public class AudioManager : MonoBehaviour
             print("Deleted data");
             PlayerPrefs.DeleteKey("AudioSettings");
         }
-        if (File.Exists(volumeData))
+        if (File.Exists(audioDataName))
         {
-            File.Delete(volumeData);
+            File.Delete(audioDataName);
             print("Deleted data");
         }
         audioDataLocal = null;

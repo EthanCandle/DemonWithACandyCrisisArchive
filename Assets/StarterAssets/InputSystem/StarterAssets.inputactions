@@ -27,7 +27,7 @@
                     "name": "Jump",
                     "type": "Button",
                     "id": "8c4abdf8-4099-493a-aa1a-129acec7c3df",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "Press(behavior=2)",
                     "initialStateCheck": false
@@ -54,7 +54,7 @@
                     "name": "Dash",
                     "type": "Button",
                     "id": "6e928e56-d0b6-4cef-b728-be254437fe53",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "Press(behavior=2)",
                     "initialStateCheck": false
@@ -63,7 +63,7 @@
                     "name": "Interact",
                     "type": "Button",
                     "id": "3bff444c-c707-460d-a3dc-6723a05ba4fd",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "Press(behavior=2)",
                     "initialStateCheck": false
@@ -171,7 +171,7 @@
                     "name": "M1",
                     "type": "Button",
                     "id": "53d570e7-1d2a-43c6-96c5-8b382d7d8f19",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -730,6 +730,17 @@
                 },
                 {
                     "name": "",
+                    "id": "546c964d-66d9-4290-a03a-b83e2a844db9",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KeyboardMouse",
+                    "action": "Interact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "9d849282-3c4d-45a8-a318-bc6ebc38884c",
                     "path": "<Gamepad>/rightShoulder",
                     "interactions": "",
@@ -903,7 +914,7 @@
                     "name": "Interact",
                     "type": "Button",
                     "id": "9b520faf-b9f3-407a-92c2-823702892357",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -931,7 +942,7 @@
                     "name": "New action",
                     "type": "Button",
                     "id": "6c5187a9-fab1-4ede-99d2-af99c35780f7",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false

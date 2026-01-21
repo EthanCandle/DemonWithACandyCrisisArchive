@@ -58,9 +58,6 @@
             "m_Id": "6198b8230dbf4e71b26143f1c10908a3"
         },
         {
-            "m_Id": "5e68c77da5074ccf8fb51a334652cb14"
-        },
-        {
             "m_Id": "93f7d6d67765419bae79fcbb48b46452"
         },
         {
@@ -679,9 +676,6 @@
         "m_Blocks": [
             {
                 "m_Id": "6198b8230dbf4e71b26143f1c10908a3"
-            },
-            {
-                "m_Id": "5e68c77da5074ccf8fb51a334652cb14"
             }
         ]
     },
@@ -704,21 +698,6 @@
             "m_Id": "e2f81c36ea8348e2a257291debd7c7f8"
         }
     ]
-}
-
-{
-    "m_SGVersion": 0,
-    "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
-    "m_ObjectId": "0208980d02414c14bd5e01a04725f30b",
-    "m_Id": 0,
-    "m_DisplayName": "Alpha",
-    "m_SlotType": 0,
-    "m_Hidden": false,
-    "m_ShaderOutputName": "Alpha",
-    "m_StageCapability": 2,
-    "m_Value": 1.0,
-    "m_DefaultValue": 1.0,
-    "m_Labels": []
 }
 
 {
@@ -2158,40 +2137,6 @@
     },
     "m_Labels": [],
     "m_Space": 0
-}
-
-{
-    "m_SGVersion": 0,
-    "m_Type": "UnityEditor.ShaderGraph.BlockNode",
-    "m_ObjectId": "5e68c77da5074ccf8fb51a334652cb14",
-    "m_Group": {
-        "m_Id": ""
-    },
-    "m_Name": "SurfaceDescription.Alpha",
-    "m_DrawState": {
-        "m_Expanded": true,
-        "m_Position": {
-            "serializedVersion": "2",
-            "x": 1766.0,
-            "y": 278.0000305175781,
-            "width": 200.0001220703125,
-            "height": 41.0
-        }
-    },
-    "m_Slots": [
-        {
-            "m_Id": "0208980d02414c14bd5e01a04725f30b"
-        }
-    ],
-    "synonyms": [],
-    "m_Precision": 0,
-    "m_PreviewExpanded": true,
-    "m_DismissedVersion": 0,
-    "m_PreviewMode": 0,
-    "m_CustomColors": {
-        "m_SerializableColors": []
-    },
-    "m_SerializedDescriptor": "SurfaceDescription.Alpha"
 }
 
 {
@@ -4443,7 +4388,7 @@
         "m_Id": "96248bc11aec475092d5bc26a6f23428"
     },
     "m_AllowMaterialOverride": false,
-    "m_SurfaceType": 1,
+    "m_SurfaceType": 0,
     "m_ZTestMode": 4,
     "m_ZWriteControl": 0,
     "m_AlphaMode": 0,
@@ -4666,8 +4611,8 @@
     "m_ObjectId": "f424ffb34c6f46579260e07133447df9",
     "m_Title": "Visiuals",
     "m_Position": {
-        "x": -1205.9998779296875,
-        "y": -6.0
+        "x": -1206.0,
+        "y": -6.000129699707031
     }
 }
 

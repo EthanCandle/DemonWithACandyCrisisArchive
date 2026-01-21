@@ -4545,7 +4545,7 @@
         "m_Id": "96248bc11aec475092d5bc26a6f23428"
     },
     "m_AllowMaterialOverride": false,
-    "m_SurfaceType": 1,
+    "m_SurfaceType": 0,
     "m_ZTestMode": 4,
     "m_ZWriteControl": 0,
     "m_AlphaMode": 0,
@@ -4769,7 +4769,7 @@
     "m_Title": "Visiuals",
     "m_Position": {
         "x": -1206.0,
-        "y": -6.0
+        "y": -6.000129699707031
     }
 }
 
